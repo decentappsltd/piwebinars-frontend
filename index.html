@@ -10,46 +10,20 @@
 <script src="https://sdk.minepi.com/pi-sdk.js"></script>
 <script>Pi.init({ version: "2.0" })</script>
   
-<script type="text/javascript">
-            $( document ).ready(function() {
-                const Pi = window.Pi;
-                Pi.init({ version: "2.0" });
-                
-                async function auth() {
-                    try {
-                        const scopes = ['username', 'payments'];
-                        function onIncompletePaymentFound(payment) {
-                        };
-                        Pi.authenticate(scopes, onIncompletePaymentFound).then(function(auth) {
-                            $("#username").html(" " + auth.user.username);
-                        }).catch(function(error) {
-                            console.error(error);
-                        });
-                    } catch (err) {
-                        console.error(err);
-                    }
-                }
-                
-                auth();
-                
-                const shareData = {
-                    title: 'Pi Webinars',
+<script                
+              // Authenticate the user, and get permission to request payments from them:
+const scopes = ['payments'];
 
-                }
-                const btn = document.querySelector('#button1');                
-                btn.addEventListener('click', async () => {
-                    if (!navigator.share) {
-                        Pi.openShareDialog(shareData.title, shareData.text);
-                    }else
-                    {
-                      try {
-                        await navigator.share(shareData);
-                      } catch(err) {
-                      }
-                    }
-                });
-            });
+// Read more about this callback in the SDK reference:
+function onIncompletePaymentFound(payment) { 
 
+};
+
+Pi.authenticate(scopes, onIncompletePaymentFound).then(function(auth) {
+  console.log(`Hi there! You're ready to make payments!`);
+}).catch(function(error) {
+  console.error(error);
+});
         </script>
     
 <h1 >Pi Webinars</h1>

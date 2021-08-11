@@ -28,11 +28,20 @@ src="https://i.postimg.cc/DzynCpk6/pi-webinars-logo-2.png"</img>
     
 <h2 >On Demand</h2>
   
-<iframe style="position:relative;top:0;width:100%" src="https://www.youtube.com/embed/qmAy8HQrak8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<div>     
+  <iframe style="position:relative;top:0;width:100%" src="https://www.youtube.com/embed/KfDB9e_cO4k" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>       		    
+   <INPUT TYPE="button" class="createPayment" id="createPayment" VALUE="Pay with Pi"            
+</div>
   
-<iframe style="position:relative;top:0;width:100%" src="https://www.youtube.com/embed/QurA6GIaZRY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  <div>
+  <iframe style="position:relative;top:0;width:100%"  src="https://www.youtube.com/embed/6dGYVKt1zw4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+   <INPUT TYPE="button" class="createPayment" id="createPayment" VALUE="Pay with Pi" 
+          </div>
   
-<iframe style="position:relative;top:0;width:100%"  src="https://www.youtube-nocookie.com/embed/BJOLSg-B9Y4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    <div>
+  <iframe style="position:relative;top:0;width:100%" src="https://www.youtube.com/embed/cTQ3Ko9ZKg8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+       <INPUT TYPE="button" class="createPayment" id="createPayment" VALUE="Pay with Pi" 
+              </div>
   
 <h2 >Upcoming Live</h2>
   
@@ -41,3 +50,17 @@ src="https://i.postimg.cc/DzynCpk6/pi-webinars-logo-2.png"</img>
   <h5> At mainnet, all webinars will be full length, high quality and origional to this site </h5>
   
 </html>
+  
+  <script>
+Pi.createPayment({
+  amount: 1,
+  memo: "Unlock Webinar", 
+  metadata: { uploaded: olivermc3 },
+}, {
+  // Callbacks you need to implement 
+  onReadyForServerApproval: function(paymentId) { /* ... */ },
+  onReadyForServerCompletion: function(paymentId, txid) { /* ... */ },
+  onCancel: function(paymentId) { /* ... */ },
+  onError: function(error, payment) { /* ... */ },
+});
+  </script>

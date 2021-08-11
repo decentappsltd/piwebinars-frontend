@@ -9,6 +9,64 @@
       type="image/png" 
       href="https://i.postimg.cc/DzynCpk6/pi-webinars-logo-2.png">
   <title>Pi Webinars</title>
+  
+<script type="text/javascript">
+            $( document ).ready(function() {
+                const Pi = window.Pi;
+                Pi.init({ version: "2.0" });
+                
+                async function auth() {
+                    try {
+                        // Identify the user with their username / unique network-wide ID, and get permission to request payments from them.
+                        const scopes = ['username', 'payments'];
+                        function onIncompletePaymentFound(payment) {
+                            
+                        }; // Read more about this in the SDK reference
+
+                        Pi.authenticate(scopes, onIncompletePaymentFound).then(function(auth) {
+                            $("#username").html(" " + auth.user.username);
+                        }).catch(function(error) {
+                            //Pi.openShareDialog("Error", error);
+                            //alert(err);
+                            console.error(error);
+                        });
+                    } catch (err) {
+                        //Pi.openShareDialog("Error", err);
+                        //alert(err);
+                        console.error(err);
+                        // Not able to fetch the user
+                    }
+                }
+                
+                auth();
+                
+                const shareData = {
+                    title: 'LatinChain Platform',
+                    text: 'Hi. Check it out this Pi App: LatinChain Platform (Pi Network Games from Latin America). Try it in Pi Browser. #PiNetwork #PiApps https://latin-chain.com/',
+                    //url: 'https://latin-chain.com/',
+                }
+
+                //$("#social_div").css("visibility", "visible");
+                const btn = document.querySelector('#button1');
+                //const resultPara = document.querySelector('.result');
+                
+                // Must be triggered some kind of "user activation"
+                btn.addEventListener('click', async () => {
+                    if (!navigator.share) {
+                        Pi.openShareDialog(shareData.title, shareData.text);
+                    }else
+                    {
+                      try {
+                        await navigator.share(shareData);
+                        //resultPara.textContent = 'MDN shared successfully'
+                      } catch(err) {
+                        //alert('Error: ' + err);
+                      }
+                    }
+                });
+            });
+
+        </script>
     
 <h1 >Pi Webinars</h1>
   

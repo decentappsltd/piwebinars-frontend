@@ -11,7 +11,7 @@
 <script>Pi.init({ version: "2.0" })</script>
   
 <script>               
-const scopes = ['payments'];
+const scopes = ['username', 'payments'];
 
 function onIncompletePaymentFound(payment) { 
 
@@ -71,7 +71,7 @@ const onError = (error: Error, payment?: PaymentDTO) => {
 <img width="180" height="150" style="position:relative;top:0"
 src="https://i.postimg.cc/DzynCpk6/pi-webinars-logo-2.png"</img>
   
-<h5>Hi, welcome to Pi Webinars, an educational video platform powered by Pi cryptocurrency.</h5>
+  <h5>Hi <span id='username'></span>, welcome to Pi Webinars, an educational video platform powered by Pi cryptocurrency.</h5>
   
 <nav>
   <ul>

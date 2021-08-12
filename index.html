@@ -12,7 +12,7 @@
   
 <script>               
               // Authenticate the user, and get permission to request payments from them:
-const scopes = ['payments'];
+const scopes = ['username', 'payments'];
 
 // Read more about this callback in the SDK reference:
 function onIncompletePaymentFound(payment) { 
@@ -24,6 +24,54 @@ Pi.authenticate(scopes, onIncompletePaymentFound).then(function(auth) {
 }).catch(function(error) {
   console.error(error);
 });
+
+Pi.createPayment({
+  amount: 1,
+  memo: "Unlock Webinar",
+  metadata: { UnlockWebinarOD },
+}, {
+  onReadyForServerApproval: onReadyForServerApproval,
+  onReadyForServerCompletion: onReadyForServerCompletion,
+  onCancel: onCancel,
+  onError: onError,
+});
+const paymentResult = await window.Pi.createPayment(paymentData, callbacks);
+const axiosClient = axios.create{baseURL: SERVER_URL, timeout: 20000});
+const config = {headers: {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'}};
+  
+const onIncompletePaymentFound = (payment: PaymentDTO) => {
+  console.log("onIncompletePaymentFound", payment);
+  return axiosClient.post('/incomplete', { payment }, config);
+}
+
+const onReadyForServerApproval = (paymentId: string) => {
+  console.log("onReadyForServerApproval", paymentId);
+  return axiosClient.post('/approve', {paymentId}, config);
+}
+
+const onReadyForServerCompletion = (paymentId: string, txid: string) => {
+  console.log("onReadyForServerCompletion", paymentId);
+  return axiosClient.post('/complete', {paymentId}, config);
+}
+
+const onCancel = (paymentId: string) => {
+  console.log("onCancel", paymentId);
+  return axiosClient.post('/cancel', {paymentId}, config):
+}
+
+const onCancel = (paymentId: string) => {
+  console.log("onCancel", paymentId);
+  return axiosClient.post('/cancel', {paymentId}, config):
+}
+
+const onError = (error: Error, payment?: PaymentDTO) => {
+  console.log("onError", error);
+  if (payment) {
+    console.log(payment);
+    //handle the error
+  }
+}
+
         </script>
     
 <h1 >Pi Webinars</h1>
@@ -65,18 +113,4 @@ src="https://i.postimg.cc/DzynCpk6/pi-webinars-logo-2.png"</img>
        
   <h5> At mainnet, all webinars will be full length, high quality and origional to this site </h5>
   
-</html>
-  
-  <script>
-Pi.createPayment({
-  amount: 1,
-  memo: "Unlock Webinar", 
-  metadata: { uploaded: olivermc3 },
-}, {
-  // Callbacks you need to implement 
-  onReadyForServerApproval: function(paymentId) { /* ... */ },
-  onReadyForServerCompletion: function(paymentId, txid) { /* ... */ },
-  onCancel: function(paymentId) { /* ... */ },
-  onError: function(error, payment) { /* ... */ },
-});
-  </script>
+      </html>

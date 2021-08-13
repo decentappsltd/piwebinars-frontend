@@ -18,7 +18,7 @@ Pi.authenticate(scopes, onIncompletePaymentFound).then(function(auth) {
   
 <script>
 
-function Pi.createPayment({
+Pi.createPayment({
   amount: 1,
   memo: "Unlock Webinar",
   metadata: { UnlockWebinarOD },
@@ -85,12 +85,12 @@ src="../img/logo.png"</img>
   
 <div>     
   <iframe style="position:relative;top:0;width:100%" src="https://www.youtube.com/embed/KfDB9e_cO4k" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>       		    
-  <button onclick="createPayment()">Pay with Pi</button>        
+  <button onclick="Pi.createPayment()">Pay with Pi</button>
 </div>
   
   <div>
   <iframe style="position:relative;top:0;width:100%"  src="https://www.youtube.com/embed/6dGYVKt1zw4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-   <button onclick="createPayment()">Pay with Pi</button> 
+   <button onclick="Pi.createPayment()">Pay with Pi</button> 
           </div>
   
     <div>

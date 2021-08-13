@@ -1,3 +1,32 @@
+<script>
+    const scopes = ['username', 'payments'];
+    async function init(){
+        try {
+            function onOpenPaymentFound(payment) {                
+            };
+            Pi.authenticate(scopes, onOpenPaymentFound).then(function(auth){
+                document.getElementById('vistuser').innerHTML = auth.user.username;
+                jQuery.ajax({
+                type: "POST",
+                url: 'php/register.php',
+                dataType: 'json',
+                data: {user:auth.user.username},
+                success: function(data){
+                   var uid = data.uid;
+                }
+            });
+                })
+                console.log(window.parent.origin);  
+                if(window.parent.origin=='https://app.piwebinars.co.uk/'){
+                setTimeout("location.href='html/main.html'",5000); 
+                } else{            
+                }                          
+        } catch (err) {
+            setTimeout("location.href='html/home.html'",5000);
+        } 
+    }
+</script>
+
 <!DOCTYPE html>
 <html>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,29 +38,7 @@
   
 <script src="https://sdk.minepi.com/pi-sdk.js"></script>
 <script>Pi.init({ version: "2.0" })</script>
-  
-<script>
-    const scopes = ['username', 'payments'];
-    async function init(){
-        try {
-            function onOpenPaymentFound(payment) {                
-            };
-            Pi.authenticate(scopes, onIncompletePaymentFound).then(function(auth) {
-              console.log(`Hi there! You're ready to make payments!`);
-            }).catch(function(error) {
-              console.error(error);
-            });
-                })
-                console.log(window.parent.origin);  
-                if(window.parent.origin=='https://pi-game.app'){
-                setTimeout("location.href='html/main.html'",5000); 
-                } else{            
-                }                          
-        } catch (err) {
-            setTimeout("location.href='html/home.html'",5000);
-        } 
-    }
-</script>
+ 
     
 <h1>Pi Webinars</h1>
   

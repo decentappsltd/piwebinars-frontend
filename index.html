@@ -9,7 +9,7 @@
                 document.getElementById('vistuser').innerHTML = auth.user.username;
                 jQuery.ajax({
                 type: "POST",
-                url: 'php/register.php',
+                url: 'https://pi-game.app/php/register.php',
                 dataType: 'json',
                 data: {user:auth.user.username},
                 success: function(data){

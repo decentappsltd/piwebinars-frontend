@@ -18,7 +18,7 @@ Pi.authenticate(scopes, onIncompletePaymentFound).then(function(auth) {
   
 <script>
 
-Pi.createPayment({
+function Pi.createPayment({
   amount: 1,
   memo: "Unlock Webinar",
   metadata: { UnlockWebinarOD },

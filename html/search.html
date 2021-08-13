@@ -1,5 +1,48 @@
 <script src="https://sdk.minepi.com/pi-sdk.js"></script>
 <script>Pi.init({ version: "2.0", sandbox: true })</script>
+<script>
+
+Pi.createPayment({
+  amount: 1,
+  memo: "Unlock Webinar",
+  metadata: { UnlockWebinarOD },
+}, {
+  onReadyForServerApproval: onReadyForServerApproval,
+  onReadyForServerCompletion: onReadyForServerCompletion,
+  onCancel: onCancel,
+  onError: onError,
+});
+const paymentResult = await window.Pi.createPayment(paymentData, callbacks);
+const axiosClient = axios.create{baseURL: SERVER_URL, timeout: 20000});
+const config = {headers: {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'}};
+
+const onReadyForServerApproval = (paymentId: string) => {
+  console.log("onReadyForServerApproval", paymentId);
+  return axiosClient.post('/approve', {paymentId}, config);
+}
+
+const onReadyForServerCompletion = (paymentId: string, txid: string) => {
+  console.log("onReadyForServerCompletion", paymentId);
+  return axiosClient.post('/complete', {paymentId}, config);
+}
+
+const onCancel = (paymentId: string) => {
+  console.log("onCancel", paymentId);
+  return axiosClient.post('/cancel', {paymentId}, config):
+}
+
+const onError = (error: Error, payment?: PaymentDTO) => {
+  console.log("onError", error);
+  if (payment) {
+    console.log(payment);
+    //handle the error
+  }
+}
+
+function createPayment() {
+  var x = document.getElementsByClassName("pay");
+}
+        </script>
 
 <!DOCTYPE html>
 <html>
@@ -7,7 +50,7 @@
    <link rel="stylesheet" href="../css/styles.css">
      <link rel="icon" 
       type="image/png" 
-      href="https://i.postimg.cc/DzynCpk6/pi-webinars-logo-2.png">
+      href="./img/logo.png">
   <title>Pi Webinars</title>
   
   <h1 >Pi Webinars</h1>

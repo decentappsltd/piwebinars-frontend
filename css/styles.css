@@ -52,3 +52,6 @@ nav, ul, li {
   border-style: solid;
   border-color: #36454F;
 }
+button {
+  margin-bottom: 20px;
+  }

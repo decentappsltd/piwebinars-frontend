@@ -78,7 +78,7 @@ li:active, li:hover {
   background-color: #36454F;
 }
 li {
-  border-right: 1px solid #bbb;
+  border-right: 1px solid #fbb44a;
 }
 li:last-child {
   border-right: none;

@@ -64,18 +64,14 @@ button {
   border-color: #fbb44a;
   }
 ul {
-  list-style-type: none;
   overflow: hidden;
-  background-color: none;
   border: solid;
 }
 li {
   display: inline-block;
 }
 li a {
-  display: block;
   color: #FBB44A;  
-  text-align: center;
   text-decoration: none;
   font-weight: bold;
 }

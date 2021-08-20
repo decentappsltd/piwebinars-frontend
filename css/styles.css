@@ -74,6 +74,7 @@ li a {
   color: #FBB44A;  
   text-decoration: none;
   font-weight: bold;
+  text-align: center;
 }
 li:active, li:hover {
   background-color: #36454F;

@@ -39,12 +39,6 @@ h5 {
   margin-right: auto;
   margin-top: 50px;
 }
-nav, ul, li {
-  display: inline-block;
-  margin-right: auto;
-  Font-size: small;
-  color: #FBB44A;
-}
 #webinar {
   display: none;
 }
@@ -69,3 +63,24 @@ button {
   border: solid;
   border-color: #fbb44a;
   }
+ul {
+  list-style-type: none;
+  padding: 0;
+  overflow: hidden;
+  background-color: none;
+  border: solid;
+}
+li {
+  display: inline-block;
+}
+li a {
+  display: block;
+  color: #FBB44A;  
+  text-align: center;
+  padding: 5px 15px;
+  text-decoration: none;
+  font-weight: bold;
+}
+li:active, li:hover {
+  background-color: #36454F;
+}

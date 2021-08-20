@@ -55,3 +55,20 @@ nav, ul, li {
 button {
   margin-bottom: 20px;
   }
+button {
+  margin-bottom: 20px;
+  background-color: #FBB44A;
+  color: #36454F;
+  padding: 0px 30px;
+  font-size: 15px;
+  border: outset;
+  border-color: #fbb44a;
+  font-weight: bold;
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+  }
+  button:active {
+  background-color: #FBB44A;
+  transform: translateY(3px);
+  border: solid;
+  border-color: #fbb44a;
+  }

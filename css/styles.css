@@ -65,6 +65,7 @@ button {
   }
 ul {
   border: solid;
+  text-align: left;
 }
 li, a {
   display: inline-block;

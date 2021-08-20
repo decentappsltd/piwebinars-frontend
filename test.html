@@ -1,0 +1,18 @@
+<script language="javascript">
+    const scopes = ['username', 'payments'];
+    async function init(){
+        try {
+            function onOpenPaymentFound(payment) {                
+            };
+            Pi.authenticate(scopes, onOpenPaymentFound).then(function(auth){
+                })
+                console.log(window.parent.origin);  
+                if(window.parent.origin=='https://app.piwebinars.co.uk'){
+                setTimeout("location.href='https://sites.google.com/view/pi-webinars'",5000); 
+                } else{            
+                }                          
+        } catch (err) {
+            setTimeout("location.href='index.html'",5000);
+        } 
+    }
+</script>

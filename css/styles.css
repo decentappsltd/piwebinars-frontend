@@ -45,3 +45,6 @@ nav, ul, li {
   Font-size: small;
   color: #FBB44A;
 }
+#webinar {
+  display: none;
+}

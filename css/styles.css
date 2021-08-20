@@ -48,3 +48,7 @@ nav, ul, li {
 #webinar {
   display: none;
 }
+#title {
+  border-style: solid;
+  border-color: #36454F;
+}

@@ -64,13 +64,10 @@ button {
   border-color: #fbb44a;
   }
 ul {
-  overflow: hidden;
   border: solid;
 }
-li {
+li, a {
   display: inline-block;
-}
-li a {
   color: #FBB44A;  
   text-decoration: none;
   font-weight: bold;

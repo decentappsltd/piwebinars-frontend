@@ -10,9 +10,9 @@ function onIncompletePaymentFound(payment) {
 
 Pi.authenticate(scopes, onIncompletePaymentFound).then(function(auth) {
   console.log(`Hi there! You're ready to make payments!`);
-  setTimeout("location.href='test.html'", 5000)
 }).catch(function(error) {
   console.error(error);
+  setTimeout("location.href='test.html'", 5000)
 });
   
   </script>

@@ -60,9 +60,10 @@ button {
   button:active {
   background-color: #FBB44A;
   transform: translateY(3px);
+  border: solid;
+  border-color: #fbb44a;
   }
 ul {
-  border: solid;
   text-align: left;
 }
 li, a {

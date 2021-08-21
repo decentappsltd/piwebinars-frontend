@@ -46,11 +46,17 @@ function createPayment() {
 
 <!DOCTYPE html>
 <html>
+  <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <link rel="stylesheet" href="../css/styles.css">
      <link rel="icon" 
       type="image/png" 
       href="../img/logo.png">
+    <script>
+      if(navigator.userAgent.toLowerCase().indexOf("pibrowser")<0) document.domain!="localhost"&&window.open(window.location.protocol+"//"+document.domain+"/html/home.html","_self");
+    </script>
+  </head>
+  
   <title>Pi Webinars</title>
   
   <h1 >Pi Webinars</h1>

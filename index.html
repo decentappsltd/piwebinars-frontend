@@ -75,7 +75,7 @@ const onError = (error: Error, payment?: PaymentDTO) => {
       type="image/png" 
       href="../img/logo.png">
     <script>
-    if(navigator.userAgent.toLowerCase().indexOf("pibrowser")<0) "location.href='html/home.html'";
+      if(navigator.userAgent.toLowerCase().indexOf("pibrowser")<0) document.domain!="localhost"&&window.open(window.location.protocol+"//"+document.domain+"/html/home.html","_self");
     </script>
   </head>
   

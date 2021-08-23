@@ -54,6 +54,15 @@ const onError = (error: Error, payment?: PaymentDTO) => {
     //handle the error
   }
 }
+$(document).bind("contextmenu",function(e) {
+ e.preventDefault();
+});
+  
+$(document).keydown(function(e){
+    if(e.which === 123){
+       return false;
+    }
+});
         </script>
 
 <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -125,14 +134,12 @@ src="../img/logo.png"</img>
   
 <div>
 <div id="webinar">
-  <html hidden>
   <iframe style="position:relative;top:0;width:100%" src="https://www.youtube.com/embed/YIhYCRBDOUo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
   </div>
   <div id="title">
   <h3>Winston Churchill ‘A Giant in The Century’ Documentary</h3>
   <p><i>How Winston Churchill turned the tables in the war and influenced the century to come.</i></p>
   <img src=https://img.youtube.com/vi/YIhYCRBDOUo/maxresdefault.jpg style="position:relative;top:0;width:100%">
-    </html hidden>
   </div>
   <button id="222" onclick="Pi.createPayment()">Pay with Pi</button>
 </div>

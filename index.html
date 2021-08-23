@@ -54,26 +54,7 @@ const onError = (error: Error, payment?: PaymentDTO) => {
     //handle the error
   }
 }
-$(document).bind("contextmenu",function(e) {
- e.preventDefault();
-});
-  
-$(document).keydown(function(e){
-    if(e.which === 123){
-       return false;
-    }
-});
         </script>
-
-<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-2N939D6C1C"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-2N939D6C1C');
-</script>
 
 <!DOCTYPE html>
 <html>
@@ -87,7 +68,7 @@ $(document).keydown(function(e){
       if(navigator.userAgent.toLowerCase().indexOf("pibrowser")<0) document.domain!="localhost"&&window.open(window.location.protocol+"//"+document.domain+"/html/home.html","_self");
     </script>
   </head>
-  
+  <body>
   <title>Pi Webinars</title>
  
 <h1 >Pi Webinars</h1>
@@ -149,5 +130,5 @@ src="../img/logo.png"</img>
 <p1 >Live webinars coming soon...</p1>
        
       <h5><i At mainnet, all webinars will be full length, high quality and origional to this site></i></h5>
-  
+  </body>
       </html>

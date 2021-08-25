@@ -5,7 +5,6 @@
 const scopes = ['payments'];
 
 function onIncompletePaymentFound(payment) { 
-
 };
 
 Pi.authenticate(scopes, onIncompletePaymentFound).then(function(auth) {
@@ -13,15 +12,11 @@ Pi.authenticate(scopes, onIncompletePaymentFound).then(function(auth) {
 }).catch(function(error) {
   setTimeout("location.href='html/home.html'")
 });
-  
-  </script>
-  
-<script>
 
 Pi.createPayment({
   amount: 1,
   memo: "Unlock Webinar",
-  metadata: { (function reply_click(clicked_id)) },
+  metadata: { (getId(clicked_id)) },
 }, {
   onReadyForServerApproval: onReadyForServerApproval,
   onReadyForServerCompletion: onReadyForServerCompletion,
@@ -51,8 +46,23 @@ const onError = (error: Error, payment?: PaymentDTO) => {
   console.log("onError", error);
   if (payment) {
     console.log(payment);
-    //handle the error
+    return axiosClient.post('/incomplete', {paymentId}, config):
   }
+}
+
+function getId(clicked_id) {
+   return clicked_id;
+}
+
+function showWebinar() {
+for (clicked_id) {
+    document.getElementById('webinar').style.display = "block";
+    document.getElementById('title').style.display = "none";
+  }
+}
+  
+function logView(){
+ //log view to db using clicked_id
 }
         </script>
 
@@ -98,7 +108,7 @@ src="../img/logo.png"</img>
   <p><i>In this lesson, students learn what value investing is.  The three course objectives are: 1) The difference between value trading and value investing 2) The difference between an asset and a liability 3) Who created and uses value investing.</i></p>
   <img src=https://img.youtube.com/vi/KfDB9e_cO4k/maxresdefault.jpg style="position:relative;top:0;width:100%">
   </div>
-  <button id="000" onclick="Pi.createPayment()">Pay with Pi</button>
+  <button id="000" onclick="Pi.createPayment();getId(this.id);">Pay with Pi</button>
 </div>
   
 <div>
@@ -110,7 +120,7 @@ src="../img/logo.png"</img>
   <p><i>Rana Mitter finds out how South Korean culture manages to punch so far above its weight.</i></p>
   <img src=https://img.youtube.com/vi/6dGYVKt1zw4/maxresdefault.jpg style="position:relative;top:0;width:100%">
   </div>
-  <button id="111" onclick="Pi.createPayment()">Pay with Pi</button>
+  <button id="111" onclick="Pi.createPayment();getId(this.id);">Pay with Pi</button>
 </div>
   
 <div>

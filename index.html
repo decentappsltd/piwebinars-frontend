@@ -2,7 +2,7 @@
 <script>Pi.init({ version: "2.0" })</script>
   
 <script>               
-const scopes = ['payments'];
+const scopes = ['payments', 'username'];
 
 function onIncompletePaymentFound(payment) { 
 };
@@ -11,9 +11,10 @@ Pi.authenticate(scopes, onIncompletePaymentFound).then(function(auth) {
   console.log(`Hi there! You're ready to make payments!`);
 }).catch(function(error) {
   console.error(error);
-  setTimeout("location.href='html/home.html'");
 });
+</script>
 
+<script>
 Pi.createPayment({
   amount: 1,
   memo: "Unlock Webinar",

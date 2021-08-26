@@ -61,8 +61,6 @@ button {
   border: solid;
   border-color: #fbb44a;
   }
-ul {
-  text-align: left;
 }
 li, a {
   display: inline-block;

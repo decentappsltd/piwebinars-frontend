@@ -54,13 +54,15 @@ button {
   border-color: #fbb44a;
   font-weight: bold;
   box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
-  }
+}
   button:active {
   background-color: #FBB44A;
   transform: translateY(3px);
   border: solid;
   border-color: #fbb44a;
-  }
+}
+ul {
+  text-align: left;
 }
 li, a {
   display: inline-block;
@@ -73,9 +75,7 @@ li, a {
 li:active, li:hover {
   background-color: #36454F;
 }
-ul {
-  text-align: left;
-}
+
 li {
   border-right: 2px solid #36454F;
 }

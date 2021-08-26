@@ -10,7 +10,8 @@ function onIncompletePaymentFound(payment) {
 Pi.authenticate(scopes, onIncompletePaymentFound).then(function(auth) {
   console.log(`Hi there! You're ready to make payments!`);
 }).catch(function(error) {
-  setTimeout("location.href='html/home.html'")
+  console.error(error);
+  setTimeout("location.href='html/home.html'");
 });
 
 Pi.createPayment({

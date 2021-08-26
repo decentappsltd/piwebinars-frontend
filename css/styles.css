@@ -1,11 +1,10 @@
 body {
-  font-family: system-ui;
+  font-family: 'Ubuntu', sans-serif;
   background: #E9E9E9;
   color: #36454F;
   text-align: center;
 }
 h1 {
-  font-family: system-ui;
   color: #FBB44A;
 }
 img {
@@ -20,7 +19,6 @@ iframe {
   margin-top: 50px;
 }
 h2 {
-  font-family: system-ui;
   color: #36454F;
   text-align: center; 
   background: #FFFFFF;

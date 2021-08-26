@@ -75,36 +75,4 @@ function createPayment() {
 <script async src="https://cse.google.com/cse.js?cx=49f21ac287cae8634"></script>
 <div class="gcse-search"></div>
   
-  <div class="row" id="graphic_board">
-   <div class="col-md-2">
-      <p><b>graphic board</b></p>
-   </div>
-   <div class="col-md-3">
-      <p><i>Grafikkarte</i></p>
-   </div>
-   <div class="col-md-7">
-      <p>Some short description here ...</p>
-   </div>
-</div>
-  
-  <script>
-    function search() {
- 
-   var name = document.getElementById("searchForm").elements["searchItem"].value;
-   var pattern = name.toLowerCase();
-   var targetId = "";
- 
-   var divs = document.getElementsByClassName("col-md-2");
-   for (var i = 0; i < divs.length; i++) {
-      var para = divs[i].getElementsByTagName("p");
-      var index = para[0].innerText.toLowerCase().indexOf(pattern);
-      if (index != -1) {
-         targetId = divs[i].parentNode.id;
-         document.getElementById(targetId).scrollIntoView();
-         break;
-      }
-   }  
-}
-  </script>
-  
 </html>

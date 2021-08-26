@@ -73,6 +73,8 @@ li, a {
 li:active, li:hover {
   background-color: #36454F;
 }
+ul {
+  text-align: center;
 li {
   border-right: 2px solid #36454F;
 }

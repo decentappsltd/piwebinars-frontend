@@ -50,18 +50,7 @@ const onError = (error: Error, payment?: PaymentDTO) => {
     return axiosClient.post('/incomplete', {paymentId}, config):
   }
 }
-
-function getId(clicked_id) {
-   return clicked_id;
-}
-
-function showWebinar() {
-for (clicked_id) {
-    document.getElementById('webinar').style.display = "block";
-    document.getElementById('title').style.display = "none";
-  }
-}
-  
+ 
 function logView(){
  //log view to db using clicked_id
 }
@@ -114,65 +103,30 @@ src="../img/logo.png"</img>
 </nav>  
     
 <h2 >Featured</h2>
-  
-<div>
-<div id="webinar">     
-  <iframe style="position:relative;top:0;width:100%" src="https://www.youtube.com/embed/KfDB9e_cO4k" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-  </div>
-  <div id="title">
-  <h3>What is Value Investing?</h3>
+ 
+  <div id="title"><h3>What is Value Investing?</h3>
   <p><i>In this lesson, students learn what value investing is.  The three course objectives are: 1) The difference between value trading and value investing 2) The difference between an asset and a liability 3) Who created and uses value investing.</i></p>
-  <img src=https://img.youtube.com/vi/KfDB9e_cO4k/maxresdefault.jpg style="position:relative;top:0;width:100%">
-  </div>
-  <button id="000" onclick="Pi.createPayment();getId(this.id);">Pay with Pi</button>
-</div>
-  
-<div>
-<div id="webinar">     
-  <iframe style="position:relative;top:0;width:100%" src="https://www.youtube.com/embed/6dGYVKt1zw4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-  </div>
-  <div id="title">
-  <h3>South Korea: The Silent Cultural Superpower - Full Documentary</h3>
-  <p><i>Rana Mitter finds out how South Korean culture manages to punch so far above its weight.</i></p>
-  <img src=https://img.youtube.com/vi/6dGYVKt1zw4/maxresdefault.jpg style="position:relative;top:0;width:100%">
-  </div>
-  <button id="111" onclick="Pi.createPayment();getId(this.id);">Pay with Pi</button>
-</div>
-  
-<div>
-<div id="webinar">
-  <iframe style="position:relative;top:0;width:100%" src="https://www.youtube.com/embed/YIhYCRBDOUo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-  </div>
-  <div id="title">
-  <h3>Winston Churchill ‘A Giant in The Century’ Documentary</h3>
-  <p><i>How Winston Churchill turned the tables in the war and influenced the century to come.</i></p>
-  <img src=https://img.youtube.com/vi/YIhYCRBDOUo/maxresdefault.jpg style="position:relative;top:0;width:100%">
-  </div>
-  <button id="222" onclick="Pi.createPayment()">Pay with Pi</button>
-</div><iframe class="footer" id="youtube_frame" style="position:relative;top:0;width:100%;display:none" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-  <h3>What is Value Investing?</h3>
-  <p><i>In this lesson, students learn what value investing is.  The three course objectives are: 1) The difference between value trading and value investing 2) The difference between an asset and a liability 3) Who created and uses value investing.</i></p>
-  <img src=https://img.youtube.com/vi/KfDB9e_cO4k/maxresdefault.jpg style="position:relative;top:0;width:100%">
+  <img src=https://img.youtube.com/vi/KfDB9e_cO4k/maxresdefault.jpg style="position:relative;top:0;width:100%"></div>
   <button onclick="Pi.createPayment();showWebinar('KfDB9e_cO4k')">Pay with Pi</button>
   
-  <h3>South Korea: The Silent Cultural Superpower - Full Documentary</h3>
+  <div id="title"><h3>South Korea: The Silent Cultural Superpower - Full Documentary</h3>
   <p><i>Rana Mitter finds out how South Korean culture manages to punch so far above its weight.</i></p>
-  <img src=https://img.youtube.com/vi/6dGYVKt1zw4/maxresdefault.jpg style="position:relative;top:0;width:100%">
+  <img src=https://img.youtube.com/vi/6dGYVKt1zw4/maxresdefault.jpg style="position:relative;top:0;width:100%"></div>
   <button onclick="Pi.createPayment();showWebinar('6dGYVKt1zw4')">Pay with Pi</button>
   
-  <h3>Winston Churchill ‘A Giant in The Century’ Documentary</h3>
+  <div id="title"><h3>Winston Churchill ‘A Giant in The Century’ Documentary</h3>
   <p><i>How Winston Churchill turned the tables in the war and influenced the century to come.</i></p>
-  <img src=https://img.youtube.com/vi/YIhYCRBDOUo/maxresdefault.jpg style="position:relative;top:0;width:100%">
+  <img src=https://img.youtube.com/vi/YIhYCRBDOUo/maxresdefault.jpg style="position:relative;top:0;width:100%"></div>
   <button onclick="Pi.createPayment();showWebinar('YIhYCRBDOUo')">Pay with Pi</button>
   
 <h2 >Upcoming Live</h2>
   
 <p1 >Live webinars coming soon...</p1>
        
-      <h5><i At mainnet, all webinars will be full length, high quality and origional to this site></i></h5>
+      <h5><i>At mainnet, all webinars will be full length, high quality and origional to this site</i></h5>
   </body>
   
   <h2>Watch Webinar:</h2>
   <iframe class="footer" id="youtube_frame" style="position:relative;top:0;width:100%;display:none" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-  <br/><br/>
+  <br/><br/></br><br/>
       </html>

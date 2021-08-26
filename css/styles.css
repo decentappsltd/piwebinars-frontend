@@ -83,3 +83,10 @@ li {
 li:last-child {
   border-right: none;
 }
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: #FFFFFF;  
+}

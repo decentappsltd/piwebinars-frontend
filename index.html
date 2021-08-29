@@ -18,7 +18,7 @@ Pi.authenticate(scopes, onIncompletePaymentFound).then(function(auth) {
 Pi.createPayment({
   amount: 1,
   memo: "Unlock Webinar",
-  metadata: { (getId(clicked_id)) },
+  metadata: {`${id}`},
 }, {
   onReadyForServerApproval: onReadyForServerApproval,
   onReadyForServerCompletion: onReadyForServerCompletion,

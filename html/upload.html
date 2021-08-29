@@ -26,11 +26,40 @@
     <h5 >Upload your webinar here. You must upload your webinar to youtube.com as an unlisted video, then enter the URL for it in the space below. This webinar must not be available anywhere else on the internet and must be your origional work.</h5>
    
 <form hidden action="../upload.php">
-   <label>Enter URL:</label>
-   <input type="url" id="video" name="video">
+   <label>Enter Video ID:</label>
+  <input hidden type="text" id="username"></span></input>
+   <input type="text" id="id" name="id">
    <input type="submit" value="submit">
    </form>
    
-<iframe src="https://docs.google.com/forms/d/e/1FAIpQLSc-9LzrQGLJ7tiQGhEoxMc0PBMq2HN1Ic4pb0-fPNfkCNO56g/viewform?embedded=true" height="430" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
-   
+<h2>Your Webinars</h2><br/><br/><br/>
+
+<?php
+$con=mysqli_connect("","","","pi-webinars");
+// Check connection
+if (mysqli_connect_errno())
+{
+echo "Failed to connect to MySQL: " . mysqli_connect_error();
+}
+
+$result = mysqli_query($con,"SELECT * FROM Persons");
+
+echo "<table border='1'>
+<tr>
+<th>ID of Webinars</th>
+<th>Views this Month</th>
+</tr>";
+
+while($row = mysqli_fetch_array($result))
+{
+echo "<tr>";
+echo "<td>" . $row['id'] . "</td>";
+echo "<td>" . $row['view_count'] . "</td>";
+echo "</tr>";
+}
+echo "</table>";
+
+mysqli_close($con);
+?>
+
 </html>

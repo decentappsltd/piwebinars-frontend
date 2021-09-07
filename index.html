@@ -36,6 +36,7 @@ const axiosClient = axios.create{baseURL: "https://pi-webinars.herokuapp.com", t
   
 const config = {headers: {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'}};
 
+const callbacks = {
 const onReadyForServerApproval = (paymentId: string) => {
   console.log("onReadyForServerApproval", paymentId);
   return axiosClient.post('/approve', {paymentId}, config);
@@ -61,6 +62,7 @@ const onError = (error: Error, payment?: PaymentDTO) => {
     console.log(payment);
     return axiosClient.post('/incomplete', {paymentId}, config);
 }
+};
 };
         </script>
 

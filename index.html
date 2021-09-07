@@ -9,31 +9,37 @@ function onIncompletePaymentFound(payment) {
 
 Pi.authenticate(scopes, onIncompletePaymentFound).then(function(auth) {
   document.getElementById('username').innerHTML = auth.user.username;
-  console.log(`Hi there! You're ready to make payments!`);
+  console.log(`Hi there! Youre ready to make payments!`);
 }).catch(function(error) {
   console.error(error);
 });
 </script>
 
 <script>
-Pi.createPayment({
-  amount: 1,
-  memo: "Unlock Webinar",
-  metadata: `${id}`,
-}, {
+Pi.createPayment {
+const paymentData = {
+  amount: 1, 
+  memo: "webinar", 
+  metadata: {productId: `${id}`}
+  };
+  
+const callbacks = {
   onReadyForServerApproval: onReadyForServerApproval,
   onReadyForServerCompletion: onReadyForServerCompletion,
   onCancel: onCancel,
   onError: onError,
-});
+};
+  
 const paymentResult = await window.Pi.createPayment(paymentData, callbacks);
+  
 const axiosClient = axios.create{baseURL: "https://pi-webinars.herokuapp.com", timeout: 20000});
+  
 const config = {headers: {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'}};
 
 const onReadyForServerApproval = (paymentId: string) => {
   console.log("onReadyForServerApproval", paymentId);
   return axiosClient.post('/approve', {paymentId}, config);
-}
+} 
 
 const onReadyForServerCompletion = (paymentId: string, txid: string) => {
   console.log("onReadyForServerCompletion", paymentId);
@@ -42,16 +48,20 @@ const onReadyForServerCompletion = (paymentId: string, txid: string) => {
 
 const onCancel = (paymentId: string) => {
   console.log("onCancel", paymentId);
-  return axiosClient.post('/cancel', {paymentId}, config):
+  return axiosClient.post('/cancel', {paymentId}, config);
+}
+
+const onIncompletePaymentFound = (payment: paymentDTO) => {
+  console.log("onIncompletePaymentFound", paymentId);
+  return axiosClient.post('/incomplete', {paymentId}, config);
 }
 
 const onError = (error: Error, payment?: PaymentDTO) => {
   console.log("onError", error);
-  if (payment) {
     console.log(payment);
-    return axiosClient.post('/incomplete', {paymentId}, config):
-  }
+    return axiosClient.post('/incomplete', {paymentId}, config);
 }
+};
         </script>
 
 <!DOCTYPE html>

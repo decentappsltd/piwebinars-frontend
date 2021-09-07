@@ -16,7 +16,6 @@ Pi.authenticate(scopes, onIncompletePaymentFound).then(function(auth) {
 </script>
 
 <script>
-Pi.createPayment {
 const paymentData = {
   amount: 1, 
   memo: "webinar", 
@@ -24,10 +23,10 @@ const paymentData = {
   };
   
 const callbacks = {
-  onReadyForServerApproval: onReadyForServerApproval,
-  onReadyForServerCompletion: onReadyForServerCompletion,
-  onCancel: onCancel,
-  onError: onError,
+  onReadyForServerApproval: this.onReadyForServerApproval,
+  onReadyForServerCompletion: this.onReadyForServerCompletion,
+  onCancel: this.onCancel,
+  onError: this.onError,
 };
   
 const paymentResult = await window.Pi.createPayment(paymentData, callbacks);
@@ -36,34 +35,34 @@ const axiosClient = axios.create{baseURL: "https://pi-webinars.herokuapp.com", t
   
 const config = {headers: {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'}};
 
-const callbacks = {
-const onReadyForServerApproval = (paymentId: string) => {
+onReadyForServerApproval = (paymentId: string) => {
   console.log("onReadyForServerApproval", paymentId);
   return axiosClient.post('/approve', {paymentId}, config);
 } 
 
-const onReadyForServerCompletion = (paymentId: string, txid: string) => {
+onReadyForServerCompletion = (paymentId: string, txid: string) => {
   console.log("onReadyForServerCompletion", paymentId);
   return axiosClient.post('/complete', {paymentId}, config);
 }
 
-const onCancel = (paymentId: string) => {
+onCancel = (paymentId: string) => {
   console.log("onCancel", paymentId);
   return axiosClient.post('/cancel', {paymentId}, config);
 }
 
-const onIncompletePaymentFound = (payment: paymentDTO) => {
+onIncompletePaymentFound = (payment: paymentDTO) => {
   console.log("onIncompletePaymentFound", paymentId);
   return axiosClient.post('/incomplete', {paymentId}, config);
 }
 
-const onError = (error: Error, payment?: PaymentDTO) => {
+onError = (error: Error, payment?: PaymentDTO) => {
   console.log("onError", error);
     console.log(payment);
     return axiosClient.post('/incomplete', {paymentId}, config);
 }
-};
-};
+
+Pi.createPayment(paymentData, callbacks);
+  
         </script>
 
 <!DOCTYPE html>

@@ -16,6 +16,8 @@ Pi.authenticate(scopes, onIncompletePaymentFound).then(function(auth) {
 </script>
 
 <script>
+  const axios = require('axios');
+  
 const paymentData = {
   amount: 1, 
   memo: "webinar", 

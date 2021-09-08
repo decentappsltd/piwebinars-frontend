@@ -1,7 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    
+    <!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-KRPNL55');</script>
+<!-- End Google Tag Manager -->
+  
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-2N939D6C1C"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-2N939D6C1C');
+</script>
+    
 <script src="https://sdk.minepi.com/pi-sdk.js"></script>
 <script>Pi.init({ version: "2.0" })</script>
+    
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="icon" 
+      type="image/png" 
+      href="../img/logo.png">
+    
+    <script>
+      if(navigator.userAgent.toLowerCase().indexOf("pibrowser")<0) document.domain!="localhost"&&window.open(window.location.protocol+"//"+document.domain+"/html/home.html","_self");
+    </script>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@500;700&display=swap" rel="stylesheet">
   
-<script>               
+  </head>
+  <body>
+    
+    <!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KRPNL55"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+    
+    <script>               
 const scopes = ['payments', 'username'];
 
 function onIncompletePaymentFound(payment) { 
@@ -14,7 +58,7 @@ Pi.authenticate(scopes, onIncompletePaymentFound).then(function(auth) {
   console.error(error);
 });
 </script>
-<!--
+
 <script>
 const axios = require('axios');
   
@@ -63,98 +107,7 @@ const callbacks = {
   onError: this.onError,
 };
         </script>
--->
-<script>
-  async function transfer() {
-                    try {
-                        const payment = Pi.createPayment({
-                          // Amount of π to be paid:
-                          amount: 1,
-                          // An explanation of the payment - will be shown to the user:
-                          memo: "Demo transfer request", // e.g: "Digital kitten #1234",
-                          // An arbitrary developer-provided metadata object - for your own usage:
-                          metadata: { paymentType: "donation" /* ... */ }, // e.g: { kittenId: 1234 }
-                        }, {
-                          // Callbacks you need to implement - read more about those in the detailed docs linked below:
-                          onReadyForServerApproval: function(paymentId) {
-                              var data = {
-                                        'action': 'approve',
-                                        'paymentId': paymentId,
-                                        'txid': '',
-                                        'app_client': 'auth_example'
-                                    };
-                              return $.post( "https://pi-webinars.herokuapp.com", data).done(function(data) {
-                                    $("#button_click").prop( "disabled", false );
-                                }).fail(function() {
-                                    $("#button_click").prop( "disabled", false );
-                                });
-                          },
-                          onReadyForServerCompletion: function(paymentId, txid) {
-                                var data = {
-                                    'action': 'complete',
-                                    'paymentId': paymentId,
-                                    "txid": txid,
-                                    'app_client': 'auth_example'
-                                };
-                                return $.post( "https://pi-webinars.herokuapp.com", data).done(function(data) {
-                                    $("#button_click").prop( "disabled", false );
-                                }).fail(function() {
-                                    $("#button_click").prop( "disabled", false );
-                                });
-                          },
-                          onCancel: function(paymentId) { $("#button_click").prop( "disabled", false ); /* ... */ },
-                          onError: function(error, payment) { $("#button_click").prop( "disabled", false ); /* ... */ },
-                        });
-                    } catch(err) {
-                        $("#button_click").prop( "disabled", false );
-                        alert(err);
-                        // Technical problem (eg network failure). Please try again
-                    }
-                }
-</script>
-<!DOCTYPE html>
-<html>
-  <head>
-    
-    <!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-KRPNL55');</script>
-<!-- End Google Tag Manager -->
-  
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-2N939D6C1C"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
 
-  gtag('config', 'G-2N939D6C1C');
-</script>
-    
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="css/styles.css">
-  <link rel="icon" 
-      type="image/png" 
-      href="../img/logo.png">
-    <script>
-      if(navigator.userAgent.toLowerCase().indexOf("pibrowser")<0) document.domain!="localhost"&&window.open(window.location.protocol+"//"+document.domain+"/html/home.html","_self");
-    </script>
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@500;700&display=swap" rel="stylesheet">
-  
-  </head>
-  <body>
-    
-    <!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KRPNL55"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->
-    
     <script>
       const showWebinar = (id) => {
         const yt_frame = document.getElementById("youtube_frame");
@@ -186,7 +139,7 @@ src="../img/logo.png"</img>
   <div id="title"><h3>What is Value Investing?</h3>
   <p><i>In this lesson, students learn what value investing is.  The three course objectives are: 1) The difference between value trading and value investing 2) The difference between an asset and a liability 3) Who created and uses value investing.</i></p>
   <img src=https://img.youtube.com/vi/KfDB9e_cO4k/maxresdefault.jpg style="position:relative;top:0;width:100%"></div>
-  <button id="button_click" onclick="transfer();showWebinar('KfDB9e_cO4k');dataLayer.push({'event': 'KfDB9e_cO4k'});">Pay with Pi</button>
+  <button onclick="Pi.createPayment();showWebinar('KfDB9e_cO4k');dataLayer.push({'event': 'KfDB9e_cO4k'});">Pay with Pi</button>
   
   <div id="title"><h3>South Korea: The Silent Cultural Superpower - Full Documentary</h3>
   <p><i>Rana Mitter finds out how South Korean culture manages to punch so far above its weight.</i></p>

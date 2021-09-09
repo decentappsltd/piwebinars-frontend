@@ -86,15 +86,15 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                                     'app_client': 'auth_example'
                                 };
                             return $.post( "https://latin-chain.com/server1.php", data).done(function(data) {
-                                $("#button_click").prop( "disabled", false );
+                                $(".button_click").prop( "disabled", false );
                             }).fail(function() {
-                                $("#button_click").prop( "disabled", false );
+                                $(".button_click").prop( "disabled", false );
                             });
                         }; // Read more about this in the SDK reference
 
                         Pi.authenticate(scopes, onIncompletePaymentFound).then(function(auth) {
                           document.getElementById('username').innerHTML = auth.user.username;
-                          $( "#button_click" ).click(function() {
+                          $( ".button_click" ).click(function() {
                                     transfer();
                             });
                             //alert('Hello ' + auth.user.username);
@@ -126,9 +126,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                                         'app_client': 'auth_example'
                                     };
                               return $.post( "https://latin-chain.com/server1.php", data).done(function(data) {
-                                    $("#button_click").prop( "disabled", false );
+                                    $(".button_click").prop( "disabled", false );
                                 }).fail(function() {
-                                    $("#button_click").prop( "disabled", false );
+                                    $(".button_click").prop( "disabled", false );
                                 });
                           },
                           onReadyForServerCompletion: function(paymentId, txid) {
@@ -139,16 +139,16 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                                     'app_client': 'auth_example'
                                 };
                                 return $.post( "https://latin-chain.com/server1.php", data).done(function(data) {
-                                    $("#button_click").prop( "disabled", false );
+                                    $(".button_click").prop( "disabled", false );
                                 }).fail(function() {
-                                    $("#button_click").prop( "disabled", false );
+                                    $(".button_click").prop( "disabled", false );
                                 });
                           },
-                          onCancel: function(paymentId) { $("#button_click").prop( "disabled", false ); /* ... */ },
-                          onError: function(error, payment) { $("#button_click").prop( "disabled", false ); /* ... */ },
+                          onCancel: function(paymentId) { $(".button_click").prop( "disabled", false ); /* ... */ },
+                          onError: function(error, payment) { $(".button_click").prop( "disabled", false ); /* ... */ },
                         });
                     } catch(err) {
-                        $("#button_click").prop( "disabled", false );
+                        $(".button_click").prop( "disabled", false );
                         alert(err);
                         // Technical problem (eg network failure). Please try again
                     }
@@ -190,17 +190,17 @@ src="../img/logo.png"</img>
   <div id="title"><h3>What is Value Investing?</h3>
   <p><i>In this lesson, students learn what value investing is.  The three course objectives are: 1) The difference between value trading and value investing 2) The difference between an asset and a liability 3) Who created and uses value investing.</i></p>
   <img src=https://img.youtube.com/vi/KfDB9e_cO4k/maxresdefault.jpg style="position:relative;top:0;width:100%"></div>
-  <button id="button_click" onclick="showWebinar('KfDB9e_cO4k');dataLayer.push({'event': 'KfDB9e_cO4k'});">Pay with Pi</button>
+  <button class="button_click" onclick="showWebinar('KfDB9e_cO4k');dataLayer.push({'event': 'KfDB9e_cO4k'});">Pay with Pi</button>
   
   <div id="title"><h3>South Korea: The Silent Cultural Superpower - Full Documentary</h3>
   <p><i>Rana Mitter finds out how South Korean culture manages to punch so far above its weight.</i></p>
   <img src=https://img.youtube.com/vi/6dGYVKt1zw4/maxresdefault.jpg style="position:relative;top:0;width:100%"></div>
-  <button id="button_click" onclick="showWebinar('6dGYVKt1zw4');dataLayer.push({'event': '6dGYVKt1zw4'});">Pay with Pi</button>
+  <button class="button_click" onclick="showWebinar('6dGYVKt1zw4');dataLayer.push({'event': '6dGYVKt1zw4'});">Pay with Pi</button>
   
   <div id="title"><h3>Winston Churchill ‘A Giant in The Century’ Documentary</h3>
   <p><i>How Winston Churchill turned the tables in the war and influenced the century to come.</i></p>
   <img src=https://img.youtube.com/vi/YIhYCRBDOUo/maxresdefault.jpg style="position:relative;top:0;width:100%"></div>
-  <button id="button_click" onclick="showWebinar('YIhYCRBDOUo');dataLayer.push({'event': 'YIhYCRBDOUo'});">Pay with Pi</button>
+  <button class="button_click" onclick="showWebinar('YIhYCRBDOUo');dataLayer.push({'event': 'YIhYCRBDOUo'});">Pay with Pi</button>
     
 <h2 >Upcoming Live</h2>
   

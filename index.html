@@ -65,72 +65,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KRPNL55"
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
-    
-<!--    <script>               
-const scopes = ['payments', 'username'];
-
-function onIncompletePaymentFound(payment) { 
-};
-
-Pi.authenticate(scopes, onIncompletePaymentFound).then(function(auth) {
-  document.getElementById('username').innerHTML = auth.user.username;
-  console.log(`Hi there! Youre ready to make payments!`);
-}).catch(function(error) {
-  console.error(error);
-});
-</script>
-
-<script>
-  async function payPi () {
-const axios = require('axios');
-  
-const paymentResult = await window.Pi.createPayment(paymentData, callbacks);
-  
-const axiosClient = axios.create({baseURL: "https://pi-webinars.herokuapp.com", timeout: 20000});
-  
-const config = {headers: {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'}};
-
-onReadyForServerApproval = (paymentId: string) => {
-  console.log("onReadyForServerApproval", paymentId);
-  return axiosClient.post('/approve', {paymentId}, config);
-} 
-
-onReadyForServerCompletion = (paymentId: string, txid: string) => {
-  console.log("onReadyForServerCompletion", paymentId);
-  return axiosClient.post('/complete', {paymentId}, config);
-}
-
-onCancel = (paymentId: string) => {
-  console.log("onCancel", paymentId);
-  return axiosClient.post('/cancel', {paymentId}, config);
-}
-
-onIncompletePaymentFound = (payment: paymentDTO) => {
-  console.log("onIncompletePaymentFound", paymentId);
-  return axiosClient.post('/incomplete', {paymentId}, config);
-}
-
-onError = (error: Error, payment?: PaymentDTO) => {
-  console.log("onError", error);
-    console.log(payment);
-    return axiosClient.post('/incomplete', {paymentId}, config);
-}
-
-const paymentData = {
-  amount: 1, 
-  memo: "webinar", 
-  metadata: {productId: `${id}`}
-  };
-  
-const callbacks = {
-  onReadyForServerApproval: this.onReadyForServerApproval,
-  onReadyForServerCompletion: this.onReadyForServerCompletion,
-  onCancel: this.onCancel,
-  onError: this.onError,
-};
-  };
-        </script>-->
-    
+        
     <script type="text/javascript">
             $( document ).ready(function() {
                 const Pi = window.Pi;
@@ -158,6 +93,7 @@ const callbacks = {
                         }; // Read more about this in the SDK reference
 
                         Pi.authenticate(scopes, onIncompletePaymentFound).then(function(auth) {
+                          document.getElementById('username').innerHTML = auth.user.username;
                           $( "#button_click" ).click(function() {
                                     transfer();
                             });
@@ -244,7 +180,7 @@ src="../img/logo.png"</img>
   <ul>
     <li><a href="index.html">Home</a></li>
     <li><a href="html/search.html">Search</a></li>
-    <li><a href="html/test.html">All Webinars</a></li>
+    <li><a href="html/all-webinars.html">All Webinars</a></li>
     <li><a href="html/upload.html">Upload</a></li>
   </ul>
 </nav>  
@@ -266,7 +202,6 @@ src="../img/logo.png"</img>
   <img src=https://img.youtube.com/vi/YIhYCRBDOUo/maxresdefault.jpg style="position:relative;top:0;width:100%"></div>
   <button id="button_click" onclick="showWebinar('YIhYCRBDOUo');dataLayer.push({'event': 'YIhYCRBDOUo'});">Pay with Pi</button>
     
-    </div>
 <h2 >Upcoming Live</h2>
   
 <h5 >Live webinars coming soon...</h5><br/>

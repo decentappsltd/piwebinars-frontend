@@ -159,16 +159,7 @@ const callbacks = {
 
                         Pi.authenticate(scopes, onIncompletePaymentFound).then(function(auth) {
                           $( "#button_click" ).click(function() {
-                                if(parseFloat($("#pi_donate").val()) > 0)
-                                {
-                                    $("#button_click").prop( "disabled", true );
-                                    /*setTimeout(function ()
-                                    {
-                                        $("#button_click").prop( "disabled", false );
-                                    }, 10000);*/
                                     transfer();
-                                }
-                                //alert("Click");
                             });
                             //alert('Hello ' + auth.user.username);
                         }).catch(function(error) {
@@ -274,6 +265,9 @@ src="../img/logo.png"</img>
   <p><i>How Winston Churchill turned the tables in the war and influenced the century to come.</i></p>
   <img src=https://img.youtube.com/vi/YIhYCRBDOUo/maxresdefault.jpg style="position:relative;top:0;width:100%"></div>
   <button id="button_click" name="button_click" onclick="transfer();showWebinar('YIhYCRBDOUo');dataLayer.push({'event': 'YIhYCRBDOUo'});">Pay with Pi</button>
+    
+    <div class="container form-group" style="text-align:center">
+            <input id="button_click" name="button_click" value="Donate" type="button" class="btn btn-primary"/>
   
 <h2 >Upcoming Live</h2>
   

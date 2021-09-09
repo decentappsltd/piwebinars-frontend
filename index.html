@@ -65,7 +65,7 @@ const axios = require('axios');
   
 const paymentResult = await window.Pi.createPayment(paymentData, callbacks);
   
-const axiosClient = axios.create{baseURL: "https://pi-webinars.herokuapp.com", timeout: 20000});
+const axiosClient = axios.create({baseURL: "https://pi-webinars.herokuapp.com", timeout: 20000});
   
 const config = {headers: {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'}};
 

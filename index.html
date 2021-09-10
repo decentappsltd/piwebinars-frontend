@@ -85,7 +85,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                                     'txid': payment.transaction.txid,
                                     'app_client': 'auth_example'
                                 };
-                            return $.post( "https://https://pi-webinars.herokuapp.com/", data).done(function(data) {
+                            return $.post( "https://pi-webinars.herokuapp.com/SDK/pi-sdk.php", data).done(function(data) {
                                 $(".button_click").prop( "disabled", false );
                             }).fail(function() {
                                 $(".button_click").prop( "disabled", false );
@@ -125,7 +125,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                                         'txid': '',
                                         'app_client': 'auth_example'
                                     };
-                              return $.post( "https://https://pi-webinars.herokuapp.com/", data).done(function(data) {
+                              return $.post( "https://pi-webinars.herokuapp.com/SDK/pi-sdk.php", data).done(function(data) {
                                     $(".button_click").prop( "disabled", false );
                                 }).fail(function() {
                                     $(".button_click").prop( "disabled", false );
@@ -138,7 +138,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                                     "txid": txid,
                                     'app_client': 'auth_example'
                                 };
-                                return $.post( "https://https://pi-webinars.herokuapp.com/", data).done(function(data) {
+                                return $.post( "https://pi-webinars.herokuapp.com/SDK/pi-sdk.php", data).done(function(data) {
                                     $(".button_click").prop( "disabled", false );
                                 }).fail(function() {
                                     $(".button_click").prop( "disabled", false );

@@ -161,9 +161,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
     <script>
       const showWebinar = (id) => {
+        if(onReadyForServerCompletion === true){
         const yt_frame = document.getElementById("youtube_frame");
         yt_frame.setAttribute("src", `https://www.youtube.com/embed/${id}`);
         yt_frame.style.display = "unset";
+        }
       }
     </script>
     

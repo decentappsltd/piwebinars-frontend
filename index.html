@@ -160,7 +160,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </script>
 
     <script>
-      const showWebinar = (id) => {
+      async const showWebinar = (id) => {
+        await onReadyForServerApproval;
         const yt_frame = document.getElementById("youtube_frame");
         yt_frame.setAttribute("src", `https://www.youtube.com/embed/${id}`);
         yt_frame.style.display = "unset";

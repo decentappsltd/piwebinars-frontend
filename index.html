@@ -132,6 +132,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                                 });
                           },
                           onReadyForServerCompletion: function(paymentId, txid) {
+                            var Dave = true;
                                 var data = {
                                     'action': 'complete',
                                     'paymentId': paymentId,
@@ -161,10 +162,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
     <script>
       const showWebinar = (id) => {
-        if(onReadyForServerCompletion === true){
+        if(Dave === true){
+          window.setTimeout(60000);
         const yt_frame = document.getElementById("youtube_frame");
         yt_frame.setAttribute("src", `https://www.youtube.com/embed/${id}`);
         yt_frame.style.display = "unset";
+        //dataLayer.push({'event': `${id}`});
         }
       }
     </script>

@@ -96,9 +96,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
                         Pi.authenticate(scopes, onIncompletePaymentFound).then(function(auth) {
                           document.getElementById('username').innerHTML = auth.user.username;
-                          $( ".button_click" ).click(function() {
-                                    transfer();
-                            });
+
                             //alert('Hello ' + auth.user.username);
                         }).catch(function(error) {
                           console.error(error);

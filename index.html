@@ -72,7 +72,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 Pi.init({ version: "2.0" });
 
                 //alert(PiNetworkClient);
-
+               $( ".button_click" ).click(function() {
+                    transfer($(this).data('webinar-id'));
+                });
+              
                 async function auth() {
                     try {
                         // Identify the user with their username / unique network-wide ID, and get permission to request payments from them.

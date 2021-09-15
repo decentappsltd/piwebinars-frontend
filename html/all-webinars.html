@@ -1,52 +1,46 @@
-<script src="https://sdk.minepi.com/pi-sdk.js"></script>
-<script>Pi.init({ version: "2.0" })</script>
-<script>
-
-Pi.createPayment({
-  amount: 1,
-  memo: "Unlock Webinar",
-  metadata: { UnlockWebinarOD },
-}, {
-  onReadyForServerApproval: onReadyForServerApproval,
-  onReadyForServerCompletion: onReadyForServerCompletion,
-  onCancel: onCancel,
-  onError: onError,
-});
-const paymentResult = await window.Pi.createPayment(paymentData, callbacks);
-const axiosClient = axios.create{baseURL: SERVER_URL, timeout: 20000});
-const config = {headers: {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'}};
-
-const onReadyForServerApproval = (paymentId: string) => {
-  console.log("onReadyForServerApproval", paymentId);
-  return axiosClient.post('/approve', {paymentId}, config);
-}
-
-const onReadyForServerCompletion = (paymentId: string, txid: string) => {
-  console.log("onReadyForServerCompletion", paymentId);
-  return axiosClient.post('/complete', {paymentId}, config);
-}
-
-const onCancel = (paymentId: string) => {
-  console.log("onCancel", paymentId);
-  return axiosClient.post('/cancel', {paymentId}, config):
-}
-
-const onError = (error: Error, payment?: PaymentDTO) => {
-  console.log("onError", error);
-  if (payment) {
-    console.log(payment);
-    //handle the error
-  }
-}
-
-function createPayment() {
-  var x = document.getElementsByClassName("pay");
-}
-        </script>
-
 <!DOCTYPE html>
 <html>
   <head>
+        <!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-KRPNL55');</script>
+<!-- End Google Tag Manager -->
+  
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-2N939D6C1C"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-2N939D6C1C');
+</script>
+    
+<meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, user-scalable=yes">
+        
+        <!-- ios support -->
+        <meta name="apple-mobile-web-app-status-bar" content="#db4938" />
+        <meta name="theme-color" content="#db4938" />
+        
+        <meta name="application-name" content="Pi Webinars">
+
+        <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+        <!--[if lt IE 9]>
+            <script src="assets/js/html5shiv-pre3.6.js"></script>
+        <![endif]-->
+        
+        <script type="text/javascript" src="jquery-3.5.1.min.js"></script>
+        <!--<script src="https://downloads.minepi.com/sdk/v1/dev.js"></script>-->
+        <!--<script src="https://downloads.minepi.com/sdk/v1/prod.js"></script>-->
+        <script src="https://sdk.minepi.com/pi-sdk.js"></script>
+    
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <link rel="stylesheet" href="../css/styles.css">
      <link rel="icon" 
@@ -61,7 +55,115 @@ function createPayment() {
 <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@500;700&display=swap" rel="stylesheet">
 
   </head>
-  
+  <body>
+        <!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KRPNL55"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+        
+    <script type="text/javascript">
+            $( document ).ready(function() {
+                const Pi = window.Pi;
+                Pi.init({ version: "2.0" });
+              
+               $( ".button_click" ).click(function() {
+                    transfer($(this).data('webinar-id'));
+                });
+              
+                async function auth() {
+                    try {
+                        // Identify the user with their username / unique network-wide ID, and get permission to request payments from them.
+                        const scopes = ['username', 'payments'];
+                        function onIncompletePaymentFound(payment) {
+                            
+                            var data = {
+                                    'action': 'complete',
+                                    'paymentId': payment.identifier,
+                                    'txid': payment.transaction.txid,
+                                    'app_client': 'auth_example'
+                                };
+                            return $.post( "https://latin-chain.com/server1.php", data).done(function(data) {
+                                $(".button_click").prop( "disabled", false );
+                            }).fail(function() {
+                                $(".button_click").prop( "disabled", false );
+                            });
+                        }; // Read more about this in the SDK reference
+
+                        Pi.authenticate(scopes, onIncompletePaymentFound).then(function(auth) {
+                          document.getElementById('username').innerHTML = auth.user.username;
+
+                            //alert('Hello ' + auth.user.username);
+                        }).catch(function(error) {
+                          console.error(error);
+                        });
+                    } catch (err) {
+                        alert(err);
+                        // Not able to fetch the user
+                    }
+                }
+
+                async function transfer(webinarId) {
+                    try {
+                        const payment = Pi.createPayment({
+                          // Amount of π to be paid:
+                          amount: 1,
+                          // An explanation of the payment - will be shown to the user:
+                          memo: "Demo transfer request", // e.g: "Digital kitten #1234",
+                          // An arbitrary developer-provided metadata object - for your own usage:
+                          metadata: { paymentType: "donation" /* ... */ }, // e.g: { kittenId: 1234 }
+                        }, {
+                          // Callbacks you need to implement - read more about those in the detailed docs linked below:
+                          onReadyForServerApproval: function(paymentId) {
+                              var data = {
+                                        'action': 'approve',
+                                        'paymentId': paymentId,
+                                        'txid': '',
+                                        'app_client': 'auth_example'
+                                    };
+                              return $.post( "https://latin-chain.com/server1.php", data).done(function(data) {
+                                    $(".button_click").prop( "disabled", false );
+                                }).fail(function() {
+                                    $(".button_click").prop( "disabled", false );
+                                });
+                          },
+                          onReadyForServerCompletion: function(paymentId, txid) {
+                                var data = {
+                                    'action': 'complete',
+                                    'paymentId': paymentId,
+                                    "txid": txid,
+                                    'app_client': 'auth_example'
+                                };
+                            showWebinar(webinarId);
+                                return $.post( "https://latin-chain.com/server1.php", data).done(function(data) {
+                                    $(".button_click").prop( "disabled", false );
+                                }).fail(function() {
+                                    $(".button_click").prop( "disabled", false );
+                                });
+                          },
+                          onCancel: function(paymentId) { $(".button_click").prop( "disabled", false ); /* ... */ },
+                          onError: function(error, payment) { $(".button_click").prop( "disabled", false ); /* ... */ },
+                        });
+                    } catch(err) {
+                        $(".button_click").prop( "disabled", false );
+                        alert(err);
+                        // Technical problem (eg network failure). Please try again
+                    }
+                }
+
+                auth();
+
+            });
+        </script>
+
+    <script>
+        const showWebinar = (id) => {
+        const yt_frame = document.getElementById("youtube_frame");
+        yt_frame.setAttribute("src", `https://www.youtube.com/embed/${id}`);
+        yt_frame.style.display = "unset";
+        dataLayer.push({'event': id})
+      }
+    </script>
+    
   <title>Pi Webinars</title>
 
   <h1 >Pi Webinars</h1>
@@ -75,42 +177,48 @@ function createPayment() {
   </ul>
 </nav>  
     
-   <h5><i> At mainnet, all webinars will be full length, high quality and origional to this site </i></h5>
+<script async src="https://cse.google.com/cse.js?cx=49f21ac287cae8634"></script>
+<div class="gcse-search"></div>
   
-  <h2 >Technology</h2>
+<h2>Watch Webinar:</h2>
+<h5>Purchased webinars will appear here:</h5>
+<iframe class="footer" id="youtube_frame" style="position:relative;top:0;width:100%;display:none" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+  
+    <h2>Cryptocurrency</h2>
+  <br><br><br>
+  
+    <h2 >Education</h2>
   <br/><br/><br/>
   
-  
-  <h2 >Fitness</h2>
+    <h2 >Fitness</h2>
   <br/><br/><br/>
   
-  
-  <h2 >Education</h2>
+    <h2 >Food</h2>
   <br/><br/><br/>
-  
   
   <h2 >History</h2>
   <br/><br/><br/>
-  
-  
-  <h2 >Food</h2>
+
+  <h2 >Money</h2>
   <br/><br/><br/>
-  
   
   <h2 >Nature</h2>
   <br/><br/><br/>
   
+  <h2>Pi Network</h2>
+  <br><br><br>
+    
+  <h2 >Politics</h2>
+  <br/><br/><br/>
   
   <h2 >Sports</h2>
   <br/><br/><br/>
-  
-  
-  <h2 >Politics</h2>
+    
+  <h2 >Technology</h2>
   <br/><br/><br/>
- 
-  
-  <h2 >Money</h2>
-  <br/><br/><br/>
-  
-  
+
+     <h5><i> At mainnet, all webinars will be full length, high quality and origional to this site </i></h5>
+    
+  </body>
 </html>

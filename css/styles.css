@@ -12,12 +12,6 @@ img {
   margin-left: auto;
   margin-right: auto;
 }
-iframe {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 10px;
-}
 h2 {
   color: #36454F;
   text-align: center; 
@@ -28,7 +22,7 @@ span {
   display: block;
   margin-left: auto;
   margin-right: auto;
-  margin-top: 0px;
+  margin-top: 50px;
 }
 h5 {
   display: block;
@@ -36,13 +30,6 @@ h5 {
   margin-left: auto;
   margin-right: auto;
   margin-top: 20px;
-}
-#webinar {
-  display: none;
-}
-#title {
-  border-style: solid;
-  border-color: #36454F;
 }
 button {
   margin-bottom: 20px;
@@ -54,17 +41,17 @@ button {
   border-color: #fbb44a;
   font-weight: bold;
   box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
-}
+  }
   button:active {
   background-color: #FBB44A;
   transform: translateY(3px);
   border: solid;
   border-color: #fbb44a;
+  }
+.ul {
+  text-align: center;
 }
-ul {
-  text-align: left;
-}
-li, a {
+.li {
   display: inline-block;
   color: #FBB44A;  
   text-decoration: none;
@@ -72,14 +59,21 @@ li, a {
   text-align: center;
   padding: 0px 1px;
 }
-li:active, li:hover {
+.a {
+  display: inline-block;
+  color: #FBB44A;  
+  text-decoration: none;
+  font-weight: bold;
+  text-align: center;
+  padding: 0px 1px;
+}
+.li:active {
   background-color: #36454F;
 }
-
-li {
+.li {
   border-right: 2px solid #36454F;
 }
-li:last-child {
+.li:last-child {
   border-right: none;
 }
 .footer {
@@ -89,9 +83,9 @@ li:last-child {
   width: 100%;
   background-color: #FFFFFF;  
 }
-.gap {
-  margin-bottom: 20px;
-}
-#categories {
-  font-size: 30px;
+iframe {
+  width: 100%;
+  position: absolute;
+  z-index: 101;
+  margin-left: 0px;
 }

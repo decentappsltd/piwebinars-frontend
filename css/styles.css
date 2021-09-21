@@ -61,10 +61,10 @@ button {
   border: solid;
   border-color: #fbb44a;
 }
-.ul {
+ul {
   text-align: left;
 }
-.li, .a {
+li, a {
   display: inline-block;
   color: #FBB44A;  
   text-decoration: none;
@@ -72,14 +72,14 @@ button {
   text-align: center;
   padding: 0px 1px;
 }
-.li:active, .li:hover {
+li:active, li:hover {
   background-color: #36454F;
 }
 
-.li {
+li {
   border-right: 2px solid #36454F;
 }
-.li:last-child {
+li:last-child {
   border-right: none;
 }
 .footer {

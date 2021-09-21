@@ -1,138 +1,121 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <meta name="viewport" content="width=device-width, user-scalable=yes">
     
-    <!-- ios support -->
-    <meta name="apple-mobile-web-app-status-bar" content="#db4938" />
-    <meta name="theme-color" content="#db4938" />
-    
-    <meta name="application-name" content="Pi Example">
-    
-    <script type="text/javascript" src="jquery-3.5.1.min.js"></script>
-
     <!-- Google Tag Manager -->
-    <script>
-      (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-      })(window,document,'script','dataLayer','GTM-KRPNL55');
-    </script>
-    <!-- End Google Tag Manager -->
-        
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-2N939D6C1C"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-
-      gtag('config', 'G-2N939D6C1C');
-    </script>
-      
-    <script src="https://sdk.minepi.com/pi-sdk.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.min.js" integrity="sha384-skAcpIdS7UcVUC05LJ9Dxay8AXcDYfBJqt1CJ85S/CFujBsIzCIv+l9liuYLaMQ/" crossorigin="anonymous"></script>    
-    
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-KRPNL55');</script>
+<!-- End Google Tag Manager -->
   
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-2N939D6C1C"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-2N939D6C1C');
+</script>
+    
+<meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, user-scalable=yes">
         
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/styles.css">
-    <link rel="icon" type="image/png" href="/img/logo.png">
+        <!-- ios support -->
+        <meta name="apple-mobile-web-app-status-bar" content="#db4938" />
+        <meta name="theme-color" content="#db4938" />
+        
+        <meta name="application-name" content="Pi Webinars">
+
+        <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+        <!--[if lt IE 9]>
+            <script src="assets/js/html5shiv-pre3.6.js"></script>
+        <![endif]-->
+        
+        <script type="text/javascript" src="jquery-3.5.1.min.js"></script>
+        <!--<script src="https://downloads.minepi.com/sdk/v1/dev.js"></script>-->
+        <!--<script src="https://downloads.minepi.com/sdk/v1/prod.js"></script>-->
+        <script src="https://sdk.minepi.com/pi-sdk.js"></script>
+        
+        	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="icon" 
+      type="image/png" 
+      href="../img/logo.png">
     
     <script>
       if(navigator.userAgent.toLowerCase().indexOf("pibrowser")<0) document.domain!="localhost"&&window.open(window.location.protocol+"//"+document.domain+"/html/home.html","_self");
     </script>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@500;700&display=swap" rel="stylesheet">
-    <script src="/scripts/index.js"></script>    
-    <title>Pi Webinars</title>
-
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@500;700&display=swap" rel="stylesheet">
+  
   </head>
   <body>
-      <!-- Google Tag Manager (noscript) -->
-      <noscript>
-        <iframe 
-          src="https://www.googletagmanager.com/ns.html?id=GTM-KRPNL55"
-          height="0" 
-          width="0" 
-          style="display:none;visibility:hidden"
-        >
-        </iframe>
-      </noscript>
-      <!-- End Google Tag Manager (noscript) -->
-
-      <h1 >Pi Webinars</h1> 
     
-      <img width="180" height="150" style="position:relative;top:0" src="./img/logo.png"/>
-    
-      <h4><span id="username"></span></h4><h5> Welcome to Pi Webinars, an educational video platform powered by Pi cryptocurrency.<br/></h5>
-      <h2 class="rounded">Featured</h2>
+    <!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KRPNL55"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+        
+  <title>Pi Webinars</title>
+ 
+<h1 >Pi Webinars</h1>
   
-      <div id="title" class="rounded">
-        <h3>What is Value Investing?</h3>
-        <p>
-          <i>In this lesson, students learn what value investing is.  The three course objectives are: 1) The difference between value trading and value investing 2) The difference between an asset and a liability 3) Who created and uses value investing.</i>
-        </p>
-        <img src=https://img.youtube.com/vi/KfDB9e_cO4k/maxresdefault.jpg style="position:relative;top:0;width:100%">
-      </div>
-      <button class="button_click" data-webinar-id="KfDB9e_cO4k">Pay with Pi</button>
+<img width="180" height="150" style="position:relative;top:0"
+src="../img/logo.png"</img>
+  
+    <h4><span id="username"></span></h4><h5> Welcome to Pi Webinars, an educational video platform powered by Pi cryptocurrency.<br/></h5>
+  
+<nav class="footer" style="z-index: 100">
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="html/all-webinars.html">All Webinars</a></li>
+    <li><a href="html/upload.html">Upload</a></li>
+    <li><a href="html/about.html">About</a></li>
+  </ul>
+</nav>  
     
-      <div id="title" class="rounded">
-        <h3>South Korea: The Silent Cultural Superpower - Full Documentary</h3>
-        <p><i>Rana Mitter finds out how South Korean culture manages to punch so far above its weight.</i></p>
-        <img src=https://img.youtube.com/vi/6dGYVKt1zw4/maxresdefault.jpg style="position:relative;top:0;width:100%">
-      </div>
-      <button class="button_click" data-webinar-id="6dGYVKt1zw4">Pay with Pi</button>
-    
-      <div id="title" class="rounded">
-        <h3>Winston Churchill ‘A Giant in The Century’ Documentary</h3>
-        <p><i>How Winston Churchill turned the tables in the war and influenced the century to come.</i></p>
-        <img src=https://img.youtube.com/vi/YIhYCRBDOUo/maxresdefault.jpg style="position:relative;top:0;width:100%">
-      </div>
-      <button class="button-click" data-webinar-id="YIhYCRBDOUo">Pay with Pi</button>
-      
-      <h2>Upcoming Live</h2>
-    
-      <h5>Live webinars coming soon...</h5><br/>
-    
-      <h2>Watch Webinar:</h2>
-      <iframe class="footer" id="youtube_frame" style="position:relative;top:0;width:100%;display:none" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    <h2>Watch Webinar:</h2>
+    <h5>Purchased webinars will appear here:</h5>
+  <iframe class="footer" id="youtube_frame" style="position:relative;top:0;width:100%;display:none" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-      <div id="purchased-videos" style="height: 10em; padding-bottom: 40em;">
-        <p>purchased videos</p>
-        <p id="no-purchases">you currently have no purchased videos</p>
-      </div>
-      
-            <h5><i>At mainnet, all webinars will be full length, high quality and origional to this site</i></h5>
-      <br/><br/><br/><br/>
-      
-      <nav class="footer" style="z-index: 100">
-        <ul class="ul">
-          <li class="li">
-            <a class="a" href="index.html">Home</a>
-          </li>
-          <li class="li">
-            <a class="a" href="./html/all-webinars.html">All Webinars</a>
-          </li>
-          <li class="li">
-            <a class="a" href="./html/upload.html">Upload</a>
-          </li>
-          <li class="li">
-            <a class="a" href="./html/about.html">Search</a>
-          </li>
-        </ul>
-      </nav>
+<h2 >Featured</h2>
+ 
+  <div id="title"><h3>What is Value Investing?</h3>
+  <p><i>In this lesson, students learn what value investing is.  The three course objectives are: 1) The difference between value trading and value investing 2) The difference between an asset and a liability 3) Who created and uses value investing.</i></p>
+  <img src=https://img.youtube.com/vi/KfDB9e_cO4k/maxresdefault.jpg style="position:relative;top:0;width:100%"></div>
+  <button class="button_click" data-webinar-id="KfDB9e_cO4k">Pay with Pi</button>
+  
+  <div id="title"><h3>South Korea: The Silent Cultural Superpower - Full Documentary</h3>
+  <p><i>Rana Mitter finds out how South Korean culture manages to punch so far above its weight.</i></p>
+  <img src=https://img.youtube.com/vi/6dGYVKt1zw4/maxresdefault.jpg style="position:relative;top:0;width:100%"></div>
+  <button class="button_click" data-webinar-id="6dGYVKt1zw4">Pay with Pi</button>
+  
+  <div id="title"><h3>Winston Churchill ‘A Giant in The Century’ Documentary</h3>
+  <p><i>How Winston Churchill turned the tables in the war and influenced the century to come.</i></p>
+  <img src=https://img.youtube.com/vi/YIhYCRBDOUo/maxresdefault.jpg style="position:relative;top:0;width:100%"></div>
+  <button class="button_click" data-webinar-id="YIhYCRBDOUo">Pay with Pi</button>
     
-    <script type="text/javascript">
-    
+<h2 >Upcoming Live</h2>
+  
+<h5 >There are no upcoming live webinars...</h5><br/>
+      
+  </body>
+  
+  <h5><i>At mainnet, all webinars will be full length, high quality and origional to this site</i></h5>
+  <br/><br/><br/><br/>
+  
+      <script type="text/javascript">
+      
       document.addEventListener("DOMContentLoaded", function(event) { 
         renderPurchasedVideos();
       });
@@ -193,7 +176,8 @@
           }
       }
 
-       $( document ).ready(function() {
+      
+            $( document ).ready(function() {
                 const Pi = window.Pi;
                 Pi.init({ version: "2.0" });
               
@@ -239,7 +223,7 @@
                           // Amount of π to be paid:
                           amount: 1,
                           // An explanation of the payment - will be shown to the user:
-                          memo: "Demo transfer request", // e.g: "Digital kitten #1234",
+                          memo: "Unlock Webinar", // e.g: "Digital kitten #1234",
                           // An arbitrary developer-provided metadata object - for your own usage:
                           metadata: { paymentType: "donation" /* ... */ }, // e.g: { kittenId: 1234 }
                         }, {
@@ -284,6 +268,6 @@
                 auth();
 
             });
-    </script>
-  </body>    
-</html>
+        </script>
+    
+      </html>

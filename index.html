@@ -66,7 +66,117 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
         
-    <script type="text/javascript">
+  <title>Pi Webinars</title>
+ 
+<h1 >Pi Webinars</h1>
+  
+<img width="180" height="150" style="position:relative;top:0"
+src="../img/logo.png"</img>
+  
+    <h4><span id="username"></span></h4><h5> Welcome to Pi Webinars, an educational video platform powered by Pi cryptocurrency.<br/></h5>
+  
+<nav class="footer" style="z-index: 100">
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="html/all-webinars.html">All Webinars</a></li>
+    <li><a href="html/upload.html">Upload</a></li>
+    <li><a href="html/about.html">About</a></li>
+  </ul>
+</nav>  
+    
+    <h2>Watch Webinar:</h2>
+    <h5>Purchased webinars will appear here:</h5>
+  <iframe class="footer" id="youtube_frame" style="position:relative;top:0;width:100%;display:none" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+<h2 >Featured</h2>
+ 
+  <div id="title"><h3>What is Value Investing?</h3>
+  <p><i>In this lesson, students learn what value investing is.  The three course objectives are: 1) The difference between value trading and value investing 2) The difference between an asset and a liability 3) Who created and uses value investing.</i></p>
+  <img src=https://img.youtube.com/vi/KfDB9e_cO4k/maxresdefault.jpg style="position:relative;top:0;width:100%"></div>
+  <button class="button_click" data-webinar-id="KfDB9e_cO4k">Pay with Pi</button>
+  
+  <div id="title"><h3>South Korea: The Silent Cultural Superpower - Full Documentary</h3>
+  <p><i>Rana Mitter finds out how South Korean culture manages to punch so far above its weight.</i></p>
+  <img src=https://img.youtube.com/vi/6dGYVKt1zw4/maxresdefault.jpg style="position:relative;top:0;width:100%"></div>
+  <button class="button_click" data-webinar-id="6dGYVKt1zw4">Pay with Pi</button>
+  
+  <div id="title"><h3>Winston Churchill ‘A Giant in The Century’ Documentary</h3>
+  <p><i>How Winston Churchill turned the tables in the war and influenced the century to come.</i></p>
+  <img src=https://img.youtube.com/vi/YIhYCRBDOUo/maxresdefault.jpg style="position:relative;top:0;width:100%"></div>
+  <button class="button_click" data-webinar-id="YIhYCRBDOUo">Pay with Pi</button>
+    
+<h2 >Upcoming Live</h2>
+  
+<h5 >There are no upcoming live webinars...</h5><br/>
+      
+  </body>
+  
+  <h5><i>At mainnet, all webinars will be full length, high quality and origional to this site</i></h5>
+  <br/><br/><br/><br/>
+  
+      <script type="text/javascript">
+      
+      document.addEventListener("DOMContentLoaded", function(event) { 
+        renderPurchasedVideos();
+      });
+
+      const showWebinar = (id) => {
+        const yt_frame = document.getElementById("youtube_frame");
+        yt_frame.setAttribute("src", `https://www.youtube.com/embed/${id}`);
+        yt_frame.style.display = "unset";
+        dataLayer.push({'event': id});
+        updatePurchasedVideos(id);
+      }
+
+      const updatePurchasedVideos = (videoId) => {
+        const button = document.querySelectorAll(`[data-webinar-id~="${videoId}"]`);
+        
+        button[0].setAttribute('style', 'display: none;')
+        const purchasedVideos = JSON.parse(localStorage.getItem('purchased-videos')) || []
+        
+        if (purchasedVideos.includes(videoId)) {
+          throw new Error('purchased video already in list')
+        } 
+        
+        localStorage.setItem('purchased-videos', JSON.stringify([
+            ...purchasedVideos,
+            videoId
+        ]))
+
+        renderPurchasedVideos()
+      }
+
+      let renderedVideos = [];
+
+      const renderPurchasedVideos = () => {
+          const purchasedVideos = JSON.parse(localStorage.getItem('purchased-videos'))
+          const container = document.getElementById('purchased-videos')
+
+          purchasedVideos.forEach((purchasedVideoId) => {
+              // check if video is already rendered
+              if (renderedVideos.includes(purchasedVideoId)) {
+                return
+              }
+
+              const element = document.createElement('div')
+              const ytFrame = document.createElement('iframe')
+
+              //hide buttons for purchased videos
+              const button = document.querySelectorAll(`[data-webinar-id~="${purchasedVideoId}"]`);
+              button[0].setAttribute('style', 'display: none;')
+              
+              ytFrame.setAttribute('src', `https://www.youtube.com/embed/${purchasedVideoId}`)
+              element.appendChild(ytFrame)
+              container.appendChild(element)
+              renderedVideos.push(purchasedVideoId);
+          })
+
+          if (renderedVideos.length > 0) {
+            document.getElementById('no-purchases').setAttribute('style', 'display: none;')
+          }
+      }
+
+      
             $( document ).ready(function() {
                 const Pi = window.Pi;
                 Pi.init({ version: "2.0" });
@@ -159,62 +269,5 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
             });
         </script>
-
-    <script>
-        const showWebinar = (id) => {
-        const yt_frame = document.getElementById("youtube_frame");
-        yt_frame.setAttribute("src", `https://www.youtube.com/embed/${id}`);
-        yt_frame.style.display = "unset";
-        dataLayer.push({'event': id})
-      }
-    </script>
     
-  <title>Pi Webinars</title>
- 
-<h1 >Pi Webinars</h1>
-  
-<img width="180" height="150" style="position:relative;top:0"
-src="../img/logo.png"</img>
-  
-    <h4><span id="username"></span></h4><h5> Welcome to Pi Webinars, an educational video platform powered by Pi cryptocurrency.<br/></h5>
-  
-<nav class="footer" style="z-index: 100">
-  <ul>
-    <li><a href="index.html">Home</a></li>
-    <li><a href="html/all-webinars.html">All Webinars</a></li>
-    <li><a href="html/upload.html">Upload</a></li>
-    <li><a href="html/about.html">About</a></li>
-  </ul>
-</nav>  
-    
-    <h2>Watch Webinar:</h2>
-    <h5>Purchased webinars will appear here:</h5>
-  <iframe class="footer" id="youtube_frame" style="position:relative;top:0;width:100%;display:none" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
-<h2 >Featured</h2>
- 
-  <div id="title"><h3>What is Value Investing?</h3>
-  <p><i>In this lesson, students learn what value investing is.  The three course objectives are: 1) The difference between value trading and value investing 2) The difference between an asset and a liability 3) Who created and uses value investing.</i></p>
-  <img src=https://img.youtube.com/vi/KfDB9e_cO4k/maxresdefault.jpg style="position:relative;top:0;width:100%"></div>
-  <button class="button_click" data-webinar-id="KfDB9e_cO4k">Pay with Pi</button>
-  
-  <div id="title"><h3>South Korea: The Silent Cultural Superpower - Full Documentary</h3>
-  <p><i>Rana Mitter finds out how South Korean culture manages to punch so far above its weight.</i></p>
-  <img src=https://img.youtube.com/vi/6dGYVKt1zw4/maxresdefault.jpg style="position:relative;top:0;width:100%"></div>
-  <button class="button_click" data-webinar-id="6dGYVKt1zw4">Pay with Pi</button>
-  
-  <div id="title"><h3>Winston Churchill ‘A Giant in The Century’ Documentary</h3>
-  <p><i>How Winston Churchill turned the tables in the war and influenced the century to come.</i></p>
-  <img src=https://img.youtube.com/vi/YIhYCRBDOUo/maxresdefault.jpg style="position:relative;top:0;width:100%"></div>
-  <button class="button_click" data-webinar-id="YIhYCRBDOUo">Pay with Pi</button>
-    
-<h2 >Upcoming Live</h2>
-  
-<h5 >There are no upcoming live webinars...</h5><br/>
-      
-  </body>
-  
-  <h5><i>At mainnet, all webinars will be full length, high quality and origional to this site</i></h5>
-  <br/><br/><br/><br/>
-  
       </html>

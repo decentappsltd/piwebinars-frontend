@@ -63,10 +63,10 @@ button {
   border: solid;
   border-color: #fbb44a;
 }
-ul {
+.ul {
   text-align: left;
 }
-li, a {
+.li, .a {
   display: inline-block;
   color: #FBB44A;  
   text-decoration: none;
@@ -74,14 +74,14 @@ li, a {
   text-align: center;
   padding: 0px 1px;
 }
-li:active, li:hover {
+.li:active, .li:hover {
   background-color: #36454F;
 }
 
-li {
+.li {
   border-right: 2px solid #36454F;
 }
-li:last-child {
+.li:last-child {
   border-right: none;
 }
 .footer {
@@ -96,4 +96,25 @@ li:last-child {
 }
 #categories {
   font-size: 30px;
+}
+.back_button {
+  text-align: left;
+  color: #36454F;
+  margin-bottom: 20px;
+  border-style: solid;
+  border-color: #FBB44A;
+}
+#myUL {
+  border-style: none;
+}
+.list {
+  font-size: 20px;
+  background: #FFFFFF;
+  color: #36454F;
+  margin-bottom: 20px;
+  text-decoration: none;
+  font-weight: bold;
+  text-align: center;
+  display: block;
+  padding: 2px;
 }

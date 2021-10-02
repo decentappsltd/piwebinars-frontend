@@ -98,6 +98,8 @@ button {
   font-size: 30px;
 }
 .back_button {
+  text-decoration: none;
+  display: inline-block;
   text-align: left;
   color: #36454F;
   margin-bottom: 20px;

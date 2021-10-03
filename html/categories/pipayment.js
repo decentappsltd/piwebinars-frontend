@@ -1,4 +1,4 @@
-      window.addEventListener("DOMContentLoaded", function(event) { 
+      document.addEventListener("DOMContentLoaded", function(event) { 
         renderPurchasedVideos();
       });
 
@@ -7,11 +7,11 @@
         yt_frame.setAttribute("src", `https://www.youtube.com/embed/${id}`);
         yt_frame.style.display = "unset";
         dataLayer.push({'event': id});
-        updatePurchasedVideos(id);
+       // updatePurchasedVideos(id);
       }
 
       const updatePurchasedVideos = (videoId) => {
-        const button = window.querySelectorAll(`[data-webinar-id~="${videoId}"]`);
+        const button = document.querySelectorAll(`[data-webinar-id~="${videoId}"]`);
         
         button[0].setAttribute('style', 'display: none;')
         const purchasedVideos = JSON.parse(localStorage.getItem('purchased-videos')) || []
@@ -32,7 +32,7 @@
 
       const renderPurchasedVideos = () => {
           const purchasedVideos = JSON.parse(localStorage.getItem('purchased-videos'))
-          const container = windows.getElementById('purchased-videos')
+          const container = document.getElementById('purchased-videos')
 
           purchasedVideos.forEach((purchasedVideoId) => {
               // check if video is already rendered
@@ -40,11 +40,11 @@
                 return
               }
 
-              const element = window.createElement('div')
-              const ytFrame = window.createElement('iframe')
+              const element = document.createElement('div')
+              const ytFrame = document.createElement('iframe')
 
               //hide buttons for purchased videos
-              const button = window.querySelectorAll(`[data-webinar-id~="${purchasedVideoId}"]`);
+              const button = document.querySelectorAll(`[data-webinar-id~="${purchasedVideoId}"]`);
               button[0].setAttribute('style', 'display: none;')
               
               ytFrame.setAttribute('src', `https://www.youtube.com/embed/${purchasedVideoId}`)
@@ -54,7 +54,7 @@
           })
 
           if (renderedVideos.length > 0) {
-            window.getElementById('no-purchases').setAttribute('style', 'display: none;')
+            document.getElementById('no-purchases').setAttribute('style', 'display: none;')
           }
       }
 

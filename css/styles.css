@@ -45,9 +45,9 @@ h5 {
   border-style: solid;
   border-color: #36454F;
   border-radius: 5px;
+  margin-top: 20px;
 }
 button {
-  margin-bottom: 20px;
   background-color: #FBB44A;
   color: #36454F;
   padding: 0px 30px;
@@ -119,4 +119,14 @@ button {
   text-align: center;
   display: block;
   padding: 2px;
+  border-radius: 7.5px;
+}
+#search {
+  border-style: solid;
+  border-color: #FBB44A;
+  border-radius: 7.5px;
+  color: #36454F;
+  font-size: 15px;
+  padding: 5px 30px;
+  text-align: center;
 }

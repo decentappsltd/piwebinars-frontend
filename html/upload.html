@@ -31,6 +31,8 @@
         </ul>
       </nav>
   
+   <h2>Upload:</h2>
+   
    <form>
   <label for="vid">Upload MP4/MOV:</label></br>
   <button onclick="alert('feature coming soon...')" style="margin-bottom: 20px;">Choose file</button></br>
@@ -38,15 +40,15 @@
 
   <form>
     <label>Your Pi Username:</label></br>
-  <input style="width: 100%; margin-bottom: 10px;" type="text" id="username"></br>
+  <input style="width: 100%; margin-bottom: 10px;" type="text" id="username" required></br>
 
 <label>Video URL:</label></br>
-  <input style="width: 100%; margin-bottom: 10px;"  type="url" id="url">
+  <input style="width: 100%; margin-bottom: 10px;"  type="url" id="url" required>
 
   <input type="checkbox" id="own" required>
-  <label for="own" required> I certify that I own this content</label></br>
+  <label for="own"> I certify that I own this content</label></br>
 
-  <input type="checkbox" id="unlisted">
+  <input type="checkbox" id="unlisted" required>
   <label for="unlisted"> This is an unlisted video</label></br>
 
   </br>

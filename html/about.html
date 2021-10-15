@@ -44,8 +44,23 @@
     <iframe class="gap" width=100% src="https://www.youtube.com/embed/mEmjbv26x3A" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
     
     <h2>Customer Feedback:</h2>
-    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSeLabPJTCyp0BYBe9uUFN7fZD6wNn8HduaHvROxq-FOIV07JA/viewform?embedded=true" height="600" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
-     
+<form>
+  <label>What you like</label></br>
+  <input style="width: 100%; margin-bottom: 10px;" type="text" id="like">
+  <br>
+<label>What you want improved:</label></br>
+  <input style="width: 100%;"  type="text" id="improve">
+  <br><br>
+<button type="submit" value="Submit" onclick="feedbackForm()">Submit</button>
+</form> 
+
+<script>
+       function feedbackForm() {
+  var like = document.getElementById('like').value;
+  var improve = document.getElementById('improve').value; fetch('https://docs.google.com/forms/d/e/1FAIpQLSeLabPJTCyp0BYBe9uUFN7fZD6wNn8HduaHvROxq-FOIV07JA/formResponse?usp=pp_url&entry.378592686='+like+'&entry.1827680896='+improve);
+}
+</script>
+
      <div style="margin-bottom: 20px;">
         <p1>Pi, Pi Network and the Pi logo are trademarks of the Pi Community Company.</p1></div>
 

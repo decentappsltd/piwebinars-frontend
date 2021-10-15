@@ -130,3 +130,6 @@ button {
   padding: 5px 30px;
   text-align: center;
 }
+label {
+  font-weight: bold;
+}

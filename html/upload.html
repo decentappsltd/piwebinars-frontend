@@ -59,6 +59,19 @@
 <h5 >Upload your webinar here. You must upload your webinar to youtube.com as an unlisted video, then enter the URL (or the unique video code) for it in the space below. This webinar must not be available anywhere else on the internet and must be your origional work. There will be a short wait time before your webinar is on our site, so that we can review them for quality. Once your webinar is live, you will recieve 80% of all Pi made from it, which will be sent you your wallet at the end of every month (please make sure you enter your username correctly for this reason).</h5>
    
 <script>
+   const scopes = ['payments'];
+
+// Read more about this callback in the SDK reference:
+function onIncompletePaymentFound(payment) { /* ... */ };
+
+Pi.authenticate(scopes, onIncompletePaymentFound).then(function(auth) {
+  console.log(`Hi there! You're ready to make payments!`);
+   var username = auth.user.username;
+	localStorage.setItem("username", username );
+}).catch(function(error) {
+  console.error(error);
+})
+   
    function feedbackForm() {
  // var username = document.getElementById('username').value;
   var url = document.getElementById('url').value; 

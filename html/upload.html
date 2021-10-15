@@ -60,7 +60,7 @@
    
 <script>
    function feedbackForm() {
-  var username = document.getElementById('username').value;
+ // var username = document.getElementById('username').value;
   var url = document.getElementById('url').value; 
   fetch('https://docs.google.com/forms/d/e/1FAIpQLSc-9LzrQGLJ7tiQGhEoxMc0PBMq2HN1Ic4pb0-fPNfkCNO56g/formResponse?usp=pp_url&entry.400578117='+localStorage.getItem("username")+'&entry.1717977435='+url);
   alert('Upload Successful! Thanks for your Webinar');

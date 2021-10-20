@@ -7,9 +7,6 @@
       }
 
       const updatePurchasedVideos = (videoId) => {
-        const button = document.querySelectorAll(`[data-webinar-id~="${videoId}"]`);
-        
-        button[0].setAttribute('style', 'display: none;')
         const purchasedVideos = JSON.parse(localStorage.getItem('purchased-videos')) || []
         
         if (purchasedVideos.includes(videoId)) {

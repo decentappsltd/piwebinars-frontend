@@ -1,13 +1,9 @@
-      document.addEventListener("DOMContentLoaded", function(event) { 
-        renderPurchasedVideos();
-      });
-
       const showWebinar = (id) => {
         const yt_frame = document.getElementById("youtube_frame");
         yt_frame.setAttribute("src", `https://www.youtube.com/embed/${id}`);
         yt_frame.style.display = "unset";
         dataLayer.push({'event': id});
-       // updatePurchasedVideos(id);
+        updatePurchasedVideos(id);
       }
 
       const updatePurchasedVideos = (videoId) => {
@@ -24,41 +20,8 @@
             ...purchasedVideos,
             videoId
         ]))
-
-        renderPurchasedVideos()
       }
-
-      let renderedVideos = [];
-
-      const renderPurchasedVideos = () => {
-          const purchasedVideos = JSON.parse(localStorage.getItem('purchased-videos'))
-          const container = document.getElementById('purchased-videos')
-
-          purchasedVideos.forEach((purchasedVideoId) => {
-              // check if video is already rendered
-              if (renderedVideos.includes(purchasedVideoId)) {
-                return
-              }
-
-              const element = document.createElement('div')
-              const ytFrame = document.createElement('iframe')
-
-              //hide buttons for purchased videos
-              const button = document.querySelectorAll(`[data-webinar-id~="${purchasedVideoId}"]`);
-              button[0].setAttribute('style', 'display: none;')
-              
-              ytFrame.setAttribute('src', `https://www.youtube.com/embed/${purchasedVideoId}`)
-              element.appendChild(ytFrame)
-              container.appendChild(element)
-              renderedVideos.push(purchasedVideoId);
-          })
-
-          if (renderedVideos.length > 0) {
-            document.getElementById('no-purchases').setAttribute('style', 'display: none;')
-          }
-      }
-
-      
+     
             $( document ).ready(function() {
                 const Pi = window.Pi;
                 Pi.init({ version: "2.0" });

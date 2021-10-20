@@ -3,20 +3,23 @@
         yt_frame.setAttribute("src", `https://www.youtube.com/embed/${id}`);
         yt_frame.style.display = "unset";
         dataLayer.push({'event': id});
+        console.log("test 1");
         updatePurchasedVideos(id);
       }
 
       const updatePurchasedVideos = (videoId) => {
+            console.log("test 2");
         const purchasedVideos = JSON.parse(localStorage.getItem('purchased-videos')) || []
-        
+        console.log("test 3");
         if (purchasedVideos.includes(videoId)) {
           throw new Error('purchased video already in list')
         } 
-        
+        console.log("test 3");
         localStorage.setItem('purchased-videos', JSON.stringify([
             ...purchasedVideos,
             videoId
         ]))
+            console.log("complete");
       }
      
             $( document ).ready(function() {

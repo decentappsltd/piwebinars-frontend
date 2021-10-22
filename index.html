@@ -137,15 +137,7 @@ pageLanguage: 'en'
   
       <script type="text/javascript">
       
-      document.addEventListener("DOMContentLoaded", function(event) { 
-	      
-	    const purchasedVideos = JSON.parse(localStorage.getItem('purchased-videos'))
-	      
-            localStorage.setItem('purchased-videos', JSON.stringify([
-            ...purchasedVideos,
-            localStorage.getItem('last-purchase')
-        ]));
-	      
+      document.addEventListener("DOMContentLoaded", function(event) {      
         renderPurchasedVideos();
       });
 

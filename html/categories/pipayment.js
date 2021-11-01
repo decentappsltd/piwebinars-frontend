@@ -31,11 +31,11 @@
                                     'txid': payment.transaction.txid,
                                     'app_client': 'auth_example'
                                 };
-                            return $.post( "https://latin-chain.com/server1.php", data).done(function(data) {
+                          /*  return $.post( "https://latin-chain.com/server1.php", data).done(function(data) {
                                 $(".button_click").prop( "disabled", false );
                             }).fail(function() {
                                 $(".button_click").prop( "disabled", false );
-                            });
+                            }); */
                         }; // Read more about this in the SDK reference
 
                         Pi.authenticate(scopes, onIncompletePaymentFound).then(function(auth) {
@@ -69,12 +69,12 @@
                                         'txid': '',
                                         'app_client': 'auth_example'
                                     };
-                              return $.post( "https://latin-chain.com/server1.php", data).done(function(data) {
+                   /*           return $.post( "https://latin-chain.com/server1.php", data).done(function(data) {
                                     $(".button_click").prop( "disabled", false );
                                 }).fail(function() {
                                     $(".button_click").prop( "disabled", false );
-                                });
-                          },
+                                });  
+                          },  */
                           onReadyForServerCompletion: function(paymentId, txid) {
                                 var data = {
                                     'action': 'complete',
@@ -83,12 +83,12 @@
                                     'app_client': 'auth_example'
                                 };
                             showWebinar(webinarId);
-                                return $.post( "https://latin-chain.com/server1.php", data).done(function(data) {
+                /*                return $.post( "https://latin-chain.com/server1.php", data).done(function(data) {
                                     $(".button_click").prop( "disabled", false );
                                 }).fail(function() {
                                     $(".button_click").prop( "disabled", false );
-                                });
-                          },
+                                });  
+                          },  */
                           onCancel: function(paymentId) { $(".button_click").prop( "disabled", false ); /* ... */ },
                           onError: function(error, payment) { $(".button_click").prop( "disabled", false ); /* ... */ },
                         });

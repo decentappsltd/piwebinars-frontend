@@ -35,8 +35,8 @@
                                 $(".button_click").prop( "disabled", false );
                             }).fail(function() {
                                 $(".button_click").prop( "disabled", false );
-                            }); */
-                        }; // Read more about this in the SDK reference
+                            }); 
+                        }; */ // Read more about this in the SDK reference
 
                         Pi.authenticate(scopes, onIncompletePaymentFound).then(function(auth) {
                           document.getElementById('username').innerHTML = auth.user.username;

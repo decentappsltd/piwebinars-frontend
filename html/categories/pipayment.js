@@ -31,12 +31,12 @@
                                     'txid': payment.transaction.txid,
                                     'app_client': 'auth_example'
                                 };
-                          /*  return $.post( "https://latin-chain.com/server1.php", data).done(function(data) {
+                  /*          return $.post( "https://latin-chain.com/server1.php", data).done(function(data) {
                                 $(".button_click").prop( "disabled", false );
                             }).fail(function() {
                                 $(".button_click").prop( "disabled", false );
-                            }); 
-                        }; */ // Read more about this in the SDK reference
+                            }); */
+                        };  // Read more about this in the SDK reference
 
                         Pi.authenticate(scopes, onIncompletePaymentFound).then(function(auth) {
                           document.getElementById('username').innerHTML = auth.user.username;
@@ -50,7 +50,7 @@
                         // Not able to fetch the user
                     }
                 }
-
+                
                 async function transfer(webinarId) {
                     try {
                         const payment = Pi.createPayment({
@@ -73,8 +73,8 @@
                                     $(".button_click").prop( "disabled", false );
                                 }).fail(function() {
                                     $(".button_click").prop( "disabled", false );
-                                });  
-                          },  */
+                                });  */
+                          },  
                           onReadyForServerCompletion: function(paymentId, txid) {
                                 var data = {
                                     'action': 'complete',
@@ -87,8 +87,8 @@
                                     $(".button_click").prop( "disabled", false );
                                 }).fail(function() {
                                     $(".button_click").prop( "disabled", false );
-                                });  
-                          },  */
+                                });  */
+                          },  
                           onCancel: function(paymentId) { $(".button_click").prop( "disabled", false ); /* ... */ },
                           onError: function(error, payment) { $(".button_click").prop( "disabled", false ); /* ... */ },
                         });

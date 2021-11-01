@@ -50,40 +50,25 @@
                 async function transfer(webinarId) {
                     try {
                         const payment = Pi.createPayment({
-                          // Amount of π to be paid:
                           amount: 1,
-                          // An explanation of the payment - will be shown to the user:
-                          memo: "Unlock Webinar", // e.g: "Digital kitten #1234",
-                          // An arbitrary developer-provided metadata object - for your own usage:
-                          metadata: { paymentType: "donation" /* ... */ }, // e.g: { kittenId: 1234 }
+                          memo: "Unlock Webinar",
+                          metadata: { paymentType: "donation" }, 
                         }, {
-                          // Callbacks you need to implement - read more about those in the detailed docs linked below:
                           onReadyForServerApproval: function(paymentId) {
-                              var data = {
-                                        'action': 'approve',
-                                        'paymentId': paymentId,
-                                        'txid': '',
-                                        'app_client': 'auth_example'
-                                    };
-                                return $.post( 'https://api.minepi.com/v2/payments/'+paymentId+'/approve' );
+                                var paymentId = 'paymentId';
+                                fetch('https://api.minepi.com/v2/payments/'+paymentId+'/approve');
                           },  
-                          onReadyForServerCompletion: function(paymentId, txid) {
-                                var data = {
-                                    'action': 'complete',
-                                    'paymentId': paymentId,
-                                    "txid": txid,
-                                    'app_client': 'auth_example'
-                                };
+                          onReadyForServerCompletion: function(paymentId) {
                             showWebinar(webinarId);
-                                return $.post( 'https://api.minepi.com/v2/payments/'+paymentId+'/complete' );
+                                var paymentId = 'paymentId';
+                                fetch('https://api.minepi.com/v2/payments/'+paymentId+'/complete');
                           },  
-                          onCancel: function(paymentId) { $(".button_click").prop( "disabled", false ); /* ... */ },
-                          onError: function(error, payment) { $(".button_click").prop( "disabled", false ); /* ... */ },
+                          onCancel: function(paymentId) { $(".button_click").prop( "disabled", false ); },
+                          onError: function(error, payment) { $(".button_click").prop( "disabled", false ); },
                         });
                     } catch(err) {
                         $(".button_click").prop( "disabled", false );
                         alert(err);
-                        // Technical problem (eg network failure). Please try again
                     }
                 }
 

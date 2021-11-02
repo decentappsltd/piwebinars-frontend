@@ -55,7 +55,7 @@
                           metadata: { paymentType: "donation" }, 
                         }, {
                           onReadyForServerApproval: function(paymentId) {
-                                var paymentId = 'paymentId';
+                           //     var paymentId = 'paymentId';
                                 fetch('https://api.minepi.com/v2/payments/'+paymentId+'/approve');
                           },  
                           onReadyForServerCompletion: function(paymentId) {

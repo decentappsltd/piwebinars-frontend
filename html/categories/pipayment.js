@@ -54,9 +54,9 @@
                           memo: "Unlock Webinar",
                           metadata: { paymentType: "donation" }, 
                         }, {
-                          onReadyForServerApproval: function(paymentId) {
-                           //     var paymentId = 'paymentId';
-                                fetch(`https://api.minepi.com/v2/payments/${paymentId}/approve`);
+                          onReadyForServerApproval: function() {
+                                var paymentId = payment.identifier;
+                                fetch('https://api.minepi.com/v2/payments/'+paymentId+'/approve');
                           },  
                           onReadyForServerCompletion: function(paymentId) {
                             showWebinar(webinarId);

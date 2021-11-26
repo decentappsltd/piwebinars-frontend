@@ -6,82 +6,72 @@
      <link rel="icon" 
       type="image/png" 
       href="../img/logo.png">
+    <script src="/js/routes.js"></script>
+    <script src="/js/pipayment.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
   <title>Pi Webinars</title>
       <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;700&display=swap" rel="stylesheet">
-	   
-	<script type="text/javascript" src="/jquery-3.5.1.min.js"></script>
-        <script src="https://sdk.minepi.com/pi-sdk.js"></script>
    </head>
   
   <h1 >Pi Webinars</h1>
   
-      <nav class="footer" style="z-index: 100">
-        <ul class="ul">
-          <li class="li">
-            <a class="a" href="../index.html">Home</a>
-          </li>
-          <li class="li">
-            <a class="a" href="all-webinars.html">All Webinars</a>
-          </li>
-          <li class="li">
-            <a class="a" href="upload.html">Upload</a>
-          </li>
-          <li class="li">
-            <a class="a" href="about.html">About</a>
-          </li>
-        </ul>
-      </nav>
+<nav class="footer" style="z-index: 100">
+  <ul class="ul">
+    <li class="li"><a class="a" href="/index.html"><img src="https://app.piwebinars.co.uk/img/Home_Icon.png" width="30px;">Home</a></li>
+    <li class="li"><a class="a" href="/html/all-webinars.html"><img src="https://app.piwebinars.co.uk/img/Watch_Icon.png" width="30px;">Webinars</a></li>
+    <li class="li"><a class="a" href="/html/upload.html"><img src="https://app.piwebinars.co.uk/img/Upload_Icon.png" width="30px;">Upload</a></li>
+    <li class="li"><a class="a" href="/html/profile.html"><img src="https://app.piwebinars.co.uk/img/Profile_Icon.png" width="30px;">Profile</a></li>
+  </ul>
+</nav>   
   
-   <h2>Upload:</h2>
+  <h2>Upload a Webinar</h2>
    
-   <form style="text-align: left;">
-  <label for="vid">Upload MP4/MOV:</label>
-  <button onclick="alert('feature coming soon...')" style="margin-bottom: 20px;">Choose file</button></br>
-</form>
+ <form style="text-align: left;">
+  <label for="vid">Upload Webinar:</label>
+  <input type="file" id="file"></input><br/>
+ <label>Select Filetype:</label>
+  <select id="file_type" style="margin-bottom: 20px;">
+    <option class="list" value="MP4" >MP4</option><br/>
+    <option class="list" value="MOV" >MOV</option><br/>
+</select><br/>
 
-  <form>
-    <!--<label>Your Pi Username:</label></br>
-  <input style="width: 100%; margin-bottom: 10px;" type="text" id="username" required></br>-->
+<label>Add a Title:</label></br>
+  <input style="width: 100%; margin-bottom: 10px;"  type="text" id="text" required>
 
-<label>Video URL:</label></br>
-  <input style="width: 100%; margin-bottom: 10px;"  type="url" id="url" required>
-<div style="text-align: left;">
+<label>Add a Description:</label></br>
+  <input style="width: 100%; height: 50px; margin-bottom: 10px;"  type="text" id="description">
+
+<label>Set a Price:</label></br>
+  <input style="width: 100%; height: 50px; margin-bottom: 10px;"  type="number" id="price">
+
+  <label for="own">Upload a Thumbnail:</label>
+  <input type="file" id="thumbnail" style="margin-bottom: 20px;"></input></br>
+
+ <label>Choose a Catagory:</label>
+  <select name="catagories">
+    <option class="list" value="none" >None</option><br/>
+    <option class="list" value="cryptocurrency" >Cryptocurrency</option><br/>
+    <option class="list" value="education" >Eduction</option><br/>
+    <option class="list" value="fitness" >Fitness</option><br/>
+    <option class="list" value="food" >Food</option><br/>
+    <option class="list" value="history" >History</option><br/>
+    <option class="list" value="money" >Money</option><br/>
+    <option class="list" value="nature" >Nature</option><br/>
+    <option class="list" value="pi-network" >Pi Network</option><br/>
+    <option class="list" value="politics" >Politics</option><br/>
+    <option class="list" value="sports" >Sports</option><br/>
+    <option class="list" value="technology" >Technology</option><br/>
+  </select>
+
+<div style="text-align: left; margin-top: 20px;">
   <input type="checkbox" id="own" required>
-  <label for="own"> I certify that I own this content</label></br>
+  <label for="own"> I certify that I own this content</label></br></div><br/>
 
-  <input type="checkbox" id="unlisted" required>
-  <label for="unlisted"> This is an unlisted video</label></br>
-</div>
-  </br>
-<button type="submit" value="Submit" onclick="feedbackForm()">Submit</button>
+<button style="text-align: center" type="submit" value="Submit" class="createPost">Submit</button>
 </form>
 
-<h2 style="margin-top: 20px;">Details:</h2>
-<p2>Upload your webinar here. You must upload your webinar to youtube.com as an unlisted video, then enter the URL (or the unique video code) for it in the space below. This webinar must not be available anywhere else on the internet and must be your origional work. There will be a short wait time before your webinar is on our site, so that we can review them for quality. Once your webinar is live, you will recieve 80% of all Pi made from it, which will be sent you your wallet at the end of every month (please make sure you enter your username correctly for this reason).</h5>
-   
-<script>
-   const scopes = ['payments'];
-
-// Read more about this callback in the SDK reference:
-function onIncompletePaymentFound(payment) { /* ... */ };
-
-Pi.authenticate(scopes, onIncompletePaymentFound).then(function(auth) {
-  console.log(`Hi there! You're ready to make payments!`);
-   var username = auth.user.username;
-	localStorage.setItem("username", username );
-}).catch(function(error) {
-  console.error(error);
-})
-   
-   function feedbackForm() {
- // var username = document.getElementById('username').value;
-  var url = document.getElementById('url').value; 
-  fetch('https://docs.google.com/forms/d/e/1FAIpQLSc-9LzrQGLJ7tiQGhEoxMc0PBMq2HN1Ic4pb0-fPNfkCNO56g/formResponse?usp=pp_url&entry.400578117='+localStorage.getItem("username")+'&entry.1717977435='+url);
-  alert('Upload Successful! Thanks for your Webinar');
-}
-</script>
-</br></br></br>
-
+<br/><br/><br/>
 </html>

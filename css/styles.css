@@ -1,6 +1,6 @@
 body {
   font-family: 'Ubuntu', sans-serif;
-  background: #E9E9E9;
+  background-image: url("https://app.piwebinars.co.uk/img/background.png");
   color: #36454F;
   text-align: center;
 }
@@ -19,9 +19,8 @@ iframe {
   margin-top: 10px;
 }
 h2 {
-  color: #36454F;
+  color: #FBB44A;
   text-align: center; 
-  background: #FFFFFF;
   border-radius: 5px;
   margin-top: 0px;
 }
@@ -70,17 +69,18 @@ button {
 .li, .a {
   display: inline-block;
   color: #FBB44A;  
+  font-size: 12px;
   text-decoration: none;
   font-weight: bold;
   text-align: center;
-  padding: 0px 1px;
+  padding: 0px 7.5px;
 }
 .li:active, .li:hover {
   background-color: #36454F;
 }
 
 .li {
-  border-right: 2px solid #36454F;
+  border-right: 1px solid #36454F;
 }
 .li:last-child {
   border-right: none;
@@ -90,13 +90,15 @@ button {
   left: 0;
   bottom: 0;
   width: 100%;
-  background-color: #FFFFFF;  
+  height: 60px;
+  background-color: #FFFFFF;
+  box-shadow: 10px 10px 10px 10px black;
 }
 .gap {
   margin-bottom: 20px;
 }
 #categories {
-  font-size: 30px;
+  font-size: 25px;
 }
 .back_button {
   text-decoration: none;
@@ -111,26 +113,79 @@ button {
   border-style: none;
 }
 .list {
-  font-size: 20px;
+  font-size: 15px;
   background: #FFFFFF;
   color: #36454F;
-  margin-bottom: 20px;
+  margin-bottom: 1px;
   text-decoration: none;
-  font-weight: bold;
   text-align: center;
-  display: block;
-  padding: 2px;
-  border-radius: 7.5px;
-}
-#search {
-  border-style: solid;
-  border-color: #FBB44A;
-  border-radius: 7.5px;
-  color: #36454F;
-  font-size: 15px;
-  padding: 5px 30px;
-  text-align: center;
+  dlay: block;
+  border-radius: 5px;
 }
 label {
   font-weight: bold;
+}
+#select {
+  padding: 5px;
+  color: #36454F;
+  border-color: #FBB44A;
+  border-radius: 7.5px;
+  width: 150px;
+}
+.column {
+  float: left;
+}
+.row::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+.deleteAccount, .logout, .logoutAll {
+  color: red;
+  margin-top: 10px;
+  background: #FFFFFF;
+  border-style: none;
+  font-size: 10px;
+  box-shadow: none;
+}
+:root {
+  --lightgray: #efefef;
+  --blue: steelblue;
+  --white: #fff;
+  --black: rgba(0, 0, 0, 0.8);
+  --bounceEasing: cubic-bezier(0.51, 0.92, 0.24, 1.15);
+}
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--black);
+  visibility: hidden;
+  opacity: 0;
+  transition: all 0.35s ease-in;
+}
+.is-visible {
+  visibility: visible;
+  opacity: 1;
+}
+.modal-dialog {
+  width: 95%;
+  background: var(--white);
+}
+.modal-dialog > * {
+  padding: 20px;
+}
+
+.modal-header {
+  background: var(--lightgray);
+}
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }

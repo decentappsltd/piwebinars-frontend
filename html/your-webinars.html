@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+   <head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link rel="stylesheet" href="../css/styles.css">
+     <link rel="icon" 
+      type="image/png" 
+      href="../img/logo.png">
+    <script src="/js/routes.js"></script>
+    <script src="/js/pipayment.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+  <title>Pi Webinars</title>
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;700&display=swap" rel="stylesheet">
+   </head>
+  <body>
+  <h1 >Pi Webinars</h1>
+  
+<nav class="footer" style="z-index: 100">
+  <ul class="ul">
+    <li class="li"><a class="a" href="/index.html"><img src="https://app.piwebinars.co.uk/img/Home_Icon.png" width="30px;">Home</a></li>
+    <li class="li"><a class="a" href="/html/all-webinars.html"><img src="https://app.piwebinars.co.uk/img/Watch_Icon.png" width="30px;">Webinars</a></li>
+    <li class="li"><a class="a" href="/html/upload.html"><img src="https://app.piwebinars.co.uk/img/Upload_Icon.png" width="30px;">Upload</a></li>
+    <li class="li"><a class="a" href="/html/profile.html"><img src="https://app.piwebinars.co.uk/img/Profile_Icon.png" width="30px;">Profile</a></li>
+  </ul>
+</nav>
+    
+    <a class="back_button" href="/html/profile.html">Back</a>
+
+    <h2>Your Webinars:</h2>
+    
+    <script>
+   document.addEventListener("DOMContentLoaded", function(event) {      
+     const webinarUserUploadsJson = axios.get(`https://server.piwebinars.co.uk/post/${userId}`);
+     const webinarUserUploads = JSON.parse(webinarUserUploadsJson);
+     showWebinarsUser(webinarUserUploads);
+      }); 
+    
+    function showWebinarsUser(obj) {
+  const webinarsUser = obj['members'];
+
+  for (let i = 0; i < webinarsUser.length; i++) {
+    const renderDivYour = document.createElement('div');
+    renderDivYour.className = "title";
+    const renderTextYour = document.createElement('h3');
+    const renderDescYour = document.createElement('p');
+    const renderImgYour = document.createElement('img');
+    renderImgYour.className = "thumbnail";
+    const renderLikesYour = document.createElement('p');
+    renderLikesYour.className = "likes";
+    const renderTitle = document.createElement('button');
+    renderTitle.className = "updatePostTitle";
+    renderTitle.onclick = function () {
+      var webinarId = webinarsUser[i].post_id;
+      var creatorId = webinarsUser[i].userId;
+      var categoryId = webinarsUser[i].collection_name;
+};
+    const renderAmount = document.createElement('button');
+    renderAmount.onclick = function () {
+      var webinarId = webinarsUser[i].post_id;
+      var creatorId = webinarsUser[i].userId;
+      var categoryId = webinarsUser[i].collection_name;
+};
+    renderAmount.className = "updatePostAmount";
+
+    renderTextYour.textContent = webinarsUser[i].text;
+    renderDescYour.textContent = webinarsUser[i].description;
+    renderImgYour.imgContent = webinarsUser[i].thumbnail;
+    renderLikesYour.textContent = webinarsUser[i].likes;
+    renderTitle.textContent = "Edit Title";
+    renderAmount.textContent = "Edit Price";
+
+    renderDivYour.appendChild(renderTextYour);
+    renderDivYour.appendChild(renderDescYour);
+    renderDivYour.appendChild(renderImgYour);
+    renderDivYour.appendChild(renderLikesYour);
+    renderDivYour.appendChild(renderTitle);
+    renderDivYour.appendChild(renderAmount);
+
+    section.appendChild(renderDivYour);
+  }
+}
+    </script>
+    
+        <br><br><br>
+</body>
+</html>

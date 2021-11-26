@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
   <head>
-    
     <!-- Google Tag Manager -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -30,16 +29,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         <meta name="apple-mobile-web-app-status-bar" content="#db4938" />
         <meta name="theme-color" content="#db4938" />
         
-        <meta name="application-name" content="Pi Webinars">
-
-        <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
-        <!--[if lt IE 9]>
-            <script src="assets/js/html5shiv-pre3.6.js"></script>
-        <![endif]-->
-        
-        <script type="text/javascript" src="jquery-3.5.1.min.js"></script>
-        <!--<script src="https://downloads.minepi.com/sdk/v1/dev.js"></script>-->
-        <!--<script src="https://downloads.minepi.com/sdk/v1/prod.js"></script>-->
+        <meta name="application-name" content="Pi Webinars">        
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://sdk.minepi.com/pi-sdk.js"></script>
         
         	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
@@ -49,9 +40,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <link rel="icon" 
       type="image/png" 
       href="../img/logo.png">
+    <script src="/js/routes.js"></script>
+    <script src="/js/pipayment.js"></script>
     
     <script>
-      if(navigator.userAgent.toLowerCase().indexOf("pibrowser")<0) document.domain!="localhost"&&window.open(window.location.protocol+"//"+document.domain+"/html/home.html","_self");
+    //  if(navigator.userAgent.toLowerCase().indexOf("pibrowser")<0) document.domain!="localhost"&&window.open(window.location.protocol+"//"+document.domain+"/html/home.html","_self");
     </script>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -60,6 +53,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   
   </head>
   <body>
+    
+   <body>
     
     <!-- Google Tag Manager (noscript) -->
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KRPNL55"
@@ -71,225 +66,68 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <h1 >Pi Webinars</h1>
   
 <img width="180" height="150" style="position:relative;top:0"
-src="../img/logo.png"</img>
+src="https://app.piwebinars.co.uk/img/logo.png"</img>
   
-    <h4><span id="username"></span></h4><h5> Welcome to Pi Webinars, an educational video platform powered by Pi cryptocurrency.<br/></h5>
+    <h4><span id="username"></span></h4>
+     <h5> Welcome to Pi Webinars &#128075;<br/> An educational video platform powered by Pi.<br/></h5>
   
 <nav class="footer" style="z-index: 100">
   <ul class="ul">
-    <li class="li"><a class="a" href="index.html">Home</a></li>
-    <li class="li"><a class="a" href="html/all-webinars.html">All Webinars</a></li>
-    <li class="li"><a class="a" href="html/upload.html">Upload</a></li>
-    <li class="li"><a class="a" href="html/about.html">About</a></li>
+    <li class="li"><a class="a" href="/index.html"><img src="https://app.piwebinars.co.uk/img/Home_Icon.png" width="30px;">Home</a></li>
+    <li class="li"><a class="a" href="/html/all-webinars.html"><img src="https://app.piwebinars.co.uk/img/Watch_Icon.png" width="30px;">Webinars</a></li>
+    <li class="li"><a class="a" href="/html/upload.html"><img src="https://app.piwebinars.co.uk/img/Upload_Icon.png" width="30px;">Upload</a></li>
+    <li class="li"><a class="a" href="/html/profile.html"><img src="https://app.piwebinars.co.uk/img/Profile_Icon.png" width="30px;">Profile</a></li>
   </ul>
 </nav>   
-    
-<h2 class="rounded" >Featured</h2>
- 
-  <div id="title" class="rounded"><h3>What is Value Investing?</h3>
-  <p><i>In this lesson, students learn what value investing is.  The three course objectives are: 1) The difference between value trading and value investing 2) The difference between an asset and a liability 3) Who created and uses value investing.</i></p>
-  <img src=https://img.youtube.com/vi/KfDB9e_cO4k/maxresdefault.jpg style="position:relative;top:0;width:100%"></div>
-  <button class="button_click" data-webinar-id="KfDB9e_cO4k">Pay with Pi</button>
-  
-  <div id="title" class="rounded"><h3>South Korea: The Silent Cultural Superpower - Full Documentary</h3>
-  <p><i>Rana Mitter finds out how South Korean culture manages to punch so far above its weight.</i></p>
-  <img src=https://img.youtube.com/vi/6dGYVKt1zw4/maxresdefault.jpg style="position:relative;top:0;width:100%"></div>
-  <button class="button_click" data-webinar-id="6dGYVKt1zw4">Pay with Pi</button>
-  
-  <div id="title" class="rounded"><h3>Winston Churchill ‘A Giant in The Century’ Documentary</h3>
-  <p><i>How Winston Churchill turned the tables in the war and influenced the century to come.</i></p>
-  <img src=https://img.youtube.com/vi/YIhYCRBDOUo/maxresdefault.jpg style="position:relative;top:0;width:100%"></div>
-  <button class="button_click" data-webinar-id="YIhYCRBDOUo">Pay with Pi</button>
-    
-   <div id="title" class="rounded"><h3>Pi Payments (Pi Hackathon Workshop)</h3>
-  <img src=https://img.youtube.com/vi/rvrmaDu61Tc/maxresdefault.jpg style="position:relative;top:0;width:100%"></div>
-  <button class="button_click" data-webinar-id="rvrmaDu61Tc">Pay with Pi</button>
-    
-<h2 class="rounded" style="margin-top: 20px;">Upcoming Live</h2>
-  
+     
+     <h2 class="rounded" style="margin-top: 20px;">Upcoming Live</h2>
+
 <h5 >There are no upcoming live webinars...</h5><br/>
     
-     <h2 class="rounded">Watch Webinar:</h2>
- <iframe class="footer" id="youtube_frame" style="position:relative;top:0;width:100%;display:none" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<h2 class="rounded" >Featured Webinars</h2>
+ 
+  <div id="title" class="rounded">
+  <img src=https://img.youtube.com/vi/KfDB9e_cO4k/maxresdefault.jpg style="position:relative;top:0;width:100%">
+    <h3>What is Value Investing?</h3>
+    <p><i>In this lesson, students learn what value investing is.  The three course objectives are: 1) The difference between value trading and value investing 2) The difference between an asset and a liability 3) Who created and uses value investing.</i></p></div>
+  <button class="button_click" data-webinar-id="KfDB9e_cO4k">Pay with Pi</button>
+  
+ <div id="title" class="rounded">
+   <script>
+     document.addEventListener("DOMContentLoaded", function(event) {
+     var featuredOne = axios.get('/post/xxxxxx/xxxxxx');
+     var renderOne = JSON.parse(featuredOne);
+     var webinarsHome = obj['members'];
+     document.getElementById('thumbnailF1').setAttribute("src", webinarsHome[i].thumbnail);
+     document.getElementById('textF1').innerHTML = webinarsHome[i].text;
+     document.getElementById('descriptionF1').innerHTML = webinarsHome[i].description;
+     document.getElementById('likesF1').innerHTML = webinarsHome[i].likes;
+     document.getElementById('amountF1').innerHTML = webinarsHome[i].amount;
+     })
+                    </script>
+   <img id="thumbnailF1"></img>
+   <h3 id="textF1"></h3>
+   <p2 id="descriptionF1"></p2>
+   <p3 id="likesF1"></p3>
+   <button class="button_click"><div id="amountF1"></div></button>
+     </div>
 
-    <div class="container">
-<div id="purchased-videos" style="height: 10em; padding-bottom: 40em;">
-        <p>purchased videos</p>
-        <p id="no-purchases">you currently have no purchased videos</p>
-      </div>
-    </div>
+ <div class="modal" id="modal1">
+  <div class="modal-dialog">
+    <header class="modal-header">
+      Watch Webinar:
+      <button class="close-modal" aria-label="close modal" data-close>✕</button>
+    </header>
+    <section class="modal-content">
+      <video id="usersPurchase"></video>
+    </section>
+  </div>
+</div>
     
     <div id="google_translate_element"></div><script>
-
-function googleTranslateElementInit() {
-
-new google.translate.TranslateElement({
-
-pageLanguage: 'en'
-
-}, 'google_translate_element');
-
-}
-
-</script><script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+function googleTranslateElementInit() {new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');}
+         </script><script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+     
   </body>
-  <br/><br/><br/><br/>
-  
-      <script type="text/javascript">
-      
-      document.addEventListener("DOMContentLoaded", function(event) {      
-        renderPurchasedVideos();
-      });
-
-      const showWebinar = (id) => {
-        const yt_frame = document.getElementById("youtube_frame");
-        yt_frame.setAttribute("src", `https://www.youtube.com/embed/${id}`);
-        yt_frame.style.display = "unset";
-        dataLayer.push({'event': id});
-        updatePurchasedVideos(id);
-      }
-
-      const updatePurchasedVideos = (videoId) => {
-        const button = document.querySelectorAll(`[data-webinar-id~="${videoId}"]`);
-        
-        button[0].setAttribute('style', 'display: none;')
-        const purchasedVideos = JSON.parse(localStorage.getItem('purchased-videos')) || []
-        
-        if (purchasedVideos.includes(videoId)) {
-          throw new Error('purchased video already in list')
-        } 
-        
-        localStorage.setItem('purchased-videos', JSON.stringify([
-            ...purchasedVideos,
-            videoId
-        ]))
-
-        renderPurchasedVideos()
-      }
-
-      let renderedVideos = [];
-
-      const renderPurchasedVideos = () => {
-          const purchasedVideos = JSON.parse(localStorage.getItem('purchased-videos'))
-          const container = document.getElementById('purchased-videos')
-
-          purchasedVideos.forEach((purchasedVideoId) => {
-              // check if video is already rendered
-              if (renderedVideos.includes(purchasedVideoId)) {
-                return
-              }
-
-              const element = document.createElement('div')
-              const ytFrame = document.createElement('iframe')
-
-              //hide buttons for purchased videos
-              const button = document.querySelectorAll(`[data-webinar-id~="${purchasedVideoId}"]`);
-              button[0].setAttribute('style', 'display: none;')
-              
-              ytFrame.setAttribute('src', `https://www.youtube.com/embed/${purchasedVideoId}`)
-              element.appendChild(ytFrame)
-              container.appendChild(element)
-              renderedVideos.push(purchasedVideoId);
-          })
-
-          if (renderedVideos.length > 0) {
-            document.getElementById('no-purchases').setAttribute('style', 'display: none;')
-          }
-      }
-
-      
-            $( document ).ready(function() {
-                const Pi = window.Pi;
-                Pi.init({ version: "2.0" });
-              
-               $( ".button_click" ).click(function() {
-                    transfer($(this).data('webinar-id'));
-                });
-              
-                async function auth() {
-                    try {
-                        // Identify the user with their username / unique network-wide ID, and get permission to request payments from them.
-                        const scopes = ['username', 'payments'];
-                        function onIncompletePaymentFound(payment) {
-                            
-                            var data = {
-                                    'action': 'complete',
-                                    'paymentId': payment.identifier,
-                                    'txid': payment.transaction.txid,
-                                    'app_client': 'auth_example'
-                                };
-                            return $.post( "https://pi-webinars-backend.000webhostapp.com/server1.php", data).done(function(data) {
-                                $(".button_click").prop( "disabled", false );
-                            }).fail(function() {
-                                $(".button_click").prop( "disabled", false );
-                            });
-                        }; // Read more about this in the SDK reference
-
-                        Pi.authenticate(scopes, onIncompletePaymentFound).then(function(auth) {
-                          document.getElementById('username').innerHTML = auth.user.username;
-                          var username = auth.user.username;
-	                    		localStorage.setItem("username", username );
-                            //alert('Hello ' + auth.user.username);
-                        }).catch(function(error) {
-                          console.error(error);
-                        });
-                    } catch (err) {
-                        alert(err);
-                        // Not able to fetch the user
-                    }
-                }
-
-                async function transfer(webinarId) {
-                    try {
-                        const payment = Pi.createPayment({
-                          // Amount of π to be paid:
-                          amount: 1,
-                          // An explanation of the payment - will be shown to the user:
-                          memo: "Unlock Webinar", // e.g: "Digital kitten #1234",
-                          // An arbitrary developer-provided metadata object - for your own usage:
-                          metadata: { paymentType: "donation" /* ... */ }, // e.g: { kittenId: 1234 }
-                        }, {
-                          // Callbacks you need to implement - read more about those in the detailed docs linked below:
-                          onReadyForServerApproval: function(paymentId) {
-                              var data = {
-                                        'action': 'approve',
-                                        'paymentId': paymentId,
-                                        'txid': '',
-                                        'app_client': 'auth_example'
-                                    };
-                              return $.post( "https://pi-webinars-backend.000webhostapp.com/server1.php", data).done(function(data) {
-                                    $(".button_click").prop( "disabled", false );
-                                }).fail(function() {
-                                    $(".button_click").prop( "disabled", false );
-                                });
-                          },
-                          onReadyForServerCompletion: function(paymentId, txid) {
-                                var data = {
-                                    'action': 'complete',
-                                    'paymentId': paymentId,
-                                    "txid": txid,
-                                    'app_client': 'auth_example'
-                                };
-                            showWebinar(webinarId);
-                                return $.post( "https://pi-webinars-backend.000webhostapp.com/server1.php", data).done(function(data) {
-                                    $(".button_click").prop( "disabled", false );
-                                }).fail(function() {
-                                    $(".button_click").prop( "disabled", false );
-                                });
-                          },
-                          onCancel: function(paymentId) { $(".button_click").prop( "disabled", false ); /* ... */ },
-                          onError: function(error, payment) { $(".button_click").prop( "disabled", false ); /* ... */ },
-                        });
-                    } catch(err) {
-                        $(".button_click").prop( "disabled", false );
-                        alert(err);
-                        // Technical problem (eg network failure). Please try again
-                    }
-                }
-
-                auth();
-
-            });
-        </script>
-    
+<br/><br/><br/><br/>
       </html>

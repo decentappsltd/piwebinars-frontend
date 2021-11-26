@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+   <head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link rel="stylesheet" href="../css/styles.css">
+     <link rel="icon" 
+      type="image/png" 
+      href="../img/logo.png">
+    <script src="/js/routes.js"></script>
+    <script src="/js/pipayment.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+  <title>Pi Webinars</title>
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;700&display=swap" rel="stylesheet">
+   </head>
+  <body>
+  <h1 >Pi Webinars</h1>
+  
+<nav class="footer" style="z-index: 100">
+  <ul class="ul">
+    <li class="li"><a class="a" href="/index.html"><img src="https://app.piwebinars.co.uk/img/Home_Icon.png" width="30px;">Home</a></li>
+    <li class="li"><a class="a" href="/html/all-webinars.html"><img src="https://app.piwebinars.co.uk/img/Watch_Icon.png" width="30px;">Webinars</a></li>
+    <li class="li"><a class="a" href="/html/upload.html"><img src="https://app.piwebinars.co.uk/img/Upload_Icon.png" width="30px;">Upload</a></li>
+    <li class="li"><a class="a" href="/html/profile.html"><img src="https://app.piwebinars.co.uk/img/Profile_Icon.png" width="30px;">Profile</a></li>
+  </ul>
+</nav>    
+    
+    <a class="back_button" href="/html/profile.html">Back</a>
+    
+    <h2>Your Purchased Webinars:</h2>
+    
+    <script>
+   document.addEventListener("DOMContentLoaded", function(event) {      
+     const webinarPurchasesUploadsJson = axios.get("/post/purchases");
+     const webinarPurchasesUploads = JSON.parse(webinarPurchasesUploadsJson);
+     showWebinars2(webinarPurchasesUploads);
+      }); 
+    
+    function showWebinars2(obj) {
+  const webinars = obj['members'];
+
+  for (let i = 0; i < webinarsPurchases.length; i++) {
+    const renderDiv2 = document.createElement('div');
+    renderDiv2.className = "title";
+    const renderText2 = document.createElement('h3');
+    const renderDesc2 = document.createElement('p');
+    const renderImg2 = document.createElement('img');
+    renderImg2.className = "thumbnail";
+    const renderLikes2 = document.createElement('p');
+    renderLikes2.className = "likes";
+    const renderButton2 = document.createElement('button');
+    renderButton2.className = "watch_again";
+    renderButton2.onclick = function () {
+      var webinarId = webinars[i].post_id;
+      var creatorId = webinars[i].userId;
+      var categoryId = webinars[i].collection_name;
+};
+
+    renderText2.textContent = webinarsPurchases[i].text;
+    renderDesc2.textContent = webinarsPurchases[i].description;
+    renderImg2.imgContent = webinarsPurchases[i].thumbnail;
+    renderLikes2.textContent = webinarsPurchases[i].likes;
+
+    renderDiv2.appendChild(renderText2);
+    renderDiv2.appendChild(renderDesc2);
+    renderDiv2.appendChild(renderImg2);
+    renderDiv2.appendChild(renderLikes2);
+    renderDiv2.appendChild(renderButton2);
+
+    section.appendChild(renderDiv2);
+  }
+}
+    </script>
+    
+ <div class="modal" id="modal1">
+  <div class="modal-dialog">
+    <header class="modal-header">
+      Watch Webinar:
+      <button class="close-modal" aria-label="close modal" data-close>✕</button>
+    </header>
+    <section class="modal-content">
+      <video id="usersPurchase"></video>
+    </section>
+  </div>
+</div>
+    
+    <br><br><br>
+</body>
+</html>

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+  <head>
+        <!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-KRPNL55');</script>
+<!-- End Google Tag Manager -->
+  
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-2N939D6C1C"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-2N939D6C1C');
+</script>
+    
+<meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, user-scalable=yes">
+        
+        <!-- ios support -->
+        <meta name="apple-mobile-web-app-status-bar" content="#db4938" />
+        <meta name="theme-color" content="#db4938" />
+        
+        <meta name="application-name" content="Pi Webinars">
+
+        <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+        <!--[if lt IE 9]>
+            <script src="assets/js/html5shiv-pre3.6.js"></script>
+        <![endif]-->
+        
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://sdk.minepi.com/pi-sdk.js"></script>
+    
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link rel="stylesheet" href="/css/styles.css">
+     <link rel="icon" 
+      type="image/png" 
+      href="/img/logo.png">
+    <script src="/js/routes.js"></script>
+    <script src="/js/pipayment.js"></script>
+    
+    <script>
+//      if(navigator.userAgent.toLowerCase().indexOf("pibrowser")<0) document.domain!="localhost"&&window.open(window.location.protocol+"//"+document.domain+"/html/home.html","_self");
+    </script>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;700&display=swap" rel="stylesheet">
+
+  </head>
+  <body>
+  <h1 >Pi Webinars</h1>
+  
+<nav class="footer" style="z-index: 100">
+  <ul class="ul">
+    <li class="li"><a class="a" href="/index.html"><img src="https://app.piwebinars.co.uk/img/Home_Icon.png" width="30px;">Home</a></li>
+    <li class="li"><a class="a" href="/html/all-webinars.html"><img src="https://app.piwebinars.co.uk/img/Watch_Icon.png" width="30px;">Webinars</a></li>
+    <li class="li"><a class="a" href="/html/upload.html"><img src="https://app.piwebinars.co.uk/img/Upload_Icon.png" width="30px;">Upload</a></li>
+    <li class="li"><a class="a" href="/html/profile.html"><img src="https://app.piwebinars.co.uk/img/Profile_Icon.png" width="30px;">Profile</a></li>
+  </ul>
+</nav>   
+  
+    <div id="profile">
+    <script>
+      document.addEventListener("DOMContentLoaded", function(event) {      
+     const profileJSON = axios.get("/profile");
+     const profile = JSON.parse(profileJSON);
+     const info = obj['members'];
+     document.getElementById('handle').innerHTML = info[i].handle;
+     document.getElementById('avatar').src = info[i].avatar;
+     document.getElementById('followers').innerHTML = info[i].followers;
+     document.getElementById('following').innerHTML = info[i].following;
+     document.getElementById('credit').innerHTML = info[i].credit;
+      }); 
+    </script>
+      <div class="row" style="border-top: solid; border-bottom: solid; margin-bottom: 50px;">
+   <img id="avatar" style="float: left; width: 25%; border-style: round; padding: 10px;" src=""></img>
+    <div>
+      <h2 id="handle"></h2>
+      <p2>Followers:</p2>
+      <p2 id="followers"></p2><br/>
+      <p2>Following:</p2>
+      <p3 id="following"></p3><br/>
+      <p2>Credit:</p2>
+      <p2 id="credit"></p2><p2> Pi</p2>
+      </div></div></div>
+  
+  <div class="row" style="margin-bottom: 50px;" onclick="location.href='/html/your-webinars.html';">
+    <img class="column" style="width: 25%; margin-right: 20px;" src="https://app.piwebinars.co.uk/img/your_webinars.png"></img>
+  <h2 class="column">Your Webinars</h2>
+  </div>
+
+<div class="row" style="margin-bottom: 50px;" onclick="location.href='/html/your-purchases.html';">
+  <img class="column" style="width: 25%; margin-right: 20px;" src="https://app.piwebinars.co.uk/img/purchases.png"></img>
+<h2 class="column">Purchases</h2>
+</div><br/>
+
+<button class="logout">Logout</button>
+<button class="logoutAll">Logout All</button>
+<button style="margin-bottom: 50px;" class="deleteAccount">Delete Account</button>
+  
+    <br><br><br>
+</body>
+</html>

@@ -85,8 +85,7 @@ async function transfer(webinarId, creatorId, categoryId) {
     const userId1 = profileCurrentUser[i].userId;
     axios.post(`/post/purchases/${userId1}/${collection_name}/${userId}/${file_id}`);
   };
-                  
-function renderComments(purchasedWebinar) {
+                  ion renderComments(purchasedWebinar) {
   const currentComments = purchasedWebinar['members'];
   const commentDiv = document.getElementById('comments');
   for (let i = 0; i < currentComments.length; i++) {
@@ -126,4 +125,12 @@ document.getElementById("modal1").classList.add("is-visible");
 
 function closeCinema() {
   document.getElementById("modal1").classList.remove("is-visible");
+}
+
+     function openUploadPage() {
+document.getElementById("modal2").classList.add("is-visible");
+};
+
+function closeUploadPage() {
+  document.getElementById("modal2").classList.remove("is-visible");
 }

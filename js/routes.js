@@ -1,5 +1,5 @@
 //import axios from 'https://olivercrockett.github.io/testrepo/node_modules/axios';
-//const axiosClient = axios.create({baseURL: 'https://server.piwebinars.co.uk', timeout: 20000});
+//const axiosServer = axios.create({baseURL: 'https://server.piwebinars.co.uk', timeout: 20000});
 
 $(document).ready(function(){
 
@@ -18,6 +18,7 @@ $(".createPost").click(function() {
     const file = document.getElementById('file').value;
     res.send(file)
   });
+  alert('Upload successful! Thanks using Pi Webinars!');
 });
 
 $(".watch_again").click(function(webinarId, creatorId, categoryId) {
@@ -144,12 +145,29 @@ $(".deleteSharedPost").click(function(webinarId) {
 })
 
 //account routes
+$(".login").click(function() {
+  const piusername = prompt("Pi Username:", "");
+  const password = prompt("Password", "");
+  axios.post('/login', function (res, req) {
+    res.send(piusername, password);
+  });
+}) 
+ 
 $(".logout").click(function() {
   axios.post('/logout')
 })
 
 $(".logoutAll").click(function() {
   axios.post('/logout_all')
+})
+  
+$(".register").click(function() {
+  const userName = prompt("Pi Username", "");
+  const password = prompt("Password:", "");
+  axios.post('/register', function (res, req) {
+    res.send(userName, password);
+  });
+  alert('Registration successfull! You can now access your webinars at piwebinars.co.uk, outside the Pi Browser');
 })
 
 $(".deleteAccount").click(function() {

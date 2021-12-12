@@ -30,14 +30,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         <meta name="theme-color" content="#db4938" />
         
         <meta name="application-name" content="Pi Webinars">
-
-        <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
-        <!--[if lt IE 9]>
-            <script src="assets/js/html5shiv-pre3.6.js"></script>
-        <![endif]-->
         
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <!--    <script src="https://sdk.minepi.com/pi-sdk.js"></script>-->
     
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <link rel="stylesheet" href="/css/styles.css">
@@ -46,10 +40,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       href="/img/logo.png">
     <script type="text/javascript" src="/js/routes.js"></script>
     <script type="text/javascript" src="/js/pipayment.js"></script>
-    
-    <script>
-//      if(navigator.userAgent.toLowerCase().indexOf("pibrowser")<0) document.domain!="localhost"&&window.open(window.location.protocol+"//"+document.domain+"/html/home.html","_self");
-    </script>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -100,11 +90,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
      renderWebinars(webinarUploads);
       }); 
     
-    function renderWebinars(obj) {
-  const webinars = obj['members'];
+    function renderWebinars(jsonobj) {
+  const webinars = jsonobj['post'];
 
   for (let i = 0; i < webinars.length; i++) {
-    const renderDiv = document.createElement('div');
+    const renderDiv = document.createElement('article');
     renderDiv.className = "title";
     const renderText = document.createElement('h3');
     const renderDesc = document.createElement('p');
@@ -113,7 +103,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     const renderLikes = document.createElement('p');
     renderLikes.className = "likes";
     const renderButton = document.createElement('button');
-    renderButton.className = "button_click";
+    renderButton.className = "button_click browser";
     renderButton.onclick = function () {
       var webinarId = webinars[i].post_id;
       var creatorId = webinars[i].userId;
@@ -136,19 +126,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 }
     </script>
     
-    <button type="button" class="open-modal" onclick="openCinema()">Open Cinema...</button>
-    
-  <!-- <script>
-     function openCinema() {
-document.getElementById("modal1").classList.add("is-visible");
-};
-    </script>-->
+    <button type="button" onclick="openCinema()">Open Cinema...</button>
     
  <div class="modal" id="modal1">
   <div class="modal-dialog">
     <header class="modal-header">
-      Watch Webinar:
-      <button class="close-modal" aria-label="close modal" onclick="closeCinema()">✕</button>
+      Cinema
+      <button class="close-modal" onclick="closeCinema()">✕</button>
     </header>
     <section class="modal-content">
       <video id="usersPurchase"></video>
@@ -170,6 +154,13 @@ document.getElementById("modal1").classList.add("is-visible");
 function googleTranslateElementInit() {new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');}
 
 </script><script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script> </br></br>
-
+             <script>
+      if (navigator.userAgent.toLowerCase().indexOf("pibrowser") < 0) {
+      var i;
+      var x = document.getElementsByClassName('browser')
+for (i = 0; i < x.length; i++) {
+x[i].style.display = 'none';
+}}
+    </script>
   </body>
 </html>

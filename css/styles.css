@@ -93,6 +93,7 @@ button {
   height: 60px;
   background-color: #FFFFFF;
   box-shadow: 10px 10px 10px 10px black;
+  z-index: 100;
 }
 .gap {
   margin-bottom: 20px;
@@ -148,6 +149,14 @@ label {
   font-size: 10px;
   box-shadow: none;
 }
+.register {
+  color: blue;
+  margin-top:10px;
+  background: #FFFFFF;
+  border-style: none;
+  font-size: 10px;
+  box-shadow: none;
+}
 :root {
   --lightgray: #efefef;
   --blue: steelblue;
@@ -168,6 +177,7 @@ label {
   visibility: hidden;
   opacity: 0;
   transition: all 0.35s ease-in;
+  z-index: 200;
 }
 .is-visible {
   visibility: visible;

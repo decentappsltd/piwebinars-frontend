@@ -39,10 +39,10 @@
       }); 
     
     function showWebinarsUser(obj) {
-  const webinarsUser = obj['members'];
+  const webinarsUser = obj['post'];
 
   for (let i = 0; i < webinarsUser.length; i++) {
-    const renderDivYour = document.createElement('div');
+    const renderDivYour = document.createElement('article');
     renderDivYour.className = "title";
     const renderTextYour = document.createElement('h3');
     const renderDescYour = document.createElement('p');

@@ -1,72 +1,68 @@
-$( document ).ready(function() {
-                const Pi = window.Pi;
-                Pi.init({ version: "2.0" });
-              
-               $( ".button_click" ).click(function() {
-                    transfer($(this).data('webinar-id'));
-                });
-              
-                async function auth() {
-                    try {
-                        const scopes = ['username', 'payments'];
-                        function onIncompletePaymentFound(payment) {
-                            
-                            var data = {
-                                    'action': 'complete',
-                                    'paymentId': payment.identifier,
-                                    'txid': payment.transaction.txid,
-                                    'app_client': 'auth_example'
-                                };
-                          axios.post('/cancel', data);
-                        };
+$(document).ready(function () {
+  const Pi = window.Pi;
+  Pi.init({ version: "2.0" });
 
-                        Pi.authenticate(scopes, onIncompletePaymentFound).then(function(auth) {
-                          const userName = auth.user.username;
-                          document.getElementById('username').innerHTML = userName;
-                          app.post('/register/:userName', function (req, res) {
-                            res.send(userName)
-                          }).catch(function() {
-                              axios.post('/login', function(res, req) {
-                                res.send(userName)
-                          });
-                        }).catch(function(error) {
-                          console.error(error);
-                        });
-                    }).catch(err)
-                    
-                }catch {
-                  alert('Please go to Pi Browser')
-                }
-                }
-});
+  async function auth() {
+    try {
+      const scopes = ["username", "payments"];
+      function onIncompletePaymentFound(payment) {
+        var data = {
+          action: "complete",
+          paymentId: payment.identifier,
+          txid: payment.transaction.txid,
+        };
+        axios.post("/payment/cancel", function(res, req) {
+          res.send(data);
+        });
+      }
 
-async function transfer(webinarId, creatorId, categoryId) {
+      Pi.authenticate(scopes, onIncompletePaymentFound)
+        .then(async function (auth) {
+          const userName = auth.user.username;
+          document.getElementById("username").innerHTML = userName;
+          const userPassword = await prompt('create or enter your password', "");
+          axios.post("/register", function (req, res) {
+              res.send(userName, userPassword);
+            })
+            .catch(function (error) {
+              console.error(error);
+            });
+        })
+        .catch(err);
+    }
+  }
+
+$(".button_click").click(function (webinarId, creatorId, categoryId) {
   try {
-    const payment = Pi.createPayment({
-      amount: 1,
-      memo: "Webinar Purchase",
-      metadata: { webinarId }
-    }, {
-      onReadyForServerApproval: function(paymentId) {
-        var data = {
-          'paymentId': paymentId,
-          'txid': '',
-        }
-        axios.post('/approve', data)
+    const payment = Pi.createPayment(
+      {
+        amount: 1,
+        memo: "Webinar Purchase",
+        metadata: { webinarId }
       },
-      onReadyForServerCompletion: function(paymentId, txid) {
-        var data = {
-          'paymentId': paymentId,
-          'txid': txid,
+      {
+        onReadyForServerApproval: function (paymentId) {
+          const paymentId = payment.identifier;
+          axios.post("/payment/approve", function(res, req) {
+            res.send(paymentId);
+          });
+        },
+        onReadyForServerCompletion: function (paymentId, txid) {
+          const paymentId = payment.identifier;
+          const txid = payment.transaction.txid;
+          const user_id = creatorId;
+          axios.post("/payment/complete", function(res, req) {
+            res.send(user_id, paymentId, txid);
+          });
+          showWebinar(webinarId, creatorId, categoryId);
         }
-        axios.post('/complete', data);
-        showWebinar(webinarId, creatorId, categoryId);
-      },
-    })
-  }catch(err) {
+      }
+    );
+  } catch (err) {
     alert(err);
   }
-};
+});
+});
   
   const showWebinar = (webinarId, creatorId, categoryId) => {
     var userId = creatorId;

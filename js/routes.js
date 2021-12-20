@@ -7,11 +7,11 @@ $(document).ready(function(){
 $(".createPost").click(function() {
   axios.post("/post", function(res, req) {
   const thumbnail = document.getElementById('thumbnail').value;
-  const catagory = document.getElementById('catagory').value;
+  const collection_name = document.getElementById('catagory').value;
   const amount = document.getElementById('price').value;
   const title = document.getElementById('title').value;
   const description = document.getElementById('description').value;
-  res.send(title, description, thumbnail, catagory, amount)
+  res.send(title, description, thumbnail, collection_name, amount)
   });
   const file_type = document.getElementById('file_type').value
   axios.post(`/upload/file_upload/${file_type}`, function(res, req) {

@@ -33,6 +33,8 @@ $(document).ready(function () {
       console.error(error);
     }
   }
+  
+  auth();
 
 $(".button_click").click(function(webinarId, creatorId, categoryId) {
   try {
@@ -52,6 +54,38 @@ $(".button_click").click(function(webinarId, creatorId, categoryId) {
       res.send(user_id, paymentId, txid);
     });
     showWebinar(webinarId, creatorId, categoryId);
+    const profileCurrentUser2 = axios.get("/profile");
+    const profileCurrentUser1 = JSON.parse(profileCurrentUser2);
+    const profileCurrentUser = obj["profile"];
+    const userId1 = profileCurrentUser[i].userId;
+    axios.post(
+      `/post/purchases/${userId1}/${categoryId}/${creatorId}/${webinarId}`
+    );
+  },
+  onCancel: function(paymentId) { /* ... */ },
+  onError: function(error, payment) { /* ... */ },
+});
+  } catch (error) {
+    console.error(error);
+  }
+});
+  
+  $(".test").click(function() {
+  try {
+   Pi.createPayment({
+        amount: 1,
+        memo: "Test",
+        metadata: { testPayment }
+}, {
+  onReadyForServerApproval: function(paymentId) {           
+    axios.post("/payment/approve", function(res, req) {
+      res.send(paymentId);
+          }); 
+   },
+  onReadyForServerCompletion: function(paymentId, txid) {
+    axios.post("/payment/complete", function(res, req) {
+      res.send(paymentId, txid);
+    });
   },
   onCancel: function(paymentId) { /* ... */ },
   onError: function(error, payment) { /* ... */ },
@@ -70,18 +104,13 @@ const showWebinar = (webinarId, creatorId, categoryId) => {
     `/upload/${collection_name}/${userId}/${file_id}`
   );
   const purchasedWebinar = JSON.parse(purchasedWebinarJSON);
-  const currentWebinar = purchasedWebinar["members"];
-  const modalId = this.dataset.open;
-  document.getElementById(modalId).classList.add(isVisible);
+  const currentWebinar = purchasedWebinar["upload"];
+  document.getElementById('modal1').classList.add('isVisible');
   document.getElementById("usersPurchase").src = currentWebinar[i].file;
   renderComments(purchasedWebinar);
-  const profileCurrentUser2 = axios.get("/profile");
-  const profileCurrentUser1 = JSON.parse(profileCurrentUser2);
-  const profileCurrentUser = obj["members"];
-  const userId1 = profileCurrentUser[i].userId;
-  axios.post(
-    `/post/purchases/${userId1}/${collection_name}/${userId}/${file_id}`
-  );
+  document.getElementById("followCreator").onclick = function() {
+    axios.post(`/auth_follow_unfollow/${userId}`)
+  };
 };
 
 function renderComments(purchasedWebinar) {
@@ -95,8 +124,7 @@ function renderComments(purchasedWebinar) {
     renderLikeButton.onclick = function () {
       var webinarId = currentComments[i].post_id;
       var creatorId = currentComments[i].userId;
-      var commentId = currentComments[i].comment_id;
-    };
+      var commentId = currentComments[i].comment_  };
     const renderReplyButton = document.createElement("button");
     renderReplyButton.className = "replyComment";
     renderReplyButton.onclick = function () {
@@ -132,4 +160,9 @@ function openUploadPage() {
 
 function closeUploadPage() {
   document.getElementById("modal2").classList.remove("is-visible");
+}
+
+function showMore(featured, webinars) {
+  var x = featured.length;
+  var feature = webinars.slice(0, x+20);
 }

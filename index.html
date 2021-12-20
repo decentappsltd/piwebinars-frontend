@@ -88,37 +88,45 @@ src="https://app.piwebinars.co.uk/img/logo.png"</img>
      <div class="browser">
   <button id="button_click" class="button_click" data-webinar-id="KfDB9e_cO4k">Pay with Pi</button></div>
   
- <div id="title" class="rounded">
-   <script>
-     document.addEventListener("DOMContentLoaded", function(event) {
-     var featuredOne = axios.get('/post/xxxxxx/xxxxxx');
-     var renderOne = JSON.parse(featuredOne);
-     var webinarsHome = obj['members'];
-     document.getElementById('thumbnailF1').setAttribute("src", webinarsHome[i].thumbnail);
-     document.getElementById('textF1').innerHTML = webinarsHome[i].text;
-     document.getElementById('descriptionF1').innerHTML = webinarsHome[i].description;
-     document.getElementById('likesF1').innerHTML = webinarsHome[i].likes;
-     document.getElementById('amountF1').innerHTML = webinarsHome[i].amount;
-     })
-                    </script>
-   <img id="thumbnailF1"></img>
-   <h3 id="textF1"></h3>
-   <p2 id="descriptionF1"></p2>
-     <p3 id="likesF1"></p3></div>
-     <div class="browser">
-       <button class="button_click">Pay with Pi</button></div>
+<script>
+    document.addEventListener("DOMContentLoaded", function(event) {
+      const webinarUploadsJson = axios.get("/post");
+      const webinarUploads = JSON.parse(webinarUploadsJson);
+      renderWebinars(webinarUploads);
+    });
 
- <div class="modal" id="modal1">
-  <div class="modal-dialog">
-    <header class="modal-header">
-      Watch Webinar:
-      <button class="close-modal" aria-label="close modal" data-close>✕</button>
-    </header>
-    <section class="modal-content">
-      <video id="usersPurchase"></video>
-    </section>
-  </div>
-</div>
+    function renderWebinars(jsonobj) {
+      const webinars = jsonobj['post'];
+      const featured = webinars.slice(0, 10);
+      for (let i = 0; i < featured.length; i++) {
+        const renderDiv = document.createElement('article');
+        renderDiv.className = "title";
+        const renderText = document.createElement('h3');
+        const renderDesc = document.createElement('p');
+        const renderImg = document.createElement('img');
+        renderImg.className = "thumbnail";
+        const renderLikes = document.createElement('p');
+        renderLikes.className = "likes";
+        const renderButton = document.createElement('button');
+        renderButton.className = "button_click browser";
+        renderButton.onclick = function() {
+          var webinarId = featured[i].post_id;
+          var creatorId = featured[i].userId;
+          var categoryId = featured[i].collection_name;
+        };
+        renderText.textContent = featured[i].text;
+        renderDesc.textContent = featured[i].description;
+        renderImg.imgContent = featured[i].thumbnail;
+        renderLikes.textContent = featured[i].likes;
+        renderDiv.appendChild(renderText);
+        renderDiv.appendChild(renderDesc);
+        renderDiv.appendChild(renderImg);
+        renderDiv.appendChild(renderLikes);
+        renderDiv.appendChild(renderButton);
+        section.appendChild(renderDiv);
+      }
+    }
+  </script>
     
     <div class="modal" id="modal1">
   <div class="modal-dialog">
@@ -135,6 +143,7 @@ src="https://app.piwebinars.co.uk/img/logo.png"</img>
   <path d="M0 56v240c0 13.255 10.745 24 24 24h80c13.255 0 24-10.745 24-24V56c0-13.255-10.745-24-24-24H24C10.745 32 0 42.745 0 56zm40 200c0-13.255 10.745-24 24-24s24 10.745 24 24-10.745 24-24 24-24-10.745-24-24zm272 256c-20.183 0-29.485-39.293-33.931-57.795-5.206-21.666-10.589-44.07-25.393-58.902-32.469-32.524-49.503-73.967-89.117-113.111a11.98 11.98 0 0 1-3.558-8.521V59.901c0-6.541 5.243-11.878 11.783-11.998 15.831-.29 36.694-9.079 52.651-16.178C256.189 17.598 295.709.017 343.995 0h2.844c42.777 0 93.363.413 113.774 29.737 8.392 12.057 10.446 27.034 6.148 44.632 16.312 17.053 25.063 48.863 16.382 74.757 17.544 23.432 19.143 56.132 9.308 79.469l.11.11c11.893 11.949 19.523 31.259 19.439 49.197-.156 30.352-26.157 58.098-59.553 58.098H350.723C358.03 364.34 384 388.132 384 430.548 384 504 336 512 312 512z" />
 </svg>
       </div>
+      <button id="followCreator">FollowCreator</button>
       <button class="comment">Comment</button>
       <div id="comments"></div>
     </section>
@@ -145,7 +154,8 @@ src="https://app.piwebinars.co.uk/img/logo.png"</img>
 function googleTranslateElementInit() {new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');}
          </script><script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
     
-             <script>
+     <button class="test">Test Payment</button>
+ <!--            <script>
       if (navigator.userAgent.toLowerCase().indexOf("pibrowser") < 0) {
       var i;
       var x = document.getElementsByClassName('browser')
@@ -156,7 +166,7 @@ x[i].style.display = 'none';
         window.location = "https://www.piwebinars.co.uk";
     }
     </script>
-    
+    -->
   </body>
 <br/><br/><br/><br/>
       </html>

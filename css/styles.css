@@ -85,7 +85,7 @@ button {
 .li:last-child {
   border-right: none;
 }
-.footer {
+.footer, #footer {
   position: fixed;
   left: 0;
   bottom: 0;
@@ -126,12 +126,17 @@ button {
 label {
   font-weight: bold;
 }
-#select {
+#select, #search {
   padding: 5px;
   color: #36454F;
   border-color: #FBB44A;
   border-radius: 7.5px;
   width: 150px;
+  border-style: solid;
+  border-width: 1px;
+}
+.fa-search:active, .fa-plus:active, .fa-minus:active {
+  color: #E9E9E9;
 }
 .column {
   float: left;
@@ -149,7 +154,7 @@ label {
   font-size: 10px;
   box-shadow: none;
 }
-.register {
+.register, #translate {
   color: blue;
   margin-top:10px;
   background: #FFFFFF;
@@ -254,4 +259,17 @@ label {
 .both::-webkit-scrollbar-thumb {
 	border-radius: 10px;
 	background-color: #FBB44A;
+}
+.loadImage {
+  background-image: url("/img/loadImage.png");
+  height: 100vh; 
+  z-index: 200;
+  padding: 0;
+  margin-top: 0;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+#google_translate_element {
+  display: none;
 }

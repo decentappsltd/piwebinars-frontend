@@ -1,63 +1,41 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <!-- Google Tag Manager -->
-  <script>
-    (function(w, d, s, l, i) {
-      w[l] = w[l] || [];
-      w[l].push({
-        'gtm.start': new Date().getTime(),
-        event: 'gtm.js'
-      });
-      var f = d.getElementsByTagName(s)[0],
-        j = d.createElement(s),
-        dl = l != 'dataLayer' ? '&l=' + l : '';
-      j.async = true;
-      j.src =
-        'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
-      f.parentNode.insertBefore(j, f);
-    })(window, document, 'script', 'dataLayer', 'GTM-KRPNL55');
-  </script>
-  <!-- End Google Tag Manager -->
-
-  <!-- Global site tag (gtag.js) - Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-2N939D6C1C"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-
-    function gtag() {
-      dataLayer.push(arguments);
-    }
-    gtag('js', new Date());
-    gtag('config', 'G-2N939D6C1C');
-  </script>
-
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <meta name="viewport" content="width=device-width, user-scalable=yes">
-
-  <!-- ios support -->
-  <meta name="apple-mobile-web-app-status-bar" content="#db4938" />
-  <meta name="theme-color" content="#db4938" />
-
-  <meta name="application-name" content="Pi Webinars">
-
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="../css/styles.css">
-  <link rel="icon" type="image/png" href="../img/logo.png">
-  <script type="text/javascript" src="/js/routes.js"></script>
-  <script type="text/javascript" src="/js/pipayment.js"></script>
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;700&display=swap" rel="stylesheet">
-
+    <!-- Google Tag Manager -->
+    <script>
+      (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+      'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+      })(window,document,'script','dataLayer','GTM-KRPNL55');
+    </script>
+  
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-2N939D6C1C"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-2N939D6C1C');
+    </script>
+          
+    <!--Scripts-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://sdk.minepi.com/pi-sdk.js"></script>
+    <script src="/js/routes.js"></script>
+    <script src="/js/pipayment.js"></script>
+    <script src="https://kit.fontawesome.com/3aea44e36d.js" crossorigin="anonymous"></script>
+            
+    <!--CSS-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="icon" type="image/png" href="/img/logo.png">
+    
+    <!--Google Fonts-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;700&display=swap" rel="stylesheet">
 </head>
-
 <body>
   <!-- Google Tag Manager (noscript) -->
   <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KRPNL55" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
@@ -76,22 +54,29 @@
     </ul>
   </nav>
 
-  <h1 id="categories">Categories:</h1>
-
-  <select style="margin-bottom: 20px;" name="categories" id="select">
+  <i class="fas fa-filter"></i>
+  <select style="margin-bottom: 5px;" name="categories" id="select">
     <option class="list" value="all">All</option><br />
     <option class="list" value="cryptocurrency">Cryptocurrency</option><br />
+    <option class="list" value="diy">DIY</option><br />
     <option class="list" value="education">Eduction</option><br />
+    <option class="list" value="finance">Finance</option><br />
     <option class="list" value="fitness">Fitness</option><br />
     <option class="list" value="food">Food</option><br />
+    <option class="list" value="gaming">Gaming</option><br />
     <option class="list" value="history">History</option><br />
-    <option class="list" value="money">Money</option><br />
+    <option class="list" value="music">Music</option><br />
     <option class="list" value="nature">Nature</option><br />
-    <option class="list" value="pi-network">Pi Network</option><br />
+    <option class="list" value="pets">Pets</option><br />
+    <option class="list" value="pinetwork">Pi Network</option><br />
     <option class="list" value="politics">Politics</option><br />
     <option class="list" value="sports">Sports</option><br />
     <option class="list" value="technology">Technology</option><br />
-  </select><br />
+  </select><i style="margin-left: 5px;" class="fas fa-search searchCat"></i><br />
+  
+  <i class="fas fa-filter"></i>
+  <input type="text" placeholder="Search Webinars.." id="search">
+  <i class="fas fa-search search"></i></br></br>
 
   <script>
     document.addEventListener("DOMContentLoaded", function(event) {
@@ -130,6 +115,29 @@
         section.appendChild(renderDiv);
       }
     }
+    
+    $(document).ready(function () {
+      $(".searchCat").click(function() {
+        var results = [];
+        var searchField = "categories";
+        var searchVal = document.querySelector('#select');
+        for (var i=0 ; i < obj.list.length ; i++) {
+          if (obj.list[i][searchField] == searchVal) {
+          results.push(obj.list[i]);
+          }
+        }
+      });
+      
+      $(".search").click(function() {
+        var results = [];
+        var searchField = document.querySelector('#search');
+        for (var i=0 ; i < obj.list.length ; i++) {
+          if (obj.list[i][searchField] == searchVal) {
+            results.push(obj.list[i]);
+          }
+        }
+      })
+    })
   </script>
   <button onclick="openCinema()">Open Cinema...</button>
 

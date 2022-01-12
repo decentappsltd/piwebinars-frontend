@@ -1,51 +1,40 @@
 <!DOCTYPE html>
 <html>
   <head>
-        <!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-KRPNL55');</script>
-<!-- End Google Tag Manager -->
+    <!-- Google Tag Manager -->
+    <script>
+      (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+      'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+      })(window,document,'script','dataLayer','GTM-KRPNL55');
+    </script>
   
     <!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-2N939D6C1C"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-2N939D6C1C');
-</script>
-    
-<meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="apple-mobile-web-app-capable" content="yes" />
-        <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <meta name="viewport" content="width=device-width, user-scalable=yes">
-        
-        <!-- ios support -->
-        <meta name="apple-mobile-web-app-status-bar" content="#db4938" />
-        <meta name="theme-color" content="#db4938" />
-        
-        <meta name="application-name" content="Pi Webinars">
-        
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script src="https://sdk.minepi.com/pi-sdk.js"></script>
-    
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <link rel="stylesheet" href="/css/styles.css">
-     <link rel="icon" 
-      type="image/png" 
-      href="/img/logo.png">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-2N939D6C1C"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-2N939D6C1C');
+    </script>
+          
+    <!--Scripts-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://sdk.minepi.com/pi-sdk.js"></script>
     <script src="/js/routes.js"></script>
     <script src="/js/pipayment.js"></script>
+    <script src="https://kit.fontawesome.com/3aea44e36d.js" crossorigin="anonymous"></script>
+            
+    <!--CSS-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="icon" type="image/png" href="/img/logo.png">
     
+    <!--Google Fonts-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;700&display=swap" rel="stylesheet">
-
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;700&display=swap" rel="stylesheet">
   </head>
   <body>
   <h1 >Pi Webinars</h1>
@@ -80,8 +69,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       <p2 id="followers">0</p2><br/>
       <p2>Following:</p2>
       <p3 id="following">0</p3><br/>
+      <i class="fas fa-plus buyCredit"></i>
       <p2>Credit:</p2>
       <p2 id="credit">0</p2><p2> Pi</p2>
+      <i class="fas fa-minus withdrawCredit"></i>
       </div></div></div>
   
   <div class="row" style="margin-bottom: 50px;" onclick="location.href='/html/your-webinars.html';">
@@ -93,7 +84,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <img class="column" style="width: 25%; margin-right: 20px;" src="https://app.piwebinars.co.uk/img/purchases.png"></img>
 <h2 class="column">Purchases</h2>
 </div><br/>
-
+<!--
+<button class="buyCredit">Buy credit</button><button class="withdrawCredit">Withdraw Credit</button> </br>
+-->
 <button class="logout">Logout</button>
 <button class="logoutAll">Logout All</button>
 <button style="margin-bottom: 50px;" class="deleteAccount">Delete Account</button>

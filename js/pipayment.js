@@ -70,12 +70,13 @@ $(".button_click").click(function(webinarId, creatorId, categoryId) {
   }
 });
   
-  $(".test").click(function() {
+  $(".buyCredit").click(function() {
+    var creditAmount = prompt('Amount:', '');
   try {
    Pi.createPayment({
-        amount: 1,
-        memo: "Test",
-        metadata: { testPayment }
+        amount: creditAmount,
+        memo: `Buy ${creditAmount} credits`,
+        metadata: { purchaseCredits }
 }, {
   onReadyForServerApproval: function(paymentId) {           
     axios.post("/payment/approve", function(res, req) {
@@ -85,6 +86,7 @@ $(".button_click").click(function(webinarId, creatorId, categoryId) {
   onReadyForServerCompletion: function(paymentId, txid) {
     axios.post("/payment/complete", function(res, req) {
       res.send(paymentId, txid);
+      buyCredits(creditAmount);
     });
   },
   onCancel: function(paymentId) { /* ... */ },
@@ -94,6 +96,11 @@ $(".button_click").click(function(webinarId, creatorId, categoryId) {
     console.error(error);
   }
 });
+  
+  $(".withdrawCredit").click(function() {
+    alert('The Pi Core Team will enable this feature soon...')
+  })
+  
 });
 
 const showWebinar = (webinarId, creatorId, categoryId) => {
@@ -114,7 +121,7 @@ const showWebinar = (webinarId, creatorId, categoryId) => {
 };
 
 function renderComments(purchasedWebinar) {
-  const currentComments = purchasedWebinar["members"];
+  const currentComments = purchasedWebinar["comments"];
   const commentDiv = document.getElementById("comments");
   for (let i = 0; i < currentComments.length; i++) {
     const renderMessage = document.createElement("p3");
@@ -128,7 +135,7 @@ function renderComments(purchasedWebinar) {
     const renderReplyButton = document.createElement("button");
     renderReplyButton.className = "replyComment";
     renderReplyButton.onclick = function () {
-      var webinarId = curetComments[i].post_id;
+      var webinarId = currentComments[i].post_id;
       var creatorId = currentComments[i].userId;
       var commentId = currentComments[i].comment_id;
     };
@@ -144,6 +151,14 @@ function renderComments(purchasedWebinar) {
 
     section.appendChild(commentDiv);
   }
+}
+
+function buyCredits(creditAmount) {
+    axios.post(
+      `/profile/credit`, function(res, req) {
+        res.send(creditAmount);
+      }
+    );
 }
 
 function openCinema() {
@@ -165,4 +180,19 @@ function closeUploadPage() {
 function showMore(featured, webinars) {
   var x = featured.length;
   var feature = webinars.slice(0, x+20);
+}
+
+function googleTranslate() {
+  document.getElementById('google_translate_element').style.display = "block";
+  document.getElementById('translate').style.display = "none";
+}
+
+function searchWebinars() {
+  var results = [];
+  var searchField = document.querySelector('#search');
+  for (var i=0 ; i < obj.list.length ; i++) {
+    if (obj.list[i][searchField] == searchVal) {
+      results.push(obj.list[i]);
+    }
+  }
 }

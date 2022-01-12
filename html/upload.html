@@ -1,20 +1,41 @@
 <!DOCTYPE html>
 <html>
-   <head>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <link rel="stylesheet" href="../css/styles.css">
-     <link rel="icon" 
-      type="image/png" 
-      href="../img/logo.png">
+  <head>
+    <!-- Google Tag Manager -->
+    <script>
+      (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+      'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+      })(window,document,'script','dataLayer','GTM-KRPNL55');
+    </script>
+  
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-2N939D6C1C"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-2N939D6C1C');
+    </script>
+          
+    <!--Scripts-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://sdk.minepi.com/pi-sdk.js"></script>
     <script src="/js/routes.js"></script>
     <script src="/js/pipayment.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
-  <title>Pi Webinars</title>
-      <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;700&display=swap" rel="stylesheet">
-   </head>
+    <script src="https://kit.fontawesome.com/3aea44e36d.js" crossorigin="anonymous"></script>
+            
+    <!--CSS-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="icon" type="image/png" href="/img/logo.png">
+    
+    <!--Google Fonts-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;700&display=swap" rel="stylesheet">
+  </head>
   
   <h1 >Pi Webinars</h1>
   
@@ -29,13 +50,13 @@
   
   <h2>Upload a Webinar</h2>
    
- <form style="text-align: left;">
+ <form style="text-align: left; padding:5px;">
   <label for="vid">Upload Webinar:</label>
-  <input type="file" id="file"></input><br/>
+   <input  type="file" id="file"></input></br>
  <label>Select Filetype:</label>
-  <select id="file_type" style="margin-bottom: 20px;">
-    <option class="list" value="MP4" >MP4</option><br/>
-    <option class="list" value="MOV" >MOV</option><br/>
+  <select id="file_type" style="margin-bottom: 10px; margin-top: 10px;">
+    <option class="list" value="MP4">MP4</option><br/>
+    <option class="list" value="MOV">MOV</option><br/>
 </select><br/>
 
 <label>Add a Title:</label></br>

@@ -162,7 +162,7 @@ label {
   font-size: 10px;
   box-shadow: none;
 }
-.register {
+.login {
   color: blue;
   margin-top: 10px;
   background: #E9E9E9;
@@ -212,7 +212,7 @@ label {
 .modal-header {
   display: flex;
   align-items: center;
-  justify-content: spae-between;
+  justify-content: space-between;
 }
 .fa, .fab {
   padding: 10px;
@@ -230,7 +230,7 @@ label {
   background: #55ACEE;
   color: white;
 }
-.fa-instagram {
+.fa-instagace- {
   background: #125688;
   color: white;
 }

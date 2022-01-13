@@ -177,6 +177,14 @@ function closeUploadPage() {
   document.getElementById("modal2").classList.remove("is-visible");
 }
 
+function openModal3() {
+  document.getElementById("modal3").classList.add("is-visible");
+}
+
+function closeModal3() {
+  document.getElementById("modal3").classList.remove("is-visible");
+}
+
 function showMore(featured, webinars) {
   var x = featured.length;
   var feature = webinars.slice(0, x+20);

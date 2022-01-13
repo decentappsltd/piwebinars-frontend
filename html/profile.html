@@ -87,11 +87,29 @@
 <!--
 <button class="buyCredit">Buy credit</button><button class="withdrawCredit">Withdraw Credit</button> </br>
 -->
-<button class="register">Login/Register</button></br>
+<button class="login" onclick="openModal3()">Login/Register</button></br>
 <button class="logout">Logout</button>
 <button class="logoutAll">Logout All</button>
 <button style="margin-bottom: 50px;" class="deleteAccount">Delete Account</button>
 
+<!--Login/Register Modal-->
+  <div class="modal" id="modal3">
+    <div class="modal-dialog">
+      <header class="modal-header">
+        Login/Register:
+        <button class="close-modal" onclick="closeModal3()">✕</button>
+      </header>
+      <section class="modal-content">
+        <form>
+          <label>Enter Pi Username:</label></br>
+          <input type="text" id="pi_username" required></br></br>
+          <label>Enter Password:</label></br>
+          <input type="text" id="user_password" required></br></br>
+          <button type="submit" class="register" onclick="closeModal3()">Login/Register</button></br>
+        </form>
+      </section>
+    </div>
+  </div>
     <br><br><br>
 </body>
 </html>

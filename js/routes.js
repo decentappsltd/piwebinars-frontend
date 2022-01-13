@@ -145,14 +145,6 @@ $(".deleteSharedPost").click(function(webinarId) {
 })
 
 //account routes
-$(".login").click(function() {
-  const piusername = prompt("Pi Username:", "");
-  const password = prompt("Password", "");
-  axios.post('/login', function (res, req) {
-    res.send(piusername, password);
-  });
-}) 
- 
 $(".logout").click(function() {
   axios.post('/logout')
 })
@@ -162,8 +154,8 @@ $(".logoutAll").click(function() {
 })
   
 $(".register").click(function() {
-  const userName = prompt("Pi Username", "");
-  const password = prompt("Password:", "");
+  const userName = document.getElementById('pi_username');
+  const password = document.getElementById('user_password');
   axios.post('/register', function (res, req) {
     res.send(userName, password);
   });

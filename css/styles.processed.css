@@ -154,12 +154,22 @@ label {
   font-size: 10px;
   box-shadow: none;
 }
-.register, #translate {
+#translate {
   color: blue;
   margin-top:10px;
   background: #FFFFFF;
   border-style: none;
   font-size: 10px;
+  box-shadow: none;
+}
+.register {
+  color: blue;
+  margin-top: 10px;
+  background: #E9E9E9;
+  border-style: none;
+  border-radius: 5px;
+  padding: 5px;
+  font-size: 15px;
   box-shadow: none;
 }
 :root {

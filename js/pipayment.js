@@ -2,9 +2,7 @@ $(document).ready(function () {
   const Pi = window.Pi;
   Pi.init({ version: "2.0" });
   
-  axios.get('/payment/status', function(res, req) {
-    var status = req.body;
-  });
+  const status = 'false';
 
   async function auth() {
     try {

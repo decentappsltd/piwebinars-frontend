@@ -1,6 +1,10 @@
 $(document).ready(function () {
   const Pi = window.Pi;
   Pi.init({ version: "2.0" });
+  
+  axios.get('/payment/status', function(res, req) {
+    var status = req.body;
+  });
 
   async function auth() {
     try {
@@ -37,6 +41,7 @@ $(document).ready(function () {
   auth();
 
 $(".button_click").click(function(webinarId, creatorId, categoryId) {
+  if (status == 'true') {
   try {
    Pi.createPayment({
         amount: 1,
@@ -67,13 +72,17 @@ $(".button_click").click(function(webinarId, creatorId, categoryId) {
 });
   } catch (error) {
     console.error(error);
+    }
+  } else {
+    alert('Payments are not availble until mainnet');
   }
 });
   
   $(".buyCredit").click(function() {
     var creditAmount = prompt('Amount:', '');
-  try {
-   Pi.createPayment({
+    if (status == 'true') {
+    try {
+      Pi.createPayment({
         amount: creditAmount,
         memo: `Buy ${creditAmount} credits`,
         metadata: { purchaseCredits }
@@ -95,10 +104,13 @@ $(".button_click").click(function(webinarId, creatorId, categoryId) {
   } catch (error) {
     console.error(error);
   }
+    } else {
+      alert('Payments are not available until mainnet');
+    }
 });
   
   $(".withdrawCredit").click(function() {
-    alert('The Pi Core Team will enable this feature soon...')
+    alert('Payments are not availble until mainnet')
   })
   
 });

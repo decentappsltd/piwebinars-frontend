@@ -20,7 +20,6 @@
     </script>
           
     <!--Scripts-->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://sdk.minepi.com/pi-sdk.js"></script>
     <script src="/js/routes.js"></script>
     <script src="/js/pipayment.js"></script>
@@ -28,7 +27,7 @@
             
     <!--CSS-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="/css/styles.css">
     <link rel="icon" type="image/png" href="../img/logo.png">
     
     <!--Google Fonts-->
@@ -47,6 +46,7 @@
     </script>
   </head>
   <body>
+    <div class="mobile">
     <!-- Google Tag Manager (noscript) -->
     <noscript>
       <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KRPNL55" height="0" width="0" style="display:none;visibility:hidden">
@@ -89,7 +89,7 @@
   
     <script>
       document.addEventListener("DOMContentLoaded", function(event) {
-        const webinarUploadsJson = axios.get("/post");
+        const webinarUploadsJson = axios.get("https://server.piwebinars.co.uk/post");
         const webinarUploads = JSON.parse(webinarUploadsJson);
         renderWebinars(webinarUploads);
       });
@@ -107,11 +107,11 @@
           const renderLikes = document.createElement('p');
           renderLikes.className = "likes";
           const renderButton = document.createElement('button');
-          renderButton.className = "button_click browser";
           renderButton.onclick = function() {
             var webinarId = featured[i].post_id;
             var creatorId = featured[i].userId;
             var categoryId = featured[i].collection_name;
+            buyWebinar();
           };
           renderText.textContent = featured[i].text;
           renderDesc.textContent = featured[i].description;
@@ -142,8 +142,8 @@
   <path d="M0 56v240c0 13.255 10.745 24 24 24h80c13.255 0 24-10.745 24-24V56c0-13.255-10.745-24-24-24H24C10.745 32 0 42.745 0 56zm40 200c0-13.255 10.745-24 24-24s24 10.745 24 24-10.745 24-24 24-24-10.745-24-24zm272 256c-20.183 0-29.485-39.293-33.931-57.795-5.206-21.666-10.589-44.07-25.393-58.902-32.469-32.524-49.503-73.967-89.117-113.111a11.98 11.98 0 0 1-3.558-8.521V59.901c0-6.541 5.243-11.878 11.783-11.998 15.831-.29 36.694-9.079 52.651-16.178C256.189 17.598 295.709.017 343.995 0h2.844c42.777 0 93.363.413 113.774 29.737 8.392 12.057 10.446 27.034 6.148 44.632 16.312 17.053 25.063 48.863 16.382 74.757 17.544 23.432 19.143 56.132 9.308 79.469l.11.11c11.893 11.949 19.523 31.259 19.439 49.197-.156 30.352-26.157 58.098-59.553 58.098H350.723C358.03 364.34 384 388.132 384 430.548 384 504 336 512 312 512z" />
 </svg>
       </div>
-      <button id="followCreator">FollowCreator</button>
-      <button class="comment">Comment</button>
+      <button onclick="followCreator()">FollowCreator</button>
+      <button onclick="comment()">Comment</button>
       <div id="comments"></div>
     </section>
   </div>
@@ -153,22 +153,298 @@
   
   <h5>&copy; Decent Apps Ltd</h5>
 
-    <div id="google_translate_element"></div><script>
-function googleTranslateElementInit() {new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');}
-         </script><script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-  
- <!--            <script>
-      if (navigator.userAgent.toLowerCase().indexOf("pibrowser") < 0) {
-      var i;
-      var x = document.getElementsByClassName('browser')
-for (i = 0; i < x.length; i++) {
-x[i].style.display = 'none';
-}}
-     if (screen.width >= 720) {
-        window.location = "https://www.piwebinars.co.uk";
+  <div id="google_translate_element"></div>
+  <script>
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
     }
-    </script>
-    -->
-  </body>
+  </script>
+  <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+  
   <br/><br/><br/><br/>
+  </div>
+  
+  <div class="desktop">
+        <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KRPNL55"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+   
+    <!--Header-->
+    <div class="row footer">
+      <img height="60" style="position:relative;top:0;display: inline; float: left;" src="https://app.piwebinars.co.uk/img/logo-text.png"></img>
+   
+      <li class="li"><a id="profile" class="a" href="/html/profile.html"><img src="https://app.piwebinars.co.uk/img/Profile_Icon.png" width="40px;">Profile</a></li>
+      <li class="li"><a class="a" onclick="openUploadPage()"><img src="https://app.piwebinars.co.uk/img/Upload_Icon.png" width="40px;">Upload</a></li>
+   
+      <a href="https://instagram.com/pi_webinars" class="fa fa-instagram"></a>
+      <a href="https://twitter.com/pi_webinars" class="fa fa-twitter"></a>
+      <a href="https://discord.gg/uT3yqpDXcj" class="fab fa-discord"></a>
+    </div>
+  
+    <!--Main Content-->
+    <div class="row">
+      <h5 style="margin-top: 80px;"> Welcome to Pi Webinars &#128075; An educational video platform powered by Pi.</h5>
+    </div>  
+  
+    <div class="row both">
+    <h2>Top webinars:</h2>
+    <select style="margin-bottom: 20px;" name="categories" id="select">
+      <option class="list" value="all">All</option><br />
+      <option class="list" value="cryptocurrency">Cryptocurrency</option><br />
+      <option class="list" value="diy">DIY</option><br />
+      <option class="list" value="education">Eduction</option><br />
+      <option class="list" value="finance">Finance</option><br />
+      <option class="list" value="fitness">Fitness</option><br />
+      <option class="list" value="food">Food</option><br />
+      <option class="list" value="gaming">Gaming</option><br />
+      <option class="list" value="history">History</option><br />
+      <option class="list" value="music">Music</option><br />
+      <option class="list" value="nature">Nature</option><br />
+      <option class="list" value="pets">Pets</option><br />
+      <option class="list" value="pinetwork">Pi Network</option><br />
+      <option class="list" value="politics">Politics</option><br />
+      <option class="list" value="sports">Sports</option><br />
+      <option class="list" value="technology">Technology</option><br />
+    </select><br />
+    <script>
+      document.addEventListener("DOMContentLoaded", function(event) {
+        const webinarUploadsJson = axios.get("/post");
+        const webinarUploads = JSON.parse(webinarUploadsJson);
+        renderWebinars(webinarUploads);
+      });
+
+      function renderWebinars(jsonobj) {
+        const webinars = jsonobj['post'];
+        var featured = webinars.slice(0, 10);
+        for (let i = 0; i < featured.length; i++) {
+          const renderDiv = document.createElement('article');
+          renderDiv.className = "title";
+          const renderText = document.createElement('h3');
+          const renderDesc = document.createElement('p');
+          const renderImg = document.createElement('img');
+          renderImg.className = "thumbnail";
+          const renderLikes = document.createElement('p');
+          renderLikes.className = "likes";
+          const renderButton = document.createElement('button');
+          renderButton.className = "button_click browser";
+          renderButton.onclick = function() {
+            var webinarId = featured[i].post_id;
+            var creatorId = featured[i].userId;
+            var categoryId = featured[i].collection_name;
+          };
+          renderText.textContent = featured[i].text;
+          renderDesc.textContent = featured[i].description;
+          renderImg.imgContent = featured[i].thumbnail;
+          renderLikes.textContent = featured[i].likes;
+          renderDiv.appendChild(renderText);
+          renderDiv.appendChild(renderDesc);
+          renderDiv.appendChild(renderImg);
+          renderDiv.appendChild(renderLikes);
+          renderDiv.appendChild(renderButton);
+          section.appendChild(renderDiv);
+        }
+      }
+    </script>
+    <div class="force-overflow"></div>
+      <button style="bottom: 0;" onclick="showMore()">Show more</button>
+    </div>  
+  
+    <div class="row">
+      <!--Your Purchases Render Div-->
+      <div class="left both">
+        <h2>Your Purchases:</h2>
+        <div>
+        <script>
+          document.addEventListener("DOMContentLoaded", function(event) {
+            const webinarPurchasesUploadsJson = axios.get("/post/purchases");
+            const webinarPurchasesUploads = JSON.parse(webinarPurchasesUploadsJson);
+            showWebinars2(webinarPurchasesUploads);
+          });
+
+          function showWebinars2(obj) {
+            const webinars = obj['post'];
+            for (let i = 0; i < webinarsPurchases.length; i++) {
+              const renderDiv2 = document.createElement('article');
+              renderDiv2.className = "title";
+              const renderText2 = document.createElement('h3');
+              const renderDesc2 = document.createElement('p');
+              const renderImg2 = document.createElement('img');
+              renderImg2.className = "thumbnail";
+              const renderLikes2 = document.createElement('p');
+              renderLikes2.className = "likes";
+              const renderButton2 = document.createElement('button');
+              renderButton2.className = "watch_again";
+              renderButton2.onclick = function() {
+                var webinarId = webinars[i].post_id;
+                var creatorId = webinars[i].userId;
+                var categoryId = webinars[i].collection_name;
+              };
+              renderText2.textContent = webinarsPurchases[i].text;
+              renderDesc2.textContent = webinarsPurchases[i].description;
+              renderImg2.imgContent = webinarsPurchases[i].thumbnail;
+              renderLikes2.textContent = webinarsPurchases[i].likes;
+              renderDiv2.appendChild(renderText2);
+              renderDiv2.appendChild(renderDesc2);
+              renderDiv2.appendChild(renderImg2);
+              renderDiv2.appendChild(renderLikes2);
+              renderDiv2.appendChild(renderButton2);
+              section.appendChild(renderDiv2);
+              if (renderDiv2.length > 0) {
+                document.getElementById('empty1').setAttribute('style', 'display: none;')
+              }
+            }
+          }
+        </script>
+        <p2 style="margin-bottom: 20px;" id="empty1">You currently have no purchases. Go the the Pi Browser to purchase a webinar.</p2>
+      </div>
+      <div class="force-overflow"></div>
+    </div>
+    
+    
+    <!--Your Webinars Render Div-->
+    <div class="right both">
+      <h2>Your Webinars:</h2>
+      <div>
+        <script>
+          document.addEventListener("DOMContentLoaded", function(event) {
+            const webinarUserUploadsJson = axios.get(`https://server.piwebinars.co.uk/post/${userId}`);
+            const webinarUserUploads = JSON.parse(webinarUserUploadsJson);
+            showWebinarsUser(webinarUserUploads);
+          });
+
+          function showWebinarsUser(obj) {
+            const webinarsUser = obj['post'];
+            for (let i = 0; i < webinarsUser.length; i++) {
+              const renderDivYour = document.createElement('article');
+              renderDivYour.className = "title";
+              const renderTextYour = document.createElement('h3');
+              const renderDescYour = document.createElement('p');
+              const renderImgYour = document.createElement('img');
+              renderImgYour.className = "thumbnail";
+              const renderLikesYour = document.createElement('p');
+              renderLikesYour.className = "likes";
+              const renderTitle = document.createElement('button');
+              renderTitle.className = "updatePostTitle";
+              renderTitle.onclick = function() {
+                var webinarId = webinarsUser[i].post_id;
+                var creatorId = webinarsUser[i].userId;
+                var categoryId = webinarsUser[i].collection_name;
+              };
+              const renderAmount = document.createElement('button');
+              renderAmount.onclick = function() {
+                var webinarId = webinarsUser[i].post_id;
+                var creatorId = webinarsUser[i].userId;
+                var categoryId = webinarsUser[i].collection_name;
+              };
+              renderAmount.className = "updatePostAmount";
+              renderTextYour.textContent = webinarsUser[i].text;
+              renderDescYour.textContent = webinarsUser[i].description;
+              renderImgYour.imgContent = webinarsUser[i].thumbnail;
+              renderLikesYour.textContent = webinarsUser[i].likes;
+              renderTitle.textContent = "Edit Title";
+              renderAmount.textContent = "Edit Price";
+              renderDivYour.appendChild(renderTextYour);
+              renderDivYour.appendChild(renderDescYour);
+              renderDivYour.appendChild(renderImgYour);
+              renderDivYour.appendChild(renderLikesYour);
+              renderDivYour.appendChild(renderTitle);
+              renderDivYour.appendChild(renderAmount);
+              section.appendChild(renderDivYour);
+              if (renderDivYour.length > 0) {
+                document.getElementById('empty2').setAttribute('style', 'display: none;')
+              }
+            }
+          }
+        </script>
+      </div>
+      <p2 style="margin-bottom: 20px;" id="empty2">You currently have no uploads.</p2>
+      <div class="force-overflow"></div>
+    </div>
+    </div>
+    
+  
+    <!--Cinema Modal-->
+    <div class="modal" id="modal1">
+      <div class="modal-dialog">
+        <header class="modal-header">
+          Cinema
+          <button class="close-modal" aria-label="close modal" onclick="closeCinema()">✕</button>
+        </header>
+      <section class="modal-content">
+        <video id="usersPurchase"></video>
+        <div class="row">
+          <svg class="likePost column" style="margin-right: 10px;" viewBox="0 0 512 512" width="20px" title="thumbs-up">
+          <path d="M104 224H24c-13.255 0-24 10.745-24 24v240c0 13.255 10.745 24 24 24h80c13.255 0 24-10.745 24-24V248c0-13.255-10.745-24-24-24zM64 472c-13.255 0-24-10.745-24-24s10.745-24 24-24 24 10.745 24 24-10.745 24-24 24zM384 81.452c0 42.416-25.97 66.208-33.277 94.548h101.723c33.397 0 59.397 27.746 59.553 58.098.084 17.938-7.546 37.249-19.439 49.197l-.11.11c9.836 23.337 8.237 56.037-9.308 79.469 8.681 25.895-.069 57.704-16.382 74.757 4.298 17.598 2.244 32.575-6.148 44.632C440.202 511.587 389.616 512 346.839 512l-2.845-.001c-48.287-.017-87.806-17.598-119.56-31.725-15.957-7.099-36.821-15.887-52.651-16.178-6.54-.12-11.783-5.457-11.783-11.998v-213.77c0-3.2 1.282-6.271 3.558-8.521 39.614-39.144 56.648-80.587 89.117-113.111 14.804-14.832 20.188-37.236 25.393-58.902C282.515 39.293 291.817 0 312 0c24 0 72 8 72 81.452z" /></svg> 
+          <svg class="dislikePost column" viewBox="0 0 512 512" width="20px" title="thumbs-down">
+          <path d="M0 56v240c0 13.255 10.745 24 24 24h80c13.255 0 24-10.745 24-24V56c0-13.255-10.745-24-24-24H24C10.745 32 0 42.745 0 56zm40 200c0-13.255 10.745-24 24-24s24 10.745 24 24-10.745 24-24 24-24-10.745-24-24zm272 256c-20.183 0-29.485-39.293-33.931-57.795-5.206-21.666-10.589-44.07-25.393-58.902-32.469-32.524-49.503-73.967-89.117-113.111a11.98 11.98 0 0 1-3.558-8.521V59.901c0-6.541 5.243-11.878 11.783-11.998 15.831-.29 36.694-9.079 52.651-16.178C256.189 17.598 295.709.017 343.995 0h2.844c42.777 0 93.363.413 113.774 29.737 8.392 12.057 10.446 27.034 6.148 44.632 16.312 17.053 25.063 48.863 16.382 74.757 17.544 23.432 19.143 56.132 9.308 79.469l.11.11c11.893 11.949 19.523 31.259 19.439 49.197-.156 30.352-26.157 58.098-59.553 58.098H350.723C358.03 364.34 384 388.132 384 430.548 384 504 336 512 312 512z" />
+          </svg>
+        </div>
+        <button class="comment">Comment</button>
+        <div id="comments"></div>
+      </section>
+    </div>
+    </div>
+  
+  
+    <!--Upload Modal-->
+    <div class="modal" id="modal2">
+      <div class="modal-dialog">
+        <header class="modal-header">
+          Upload Webinar:
+          <button class="close-modal" aria-label="close modal" onclick="closeUploadPage()">✕</button>
+        </header>
+        <section class="modal-content">
+          <form style="text-align: left;">
+            <label for="vid">Upload Webinar:</label>
+            <input type="file" id="file"></input><br/>
+          
+            <label>Select Filetype:</label>
+            <select id="file_type" style="margin-bottom: 20px;">
+              <option class="list" value="MP4" >MP4</option><br/>
+              <option class="list" value="MOV" >MOV</option><br/>
+            </select><br/>
+
+            <label>Add a Title:</label></br>
+            <input style="width: 100%; margin-bottom: 10px;"  type="text" id="text" required>
+
+            <label>Add a Description:</label></br>
+            <input style="width: 100%; height: 50px; margin-bottom: 10px;"  type="text" id="description">
+
+            <label>Set a Price:</label></br>
+            <input style="width: 100%; margin-bottom: 10px;"  type="number" id="price">
+
+            <label for="own">Upload a Thumbnail:</label>
+            <input type="file" id="thumbnail" style="margin-bottom: 20px;"></input></br>
+
+            <label>Choose a Catagory:</label>
+            <select name="catagories">
+              <option class="list" value="none" >None</option><br/>
+              <option class="list" value="cryptocurrency" >Cryptocurrency</option><br/>
+              <option class="list" value="education" >Eduction</option><br/>
+              <option class="list" value="fitness" >Fitness</option><br/>
+              <option class="list" value="food" >Food</option><br/>
+              <option class="list" value="history" >History</option><br/>
+              <option class="list" value="money" >Money</option><br/>
+              <option class="list" value="nature" >Nature</option><br/>
+              <option class="list" value="pi-network" >Pi Network</option><br/>
+              <option class="list" value="politics" >Politics</option><br/>
+              <option class="list" value="sports" >Sports</option><br/>
+              <option class="list" value="technology" >Technology</option><br/>
+            </select>
+
+            <div style="text-align: left; margin-top: 20px;">
+              <input type="checkbox" id="own" required>
+              <label for="own"> I certify that I own this content</label></br>
+            </div><br/>
+
+            <button style="text-align: center" type="submit" value="Submit" onclick="createPost()">Submit</button>
+          </form>
+        </section>
+      </div>
+    </div>
+
+    <h5>&copy; Decent Apps Ltd</h5>
+  </div>
+  </body>
 </html>

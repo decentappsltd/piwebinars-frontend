@@ -1,27 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <!-- Google Tag Manager -->
-    <script>
-      (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-      'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-      })(window,document,'script','dataLayer','GTM-KRPNL55');
-    </script>
-  
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-2N939D6C1C"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-2N939D6C1C');
-    </script>
-          
     <!--Scripts-->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://sdk.minepi.com/pi-sdk.js"></script>
     <script src="/js/routes.js"></script>
     <script src="/js/pipayment.js"></script>
     <script src="https://kit.fontawesome.com/3aea44e36d.js" crossorigin="anonymous"></script>
@@ -37,6 +17,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;700&display=swap" rel="stylesheet">
   </head>
   <body>
+    <div class="mobile">
   <h1 >Pi Webinars</h1>
   
 <nav class="footer" style="z-index: 100">
@@ -51,14 +32,14 @@
     <div id="profile">
     <script>
       document.addEventListener("DOMContentLoaded", function(event) {      
-     const profileJSON = axios.get("/profile");
-     const profile = JSON.parse(profileJSON);
-     const info = obj['profile'];
-     document.getElementById('handle').innerHTML = info[i].handle;
-     document.getElementById('avatar').src = info[i].avatar;
-     document.getElementById('followers').innerHTML = info[i].followers;
-     document.getElementById('following').innerHTML = info[i].following;
-     document.getElementById('credit').innerHTML = info[i].credit;
+        const profileJSON = axios.get("https://server.piwebinars.co.uk/profile");
+        const profile = JSON.parse(profileJSON);
+        const info = obj['profile'];
+        document.getElementById('handle').innerHTML = info[i].handle;
+        document.getElementById('avatar').src = info[i].avatar;
+        document.getElementById('followers').innerHTML = info[i].followers;
+        document.getElementById('following').innerHTML = info[i].following;
+        document.getElementById('credit').innerHTML = info[i].credit;
       }); 
     </script>
       <div class="row" style="border-top: solid; border-bottom: solid; margin-bottom: 50px;">
@@ -69,10 +50,10 @@
       <p2 id="followers">0</p2><br/>
       <p2>Following:</p2>
       <p3 id="following">0</p3><br/>
-      <i class="fas fa-plus buyCredit"></i>
+      <i class="fas fa-plus" onclick="buyCredit()"></i>
       <p2>Credit:</p2>
       <p2 id="credit">0</p2><p2> Pi</p2>
-      <i class="fas fa-minus withdrawCredit"></i>
+      <i class="fas fa-minus" onclick="withdrawCredit()"></i>
       </div></div></div>
   
   <div class="row" style="margin-bottom: 50px;" onclick="location.href='/html/your-webinars.html';">
@@ -84,13 +65,11 @@
   <img class="column" style="width: 25%; margin-right: 20px;" src="https://app.piwebinars.co.uk/img/purchases.png"></img>
 <h2 class="column">Purchases</h2>
 </div>
-<!--
-<button class="buyCredit">Buy credit</button><button class="withdrawCredit">Withdraw Credit</button> </br>
--->
+
 <button class="login" onclick="openModal3()">Login/Register</button></br>
-<button class="logout">Logout</button>
-<button class="logoutAll">Logout All</button>
-<button style="margin-bottom: 50px;" class="deleteAccount">Delete Account</button>
+<button class="logout" onclick="logout()">Logout</button>
+<button class="logoutAll" onclick="logoutAll()">Logout All</button>
+<button style="margin-bottom: 50px;" class="deleteAccount" onclick="deleteAccount()">Delete Account</button>
 
 <!--Login/Register Modal-->
   <div class="modal" id="modal3">
@@ -105,11 +84,145 @@
           <input type="text" id="pi_username" required></br></br>
           <label>Enter Password:</label></br>
           <input type="text" id="user_password" required></br></br>
-          <button type="submit" class="register" onclick="closeModal3()">Login/Register</button></br>
+          <button type="submit" onclick="register(); closeModal3()">Login/Register</button></br>
         </form>
       </section>
     </div>
   </div>
     <br><br><br>
+</div>
+
+
+
+
+<!--Desktop-->
+<div class="desktop">
+      <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KRPNL55" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+   
+    <!--Header-->
+    <div class="row footer">
+      <img height="60" style="position:relative;top:0;display: inline; float: left;" src="https://app.piwebinars.co.uk/img/logo-text.png"></img>
+   
+      <li class="li"><a href="/index.html" class="a"><img src="https://app.piwebinars.co.uk/img/Home_Icon.png" width="40px;">Home</a></li>
+      <li class="li"><a class="a" onclick="openUploadPage()"><img src="https://app.piwebinars.co.uk/img/Upload_Icon.png" width="40px;">Upload</a></li>
+   
+      <a href="https://instagram.com/pi_webinars" class="fa fa-instagram"></a>
+      <a href="https://twitter.com/pi_webinars" class="fa fa-twitter"></a>
+      <a href="https://discord.gg/uT3yqpDXcj" class="fab fa-discord"></a>
+    </div>
+    
+  
+    <!--Main Content-->
+    <div id="profile">
+      <script>
+        document.addEventListener("DOMContentLoaded", function(event) {      
+          const profileJSON = axios.get("https://server.piwebinars.co.uk/profile");
+          const profile = JSON.parse(profileJSON);
+          const info = obj['profile'];
+          document.getElementById('handle').innerHTML = info[i].handle;
+          document.getElementById('avatar').src = info[i].avatar;
+          document.getElementById('followers').innerHTML = info[i].followers;
+          document.getElementById('following').innerHTML = info[i].following;
+          document.getElementById('credit').innerHTML = info[i].credit;
+        }); 
+      </script>
+      <div class="row" style="border-top: solid; border-bottom: solid; margin-bottom: 50px;">
+        <img id="avatar" style="float: left; width: 100px; border-style: round; padding: 10px; margin-left: 10%;" src="https://app.piwebinars.co.uk/img/avatar.png" onclick="alert('Custom avatar coming soon...')"></img>
+        <div>
+          <h2 id="handle"></h2>
+          <p2>Followers:</p2>
+          <p2 id="followers">0</p2><br/>
+          <p2>Following:</p2>
+          <p3 id="following">0</p3><br/>
+          <p2>Credit:</p2>
+          <p2 id="credit">0</p2><p2> Pi</p2>
+        </div>
+      </div>
+    </div>
+
+    <button class="login" onclick="openModal4()">Login</button></br>
+    <button class="logout signedIn" onclick="logout()">Logout</button>
+    <button class="logoutAll signedIn" onclick="logoutAll()">Logout All</button>
+    <button style="margin-bottom: 50px;" class="deleteAccount signedIn" onclick="deleteAccount()">Delete Account</button>
+  
+    <!--Upload Modal-->
+    <div class="modal" id="modal2">
+      <div class="modal-dialog">
+        <header class="modal-header">
+          Upload Webinar:
+          <button class="close-modal" aria-label="close modal" onclick="closeUploadPage()">✕</button>
+        </header>
+        <section class="modal-content">
+          <form style="text-align: left;">
+            <label for="vid">Upload Webinar:</label>
+            <input type="file" id="file"></input><br/>
+          
+            <label>Select Filetype:</label>
+            <select id="file_type" style="margin-bottom: 20px;">
+              <option class="list" value="MP4" >MP4</option><br/>
+              <option class="list" value="MOV" >MOV</option><br/>
+            </select><br/>
+
+            <label>Add a Title:</label></br>
+            <input style="width: 100%; margin-bottom: 10px;"  type="text" id="text" required>
+
+            <label>Add a Description:</label></br>
+            <input style="width: 100%; height: 50px; margin-bottom: 10px;"  type="text" id="description">
+
+            <label>Set a Price:</label></br>
+            <input style="width: 100%; margin-bottom: 10px;"  type="number" id="price">
+
+            <label for="own">Upload a Thumbnail:</label>
+            <input type="file" id="thumbnail" style="margin-bottom: 20px;"></input></br>
+
+            <label>Choose a Catagory:</label>
+            <select name="catagories">
+              <option class="list" value="none" >None</option><br/>
+              <option class="list" value="cryptocurrency" >Cryptocurrency</option><br/>
+              <option class="list" value="education" >Eduction</option><br/>
+              <option class="list" value="fitness" >Fitness</option><br/>
+              <option class="list" value="food" >Food</option><br/>
+              <option class="list" value="history" >History</option><br/>
+              <option class="list" value="money" >Money</option><br/>
+              <option class="list" value="nature" >Nature</option><br/>
+              <option class="list" value="pi-network" >Pi Network</option><br/>
+              <option class="list" value="politics" >Politics</option><br/>
+              <option class="list" value="sports" >Sports</option><br/>
+              <option class="list" value="technology" >Technology</option><br/>
+            </select>
+
+            <div style="text-align: left; margin-top: 20px;">
+              <input type="checkbox" id="own" required>
+              <label for="own"> I certify that I own this content</label></br>
+            </div><br/>
+
+            <button style="text-align: center" type="submit" value="Submit" onclick="createPost()">Submit</button>
+          </form>
+        </section>
+      </div>
+    </div>
+
+<!--Login/Register Modal-->
+  <div class="modal" id="modal4">
+    <div class="modal-dialog">
+      <header class="modal-header">
+        Login/Register:
+        <button class="close-modal" onclick="closeModal4()">✕</button>
+      </header>
+      <section class="modal-content">
+        <form>
+          <label>Enter Pi Username:</label></br>
+          <input type="text" id="pi_username" required></br></br>
+          <label>Enter Password:</label></br>
+          <input type="text" id="user_password" required></br></br>
+          <button type="submit" onclick="register(); closeModal4()">Login</button></br>
+        </form>
+      </section>
+    </div>
+  </div>
+
+</div>
 </body>
 </html>

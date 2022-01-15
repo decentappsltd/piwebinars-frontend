@@ -1,45 +1,55 @@
-$(document).ready(function () {
-  const Pi = window.Pi;
-  Pi.init({ version: "2.0" });
+//const axiosServer = axios.create({baseURL: 'https://server.piwebinars.co.uk', timeout: 20000});
+const Pi = window.Pi;
+Pi.init({ version: "2.0" });
   
-  const status = 'false';
+const status = 'false';
 
-  async function auth() {
-    try {
-      const scopes = ["username", "payments"];
-      function onIncompletePaymentFound(payment) {
-        var data = {
-          action: "complete",
-          paymentId: payment.identifier,
-          txid: payment.transaction.txid,
-        };
-        axios.post("/payment/cancel", function(res, req) {
-          res.send(data);
-        });
-      }
-
-      Pi.authenticate(scopes, onIncompletePaymentFound)
-        .then(async function (auth) {
-          const userName = auth.user.username;
-          document.getElementById("username").innerHTML = userName;
-          const userPassword = await prompt('create or enter your password', "");
-          axios.post("/register", function (req, res) {
-              res.send(userName, userPassword);
-            })
-            .catch(function (error) {
-              console.error(error);
-            });
+async function auth() {
+  try {
+    const scopes = ["username", "payments"];
+    function onIncompletePaymentFound(payment) {
+      var data = {
+        action: "complete",
+        paymentId: payment.identifier,
+        txid: payment.transaction.txid,
+      };
+      axios.post("https://server.piwebinars.co.uk/payment/cancel", function(res, req) {
+        res.send(data);
+      });
+    }
+    Pi.authenticate(scopes, onIncompletePaymentFound)
+      .then(async function (auth) {
+        const userName = auth.user.username;
+        document.getElementById("username").innerHTML = userName;
+        const userPassword = await prompt('create or enter your password', "");
+        axios.post("https://server.piwebinars.co.uk/register", function (req, res) {
+          res.send(userName, userPassword);
         })
-        .catch(err);
+        .catch(function (error) {
+          console.error(error);
+        });
+      })
+     .catch(err);
     } catch (error) {
       console.error(error);
-    }
   }
+}
   
-  auth();
+auth();
 
-$(".button_click").click(function(webinarId, creatorId, categoryId) {
+function buyWebinar(webinarId, creatorId, categoryId) {
   if (status == 'true') {
+    const creditAmountJSON = axios.get("https://server.piwebinars.co.uk/profile");
+    const creditAmount = JSON.parse(creditAmountJSON);
+    const creditAvailable = creditAmount["credit"];
+    const currentUser = creditAmount["user_id"];
+    
+    if (creditAvailable > 1) {
+      axios.post("https://server.piwebinars.co.uk/payments/credit", async function(req, res) {
+        await res.send(currentUser);
+      });
+    showWebinar(webinarId, creatorId, categoryId);
+  } else {
   try {
    Pi.createPayment({
         amount: 1,
@@ -47,22 +57,22 @@ $(".button_click").click(function(webinarId, creatorId, categoryId) {
         metadata: { webinarId }
 }, {
   onReadyForServerApproval: function(paymentId) {           
-    axios.post("/payment/approve", function(res, req) {
+    axios.post("https://server.piwebinars.co.uk/payment/approve", function(res, req) {
       res.send(paymentId);
           }); 
    },
   onReadyForServerCompletion: function(paymentId, txid) {
     const user_id = creatorId;
-    axios.post("/payment/complete", function(res, req) {
+    axios.post("https://server.piwebinars.co.uk/payment/complete", function(res, req) {
       res.send(user_id, paymentId, txid);
     });
     showWebinar(webinarId, creatorId, categoryId);
-    const profileCurrentUser2 = axios.get("/profile");
+    const profileCurrentUser2 = axios.get("https://server.piwebinars.co.uk/profile");
     const profileCurrentUser1 = JSON.parse(profileCurrentUser2);
     const profileCurrentUser = obj["profile"];
     const userId1 = profileCurrentUser[i].userId;
     axios.post(
-      `/post/purchases/${userId1}/${categoryId}/${creatorId}/${webinarId}`
+      `https://server.piwebinars.co.uk/post/purchases/${userId1}/${categoryId}/${creatorId}/${webinarId}`
     );
   },
   onCancel: function(paymentId) { /* ... */ },
@@ -71,27 +81,28 @@ $(".button_click").click(function(webinarId, creatorId, categoryId) {
   } catch (error) {
     console.error(error);
     }
+  }
   } else {
     alert('Payments are not availble until mainnet');
   }
-});
+};
   
-  $(".buyCredit").click(function() {
-    var creditAmount = prompt('Amount:', '');
-    if (status == 'true') {
-    try {
-      Pi.createPayment({
-        amount: creditAmount,
-        memo: `Buy ${creditAmount} credits`,
-        metadata: { purchaseCredits }
+function buyCredit() {
+  var creditAmount = prompt('Amount:', '');
+  if (status == 'true') {
+  try {
+    Pi.createPayment({
+      amount: creditAmount,
+      memo: `Buy ${creditAmount} credits`,
+      metadata: { purchaseCredits }
 }, {
   onReadyForServerApproval: function(paymentId) {           
-    axios.post("/payment/approve", function(res, req) {
+    axios.post("https://server.piwebinars.co.uk/payment/approve", function(res, req) {
       res.send(paymentId);
           }); 
    },
   onReadyForServerCompletion: function(paymentId, txid) {
-    axios.post("/payment/complete", function(res, req) {
+    axios.post("https://server.piwebinars.co.uk/payment/complete", function(res, req) {
       res.send(paymentId, txid);
       buyCredits(creditAmount);
     });
@@ -105,20 +116,18 @@ $(".button_click").click(function(webinarId, creatorId, categoryId) {
     } else {
       alert('Payments are not available until mainnet');
     }
-});
+};
   
-  $(".withdrawCredit").click(function() {
-    alert('Payments are not availble until mainnet')
-  })
-  
-});
+function withdrawCredit() {
+  alert('Payments are not availble until mainnet')
+}
 
 const showWebinar = (webinarId, creatorId, categoryId) => {
   var userId = creatorId;
   var file_id = webinarId;
   var collection_name = categoryId;
   const purchasedWebinarJSON = axios.get(
-    `/upload/${collection_name}/${userId}/${file_id}`
+    `https://server.piwebinars.co.uk/upload/${collection_name}/${userId}/${file_id}`
   );
   const purchasedWebinar = JSON.parse(purchasedWebinarJSON);
   const currentWebinar = purchasedWebinar["upload"];
@@ -126,7 +135,7 @@ const showWebinar = (webinarId, creatorId, categoryId) => {
   document.getElementById("usersPurchase").src = currentWebinar[i].file;
   renderComments(purchasedWebinar);
   document.getElementById("followCreator").onclick = function() {
-    axios.post(`/auth_follow_unfollow/${userId}`)
+    axios.post(`https://server.piwebinars.co.uk/auth_follow_unfollow/${userId}`)
   };
 };
 
@@ -165,7 +174,7 @@ function renderComments(purchasedWebinar) {
 
 function buyCredits(creditAmount) {
     axios.post(
-      `/profile/credit`, function(res, req) {
+      `https://server.piwebinars.co.uk/profile/credit`, function(res, req) {
         res.send(creditAmount);
       }
     );
@@ -193,6 +202,14 @@ function openModal3() {
 
 function closeModal3() {
   document.getElementById("modal3").classList.remove("is-visible");
+}
+
+function openModal4() {
+  document.getElementById("modal4").classList.add("is-visible");
+}
+
+function closeModal4() {
+  document.getElementById("modal4").classList.remove("is-visible");
 }
 
 function showMore(featured, webinars) {

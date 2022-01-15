@@ -1,30 +1,9 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <!-- Google Tag Manager -->
-    <script>
-      (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-      'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-      })(window,document,'script','dataLayer','GTM-KRPNL55');
-    </script>
-  
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-2N939D6C1C"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-2N939D6C1C');
-    </script>
-          
+  <head>          
     <!--Scripts-->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://sdk.minepi.com/pi-sdk.js"></script>
     <script src="/js/routes.js"></script>
     <script src="/js/pipayment.js"></script>
-    <script src="https://kit.fontawesome.com/3aea44e36d.js" crossorigin="anonymous"></script>
             
     <!--CSS-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -91,7 +70,7 @@
   <input type="checkbox" id="own" required>
   <label for="own"> I certify that I own this content</label></br></div><br/>
 
-<button style="text-align: center" type="submit" value="Submit" class="createPost">Submit</button>
+<button style="text-align: center" type="submit" value="Submit" onclick="createPost()">Submit</button>
 </form>
 
 <br/><br/><br/>

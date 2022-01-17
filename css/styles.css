@@ -53,10 +53,20 @@ h5 {
   margin-top: 20px;
   background: #FFFFFF;
 }
+.webinar{
+  border: 2px solid #36454F;
+  border-radius: 1rem;
+  margin-block: 1rem;
+  padding-block: 1rem;
+}
 button {
   background-color: #FBB44A;
+  cursor: pointer;
   color: #36454F;
-  padding: 0px 30px;
+  padding: 7px 30px;
+  min-width: 30%;
+  width: fit-content;
+  border-radius: .5rem;
   font-size: 15px;
   border: outset;
   border-color: #fbb44a;
@@ -131,6 +141,12 @@ button {
 }
 label {
   font-weight: bold;
+  display: block;
+}
+input{
+  display: block;
+  text-align: center;
+  transform: translateX(50%);
 }
 #select, #search {
   padding: 5px;

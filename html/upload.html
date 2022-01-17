@@ -1,10 +1,6 @@
 <!DOCTYPE html>
 <html>
-  <head>          
-    <!--Scripts-->
-    <script src="/js/routes.js"></script>
-    <script src="/js/pipayment.js"></script>
-            
+  <head>    
     <!--CSS-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/styles.css">
@@ -16,6 +12,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;700&display=swap" rel="stylesheet">
   </head>
   
+  <body>
   <h1 >Pi Webinars</h1>
   
 <nav class="footer" style="z-index: 100">
@@ -29,29 +26,29 @@
   
   <h2>Upload a Webinar</h2>
    
- <form style="text-align: left; padding:5px;">
-  <label for="vid">Upload Webinar:</label>
+ <form style="text-align: left; padding:5px;" action="/upload" method="POST">
+  <label for="file">Upload Webinar:</label>
    <input  type="file" id="file"></input></br>
- <label>Select Filetype:</label>
+ <label for="file_type">Select Filetype:</label>
   <select id="file_type" style="margin-bottom: 10px; margin-top: 10px;">
     <option class="list" value="MP4">MP4</option><br/>
     <option class="list" value="MOV">MOV</option><br/>
 </select><br/>
 
-<label>Add a Title:</label></br>
-  <input style="width: 100%; margin-bottom: 10px;"  type="text" id="text" required>
+<label for="title">Add a Title:</label></br>
+  <input style="width: 100%; margin-bottom: 10px;"  type="text" id="title" required>
 
-<label>Add a Description:</label></br>
+<label for="description">Add a Description:</label></br>
   <input style="width: 100%; height: 50px; margin-bottom: 10px;"  type="text" id="description">
 
-<label>Set a Price:</label></br>
+<label for="price">Set a Price:</label></br>
   <input style="width: 100%; margin-bottom: 10px;"  type="number" id="price">
 
-  <label for="own">Upload a Thumbnail:</label>
+  <label for="thumbnail">Upload a Thumbnail:</label>
   <input type="file" id="thumbnail" style="margin-bottom: 20px;"></input></br>
 
- <label>Choose a Catagory:</label>
-  <select name="catagories">
+ <label>Choose a Category:</label>
+  <select name="catagories" id="category">
     <option class="list" value="none" >None</option><br/>
     <option class="list" value="cryptocurrency" >Cryptocurrency</option><br/>
     <option class="list" value="education" >Eduction</option><br/>
@@ -67,11 +64,26 @@
   </select>
 
 <div style="text-align: left; margin-top: 20px;">
-  <input type="checkbox" id="own" required>
-  <label for="own"> I certify that I own this content</label></br></div><br/>
+  <input type="checkbox" id="certify" required>
+  <label for="certify"> I certify that I own this content</label></br></div><br/>
 
-<button style="text-align: center" type="submit" value="Submit" onclick="createPost()">Submit</button>
+  <label for="upload_btn"></label>
+<input style="text-align: center" type="button" value="Upload" id="upload_btn"></input>
 </form>
 
 <br/><br/><br/>
+
+<script src="https://sdk.minepi.com/pi-sdk.js"></script>
+<script>
+  Pi.init({ version: "2.0" });
+</script>
+<script
+  src="https://kit.fontawesome.com/3aea44e36d.js"
+  crossorigin="anonymous"
+></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="../js/pages/authentication.js"></script>
+<script src="/js/routes.js"></script>
+<!-- <script src="/js/pipayment.js"></script> -->
+</body>
 </html>

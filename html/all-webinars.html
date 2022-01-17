@@ -1,37 +1,121 @@
 <!DOCTYPE html>
-<html>
-<head>          
-    <!--Scripts-->
-    <script src="https://sdk.minepi.com/pi-sdk.js"></script>
-    <script src="/js/routes.js"></script>
-    <script src="/js/pipayment.js"></script>
-    <script src="https://kit.fontawesome.com/3aea44e36d.js" crossorigin="anonymous"></script>
-            
-    <!--CSS-->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/styles.css">
-    <link rel="icon" type="image/png" href="/img/logo.png">
-    
-    <!--Google Fonts-->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;700&display=swap" rel="stylesheet">
-</head>
-<body>
-  <title>All Webinars</title>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <h1>Pi Webinars</h1>
+    <!-- ios support -->
+    <meta name="apple-mobile-web-app-status-bar" content="#db4938" />
+    <meta name="theme-color" content="#db4938" />
+    <meta name="application-name" content="Pi Webinars" />
 
-  <nav class="footer" style="z-index: 100">
-    <ul class="ul">
-      <li class="li"><a class="a" href="/index.html"><img src="https://app.piwebinars.co.uk/img/Home_Icon.png" width="30px;">Home</a></li>
-      <li class="li"><a class="a" href="/html/all-webinars.html"><img src="https://app.piwebinars.co.uk/img/Watch_Icon.png" width="30px;">Webinars</a></li>
-      <li class="li"><a class="a" href="/html/upload.html"><img src="https://app.piwebinars.co.uk/img/Upload_Icon.png" width="30px;">Upload</a></li>
-      <li class="li"><a class="a" href="/html/profile.html"><img src="https://app.piwebinars.co.uk/img/Profile_Icon.png" width="30px;">Profile</a></li>
-    </ul>
-  </nav>
+    <link rel="stylesheet" href="../css/styles.css" />
+    <link rel="icon" type="image/png" href="../img/logo.png" />
 
-  <i class="fas fa-filter"></i>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;700&display=swap"
+      rel="stylesheet"
+    />
+    <title>Pi Webinars</title>
+
+    <!-- Google Tag Manager -->
+    <script>
+      (function (w, d, s, l, i) {
+        w[l] = w[l] || [];
+        w[l].push({
+          "gtm.start": new Date().getTime(),
+          event: "gtm.js",
+        });
+        var f = d.getElementsByTagName(s)[0],
+          j = d.createElement(s),
+          dl = l != "dataLayer" ? "&l=" + l : "";
+        j.async = true;
+        j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
+        f.parentNode.insertBefore(j, f);
+      })(window, document, "script", "dataLayer", "GTM-KRPNL55");
+    </script>
+    <!-- End Google Tag Manager -->
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-2N939D6C1C"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-2N939D6C1C");
+    </script>
+  </head>
+
+  <body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript
+      ><iframe
+        src="https://www.googletagmanager.com/ns.html?id=GTM-KRPNL55"
+        height="0"
+        width="0"
+        style="display: none; visibility: hidden"
+      ></iframe
+    ></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    <h1>Pi Webinars</h1>
+
+    <nav class="footer" style="z-index: 100">
+      <ul class="ul">
+        <li class="li">
+          <a class="a" href="/index.html"
+            ><img
+              alt="Home icon"
+              src="https://app.piwebinars.co.uk/img/Home_Icon.png"
+              width="30"
+            />Home</a
+          >
+        </li>
+        <li class="li">
+          <a class="a" href="/html/all-webinars.html"
+            ><img
+              alt="Watch icon"
+              src="https://app.piwebinars.co.uk/img/Watch_Icon.png"
+              width="30"
+            />Webinars</a
+          >
+        </li>
+        <li class="li">
+          <a class="a" href="/html/upload.html"
+            ><img
+              alt="Upload icon"
+              src="https://app.piwebinars.co.uk/img/Upload_Icon.png"
+              width="30"
+            />Upload</a
+          >
+        </li>
+        <li class="li">
+          <a class="a" href="/html/profile.html"
+            ><img
+              alt="Profile icon"
+              src="https://app.piwebinars.co.uk/img/Profile_Icon.png"
+              width="30"
+            />Profile</a
+          >
+        </li>
+      </ul>
+    </nav>
+
+    <div class="categories_container">
+      <h1 id="categories">Categories:</h1>
+
+      <i class="fas fa-filter"></i>
   <select style="margin-bottom: 5px;" name="categories" id="select">
     <option class="list" value="all">All</option><br />
     <option class="list" value="cryptocurrency">Cryptocurrency</option><br />
@@ -49,71 +133,14 @@
     <option class="list" value="politics">Politics</option><br />
     <option class="list" value="sports">Sports</option><br />
     <option class="list" value="technology">Technology</option><br />
-  </select><i style="margin-left: 5px;" class="fas fa-search" onclick="searchCat()"></i><br />
+  </select><i style="margin-left: 5px;" class="fas fa-search" id="searchCat" onclick="searchCat()"></i><br />
   
   <i class="fas fa-filter"></i>
-  <input type="text" placeholder="Search Webinars.." id="search">
-  <i class="fas fa-search" onclick="search()"></i></br></br>
+  <label for="search">  
+    <input type="text" placeholder="Search Webinars.." id="search">
+  </label>
+  <i class="fas fa-search" id="search" onclick="search()"></i></br></br>
 
-  <script>
-    document.addEventListener("DOMContentLoaded", function(event) {
-      const webinarUploadsJson = axios.get("https://server.piwebinars.co.uk/post");
-      const webinarUploads = JSON.parse(webinarUploadsJson);
-      renderWebinars(webinarUploads);
-    });
-
-    function renderWebinars(jsonobj) {
-      const webinars = jsonobj['post'];
-      for (let i = 0; i < webinars.length; i++) {
-        const renderDiv = document.createElement('article');
-        renderDiv.className = "title";
-        const renderText = document.createElement('h3');
-        const renderDesc = document.createElement('p');
-        const renderImg = document.createElement('img');
-        renderImg.className = "thumbnail";
-        const renderLikes = document.createElement('p');
-        renderLikes.className = "likes";
-        const renderButton = document.createElement('button');
-        renderButton.onclick = function() {
-          var webinarId = webinars[i].post_id;
-          var creatorId = webinars[i].userId;
-          var categoryId = webinars[i].collection_name;
-          buyWebinar();
-        };
-        renderText.textContent = webinars[i].text;
-        renderDesc.textContent = webinars[i].description;
-        renderImg.imgContent = webinars[i].thumbnail;
-        renderLikes.textContent = webinars[i].likes;
-        renderDiv.appendChild(renderText);
-        renderDiv.appendChild(renderDesc);
-        renderDiv.appendChild(renderImg);
-        renderDiv.appendChild(renderLikes);
-        renderDiv.appendChild(renderButton);
-        section.appendChild(renderDiv);
-      }
-    }
-    
-      function searchCat() {
-        var results = [];
-        var searchField = "categories";
-        var searchVal = document.querySelector('#select');
-        for (var i=0 ; i < obj.list.length ; i++) {
-          if (obj.list[i][searchField] == searchVal) {
-          results.push(obj.list[i]);
-          }
-        }
-      };
-      
-      function search() {
-        var results = [];
-        var searchField = document.querySelector('#search');
-        for (var i=0 ; i < obj.list.length ; i++) {
-          if (obj.list[i][searchField] == searchVal) {
-            results.push(obj.list[i]);
-          }
-        }
-      }
-  </script>
   <button onclick="openCinema()">Open Cinema...</button>
 
   <div class="modal" id="modal1">
@@ -157,7 +184,17 @@
         x[i].style.display = 'none';
       }
     }
-  </script>
-</body>
+    </script>
 
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<!-- <script src="https://unpkg.com/axios/dist/axios.min.js"></script> -->
+<script src="https://sdk.minepi.com/pi-sdk.js"></script>
+<script>
+  Pi.init({ version: "2.0" });
+  </script>
+  <script src="https://kit.fontawesome.com/3aea44e36d.js" crossorigin="anonymous"></script>
+    <script src="../js/routes.js"></script>
+    <script src="../js/pipayment.js"></script>
+    <script src="../js/pages/all-webinars.js"></script>
+  </body>
 </html>

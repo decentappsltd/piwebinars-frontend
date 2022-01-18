@@ -31,7 +31,7 @@ if (search !== null) {
 const postSection = document.querySelector("#postSection");
 document.addEventListener("DOMContentLoaded", async function (event) {
   event.preventDefault();
-  const webinarUploads = await axios.get("http://localhost:5000/upload/video");
+  const webinarUploads = await axios.get("https://server.piwebinars.co.uk/upload/video");
   //   const webinarUploads = JSON.parse(webinarUploadsJson);
   // console.log(webinarUploads);
   renderWebinars(webinarUploads);
@@ -44,7 +44,7 @@ function renderWebinars(uploadsObj) {
     const { amount, cloudPath, category, path, post, thumbnail, _id, user } =
       webinar;
     const webinarPosts = await axios.get(
-      `http://localhost:5000/post/${user}/${post}`
+      `https://server.piwebinars.co.uk/post/${user}/${post}`
     );
     console.log("web posts ", webinarPosts);
     // const posts = webinarPosts["data"]["Post"];
@@ -69,6 +69,7 @@ function renderWebinars(uploadsObj) {
       var webinarId = post_id;
       var creatorId = userId;
       var categoryId = collection_name;
+      buyWebinar(webinarId, creatorId, categoryId);
     };
     renderTitle.textContent = title;
     renderImg.src = avatar;

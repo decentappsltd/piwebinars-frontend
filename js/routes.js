@@ -1,7 +1,5 @@
-//const axiosServer = axios.create({baseURL: 'https://server.piwebinars.co.uk', timeout: 20000});
 //post routes
-const url = "http://localhost:5000/";
-// const url = "https://server.piwebinars.co.uk/"
+const url = "https://server.piwebinars.co.uk/"
 function createPost() {
   axios.post(`${url}post`, function (res, req) {
     const thumbnail = document.getElementById("thumbnail").value;

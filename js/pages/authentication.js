@@ -1,7 +1,7 @@
 const registerBtn = document.querySelector("#register");
 const uploadBtn = document.querySelector("#upload_btn");
 const loginBtn = document.querySelector("#login");
-const instance = axios.create({ baseURL: "http://localhost:5000" });
+const instance = axios.create({ baseURL: "https://server.piwebinars.co.uk" });
 let token;
 
 // Login a user
@@ -208,6 +208,30 @@ function closeModal3() {
   document.getElementById("modal3").classList.remove("is-visible");
 }
 
+function openModal4() {
+  document.getElementById("modal4").classList.add("is-visible");
+}
+
+function closeModal4() {
+  document.getElementById("modal4").classList.remove("is-visible");
+}
+
+function openModal5() {
+  document.getElementById("modal5").classList.add("is-visible");
+}
+
+function closeModal5() {
+  document.getElementById("modal5").classList.remove("is-visible");
+}
+
+function openModal6() {
+  document.getElementById("modal6").classList.add("is-visible");
+}
+
+function closeModal6() {
+  document.getElementById("modal6").classList.remove("is-visible");
+}
+
 function showMore(featured, webinars) {
   var x = featured.length;
   var feature = webinars.slice(0, x + 20);
@@ -221,4 +245,9 @@ function searchWebinars() {
       results.push(obj.list[i]);
     }
   }
+}
+
+function googleTranslate() {
+  document.getElementById('google_translate_element').style.display = "block";
+  document.getElementById('translate').style.display = "none";
 }

@@ -1,73 +1,31 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
   <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-    <!-- ios support -->
-    <meta name="apple-mobile-web-app-status-bar" content="#db4938" />
-    <meta name="theme-color" content="#db4938" />
-    <meta name="application-name" content="Pi Webinars" />
-
-    <link rel="stylesheet" href="../css/styles.css" />
-    <link rel="icon" type="image/png" href="../img/logo.png" />
-
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;700&display=swap"
-      rel="stylesheet"
-    />
-    <title>Pi Webinars</title>
-
-    <!-- Google Tag Manager -->
+    <!--Scripts-->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <!-- <script src="https://unpkg.com/axios/dist/axios.min.js"></script> -->
+    <script src="https://sdk.minepi.com/pi-sdk.js"></script>
     <script>
-      (function (w, d, s, l, i) {
-        w[l] = w[l] || [];
-        w[l].push({
-          "gtm.start": new Date().getTime(),
-          event: "gtm.js",
-        });
-        var f = d.getElementsByTagName(s)[0],
-          j = d.createElement(s),
-          dl = l != "dataLayer" ? "&l=" + l : "";
-        j.async = true;
-        j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
-        f.parentNode.insertBefore(j, f);
-      })(window, document, "script", "dataLayer", "GTM-KRPNL55");
+      Pi.init({ version: "2.0" });
     </script>
-    <!-- End Google Tag Manager -->
-
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script
-      async
-      src="https://www.googletagmanager.com/gtag/js?id=G-2N939D6C1C"
-    ></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-
-      function gtag() {
-        dataLayer.push(arguments);
-      }
-      gtag("js", new Date());
-      gtag("config", "G-2N939D6C1C");
-    </script>
+    <script src="https://kit.fontawesome.com/3aea44e36d.js" crossorigin="anonymous"></script>
+    <script src="/js/routes.js"></script>
+    <script src="/js/pipayment.js"></script>
+    <script src="/js/pages/all-webinars.js"></script>
+    <script src="/js/pages/authentication.js"></script>
+            
+    <!--CSS-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="icon" type="image/png" href="/img/logo.png">
+    
+    <!--Google Fonts-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;700&display=swap" rel="stylesheet">
   </head>
 
   <body>
-    <!-- Google Tag Manager (noscript) -->
-    <noscript
-      ><iframe
-        src="https://www.googletagmanager.com/ns.html?id=GTM-KRPNL55"
-        height="0"
-        width="0"
-        style="display: none; visibility: hidden"
-      ></iframe
-    ></noscript>
-    <!-- End Google Tag Manager (noscript) -->
 
     <h1>Pi Webinars</h1>
 
@@ -136,10 +94,8 @@
   </select><i style="margin-left: 5px;" class="fas fa-search" id="searchCat" onclick="searchCat()"></i><br />
   
   <i class="fas fa-filter"></i>
-  <label for="search">  
-    <input type="text" placeholder="Search Webinars.." id="search">
-  </label>
-  <i class="fas fa-search" id="search" onclick="search()"></i></br></br>
+  <input type="text" placeholder="Search Webinars.." id="search" class="searchbar">
+      <i style="margin-left: 5px;" class="fas fa-search" id="search" onclick="search()"></i></br></br>
 
   <button onclick="openCinema()">Open Cinema...</button>
 
@@ -176,25 +132,5 @@
     }
   </script>
   <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script> </br></br>
-  <script>
-    if (navigator.userAgent.toLowerCase().indexOf("pibrowser") < 0) {
-      var i;
-      var x = document.getElementsByClassName('browser')
-      for (i = 0; i < x.length; i++) {
-        x[i].style.display = 'none';
-      }
-    }
-    </script>
-
-<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-<!-- <script src="https://unpkg.com/axios/dist/axios.min.js"></script> -->
-<script src="https://sdk.minepi.com/pi-sdk.js"></script>
-<script>
-  Pi.init({ version: "2.0" });
-  </script>
-  <script src="https://kit.fontawesome.com/3aea44e36d.js" crossorigin="anonymous"></script>
-    <script src="../js/routes.js"></script>
-    <script src="../js/pipayment.js"></script>
-    <script src="../js/pages/all-webinars.js"></script>
-  </body>
+    </body>
 </html>

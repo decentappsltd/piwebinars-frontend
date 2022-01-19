@@ -1,12 +1,16 @@
 const registerBtn = document.querySelector("#register");
 const uploadBtn = document.querySelector("#upload_btn");
 const loginBtn = document.querySelector("#login");
-const instance = axios.create({ baseURL: "https://server.piwebinars.co.uk" });
+const instance = axios.create({ 
+  baseURL: "https://piwebinars-server.herokuapp.com" 
+});
+// const instance = axios.create({ baseURL: "http://localhost:5000" });
 let token;
 
 // Login a user
 if (loginBtn !== null) {
-  loginBtn.addEventListener("click", async (e) => {
+  loginBtn.addEventListener("click", async (e)
+   => {
     e.preventDefault();
     let username = document.querySelector("#pi_username").value;
     let password = document.querySelector("#user_password").value;
@@ -23,7 +27,7 @@ if (loginBtn !== null) {
         instance.defaults.headers.common["Authorization"] = token;
         sessionStorage.removeItem("userSession");
         sessionStorage.setItem("userSession", token);
-        window.location.href = "/html/all-webinars.html";
+        window.location.href = "/html/upload.html";
       } else {
         console.log("login error");
         // console.log(response);
@@ -248,6 +252,6 @@ function searchWebinars() {
 }
 
 function googleTranslate() {
-  document.getElementById('google_translate_element').style.display = "block";
-  document.getElementById('translate').style.display = "none";
+  document.getElementById("google_translate_element").style.display = "block";
+  document.getElementById("translate").style.display = "none";
 }

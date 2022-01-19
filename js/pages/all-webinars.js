@@ -1,5 +1,8 @@
 const searchCat = document.querySelector(".searchCat");
 const search = document.querySelector(".search");
+const instance = axios.create({
+  baseURL: "https://piwebinars-server.herokuapp.com",
+});
 
 if (searchCat !== null) {
   searchCat.addEventListener("click", function (e) {
@@ -31,7 +34,7 @@ if (search !== null) {
 const postSection = document.querySelector("#postSection");
 document.addEventListener("DOMContentLoaded", async function (event) {
   event.preventDefault();
-  const webinarUploads = await axios.get("https://server.piwebinars.co.uk/upload/video");
+  const webinarUploads = await instance.get("/upload/video");
   //   const webinarUploads = JSON.parse(webinarUploadsJson);
   // console.log(webinarUploads);
   renderWebinars(webinarUploads);
@@ -43,9 +46,7 @@ function renderWebinars(uploadsObj) {
   webinars.forEach(async (webinar) => {
     const { amount, cloudPath, category, path, post, thumbnail, _id, user } =
       webinar;
-    const webinarPosts = await axios.get(
-      `https://server.piwebinars.co.uk/post/${user}/${post}`
-    );
+    const webinarPosts = await instace.get(`/post/${user}/${post}`);
     console.log("web posts ", webinarPosts);
     // const posts = webinarPosts["data"]["Post"];
     // if (!posts.success) return;

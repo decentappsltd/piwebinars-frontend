@@ -36,8 +36,6 @@ async function auth() {
   }
 }
   
-auth();
-
 function buyWebinar(webinarId, creatorId, categoryId) {
   if (status == 'true') {
     const creditAmountJSON = axios.get("https://server.piwebinars.co.uk/profile");

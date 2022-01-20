@@ -9,8 +9,7 @@ let token;
 
 // Login a user
 if (loginBtn !== null) {
-  loginBtn.addEventListener("click", async (e)
-   => {
+  loginBtn.addEventListener("click", async (e) => {
     e.preventDefault();
     let username = document.querySelector("#pi_username").value;
     let password = document.querySelector("#user_password").value;

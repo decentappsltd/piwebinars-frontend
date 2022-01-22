@@ -165,10 +165,11 @@ function logoutAll() {
 }
 
 function register() {
-  const userName = document.getElementById("pi_username");
-  const password = document.getElementById("user_password");
-  axios.post("${url}register", function (res, req) {
-    res.send(userName, password);
+  const name = prompt('name', '');
+  const userName = prompt('pi username', '')
+  const password = prompt('create password', '');
+  axios.post(`${url}register`, function (res, req) {
+    res.send(name, userName, password);
   });
   alert(
     "Registration successful! You can now access your webinars at piwebinars.co.uk, outside the Pi Browser"

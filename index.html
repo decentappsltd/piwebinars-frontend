@@ -62,46 +62,6 @@
     <h5>There are no upcoming live webinars...</h5><br/>
     
     <h2 class="rounded" >Featured Webinars</h2>
-  
-    <script>
-      document.addEventListener("DOMContentLoaded", function(event) {
-        const webinarUploadsJson = axios.get("https://server.piwebinars.co.uk/post");
-        const webinarUploads = JSON.parse(webinarUploadsJson);
-        renderWebinars(webinarUploads);
-      });
-
-      function renderWebinars(jsonobj) {
-        const webinars = jsonobj['post'];
-        const featured = webinars.slice(0, 10);
-        for (let i = 0; i < featured.length; i++) {
-          const renderDiv = document.createElement('article');
-          renderDiv.className = "title";
-          const renderText = document.createElement('h3');
-          const renderDesc = document.createElement('p');
-          const renderImg = document.createElement('img');
-          renderImg.className = "thumbnail";
-          const renderLikes = document.createElement('p');
-          renderLikes.className = "likes";
-          const renderButton = document.createElement('button');
-          renderButton.onclick = function() {
-            var webinarId = featured[i].post_id;
-            var creatorId = featured[i].userId;
-            var categoryId = featured[i].collection_name;
-            buyWebinar();
-          };
-          renderText.textContent = featured[i].text;
-          renderDesc.textContent = featured[i].description;
-          renderImg.imgContent = featured[i].thumbnail;
-          renderLikes.textContent = featured[i].likes;
-          renderDiv.appendChild(renderText);
-          renderDiv.appendChild(renderDesc);
-          renderDiv.appendChild(renderImg);
-          renderDiv.appendChild(renderLikes);
-          renderDiv.appendChild(renderButton);
-          section.appendChild(renderDiv);
-        }
-      }
-    </script>
     
     <div class="modal" id="modal1">
     <div class="modal-dialog">
@@ -169,6 +129,8 @@
    
       <li class="li"><a id="profile" class="a" href="/html/profile.html"><img src="https://app.piwebinars.co.uk/img/Profile_Icon.png" width="40px;">Profile</a></li>
       <li class="li"><a class="a" onclick="openUploadPage()"><img src="https://app.piwebinars.co.uk/img/Upload_Icon.png" width="40px;">Upload</a></li>
+      <a href="/html/login.html#login_btn" >Login</a>
+      <a href="/html/register.html#register_btn" >Register</a>
    
       <a href="https://instagram.com/pi_webinars" class="fa fa-instagram"></a>
       <a href="https://twitter.com/pi_webinars" class="fa fa-twitter"></a>
@@ -200,45 +162,6 @@
       <option class="list" value="sports">Sports</option><br />
       <option class="list" value="technology">Technology</option><br />
     </select><br />
-    <script>
-      document.addEventListener("DOMContentLoaded", function(event) {
-        const webinarUploadsJson = axios.get("/post");
-        const webinarUploads = JSON.parse(webinarUploadsJson);
-        renderWebinars(webinarUploads);
-      });
-
-      function renderWebinars(jsonobj) {
-        const webinars = jsonobj['post'];
-        var featured = webinars.slice(0, 10);
-        for (let i = 0; i < featured.length; i++) {
-          const renderDiv = document.createElement('article');
-          renderDiv.className = "title";
-          const renderText = document.createElement('h3');
-          const renderDesc = document.createElement('p');
-          const renderImg = document.createElement('img');
-          renderImg.className = "thumbnail";
-          const renderLikes = document.createElement('p');
-          renderLikes.className = "likes";
-          const renderButton = document.createElement('button');
-          renderButton.className = "button_click browser";
-          renderButton.onclick = function() {
-            var webinarId = featured[i].post_id;
-            var creatorId = featured[i].userId;
-            var categoryId = featured[i].collection_name;
-          };
-          renderText.textContent = featured[i].text;
-          renderDesc.textContent = featured[i].description;
-          renderImg.imgContent = featured[i].thumbnail;
-          renderLikes.textContent = featured[i].likes;
-          renderDiv.appendChild(renderText);
-          renderDiv.appendChild(renderDesc);
-          renderDiv.appendChild(renderImg);
-          renderDiv.appendChild(renderLikes);
-          renderDiv.appendChild(renderButton);
-          section.appendChild(renderDiv);
-        }
-      }
-    </script>
     <div class="force-overflow"></div>
       <button style="bottom: 0;" onclick="showMore()">Show more</button>
     </div>  
@@ -248,47 +171,6 @@
       <div class="left both">
         <h2>Your Purchases:</h2>
         <div>
-        <script>
-          document.addEventListener("DOMContentLoaded", function(event) {
-            const webinarPurchasesUploadsJson = axios.get("/post/purchases");
-            const webinarPurchasesUploads = JSON.parse(webinarPurchasesUploadsJson);
-            showWebinars2(webinarPurchasesUploads);
-          });
-
-          function showWebinars2(obj) {
-            const webinars = obj['post'];
-            for (let i = 0; i < webinarsPurchases.length; i++) {
-              const renderDiv2 = document.createElement('article');
-              renderDiv2.className = "title";
-              const renderText2 = document.createElement('h3');
-              const renderDesc2 = document.createElement('p');
-              const renderImg2 = document.createElement('img');
-              renderImg2.className = "thumbnail";
-              const renderLikes2 = document.createElement('p');
-              renderLikes2.className = "likes";
-              const renderButton2 = document.createElement('button');
-              renderButton2.className = "watch_again";
-              renderButton2.onclick = function() {
-                var webinarId = webinars[i].post_id;
-                var creatorId = webinars[i].userId;
-                var categoryId = webinars[i].collection_name;
-              };
-              renderText2.textContent = webinarsPurchases[i].text;
-              renderDesc2.textContent = webinarsPurchases[i].description;
-              renderImg2.imgContent = webinarsPurchases[i].thumbnail;
-              renderLikes2.textContent = webinarsPurchases[i].likes;
-              renderDiv2.appendChild(renderText2);
-              renderDiv2.appendChild(renderDesc2);
-              renderDiv2.appendChild(renderImg2);
-              renderDiv2.appendChild(renderLikes2);
-              renderDiv2.appendChild(renderButton2);
-              section.appendChild(renderDiv2);
-              if (renderDiv2.length > 0) {
-                document.getElementById('empty1').setAttribute('style', 'display: none;')
-              }
-            }
-          }
-        </script>
         <p2 style="margin-bottom: 20px;" id="empty1">You currently have no purchases. Go the the Pi Browser to purchase a webinar.</p2>
       </div>
       <div class="force-overflow"></div>
@@ -299,57 +181,6 @@
     <div class="right both">
       <h2>Your Webinars:</h2>
       <div>
-        <script>
-          document.addEventListener("DOMContentLoaded", function(event) {
-            const webinarUserUploadsJson = axios.get(`https://server.piwebinars.co.uk/post/${userId}`);
-            const webinarUserUploads = JSON.parse(webinarUserUploadsJson);
-            showWebinarsUser(webinarUserUploads);
-          });
-
-          function showWebinarsUser(obj) {
-            const webinarsUser = obj['post'];
-            for (let i = 0; i < webinarsUser.length; i++) {
-              const renderDivYour = document.createElement('article');
-              renderDivYour.className = "title";
-              const renderTextYour = document.createElement('h3');
-              const renderDescYour = document.createElement('p');
-              const renderImgYour = document.createElement('img');
-              renderImgYour.className = "thumbnail";
-              const renderLikesYour = document.createElement('p');
-              renderLikesYour.className = "likes";
-              const renderTitle = document.createElement('button');
-              renderTitle.className = "updatePostTitle";
-              renderTitle.onclick = function() {
-                var webinarId = webinarsUser[i].post_id;
-                var creatorId = webinarsUser[i].userId;
-                var categoryId = webinarsUser[i].collection_name;
-              };
-              const renderAmount = document.createElement('button');
-              renderAmount.onclick = function() {
-                var webinarId = webinarsUser[i].post_id;
-                var creatorId = webinarsUser[i].userId;
-                var categoryId = webinarsUser[i].collection_name;
-              };
-              renderAmount.className = "updatePostAmount";
-              renderTextYour.textContent = webinarsUser[i].text;
-              renderDescYour.textContent = webinarsUser[i].description;
-              renderImgYour.imgContent = webinarsUser[i].thumbnail;
-              renderLikesYour.textContent = webinarsUser[i].likes;
-              renderTitle.textContent = "Edit Title";
-              renderAmount.textContent = "Edit Price";
-              renderDivYour.appendChild(renderTextYour);
-              renderDivYour.appendChild(renderDescYour);
-              renderDivYour.appendChild(renderImgYour);
-              renderDivYour.appendChild(renderLikesYour);
-              renderDivYour.appendChild(renderTitle);
-              renderDivYour.appendChild(renderAmount);
-              section.appendChild(renderDivYour);
-              if (renderDivYour.length > 0) {
-                document.getElementById('empty2').setAttribute('style', 'display: none;')
-              }
-            }
-          }
-        </script>
       </div>
       <p2 style="margin-bottom: 20px;" id="empty2">You currently have no uploads.</p2>
       <div class="force-overflow"></div>

@@ -36,6 +36,24 @@ span {
   margin-right: auto;
   margin-top: 0px;
 }
+.center-text{
+  text-align: center;
+  font-size: 1.3rem;
+  font-weight: bold;
+}
+.error_log{
+  background-color: #e05151;
+  color: #fff;
+  width: 90%;
+  min-height: 10vh;
+  height: auto;
+  margin: 1rem auto;
+  font-size: 1.3rem;
+}
+.error_log p{
+  font-weight: bolder;
+  text-align: center;
+}
 h5 {
   display: block;
   color: #36454F;

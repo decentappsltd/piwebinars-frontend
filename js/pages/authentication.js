@@ -1,11 +1,20 @@
 const registerBtn = document.querySelector("#register");
 const uploadBtn = document.querySelector("#upload_btn");
 const loginBtn = document.querySelector("#login");
-const instance = axios.create({ 
-  baseURL: "https://piwebinars-server.herokuapp.com" 
+const handleBtn = document.querySelector("#handle");
+const errorFlash = document.querySelector("#error_log");
+const instance = axios.create({
+  baseURL: "https://piwebinars-server.herokuapp.com",
+  headers: {
+    "Access-Control-Allow-Origin": "*",
+  },
+  withCredentials: true,
+  credentials: "same-origin",
 });
 // const instance = axios.create({ baseURL: "http://localhost:5000" });
 let token;
+let flashMessage = "";
+let flashBool = false;
 
 // Login a user
 if (loginBtn !== null) {
@@ -14,29 +23,48 @@ if (loginBtn !== null) {
     let username = document.querySelector("#pi_username").value;
     let password = document.querySelector("#user_password").value;
 
-    if (username === "" || password === "") return "Cannot send empty fields";
-    else {
-      const user = {
-        username,
-        password,
-      };
-      const response = await instance.post(`/login`, user);
-      if (response.status === 200) {
-        token = response.data.token;
-        instance.defaults.headers.common["Authorization"] = token;
-        sessionStorage.removeItem("userSession");
-        sessionStorage.setItem("userSession", token);
-        window.location.href = "/html/upload.html";
+    try {
+      if (username === "" || password === "") {
+        const message = "Cannot send empty fields!!!";
+        flashMessage = message;
       } else {
-        console.log("login error");
-        // console.log(response);
+        const user = {
+          username,
+          password,
+        };
+        const response = await instance.post(`/login`, user);
+        if (response.status === 200) {
+          const message = "User successfully logged in !!!";
+          token = response.data.token;
+          instance.defaults.headers.common["Authorization"] = token;
+          sessionStorage.removeItem("userSession");
+          localStorage.removeItem("userSession");
+          sessionStorage.setItem("userSession", token);
+          localStorage.setItem("userSession", token);
+          flashMessage = message;
+          window.location.href = "/html/createProfile.html";
+        }
+        username = "";
+        password = "";
       }
-      username.textContent = "";
-      password.textContent = "";
+    } catch (error) {
+      const errorMessage = error.response.data.message;
+      if (errorMessage.length > 0) flashMessage = errorMessage;
     }
-    // Setting auth token
-    if (token.length > 0 && token !== null)
-      console.log("Common token : ", token);
+
+    flashBool = true;
+
+    // Flash message
+    if (flashBool && flashMessage.length > 0) {
+      const elem = document.createElement("p");
+      elem.textContent = flashMessage;
+      errorFlash.appendChild(elem);
+      setTimeout(() => {
+        flashMessage = "";
+        flashBool = false;
+        errorFlash.removeChild(elem);
+      }, 4000);
+    }
   });
 }
 
@@ -49,23 +77,104 @@ if (registerBtn !== null) {
     let password = document.querySelector("#user_password").value;
     let confirmPassword = document.querySelector("#confirm_password").value;
 
-    if (confirmPassword !== password) return "Passwords do not match";
-    else {
-      const newUser = {
-        name: fullName,
-        username,
-        password,
-      };
-      const response = await instance.post(`/register`, newUser);
-      if (response.status === 201) {
-        setTimeout(() => {
-          window.location.href = "/html/login.html";
-        }, 3000);
+    try {
+      if (
+        fullName === "" ||
+        username === "" ||
+        password === "" ||
+        confirmPassword === ""
+      ) {
+        const message = "Cannot send empty fields!!!";
+        flashMessage = message;
+      } else if (confirmPassword !== password) {
+        const message = "Passwords do not match";
+        flashMessage = message;
+      } else if (password.length < 8) {
+        const message = "Passwords must be greater or equal to 8 characters";
+        flashMessage = message;
       } else {
-        console.log("Registration error");
+        const newUser = {
+          name: fullName,
+          username,
+          password,
+        };
+        const response = await instance.post(`/register`, newUser);
+        if (response.status === 201) {
+          flashMessage = `New User successfully register!!!`;
+          flashBool = true;
+          setTimeout(() => {
+            window.location.href = "/html/login.html";
+          }, 5000);
+        }
+        password = "";
+        confirmPassword = "";
       }
-      password.textContent = "";
-      confirmPassword.textContent = "";
+    } catch (error) {
+      const errorMessage = error.response.data.message;
+      if (errorMessage.length > 0) flashMessage = errorMessage;
+    }
+    flashBool = true;
+
+    // Flash message
+    if (flashBool && flashMessage.length > 0) {
+      const elem = document.createElement("p");
+      elem.textContent = flashMessage;
+      errorFlash.appendChild(elem);
+      setTimeout(() => {
+        flashMessage = "";
+        flashBool = false;
+        errorFlash.removeChild(elem);
+      }, 4000);
+    }
+  });
+}
+
+// Create a user profile
+if (handleBtn !== null) {
+  handleBtn.addEventListener("click", async (e) => {
+    e.preventDefault();
+    let handle = document.querySelector("#pi_handle").value;
+    const authToken = localStorage.getItem("userSession");
+
+    try {
+      if (handle === "") {
+        const message = "Cannot send empty fields!!!";
+        flashMessage = message;
+      } else {
+        const userHandle = {
+          handle,
+        };
+        const response = await instance.post(`/profile`, userHandle, {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${authToken}`,
+          },
+        });
+        if (response.status === 200) {
+          const message = "User Profile was successfully created !!!";
+          flashMessage = message;
+          window.location.href = "/";
+        }
+      }
+    } catch (error) {
+      const errorMessage = error.response.data.message;
+      if (errorMessage.length > 0) flashMessage = errorMessage;
+      console.log(errorMessage, error.response);
+    }
+
+    flashBool = true;
+    handle.textContent = "";
+
+    // Flash message
+    if (flashBool && flashMessage.length > 0) {
+      const elem = document.createElement("p");
+      elem.textContent = flashMessage;
+      errorFlash.appendChild(elem);
+      setTimeout(() => {
+        flashMessage = "";
+        flashBool = false;
+        errorFlash.removeChild(elem);
+      }, 4000);
     }
   });
 }
@@ -82,7 +191,7 @@ if (certify_btn !== null) {
 if (uploadBtn !== null) {
   uploadBtn.addEventListener("click", async (e) => {
     e.preventDefault();
-    const authToken = sessionStorage.getItem("userSession");
+    const authToken = localStorage.getItem("userSession");
     const file = document.querySelector("#file").value;
     const thumbnail = document.querySelector("#thumbnail").value;
     const title = document.querySelector("#title").value;
@@ -116,11 +225,11 @@ if (uploadBtn !== null) {
         ...formData,
       };
 
-      const params = { file_type: "video" };
       const response = await instance.post(`/upload/file_upload`, formData, {
         headers: {
+          "content-type": "application/x-www-form-urlencoded",
           "Content-Type":
-            "multipart/form-data; charset=UTF-8; boundary='--sampleBoundary'", // do not forget this
+            "multipart/form-data; charset=UTF-8; boundary='--sampleBoundary'",
           Authorization: `Bearer ${authToken}`,
         },
       });

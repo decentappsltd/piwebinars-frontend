@@ -24,6 +24,26 @@ iframe {
   margin-right: auto;
   margin-top: 10px;
 }
+.profile{
+  width: 80%;
+  display: flex;
+  min-height: 15vh;
+  justify-content: space-between;
+  align-items: center;
+  margin: 2rem auto;
+  padding: 2rem;
+  border: .4rem solid #000;
+}
+.avatar{
+  min-width: 30%;
+  width: auto;
+  display: flex;
+  justify-content: space-around;
+}
+.avatar img{
+  height: 150px;
+  width: 150px;
+}
 h2 {
   color: #FBB44A;
   text-align: center; 
@@ -584,8 +604,5 @@ label {
 .both::-webkit-scrollbar-thumb {
 	border-radius: 10px;
 	background-color: #FBB44A;
-}
-div#profile {
-  margin-top: 75px;
 }
 }

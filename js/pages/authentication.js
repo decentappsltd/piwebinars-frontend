@@ -2,19 +2,28 @@ const registerBtn = document.querySelector("#register");
 const uploadBtn = document.querySelector("#upload_btn");
 const loginBtn = document.querySelector("#login");
 const handleBtn = document.querySelector("#handle");
+const logoutBtn = document.querySelector("#logout");
+const logoutAllBtn = document.querySelector("#logoutAll");
+const deleteAccountBtn = document.querySelector("#deleteAccount");
 const errorFlash = document.querySelector("#error_log");
+
+// Variables
+let token;
+let flashMessage = "";
+let flashBool = false;
+const flashTime = 3000;
+const elem = document.createElement("p");
+const authToken = localStorage.getItem("userSession");
 const instance = axios.create({
   baseURL: "https://piwebinars-server.herokuapp.com",
   headers: {
     "Access-Control-Allow-Origin": "*",
+    Authorization: `Bearer ${authToken}`,
   },
   withCredentials: true,
   credentials: "same-origin",
 });
 // const instance = axios.create({ baseURL: "http://localhost:5000" });
-let token;
-let flashMessage = "";
-let flashBool = false;
 
 // Login a user
 if (loginBtn !== null) {
@@ -24,7 +33,7 @@ if (loginBtn !== null) {
     let password = document.querySelector("#user_password").value;
 
     try {
-      if (username === "" || password === "") {
+      if ((username || password) === "") {
         const message = "Cannot send empty fields!!!";
         flashMessage = message;
       } else {
@@ -56,14 +65,13 @@ if (loginBtn !== null) {
 
     // Flash message
     if (flashBool && flashMessage.length > 0) {
-      const elem = document.createElement("p");
       elem.textContent = flashMessage;
       errorFlash.appendChild(elem);
       setTimeout(() => {
         flashMessage = "";
         flashBool = false;
         errorFlash.removeChild(elem);
-      }, 4000);
+      }, flashTime);
     }
   });
 }
@@ -78,12 +86,7 @@ if (registerBtn !== null) {
     let confirmPassword = document.querySelector("#confirm_password").value;
 
     try {
-      if (
-        fullName === "" ||
-        username === "" ||
-        password === "" ||
-        confirmPassword === ""
-      ) {
+      if ((fullName || username || password || confirmPassword) === "") {
         const message = "Cannot send empty fields!!!";
         flashMessage = message;
       } else if (confirmPassword !== password) {
@@ -104,7 +107,7 @@ if (registerBtn !== null) {
           flashBool = true;
           setTimeout(() => {
             window.location.href = "/html/login.html";
-          }, 5000);
+          }, 3000);
         }
         password = "";
         confirmPassword = "";
@@ -117,14 +120,13 @@ if (registerBtn !== null) {
 
     // Flash message
     if (flashBool && flashMessage.length > 0) {
-      const elem = document.createElement("p");
       elem.textContent = flashMessage;
       errorFlash.appendChild(elem);
       setTimeout(() => {
         flashMessage = "";
         flashBool = false;
         errorFlash.removeChild(elem);
-      }, 4000);
+      }, flashTime);
     }
   });
 }
@@ -159,7 +161,6 @@ if (handleBtn !== null) {
     } catch (error) {
       const errorMessage = error.response.data.message;
       if (errorMessage.length > 0) flashMessage = errorMessage;
-      console.log(errorMessage, error.response);
     }
 
     flashBool = true;
@@ -167,17 +168,47 @@ if (handleBtn !== null) {
 
     // Flash message
     if (flashBool && flashMessage.length > 0) {
-      const elem = document.createElement("p");
       elem.textContent = flashMessage;
       errorFlash.appendChild(elem);
       setTimeout(() => {
         flashMessage = "";
         flashBool = false;
         errorFlash.removeChild(elem);
-      }, 4000);
+      }, flashTime);
     }
   });
 }
+
+// Display profile names
+const splitUrl = window.location.href.split("/");
+const urlLength = splitUrl.length;
+const urlPath = splitUrl[urlLength - 1];
+const userProfile = async () => {
+  const fullName = document.querySelector("#displayFullName");
+  const userHandle = document.querySelector("#displayUserHandle");
+  const authToken = localStorage.getItem("userSession");
+
+  try {
+    const response = await instance.get(`/profile`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${authToken}`,
+      },
+    });
+    if (response.status === 200) {
+      const data = await response.data.profile;
+      const full_name = data.user.name;
+      const user_handle = data.handle;
+
+      fullName.textContent = full_name;
+      userHandle.textContent = `@${user_handle}`;
+    }
+  } catch (error) {
+    const errorMessage = error.response.data.message;
+    if (errorMessage.length > 0) return errorMessage, error.response;
+  }
+};
+if (urlPath === "profile.html") userProfile();
 
 // Upload webinar
 let certify_btn = document.querySelector("#certify");
@@ -204,7 +235,7 @@ if (uploadBtn !== null) {
     const { text: catTxt } = categoryOption;
     // const { value : ftOpt, text : ftTxt } = fileTypeOption;
 
-    if (title === "" || description === "" || file === null)
+    if ((title || description) === "" || file === null)
       return "Unable to process.";
     else {
       const formData = new FormData();
@@ -234,6 +265,132 @@ if (uploadBtn !== null) {
         },
       });
       console.log("Upload Response : ", response);
+    }
+  });
+}
+
+// Log user out current session
+if (logoutBtn !== null) {
+  logoutBtn.addEventListener("click", async (e) => {
+    e.preventDefault();
+    const authToken = localStorage.getItem("userSession");
+
+    try {
+      if (authToken === null) {
+        flashMessage = "No user is authenticated, please login!!!";
+      } else {
+        const response = await instance.post(`/logout`);
+        if (response.status === 200) {
+          flashMessage = `Successfully logged you out!!!`;
+          delete instance.defaults.headers.common["Authorization"];
+          sessionStorage.removeItem("userSession");
+          localStorage.removeItem("userSession");
+          setTimeout(() => {
+            window.location.href = "/";
+          }, 3000);
+        }
+      }
+    } catch (error) {
+      const errorMessage = error.response.data.message;
+      if (errorMessage.length > 0) flashMessage = errorMessage;
+    }
+    flashBool = true;
+
+    // Flash message
+    if (flashBool && flashMessage.length > 0) {
+      elem.textContent = flashMessage;
+      errorFlash.appendChild(elem);
+      setTimeout(() => {
+        flashMessage = "";
+        flashBool = false;
+        errorFlash.removeChild(elem);
+      }, flashTime);
+    }
+  });
+}
+
+// Log out all other sessions except current session
+if (logoutAllBtn !== null) {
+  logoutAllBtn.addEventListener("click", async (e) => {
+    e.preventDefault();
+    const authToken = localStorage.getItem("userSession");
+
+    try {
+      if (authToken === null) {
+        flashMessage = "No user is authenticated, please login!!!";
+      } else {
+        const response = await instance.post(`/logout/logout_all`);
+        if (response.status === 200) {
+          flashMessage = `Successfully logged out from other devices!!!`;
+        }
+      }
+    } catch (error) {
+      const errorMessage = error.response.data.message;
+      if (errorMessage.length > 0) flashMessage = errorMessage;
+    }
+    flashBool = true;
+
+    // Flash message
+    if (flashBool && flashMessage.length > 0) {
+      elem.textContent = flashMessage;
+      errorFlash.appendChild(elem);
+      setTimeout(() => {
+        flashMessage = "";
+        flashBool = false;
+        errorFlash.removeChild(elem);
+      }, flashTime);
+    }
+  });
+}
+
+// Delete account
+if (deleteAccountBtn !== null) {
+  deleteAccountBtn.addEventListener("click", async (e) => {
+    e.preventDefault();
+    const confirmMessage = confirm(
+      "Are you sure you want to delete your account? This CANNOT be undone!!!"
+    );
+    if (!confirmMessage) return false;
+    else {
+      try {
+        const authToken = localStorage.getItem("userSession");
+        if (authToken === null) {
+          flashMessage = "No user is authenticated, please login!!!";
+        } else {
+          const response = await instance.delete(`/profile`, {
+            headers: {
+              "Access-Control-Allow-Origin": "*",
+              Authorization: `Bearer ${authToken}`,
+            },
+            withCredentials: true,
+            credentials: "same-origin",
+          });
+          if (response.status === 200) {
+            flashMessage = `You have successfully deleted your account!!!`;
+            delete instance.defaults.headers.common["Authorization"];
+            sessionStorage.removeItem("userSession");
+            localStorage.removeItem("userSession");
+            setTimeout(() => {
+              window.location.href = "/html/register.html";
+            }, 3000);
+          }
+        }
+      } catch (error) {
+        const errorMessage = error.response.data.message;
+        if (errorMessage.length > 0) flashMessage = errorMessage;
+      }
+    }
+    flashBool = true;
+
+    // Flash message
+    if (flashBool && flashMessage.length > 0) {
+      elem.textContent = flashMessage;
+      errorFlash.appendChild(elem);
+      setTimeout(() => {
+        flashMessage = "";
+        flashBool = false;
+        errorFlash.removeChild(elem);
+      }, flashTime);
     }
   });
 }

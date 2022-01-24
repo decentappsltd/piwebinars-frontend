@@ -13,7 +13,7 @@
     <title>PI Webinars || Profile</title>
   </head>
   <body>
-    <div class="mobile">
+    <div>
   <h1 >Pi Webinars</h1>
   
 <nav class="footer" style="z-index: 100">
@@ -25,21 +25,14 @@
   </ul>
 </nav>   
   
-    <div id="profile">
-    <script>
-      document.addEventListener("DOMContentLoaded", function(event) {      
-        const profileJSON = axios.get("https://server.piwebinars.co.uk/profile");
-        const profile = JSON.parse(profileJSON);
-        const info = obj['profile'];
-        document.getElementById('handle').innerHTML = info[i].handle;
-        document.getElementById('avatar').src = info[i].avatar;
-        document.getElementById('followers').innerHTML = info[i].followers;
-        document.getElementById('following').innerHTML = info[i].following;
-        document.getElementById('credit').innerHTML = info[i].credit;
-      }); 
-    </script>
-      <div class="row" style="border-top: solid; border-bottom: solid; margin-bottom: 50px;">
-   <img id="avatar" style="float: left; width: 20%; border-style: round; padding: 10px;" src="https://app.piwebinars.co.uk/img/avatar.png" onclick="alert('Custom avatar coming soon...')" alt="avatar"></img>
+    <div id="profile" class="profile">
+   <div class="avatar">
+     <img id="avatar" src="https://app.piwebinars.co.uk/img/avatar.png" onclick="alert('Custom avatar coming soon...')" alt="avatar"></img>
+     <div class="user-details">  
+       <h1 id="displayFullName"></h1>
+       <h3 id="displayUserHandle"></h3>
+     </div>
+    </div>
     <div>
       <h2 id="handle"></h2>
       <p2>Followers:</p2>
@@ -50,7 +43,7 @@
       <p2>Credit:</p2>
       <p2 id="credit">0</p2><p2> Pi</p2>
       <i class="fas fa-minus" onclick="withdrawCredit()"></i>
-      </div></div></div>
+      </div></div>
   
   <div class="row" style="margin-bottom: 50px;" onclick="location.href='/html/your-webinars.html';">
     <img class="column" style="width: 25%; margin-right: 20px;" src="https://app.piwebinars.co.uk/img/your_webinars.png" alt="sub-logo"></img>
@@ -62,9 +55,13 @@
 <h2 class="column">Purchases</h2>
 </div>
 </br>
-<button class="logout" onclick="logout()">Logout</button>
-<button class="logoutAll" onclick="logoutAll()">Logout All</button>
-<button style="margin-bottom: 50px;" class="deleteAccount" onclick="deleteAccount()">Delete Account</button>
+
+<div class="error_log" id="error_log"></div>
+
+<br><br><br>
+<button class="logout" id="logout">Logout</button>
+<button class="logoutAll" id="logoutAll">Logout All</button>
+<button style="margin-bottom: 50px; padding: 1rem; background: red; color: white;" class="deleteAccount" id="deleteAccount">Delete My Account</button>
 
     <br><br><br>
 </div>

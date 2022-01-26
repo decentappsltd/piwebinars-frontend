@@ -18,12 +18,23 @@
   
 <nav class="footer" style="z-index: 100">
   <ul class="ul">
+    <div class="mobile">
     <li class="li"><a class="a" href="/index.html"><img src="https://app.piwebinars.co.uk/img/Home_Icon.png" width="30px;">Home</a></li>
     <li class="li"><a class="a" href="/html/all-webinars.html"><img src="https://app.piwebinars.co.uk/img/Watch_Icon.png" width="30px;">Webinars</a></li>
     <li class="li"><a class="a" href="/html/upload.html"><img src="https://app.piwebinars.co.uk/img/Upload_Icon.png" width="30px;">Upload</a></li>
     <li class="li"><a class="a" href="/html/profile.html"><img src="https://app.piwebinars.co.uk/img/Profile_Icon.png" width="30px;">Profile</a></li>
-    <li class="li"><a class="a" href="./search.html"><img src="https://app.piwebinars.co.uk/img/Profile_Icon.png" width="30px;">Search</a></li>
   </ul>
+    </div>
+  <div class="row footer desktop">
+      <img height="60" style="position:relative;top:0;display: inline; float: left;" src="https://app.piwebinars.co.uk/img/logo-text.png" alt="logo"></img>
+   
+      <li class="li"><a id="profile" class="a" href="/index.html"><img src="https://app.piwebinars.co.uk/img/Home_Icon.png" width="40px;">Home</a></li>
+      <li class="li"><a class="a" href="/index.html#uploaddesktopmodal"><img src="https://app.piwebinars.co.uk/img/Upload_Icon.png" width="40px;">Upload</a></li>
+   
+      <a href="https://instagram.com/pi_webinars" class="fa fa-instagram"></a>
+      <a href="https://twitter.com/pi_webinars" class="fa fa-twitter"></a>
+      <a href="https://discord.gg/uT3yqpDXcj" class="fab fa-discord"></a>
+    </div>
 </nav>   
   
     <div id="profile" class="profile">
@@ -41,6 +52,7 @@
         <p>Credit <span id="my_credit"></span></p>
         </div>
     </div>
+      <button id="searchuserbuttonhref" onclick="location.href='/html/search.html';">Search Users</button>
     </div>
   
   <div class="row" style="margin-bottom: 50px;" onclick="location.href='/html/your-webinars.html';">
@@ -56,7 +68,10 @@
 
 <div class="error_log" id="error_log"></div>
 
-<br><br><br>
+<br><br>
+<button class="login" onclick="location.href='/html/login.html';">Login</button>
+<button class="register" onclick="location.href='/html/register.html';">Register</button>
+<br><br>
 <button class="logout" id="logout">Logout</button>
 <button class="logoutAll" id="logoutAll">Logout All</button>
 <button style="margin-bottom: 50px; padding: 1rem; background: red; color: white;" class="deleteAccount" id="deleteAccount">Delete My Account</button>

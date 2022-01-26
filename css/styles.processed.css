@@ -24,6 +24,93 @@ iframe {
   margin-right: auto;
   margin-top: 10px;
 }
+.profile{
+  height: auto;
+  width: 90%;
+  display: flex;
+  min-height: 15vh;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+  margin: 2rem auto;
+  padding: 2rem 1rem;
+  border: .4rem solid #000;
+}
+.avatar{
+  width: auto;
+  min-width: 30%;
+  display: flex;
+  justify-content: space-evenly;
+}
+.avatar img{
+  height: 100px;
+  width: 100px;
+}
+.stats{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.stats .followBtn{
+  margin-top: 2rem;
+}
+.stats .followBtn button{
+  all: unset;
+  padding: 1rem; 
+  background: rgb(9, 94, 151); 
+  color: white;
+  border-radius: .5rem;
+  width: 50%;
+  margin: .5rem auto;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 1.3rem;
+}
+.user_stats{
+  width: auto;
+  min-width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+.user_stats p{
+  width: 100%;
+  font-weight: bolder;
+  font-size: 1.3rem;
+}
+.searchedUserLink{
+  width: 40%;
+  display: flex;
+  text-decoration: none;
+  align-items: center;
+}
+.name_section{
+  align-items: flex-start;
+  width: auto;
+  min-width: 70%;
+  text-align: left;
+  padding: 0;
+}
+.name_section p{
+  color: rgb(75, 72, 72);
+  line-height: 1rem;
+}
+.name_section p:first-child{
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+.name_section p:last-child{
+  font-size: 1.1rem;
+}
+.searched_user_avatar{
+  height: 100%;
+  width: 20%;
+}
+[data-*]{
+  visibility: hidden;
+}
 h2 {
   color: #FBB44A;
   text-align: center; 
@@ -35,6 +122,24 @@ span {
   margin-left: auto;
   margin-right: auto;
   margin-top: 0px;
+}
+.center-text{
+  text-align: center;
+  font-size: 1.3rem;
+  font-weight: bold;
+}
+.error_log{
+  background-color: #e05151;
+  color: #fff;
+  width: 90%;
+  min-height: 10vh;
+  height: auto;
+  margin: 1rem auto;
+  font-size: 1.3rem;
+}
+.error_log p{
+  font-weight: bolder;
+  text-align: center;
 }
 h5 {
   display: block;
@@ -132,7 +237,7 @@ button {
 label {
   font-weight: bold;
 }
-#select, #search {
+#select, .searchbar {
   padding: 5px;
   color: #36454F;
   border-color: #FBB44A;
@@ -168,14 +273,14 @@ label {
   font-size: 10px;
   box-shadow: none;
 }
-.login {
+.register, .login {
   color: blue;
   margin-top: 10px;
   background: #E9E9E9;
   border-style: none;
-  border-radius: 5px;
-  padding: 5px;
   font-size: 15px;
+  padding: 5px;
+  border-radius: 5px;
   box-shadow: none;
 }
 :root {
@@ -289,6 +394,17 @@ label {
 #google_translate_element {
   display: none;
 }
+#searchuserbuttonhref {
+  all: unset;
+  padding: 0.5rem; 
+  background: rgb(9, 94, 151); 
+  color: white;
+  border-radius: .5rem;
+  margin: .2rem auto;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 1rem;
+}
 
 
 /******************Desktop Styling******************/
@@ -321,6 +437,19 @@ iframe {
   margin-left: auto;
   margin-right: auto;
   margin-top: 10px;
+}
+.profile{
+  flex-direction: row;
+}
+.avatar{
+  min-width: 30%;
+}
+.avatar img{
+  height: 150px;
+  width: 150px;
+}
+.user_stats{
+  min-width: 60%;
 }
 h2 {
   color: #FBB44A;
@@ -458,7 +587,7 @@ label {
 .signedIn{
   display: none;
 }
-.register {
+.register, .login {
   color: blue;
   margin-top: 10px;
   background: #E9E9E9;
@@ -565,8 +694,5 @@ label {
 .both::-webkit-scrollbar-thumb {
 	border-radius: 10px;
 	background-color: #FBB44A;
-}
-div#profile {
-  margin-top: 75px;
 }
 }

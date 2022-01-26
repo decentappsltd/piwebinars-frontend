@@ -273,16 +273,15 @@ label {
   font-size: 10px;
   box-shadow: none;
 }
-.login, .register {
+.register, .login {
   color: blue;
   margin-top: 10px;
   background: #E9E9E9;
   border-style: none;
-  border-radius: 5px;
-  padding: 5px;
   font-size: 15px;
+  padding: 5px;
+  border-radius: 5px;
   box-shadow: none;
-  text-decoration: none;
 }
 :root {
   --lightgray: #efefef;
@@ -394,6 +393,17 @@ label {
 }
 #google_translate_element {
   display: none;
+}
+#searchuserbuttonhref {
+  all: unset;
+  padding: 0.5rem; 
+  background: rgb(9, 94, 151); 
+  color: white;
+  border-radius: .5rem;
+  margin: .2rem auto;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 1rem;
 }
 
 

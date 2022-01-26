@@ -6,13 +6,20 @@ const logoutBtn = document.querySelector("#logout");
 const logoutAllBtn = document.querySelector("#logoutAll");
 const deleteAccountBtn = document.querySelector("#deleteAccount");
 const errorFlash = document.querySelector("#error_log");
+const followBtn = document.querySelector("#follow_btn");
+const searchBtn = document.querySelector("#search_btn");
+const searchDisplay = document.querySelector("#searchedUser");
 
 // Variables
 let token;
 let flashMessage = "";
 let flashBool = false;
 const flashTime = 3000;
-const elem = document.createElement("p");
+const pTag = document.createElement("p");
+const pTag2 = document.createElement("p");
+const imgTag = document.createElement("img");
+const linkDom = document.createElement("a");
+const divDom = document.createElement("div");
 const authToken = localStorage.getItem("userSession");
 const instance = axios.create({
   baseURL: "https://piwebinars-server.herokuapp.com",
@@ -65,12 +72,12 @@ if (loginBtn !== null) {
 
     // Flash message
     if (flashBool && flashMessage.length > 0) {
-      elem.textContent = flashMessage;
-      errorFlash.appendChild(elem);
+      pTag.textContent = flashMessage;
+      errorFlash.appendChild(pTag);
       setTimeout(() => {
         flashMessage = "";
         flashBool = false;
-        errorFlash.removeChild(elem);
+        errorFlash.removeChild(pTag);
       }, flashTime);
     }
   });
@@ -120,12 +127,12 @@ if (registerBtn !== null) {
 
     // Flash message
     if (flashBool && flashMessage.length > 0) {
-      elem.textContent = flashMessage;
-      errorFlash.appendChild(elem);
+      pTag.textContent = flashMessage;
+      errorFlash.appendChild(pTag);
       setTimeout(() => {
         flashMessage = "";
         flashBool = false;
-        errorFlash.removeChild(elem);
+        errorFlash.removeChild(pTag);
       }, flashTime);
     }
   });
@@ -168,12 +175,12 @@ if (handleBtn !== null) {
 
     // Flash message
     if (flashBool && flashMessage.length > 0) {
-      elem.textContent = flashMessage;
-      errorFlash.appendChild(elem);
+      pTag.textContent = flashMessage;
+      errorFlash.appendChild(pTag);
       setTimeout(() => {
         flashMessage = "";
         flashBool = false;
-        errorFlash.removeChild(elem);
+        errorFlash.removeChild(pTag);
       }, flashTime);
     }
   });
@@ -183,9 +190,13 @@ if (handleBtn !== null) {
 const splitUrl = window.location.href.split("/");
 const urlLength = splitUrl.length;
 const urlPath = splitUrl[urlLength - 1];
-const userProfile = async () => {
+const myProfile = async () => {
   const fullName = document.querySelector("#displayFullName");
   const userHandle = document.querySelector("#displayUserHandle");
+  const followers = document.querySelector("#my_followers");
+  const following = document.querySelector("#my_following");
+  const credit = document.querySelector("#my_credit");
+  const elem = document.createElement("i");
   const authToken = localStorage.getItem("userSession");
 
   try {
@@ -197,9 +208,19 @@ const userProfile = async () => {
     });
     if (response.status === 200) {
       const data = await response.data.profile;
-      const full_name = data.user.name;
-      const user_handle = data.handle;
+      const {
+        user: { name: full_name },
+        handle: user_handle,
+        people_Who_Follow_Me,
+        people_Who_I_Follow,
+        credit: piCredit,
+      } = data;
 
+      followers.textContent = people_Who_Follow_Me;
+      following.textContent = people_Who_I_Follow;
+      credit.textContent = `${piCredit}`;
+      elem.textContent = `pi`;
+      credit.appendChild(elem);
       fullName.textContent = full_name;
       userHandle.textContent = `@${user_handle}`;
     }
@@ -208,7 +229,76 @@ const userProfile = async () => {
     if (errorMessage.length > 0) return errorMessage, error.response;
   }
 };
-if (urlPath === "profile.html") userProfile();
+const userProfile = async () => {
+  const getUserFromStorage = localStorage.getItem("userProfileName");
+  const fullName = document.querySelector("#displayFullName");
+  const userHandle = document.querySelector("#displayUserHandle");
+  const followers = document.querySelector("#user_followers");
+  const following = document.querySelector("#user_following");
+  const credit = document.querySelector("#user_credit");
+  const elem = document.createElement("i");
+  const authToken = localStorage.getItem("userSession");
+  if (authToken === null) followBtn.style.display = "none";
+
+  try {
+    const response = await instance.get(
+      `/profile/handle/${getUserFromStorage}`,
+      {
+        params: {
+          handle: getUserFromStorage,
+        },
+      }
+    );
+    const myProfile = await instance.get(`/profile`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${authToken}`,
+      },
+    });
+    if ((response.status && myProfile.status) === 200) {
+      const {
+        user: { name: full_name, _id: user_id },
+        handle: user_handle,
+        people_Who_Follow_Me,
+        people_Who_I_Follow,
+        credit: piCredit,
+        followers: userFollowers,
+        following: userFollowing,
+      } = response.data.profile;
+      const {
+        user: { _id: self_id },
+      } = myProfile.data.profile;
+      const hashedId =
+        "d1e8a70b5ccab1dc2f56bbf7e99f064a660c08e361a35751b9c483c88943d082";
+
+      followers.textContent = people_Who_Follow_Me;
+      following.textContent = people_Who_I_Follow;
+      credit.textContent = `${piCredit}`;
+      elem.textContent = `pi`;
+      credit.appendChild(elem);
+      fullName.textContent = full_name;
+      userHandle.textContent = `@${user_handle}`;
+      followBtn.dataset.userId = `${user_id}${hashedId}`;
+
+      if (self_id === user_id) {
+        followBtn.style.display = "none";
+      } else {
+        const theirFollowing = userFollowing.indexOf(self_id);
+        const foundUser = userFollowers.indexOf(self_id);
+        if (theirFollowing >= 0 && foundUser < 0)
+          followBtn.innerHTML = "Follow Back";
+        else if (foundUser >= 0) followBtn.innerHTML = "Unfollow";
+        else followBtn.innerHTML = "Follow";
+      }
+    }
+  } catch (error) {
+    const errorMessage = error.response.data.message;
+    if (errorMessage && errorMessage.length > 0)
+      return errorMessage, error.response;
+  }
+};
+if (urlPath === "profile.html") myProfile();
+if (urlPath === "userProfile.html") userProfile();
 
 // Upload webinar
 let certify_btn = document.querySelector("#certify");
@@ -287,7 +377,7 @@ if (logoutBtn !== null) {
           localStorage.removeItem("userSession");
           setTimeout(() => {
             window.location.href = "/";
-          }, 3000);
+          }, 2000);
         }
       }
     } catch (error) {
@@ -298,12 +388,12 @@ if (logoutBtn !== null) {
 
     // Flash message
     if (flashBool && flashMessage.length > 0) {
-      elem.textContent = flashMessage;
-      errorFlash.appendChild(elem);
+      pTag.textContent = flashMessage;
+      errorFlash.appendChild(pTag);
       setTimeout(() => {
         flashMessage = "";
         flashBool = false;
-        errorFlash.removeChild(elem);
+        errorFlash.removeChild(pTag);
       }, flashTime);
     }
   });
@@ -332,12 +422,12 @@ if (logoutAllBtn !== null) {
 
     // Flash message
     if (flashBool && flashMessage.length > 0) {
-      elem.textContent = flashMessage;
-      errorFlash.appendChild(elem);
+      pTag.textContent = flashMessage;
+      errorFlash.appendChild(pTag);
       setTimeout(() => {
         flashMessage = "";
         flashBool = false;
-        errorFlash.removeChild(elem);
+        errorFlash.removeChild(pTag);
       }, flashTime);
     }
   });
@@ -384,13 +474,99 @@ if (deleteAccountBtn !== null) {
 
     // Flash message
     if (flashBool && flashMessage.length > 0) {
-      elem.textContent = flashMessage;
-      errorFlash.appendChild(elem);
+      pTag.textContent = flashMessage;
+      errorFlash.appendChild(pTag);
       setTimeout(() => {
         flashMessage = "";
         flashBool = false;
-        errorFlash.removeChild(elem);
+        errorFlash.removeChild(pTag);
       }, flashTime);
+    }
+  });
+}
+
+// Search for a user
+if (searchBtn !== null) {
+  searchBtn.addEventListener("click", async (e) => {
+    e.preventDefault();
+    const searchName = document.querySelector("#search_user").value.trim();
+
+    try {
+      if (searchName === "") {
+        const message = "Cannot search empty fields!!!";
+        flashMessage = message;
+      } else {
+        const response = await instance.get(`/profile/handle/${searchName}`, {
+          params: {
+            handle: searchName,
+          },
+        });
+        if (response.status === 200) {
+          localStorage.setItem("userProfileName", searchName);
+          const {
+            handle,
+            user: { name: user_name },
+          } = response.data.profile;
+
+          pTag.setAttribute("class", "searched_user_name");
+          pTag2.setAttribute("class", "searched_user_handle");
+          pTag.textContent = user_name;
+          pTag2.textContent = `@${handle}`;
+          imgTag.src = "../../img/avatar.png";
+          imgTag.setAttribute("class", "searched_user_avatar");
+          linkDom.setAttribute("href", `/html/userProfile.html`);
+          linkDom.setAttribute("class", `searchedUserLink`);
+          divDom.setAttribute("class", "name_section");
+          divDom.appendChild(pTag);
+          divDom.appendChild(pTag2);
+          linkDom.appendChild(imgTag);
+          linkDom.appendChild(divDom);
+          searchDisplay.appendChild(linkDom);
+        }
+      }
+    } catch (error) {
+      const errorMessage = error.response.data.message;
+      if (errorMessage && errorMessage.length > 0) flashMessage = errorMessage;
+    }
+
+    flashBool = true;
+
+    // Flash message
+    if (flashBool && flashMessage.length > 0) {
+      pTag.textContent = flashMessage;
+      errorFlash.appendChild(pTag);
+      setTimeout(() => {
+        flashMessage = "";
+        flashBool = false;
+        errorFlash.removeChild(pTag);
+      }, flashTime);
+    }
+  });
+}
+
+// Follow or Unfollow a user
+if (followBtn !== null) {
+  followBtn.addEventListener("click", async (e) => {
+    e.preventDefault();
+    let user_id = await followBtn.dataset.userId.substr(0, 24).toString();
+
+    try {
+      const response = await instance.post(
+        `/profile/auth_follow_unfollow/${user_id}`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*",
+            Authorization: `Bearer ${authToken}`,
+          },
+          withCredentials: true,
+          credentials: "same-origin",
+        }
+      );
+      if (response.status === 200) window.location.reload();
+    } catch (error) {
+      const errorMessage = error.response.data.message;
+      return errorMessage;
     }
   });
 }

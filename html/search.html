@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!--CSS-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/styles.css" />
+    <link rel="icon" type="image/png" href="/img/logo.png" />
+
+    <!--Google Fonts-->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;700&display=swap"
+      rel="stylesheet"
+    />
+    <title>PI Webinars || Profile</title>
+  </head>
+  <body>
+    <div>
+      <h1>Pi Webinars</h1>
+
+      <nav class="footer" style="z-index: 100">
+        <ul class="ul">
+          <li class="li">
+            <a class="a" href="/index.html"
+              ><img
+                src="https://app.piwebinars.co.uk/img/Home_Icon.png"
+                width="30px;"
+              />Home</a
+            >
+          </li>
+          <li class="li">
+            <a class="a" href="/html/all-webinars.html"
+              ><img
+                src="https://app.piwebinars.co.uk/img/Watch_Icon.png"
+                width="30px;"
+              />Webinars</a
+            >
+          </li>
+          <li class="li">
+            <a class="a" href="/html/upload.html"
+              ><img
+                src="https://app.piwebinars.co.uk/img/Upload_Icon.png"
+                width="30px;"
+              />Upload</a
+            >
+          </li>
+          <li class="li">
+            <a class="a" href="/html/profile.html"
+              ><img
+                src="https://app.piwebinars.co.uk/img/Profile_Icon.png"
+                width="30px;"
+              />Profile</a
+            >
+          </li>
+        </ul>
+      </nav>
+
+      <div class="search-container">
+        <div class="searchInput">
+          <h3>Discover users . . .</h3>
+          <label for="search_user"></label>
+          <input
+            class="search_user"
+            id="search_user"
+            placeholder="Search user..."
+          />
+          <button type="submit" value="Search" id="search_btn">Search</button>
+        </div>
+        <div class="searched_results" id="searched_results">
+          <div class="error_log" id="error_log"></div>
+          <div class="searchedUser" id="searchedUser"></div>
+        </div>
+      </div>
+    </div>
+
+    <!--Scripts-->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="/js/pages/authentication.js"></script>
+    <script src="/js/routes.js"></script>
+    <script src="/js/pipayment.js"></script>
+    <script
+      src="https://kit.fontawesome.com/3aea44e36d.js"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

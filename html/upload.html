@@ -18,61 +18,61 @@
 <nav class="footer" style="z-index: 100">
   <ul class="ul">
     <div class="mobile">
-    <li class="li"><a class="a" href="/index.html"><img src="https://app.piwebinars.co.uk/img/Home_Icon.png" width="30px;">Home</a></li>
-    <li class="li"><a class="a" href="/html/all-webinars.html"><img src="https://app.piwebinars.co.uk/img/Watch_Icon.png" width="30px;">Webinars</a></li>
-    <li class="li"><a class="a" href="/html/upload.html"><img src="https://app.piwebinars.co.uk/img/Upload_Icon.png" width="30px;">Upload</a></li>
-    <li class="li"><a class="a" href="/html/profile.html"><img src="https://app.piwebinars.co.uk/img/Profile_Icon.png" width="30px;">Profile</a></li>
+    <li class="li"><a class="a" href="/index.html"><img src="https://app.piwebinars.co.uk/img/Home_Icon.png" width="40px;">Home</a></li>
+    <li class="li"><a class="a" href="./upload.html"><img src="https://app.piwebinars.co.uk/img/Upload_Icon.png" width="30px;">Upload</a></li>
+    <li class="li"><a class="a" href="./search.html"><img src="https://app.piwebinars.co.uk/img/Search_Icon.png" width="40px;">Search</a></li>
+    <li class="li"><a class="a" href="./profile.html"><img src="https://app.piwebinars.co.uk/img/Profile_Icon.png" width="40px;">Profile</a></li>
   </ul>
     </div>
   <div class="row footer desktop">
       <img height="60" style="position:relative;top:0;display: inline; float: left;" src="https://app.piwebinars.co.uk/img/logo-text.png" alt="logo"></img>
    
     <li class="li"><a class="a" href="/index.html"><img src="https://app.piwebinars.co.uk/img/Home_Icon.png" width="40px;">Home</a></li>
-    <li class="li"><a class="a" id="uploaddesktopmodal" onclick="openUploadPage()"><img src="https://app.piwebinars.co.uk/img/Upload_Icon.png" width="40px;">Upload</a></li>
-    <li class="li"><a class="a" href="/html/search.html"><img src="https://app.piwebinars.co.uk/img/Search_Icon.png" width="40px;">Search</a></li>
-    <li class="li"><a id="profile" class="a" href="/html/login.html"><img src="https://app.piwebinars.co.uk/img/Login_Icon.png" width="40px;">Login</a></li>
-      <li class="li"><a id="profile" class="a" href="/html/register.html"><img src="https://app.piwebinars.co.uk/img/Register_Icon.png" width="40px;">Register</a></li>
-    <li class="li"><a class="a" href="/html/profile.html"><img src="https://app.piwebinars.co.uk/img/Profile_Icon.png" width="40px;">Profile</a></li>
+    <li class="li"><a class="a" href="./upload.html"><img src="https://app.piwebinars.co.uk/img/Upload_Icon.png" width="30px;">Upload</a></li>
+    <li class="li"><a class="a" href="./search.html"><img src="https://app.piwebinars.co.uk/img/Search_Icon.png" width="40px;">Search</a></li>
+    <li class="li"><a class="a" href="./profile.html"><img src="https://app.piwebinars.co.uk/img/Profile_Icon.png" width="40px;">Profile</a></li>
     </div>
 </nav>    
   
-  <h2>Upload a Webinar</h2>
+  <h2>Upload a Webinar</h2><br><br>
+  <div class="error_log" id="error_log"></div>
    
- <form style="text-align: left; padding:5px;" action="/upload" method="POST">
-  <label for="file">Upload Webinar:</label>
-   <input  type="file" id="file"></input></br>
+ <form style="text-align: left; padding:5px;" action="/upload" method="POST" id="form">
+  <label for="videoUpload">Video :</label>
+   <input  type="file" id="videoUpload" name="videoUpload"></input></br>
  <label for="file_type">Select Filetype:</label>
   <select id="file_type" style="margin-bottom: 10px; margin-top: 10px;">
     <option class="list" value="MP4">MP4</option><br/>
     <option class="list" value="MOV">MOV</option><br/>
-</select><br/>
+  </select><br/>
 
+  <label for="thumbnailUpload">Thumbnail:</label>
+  <input type="file" id="thumbnailUpload" name="thumbnailUpload" style="margin-bottom: 20px;"></input></br>
+  
 <label for="title">Add a Title:</label></br>
-  <input style="width: 100%; margin-bottom: 10px;"  type="text" id="title" required>
+  <input style="width: 100%; margin-bottom: 10px;"  type="text" id="title" name="title" required>
 
 <label for="description">Add a Description:</label></br>
-  <input style="width: 100%; height: 50px; margin-bottom: 10px;"  type="text" id="description">
+  <input style="width: 100%; height: 50px; margin-bottom: 10px;" name="description" type="text" id="description">
 
 <label for="price">Set a Price:</label></br>
-  <input style="width: 100%; margin-bottom: 10px;"  type="number" id="price">
+  <input style="width: 100%; margin-bottom: 10px;"  type="number" id="price" name="amount">
 
-  <label for="thumbnail">Upload a Thumbnail:</label>
-  <input type="file" id="thumbnail" style="margin-bottom: 20px;"></input></br>
 
  <label>Choose a Category:</label>
-  <select name="catagories" id="category">
-    <option class="list" value="none" >None</option><br/>
-    <option class="list" value="cryptocurrency" >Cryptocurrency</option><br/>
-    <option class="list" value="education" >Eduction</option><br/>
-    <option class="list" value="fitness" >Fitness</option><br/>
-    <option class="list" value="food" >Food</option><br/>
-    <option class="list" value="history" >History</option><br/>
-    <option class="list" value="money" >Money</option><br/>
-    <option class="list" value="nature" >Nature</option><br/>
-    <option class="list" value="pi-network" >Pi Network</option><br/>
-    <option class="list" value="politics" >Politics</option><br/>
-    <option class="list" value="sports" >Sports</option><br/>
-    <option class="list" value="technology" >Technology</option><br/>
+  <select id="category">
+    <option class="list" value="none"  name="category">None</option><br/>
+    <option class="list" value="cryptocurrency"  name="category">Cryptocurrency</option><br/>
+    <option class="list" value="education"  name="category">Eduction</option><br/>
+    <option class="list" value="fitness"  name="category">Fitness</option><br/>
+    <option class="list" value="food"  name="category">Food</option><br/>
+    <option class="list" value="history"  name="category">History</option><br/>
+    <option class="list" value="money"  name="category">Money</option><br/>
+    <option class="list" value="nature"  name="category">Nature</option><br/>
+    <option class="list" value="pi-network"  name="category">Pi Network</option><br/>
+    <option class="list" value="politics"  name="category">Politics</option><br/>
+    <option class="list" value="sports"  name="category">Sports</option><br/>
+    <option class="list" value="technology"  name="category">Technology</option><br/>
   </select>
 
 <div style="text-align: left; margin-top: 20px;">

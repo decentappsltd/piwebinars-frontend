@@ -9,13 +9,6 @@
       gtag('js', new Date());
       gtag('config', 'G-DHEX8LQ19E');
     </script>
-          
-    <!--Scripts-->
-    <script src="https://sdk.minepi.com/pi-sdk.js"></script>
-    <script src="/js/routes.js"></script>
-    <script src="/js/pipayment.js"></script>
-    <script src="/js/pages/authentication.js"></script>
-    <script src="https://kit.fontawesome.com/3aea44e36d.js" crossorigin="anonymous"></script>
             
     <!--CSS-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -40,8 +33,8 @@
     <h4><span id="username"></span></h4>
     <h5> Welcome to Pi Webinars &#128075;<br/> An educational video platform powered by Pi.<br/></h5>
     
-    <button class="login" onclick="location.href='/html/login.html';">Login</button>
-<button class="register" onclick="location.href='/html/register.html';">Register</button>
+    <button class="login unAuthNav" onclick="location.href='/html/login.html';">Login</button>
+<button class="register unAuthNav" onclick="location.href='/html/register.html';">Register</button>
   
     <nav id="footer" style="display: none;">
       <ul class="ul">
@@ -52,10 +45,12 @@
           <a class="a" href="/html/all-webinars.html"><img src="https://app.piwebinars.co.uk/img/Watch_Icon.png" width="30px;">Webinars</a>
         </li>
         <li class="li">
-          <a class="a" href="/html/upload.html"><img src="https://app.piwebinars.co.uk/img/Upload_Icon.png" width="30px;">Upload</a>
+          <a class="a authNav" href="/html/upload.html"><img src="https://app.piwebinars.co.uk/img/Upload_Icon.png" width="30px;">Upload</a>
         </li>
+    <li class="li"><a id="profile" class="a unAuthNav" href="/html/login.html"><img src="https://app.piwebinars.co.uk/img/Login_Icon.png" width="40px;">Login</a></li>
+    <li class="li"><a id="profile" class="a unAuthNav" href="/html/register.html"><img src="https://app.piwebinars.co.uk/img/Register_Icon.png" width="40px;">Register</a></li>
         <li class="li">
-          <a class="a" href="/html/profile.html"><img src="https://app.piwebinars.co.uk/img/Profile_Icon.png" width="30px;">Profile</a>
+          <a class="a authNav" href="/html/profile.html"><img src="https://app.piwebinars.co.uk/img/Profile_Icon.png" width="30px;">Profile</a>
         </li>
       </ul>
     </nav>   
@@ -99,23 +94,6 @@
     }
   </script>
   <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-    
-    <script>
-      let image = sessionStorage.getItem("image");
-      if (image != 'true') {
-        const loadTimeout = setTimeout(loadImage, 1500);
-        auth();
-        sessionStorage.setItem("image", "true");
-      } else {
-        loadImage()
-      }
-      function loadImage() {
-        var l = document.getElementById("loadImage");
-        l.style.display = "none";
-        l.classList.remove('loadImage')
-        document.getElementById('footer').style.display = "block";
-      }
-    </script>
   
   <br/><br/><br/><br/>
   </div>
@@ -131,11 +109,11 @@
       <img height="60" style="position:relative;top:0;display: inline; float: left;" src="https://app.piwebinars.co.uk/img/logo-text.png" alt="logo"></img>
    
     <li class="li"><a class="a" href="/index.html"><img src="https://app.piwebinars.co.uk/img/Home_Icon.png" width="40px;">Home</a></li>
-      <li class="li"><a class="a" id="uploaddesktopmodal" onclick="openUploadPage()"><img src="https://app.piwebinars.co.uk/img/Upload_Icon.png" width="40px;">Upload</a></li>
+      <li class="li"><a class="a authNav" id="uploaddesktopmodal" href="./html/upload.html"><img src="https://app.piwebinars.co.uk/img/Upload_Icon.png" width="40px;">Upload</a></li>
     <li class="li"><a class="a" href="/html/search.html"><img src="https://app.piwebinars.co.uk/img/Search_Icon.png" width="40px;">Search</a></li>
-    <li class="li"><a id="profile" class="a" href="/html/login.html"><img src="https://app.piwebinars.co.uk/img/Login_Icon.png" width="40px;">Login</a></li>
-    <li class="li"><a id="profile" class="a" href="/html/register.html"><img src="https://app.piwebinars.co.uk/img/Register_Icon.png" width="40px;">Register</a></li>
-    <li class="li"><a class="a" href="/html/profile.html"><img src="https://app.piwebinars.co.uk/img/Profile_Icon.png" width="40px;">Profile</a></li>
+    <li class="li"><a id="profile" class="a unAuthNav" href="/html/login.html"><img src="https://app.piwebinars.co.uk/img/Login_Icon.png" width="40px;">Login</a></li>
+    <li class="li"><a id="profile" class="a unAuthNav" href="/html/register.html"><img src="https://app.piwebinars.co.uk/img/Register_Icon.png" width="40px;">Register</a></li>
+    <li class="li"><a class="a authNav" href="/html/profile.html"><img src="https://app.piwebinars.co.uk/img/Profile_Icon.png" width="40px;">Profile</a></li>
     </div>
   
     <!--Main Content-->
@@ -211,67 +189,18 @@
     </div>
     </div>
   
-  
-    <!--Upload Modal-->
-    <div class="modal" id="modal2">
-      <div class="modal-dialog">
-        <header class="modal-header">
-          Upload Webinar:
-          <button class="close-modal" aria-label="close modal" onclick="closeUploadPage()">✕</button>
-        </header>
-        <section class="modal-content">
-          <form style="text-align: left;">
-            <label for="vid">Upload Webinar:</label>
-            <input type="file" id="file"></input><br/>
-          
-            <label>Select Filetype:</label>
-            <select id="file_type" style="margin-bottom: 20px;">
-              <option class="list" value="MP4" >MP4</option><br/>
-              <option class="list" value="MOV" >MOV</option><br/>
-            </select><br/>
-
-            <label>Add a Title:</label></br>
-            <input style="width: 100%; margin-bottom: 10px;"  type="text" id="text" required>
-
-            <label>Add a Description:</label></br>
-            <input style="width: 100%; height: 50px; margin-bottom: 10px;"  type="text" id="description">
-
-            <label>Set a Price:</label></br>
-            <input style="width: 100%; margin-bottom: 10px;"  type="number" id="price">
-
-            <label for="own">Upload a Thumbnail:</label>
-            <input type="file" id="thumbnail" style="margin-bottom: 20px;"></input></br>
-
-            <label>Choose a Catagory:</label>
-            <select name="catagories">
-              <option class="list" value="none" >None</option><br/>
-              <option class="list" value="cryptocurrency" >Cryptocurrency</option><br/>
-              <option class="list" value="education" >Eduction</option><br/>
-              <option class="list" value="fitness" >Fitness</option><br/>
-              <option class="list" value="food" >Food</option><br/>
-              <option class="list" value="history" >History</option><br/>
-              <option class="list" value="money" >Money</option><br/>
-              <option class="list" value="nature" >Nature</option><br/>
-              <option class="list" value="pi-network" >Pi Network</option><br/>
-              <option class="list" value="politics" >Politics</option><br/>
-              <option class="list" value="sports" >Sports</option><br/>
-              <option class="list" value="technology" >Technology</option><br/>
-            </select>
-
-            <div style="text-align: left; margin-top: 20px;">
-              <input type="checkbox" id="own" required>
-              <label for="own"> I certify that I own this content</label></br>
-            </div><br/>
-
-            <button style="text-align: center" type="submit" value="Submit" onclick="createPost()">Submit</button>
-          </form>
-        </section>
-      </div>
-    </div>
     <a href="https://instagram.com/pi_webinars" class="fa fa-instagram"></a>
     <a href="https://twitter.com/pi_webinars" class="fa fa-twitter"></a>
     <a href="https://discord.gg/uT3yqpDXcj" class="fab fa-discord"></a>
     <h5>&copy; Decent Apps Ltd</h5></br>
+
+
+    <script src="https://sdk.minepi.com/pi-sdk.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="../js/pages/authentication.js"></script>
+    <script src="/js/routes.js"></script>
+    <!-- <script src="/js/pipayment.js"></script> -->
+    <script src="https://kit.fontawesome.com/3aea44e36d.js" crossorigin="anonymous"></script>
   </div>
   </body>
 </html>

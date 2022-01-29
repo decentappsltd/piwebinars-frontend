@@ -111,6 +111,15 @@ iframe {
 [data-*]{
   visibility: hidden;
 }
+a.authNav, a.unAuthNav {
+  display: none;
+}
+.showNav{
+  display: block;
+}
+.hideElem{
+  display: none;
+}
 h2 {
   color: #FBB44A;
   text-align: center; 
@@ -394,7 +403,7 @@ label {
 #google_translate_element {
   display: none;
 }
-#searchuserbuttonhref {
+.searchuserbuttonhref {
   all: unset;
   padding: 0.5rem; 
   background: rgb(9, 94, 151); 

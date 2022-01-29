@@ -1,6 +1,8 @@
+const formSection = document.querySelector("#form");
 const registerBtn = document.querySelector("#register");
 const uploadBtn = document.querySelector("#upload_btn");
 const loginBtn = document.querySelector("#login");
+const createUserProfile = document.querySelector("#create_profile");
 const handleBtn = document.querySelector("#handle");
 const logoutBtn = document.querySelector("#logout");
 const logoutAllBtn = document.querySelector("#logoutAll");
@@ -9,6 +11,8 @@ const errorFlash = document.querySelector("#error_log");
 const followBtn = document.querySelector("#follow_btn");
 const searchBtn = document.querySelector("#search_btn");
 const searchDisplay = document.querySelector("#searchedUser");
+const authNavv = document.querySelectorAll(".authNav");
+const unAuthNavv = document.querySelectorAll(".unAuthNav");
 
 // Variables
 let token;
@@ -31,6 +35,25 @@ const instance = axios.create({
   credentials: "same-origin",
 });
 // const instance = axios.create({ baseURL: "http://localhost:5000" });
+
+if (authToken !== null) {
+  authNavv.forEach((elem) => {
+    elem.classList.remove("authNav");
+    elem.classList.add("showNav");
+  });
+  unAuthNavv.forEach((elem) => {
+    elem.classList.remove(elem);
+  });
+} else {
+  authNavv.forEach((elem) => {
+    elem.classList.remove("unAuthNav");
+    elem.classList.add("showNav");
+  });
+  unAuthNavv.forEach((elem) => {
+    elem.classList.remove("unAuthNav");
+    elem.classList.add("hideNav");
+  });
+}
 
 // Login a user
 if (loginBtn !== null) {
@@ -58,7 +81,7 @@ if (loginBtn !== null) {
           sessionStorage.setItem("userSession", token);
           localStorage.setItem("userSession", token);
           flashMessage = message;
-          window.location.href = "/html/createProfile.html";
+          window.location.href = "/";
         }
         username = "";
         password = "";
@@ -223,6 +246,10 @@ const myProfile = async () => {
       credit.appendChild(elem);
       fullName.textContent = full_name;
       userHandle.textContent = `@${user_handle}`;
+
+      // Dynamic profile dom stats display
+      createUserProfile.style.display = "none";
+      document.querySelector(".stats").style.display = "block";
     }
   } catch (error) {
     const errorMessage = error.response.data.message;
@@ -235,7 +262,6 @@ const userProfile = async () => {
   const userHandle = document.querySelector("#displayUserHandle");
   const followers = document.querySelector("#user_followers");
   const following = document.querySelector("#user_following");
-  const credit = document.querySelector("#user_credit");
   const elem = document.createElement("i");
   const authToken = localStorage.getItem("userSession");
   if (authToken === null) followBtn.style.display = "none";
@@ -273,9 +299,7 @@ const userProfile = async () => {
 
       followers.textContent = people_Who_Follow_Me;
       following.textContent = people_Who_I_Follow;
-      credit.textContent = `${piCredit}`;
       elem.textContent = `pi`;
-      credit.appendChild(elem);
       fullName.textContent = full_name;
       userHandle.textContent = `@${user_handle}`;
       followBtn.dataset.userId = `${user_id}${hashedId}`;
@@ -301,6 +325,8 @@ if (urlPath === "profile.html") myProfile();
 if (urlPath === "userProfile.html") userProfile();
 
 // Upload webinar
+const video = document.querySelector("#videoUpload");
+const thumbnail = document.querySelector("#thumbnailUpload");
 let certify_btn = document.querySelector("#certify");
 if (certify_btn !== null) {
   upload_btn.disabled = true;
@@ -313,48 +339,52 @@ if (uploadBtn !== null) {
   uploadBtn.addEventListener("click", async (e) => {
     e.preventDefault();
     const authToken = localStorage.getItem("userSession");
-    const file = document.querySelector("#file").value;
-    const thumbnail = document.querySelector("#thumbnail").value;
-    const title = document.querySelector("#title").value;
-    const description = document.querySelector("#description").value;
-    const amount = document.querySelector("#price").value;
     const category = document.querySelector("#category");
     const categoryOption = category.options[category.selectedIndex];
     const fileType = document.querySelector("#file_type");
     const fileTypeOption = fileType.options[fileType.selectedIndex];
-    const { text: catTxt } = categoryOption;
+    const { text: categoryValue } = categoryOption;
     // const { value : ftOpt, text : ftTxt } = fileTypeOption;
+    const formData = new FormData(formSection);
+    formData.append("category", categoryValue);
 
-    if ((title || description) === "" || file === null)
+    if ((title || description) === "" || video === null)
       return "Unable to process.";
     else {
-      const formData = new FormData();
-      formData.append("videoUpload", file);
-      formData.append("thumbnailUpload", thumbnail);
-      formData.append("title", title);
-      formData.append("description", description);
-      formData.append("amount", amount);
-      formData.append("category", catTxt);
+      const message = "Please wait, Uploading your webinar . . . ";
+      pTag.textContent = message;
+      errorFlash.appendChild(pTag);
+      flashBool = true;
+      try {
+        const response = await instance.post(`/upload/file_upload`, formData, {
+          headers: {
+            "Content-Type": "multipart/form-data; boundary='--sampleBoundary'",
+            "Access-Control-Allow-Origin": "*",
+            Authorization: `Bearer ${authToken}`,
+          },
+          withCredentials: true,
+          credentials: "same-origin",
+        });
+        if (response.status === 200) {
+          const message = "Successfully uploaded your webinar !!!";
+          flashMessage = message;
+        }
+      } catch (error) {
+        const errorMessage = error.response.data.message;
+        if (errorMessage.length > 0) flashMessage = errorMessage;
+      }
+      flashBool = true;
 
-      const uploadData = {
-        title: title,
-        description,
-        category: catTxt,
-        amount,
-        videoUpload: file.value,
-        thumbnailUpload: thumbnail.value,
-        ...formData,
-      };
-
-      const response = await instance.post(`/upload/file_upload`, formData, {
-        headers: {
-          "content-type": "application/x-www-form-urlencoded",
-          "Content-Type":
-            "multipart/form-data; charset=UTF-8; boundary='--sampleBoundary'",
-          Authorization: `Bearer ${authToken}`,
-        },
-      });
-      console.log("Upload Response : ", response);
+      // Flash message
+      if (flashBool && flashMessage.length > 0) {
+        pTag.textContent = flashMessage;
+        errorFlash.appendChild(pTag);
+        setTimeout(() => {
+          flashMessage = "";
+          flashBool = false;
+          errorFlash.removeChild(pTag);
+        }, flashTime);
+      }
     }
   });
 }
@@ -544,6 +574,11 @@ if (searchBtn !== null) {
   });
 }
 
+// Create profile from profile
+if (createUserProfile !== null) {
+  document.querySelector(".stats").style.display = "none";
+}
+
 // Follow or Unfollow a user
 if (followBtn !== null) {
   followBtn.addEventListener("click", async (e) => {
@@ -696,3 +731,7 @@ function googleTranslate() {
   document.getElementById("google_translate_element").style.display = "block";
   document.getElementById("translate").style.display = "none";
 }
+
+window.onload = function () {
+  console.clear();
+};

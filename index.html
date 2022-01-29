@@ -47,9 +47,9 @@
         <li class="li">
           <a class="a authNav" href="/html/upload.html"><img src="https://app.piwebinars.co.uk/img/Upload_Icon.png" width="30px;">Upload</a>
         </li>
-    <li class="li"><a id="profile" class="a unAuthNav" href="/html/login.html"><img src="https://app.piwebinars.co.uk/img/Login_Icon.png" width="40px;">Login</a></li>
-    <li class="li"><a id="profile" class="a unAuthNav" href="/html/register.html"><img src="https://app.piwebinars.co.uk/img/Register_Icon.png" width="40px;">Register</a></li>
-        <li class="li">
+    <li class="li" style="margin-left:-15px;"><a id="profile" class="a unAuthNav" href="/html/login.html"><img src="https://app.piwebinars.co.uk/img/Login_Icon.png" width="30px;">Login</a></li>
+    <li class="li" style="margin-left:-10px; border-right:none;"><a id="profile" class="a unAuthNav" href="/html/register.html"><img src="https://app.piwebinars.co.uk/img/Register_Icon.png" width="30px;">Register</a></li>
+        <li class="li" style="margin-left:-15px;">
           <a class="a authNav" href="/html/profile.html"><img src="https://app.piwebinars.co.uk/img/Profile_Icon.png" width="30px;">Profile</a>
         </li>
       </ul>
@@ -94,6 +94,23 @@
     }
   </script>
   <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+    
+    <script>
+      let image = sessionStorage.getItem("image");
+      if (image != 'true') {
+        const loadTimeout = setTimeout(loadImage, 1500);
+        auth();
+        sessionStorage.setItem("image", "true");
+      } else {
+        loadImage()
+      }
+      function loadImage() {
+        var l = document.getElementById("loadImage");
+        l.style.display = "none";
+        l.classList.remove('loadImage')
+        document.getElementById('footer').style.display = "block";
+      }
+    </script>
   
   <br/><br/><br/><br/>
   </div>

@@ -20,22 +20,15 @@ async function auth() {
       .then(async function (auth) {
         const userName = auth.user.username;
         document.getElementById("username").innerHTML = userName;
-        const userPassword = await prompt('create or enter your password', "");
-        axios.post("https://server.piwebinars.co.uk/register", function (req, res) {
-          res.send(userName, userPassword);
-        })
-        .catch(function (error) {
-          console.error(error);
-          alert('Please register to use our app');
-          location.href = "/html/profile.html#register";
-        });
       })
      .catch(err);
     } catch (error) {
       console.error(error);
   }
 }
-  
+
+auth();
+
 function buyWebinar(webinarId, creatorId, categoryId) {
   if (status == 'true') {
     const creditAmountJSON = axios.get("https://server.piwebinars.co.uk/profile");

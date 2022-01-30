@@ -97,13 +97,14 @@
     
     <script>
       let image = sessionStorage.getItem("image");
-      if (image != 'true') {
-        const loadTimeout = setTimeout(loadImage, 1500);
-        auth();
-        sessionStorage.setItem("image", "true");
-      } else {
-        loadImage()
-      }
+      const loadTimeout = setTimeout(loadImage, 500);
+      // if (image != 'true') {
+      //   const loadTimeout = setTimeout(loadImage, 500);
+      //   auth();
+      //   sessionStorage.setItem("image", "true");
+      // } else {
+      //   loadImage()
+      // }
       function loadImage() {
         var l = document.getElementById("loadImage");
         l.style.display = "none";

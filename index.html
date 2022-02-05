@@ -10,6 +10,8 @@
       gtag('config', 'G-DHEX8LQ19E');
     </script>
             
+    <script src="https://sdk.minepi.com/pi-sdk.js"></script>
+    <script>Pi.init({ version: "2.0", sandbox: true });</script>
     <!--CSS-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/styles.css">
@@ -27,14 +29,10 @@
  
     <img src="/img/loadImage.png" class="loadImage" id="loadImage" alt="load"></img>
   
-    <h1>Pi Webinars</h1>
-    <img width="220" style="position:relative;top:0; margin-top: -50px; margin-bottom: -50px" src="/img/logo.png" alt="logo"/>
+    <img width="75%" style="position: -webkit-sticky; position: relative; top: 0; z-index: 100;" src="/img/logo-text.png" alt="logo"/>
   
     <h4><span id="username"></span></h4>
-    <h5> Welcome to Pi Webinars &#128075;<br/> An educational video platform powered by Pi.<br/></h5>
-    
-    <button class="login unAuthNav" onclick="location.href='/html/login.html';">Login</button>
-<button class="register unAuthNav" onclick="location.href='/html/register.html';">Register</button>
+    <h5> Welcome to Pi Webinars!<br/>Your educational video platform powered by Pi.<br/></h5>
   
     <nav id="footer" style="display: none;">
       <ul class="ul">
@@ -54,13 +52,32 @@
         </li>
       </ul>
     </nav>   
-     
-    <h2 class="rounded" style="margin-top: 20px;">Upcoming Live</h2>
-
-    <h5>There are no upcoming live webinars...</h5><br/>
-    
+        
     <h2 class="rounded" >Featured Webinars</h2>
     
+    <div class="postFeaturedSection">
+    
+    <!--Demo webinars for styling
+    <div id="title" class="rounded">
+  <img src=https://img.youtube.com/vi/KfDB9e_cO4k/maxresdefault.jpg style="position:relative;top:0;width:100%">
+    <h3>What is Value Investing?</h3></div>
+  
+  <div id="title" class="rounded">
+  <img src=https://img.youtube.com/vi/6dGYVKt1zw4/maxresdefault.jpg style="position:relative;top:0;width:100%">
+    <h3>South Korea: The Silent Cultural Superpower - Full Documentary</h3>
+  </div>
+  
+  <div id="title" class="rounded">
+  <img src=https://img.youtube.com/vi/YIhYCRBDOUo/maxresdefault.jpg style="position:relative;top:0;width:100%">
+    <h3>Winston Churchill ‘A Giant in The Century’ Documentary</h3>
+  </div>
+    
+   <div id="title" class="rounded" onclick="location.href='/html/webinar.html'">
+  <img src=https://img.youtube.com/vi/rvrmaDu61Tc/maxresdefault.jpg style="position:relative;top:0;width:100%">
+    <h3>Pi Payments (Pi Hackathon Workshop)</h3>
+  </div>-->
+    
+    <!--Modals-->
     <div class="modal" id="modal1">
     <div class="modal-dialog">
     <header class="modal-header">
@@ -83,6 +100,7 @@
   </div>
 </div>
     
+    <br>
   <button id="translate" onclick="googleTranslate()">Translate Page</button><br>
   
   <h5>&copy; Decent Apps Ltd</h5>
@@ -127,61 +145,66 @@
       <img height="60" style="position:relative;top:0;display: inline; float: left;" src="https://app.piwebinars.co.uk/img/logo-text.png" alt="logo"></img>
    
     <li class="li"><a class="a" href="/index.html"><img src="https://app.piwebinars.co.uk/img/Home_Icon.png" width="40px;">Home</a></li>
+        <li class="li"><a class="a" href="/html/search.html"><img src="https://app.piwebinars.co.uk/img/Search_Icon.png" width="40px;">Search</a></li>
       <li class="li"><a class="a authNav" id="uploaddesktopmodal" href="./html/upload.html"><img src="https://app.piwebinars.co.uk/img/Upload_Icon.png" width="40px;">Upload</a></li>
-    <li class="li"><a class="a" href="/html/search.html"><img src="https://app.piwebinars.co.uk/img/Search_Icon.png" width="40px;">Search</a></li>
     <li class="li"><a id="profile" class="a unAuthNav" href="/html/login.html"><img src="https://app.piwebinars.co.uk/img/Login_Icon.png" width="40px;">Login</a></li>
     <li class="li"><a id="profile" class="a unAuthNav" href="/html/register.html"><img src="https://app.piwebinars.co.uk/img/Register_Icon.png" width="40px;">Register</a></li>
     <li class="li"><a class="a authNav" href="/html/profile.html"><img src="https://app.piwebinars.co.uk/img/Profile_Icon.png" width="40px;">Profile</a></li>
     </div>
   
     <!--Main Content-->
-    <div class="row">
-      <h5 style="margin-top: 80px;"> Welcome to Pi Webinars &#128075; An educational video platform powered by Pi.</h5>
-    </div><br>
+  <style>
+    @media screen and (min-width: 620px) {
+      body {
+        overflow: hidden;
+      }
+    }
+
+  </style>
+    <br><br><br><br>
+    <div class="mainWebinars">
+        <div class="mainWebinarsContain">
+
+    <h2>Webinars</h2>
+    <i class="fas fa-filter"></i>
+  <select style="margin-bottom: 5px;" name="categories" id="select">
+    <option class="list" value="all">All</option><br />
+    <option class="list" value="cryptocurrency">Cryptocurrency</option><br />
+    <option class="list" value="diy">DIY</option><br />
+    <option class="list" value="education">Eduction</option><br />
+    <option class="list" value="finance">Finance</option><br />
+    <option class="list" value="fitness">Fitness</option><br />
+    <option class="list" value="food">Food</option><br />
+    <option class="list" value="gaming">Gaming</option><br />
+    <option class="list" value="history">History</option><br />
+    <option class="list" value="music">Music</option><br />
+    <option class="list" value="nature">Nature</option><br />
+    <option class="list" value="pets">Pets</option><br />
+    <option class="list" value="pinetwork">Pi Network</option><br />
+    <option class="list" value="politics">Politics</option><br />
+    <option class="list" value="sports">Sports</option><br />
+    <option class="list" value="technology">Technology</option><br />
+  </select><i style="margin-left: 5px;" class="fas fa-search" id="searchCat" onclick="searchCat()"></i><br />
   
-    <div class="row both">
-    <h2>Top webinars:</h2>
-    <select style="margin-bottom: 20px;" name="categories" id="select">
-      <option class="list" value="all">All</option><br />
-      <option class="list" value="cryptocurrency">Cryptocurrency</option><br />
-      <option class="list" value="diy">DIY</option><br />
-      <option class="list" value="education">Eduction</option><br />
-      <option class="list" value="finance">Finance</option><br />
-      <option class="list" value="fitness">Fitness</option><br />
-      <option class="list" value="food">Food</option><br />
-      <option class="list" value="gaming">Gaming</option><br />
-      <option class="list" value="history">History</option><br />
-      <option class="list" value="music">Music</option><br />
-      <option class="list" value="nature">Nature</option><br />
-      <option class="list" value="pets">Pets</option><br />
-      <option class="list" value="pinetwork">Pi Network</option><br />
-      <option class="list" value="politics">Politics</option><br />
-      <option class="list" value="sports">Sports</option><br />
-      <option class="list" value="technology">Technology</option><br />
-    </select><br />
-    <div class="force-overflow"></div>
-      <button style="bottom: 0;" onclick="showMore()">Show more</button>
-    </div>  
+  <i class="fas fa-filter"></i>
+  <input type="text" placeholder="Search Webinars.." id="search" class="searchbar">
+  <i style="margin-left: 5px;" class="fas fa-search" id="search" onclick="search()"></i></br>
+      
+    <div class="postFeaturedSection"></div>
   
-    <div class="row">
+    <div class="purchasedWebinars">
       <!--Your Purchases Render Div-->
-      <div class="left both">
-        <h2>Your Purchases:</h2>
-        <div>
-        <p2 style="margin-bottom: 20px;" id="empty1">You currently have no purchases. Go the the Pi Browser to purchase a webinar.</p2>
-      </div>
+      <h2>Purchases</h2>
+      <div id="postPurchasesSection"></div>
       <div class="force-overflow"></div>
     </div>
     
     
     <!--Your Webinars Render Div-->
-    <div class="right both">
-      <h2>Your Webinars:</h2>
-      <div>
-      </div>
-      <p2 style="margin-bottom: 20px;" id="empty2">You currently have no uploads.</p2>
+    <div class="yourWebinars">
+      <h2>Uploads</h2>
+      <div id="postUploadsSection"></div>
       <div class="force-overflow"></div>
-    </div>
     </div>
     
   
@@ -207,10 +230,12 @@
     </div>
     </div>
   
+  <!--
     <a href="https://instagram.com/pi_webinars" class="fa fa-instagram"></a>
     <a href="https://twitter.com/pi_webinars" class="fa fa-twitter"></a>
     <a href="https://discord.gg/uT3yqpDXcj" class="fab fa-discord"></a>
-    <h5>&copy; Decent Apps Ltd</h5></br>
+-->
+    <h5 id="copyright">&copy; Decent Apps Ltd</h5></br>
 
 
     <script src="https://sdk.minepi.com/pi-sdk.js"></script>

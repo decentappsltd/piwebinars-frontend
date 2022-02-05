@@ -325,7 +325,6 @@ label {
 .modal-dialog > * {
   padding: 20px;
 }
-
 .modal-header {
   background: var(--lightgray);
 }
@@ -414,6 +413,19 @@ label {
   font-weight: 600;
   font-size: 1rem;
 }
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+td, th {
+  border: 1px solid #E9E9E9;
+  text-align: left;
+  padding: 8px;
+}
+tr:nth-child(even) {
+  background-color: #E9E9E9;
+}
 
 
 /******************Desktop Styling******************/
@@ -454,8 +466,8 @@ iframe {
   min-width: 30%;
 }
 .avatar img{
-  height: 150px;
-  width: 150px;
+  height: 100px;
+  width: 100px;
 }
 .user_stats{
   min-width: 60%;
@@ -655,7 +667,9 @@ label {
   text-align: center;
   text-decoration: none;
   margin: 5px 2px;
-  float: right;
+  position: absolute;
+  right: 0;
+  bottom: 0;
 }
 .fa:hover, .fab:hover {
     opacity: 0.7;
@@ -691,17 +705,70 @@ label {
 .force-overflow {
 	min-height: 1000px;
 }
-.both::-webkit-scrollbar-track {
-	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-	border-radius: 10px;
-	background-color: #F5F5F5;
+.yourWebinars::-webkit-scrollbar {
+	width: 10px;
+	background-color: #FFFFFF;
 }
-.both::-webkit-scrollbar {
-	width: 12px;
-	background-color: #F5F5F5;
-}
-.both::-webkit-scrollbar-thumb {
+.yourWebinars::-webkit-scrollbar-thumb {
 	border-radius: 10px;
 	background-color: #FBB44A;
 }
+.mainWebinars::-webkit-scrollbar {
+	width: 10px;
+	background-color: #FFFFFF;
+}
+.mainWebinars::-webkit-scrollbar-thumb {
+	border-radius: 10px;
+	background-color: #FBB44A;
+}
+.purchasedWebinars::-webkit-scrollbar {
+	width: 10px;
+	background-color: #FFFFFF;
+}
+.purchasedWebinars::-webkit-scrollbar-thumb {
+	border-radius: 10px;
+	background-color: #FBB44A;
+}
+  .mainWebinars {
+    height: 85vh;
+    width: 60vw;
+    position: absolute;
+    left: 0;
+    border-right: solid 1px;
+    overflow-y: scroll;
+  }
+  .mainWebinarsContain {
+    column-count: 2;
+    column-width: 100px;
+    padding-right: 5px;
+  }
+  .purchasedWebinars {
+    height: 40vh;
+    width: 30vw;
+    border-bottom: solid 1px;
+    position: absolute;
+    right: 0;
+    overflow-y: scroll;
+    padding-right: 3.5vw;
+    padding-left: 4vw;
+  }
+  .yourWebinars {
+    height: 40vh;
+    width: 30vw;
+    position: absolute;
+    right: 0;
+    top: 55vh;
+    overflow-y: scroll;
+    padding-right: 3.5vw;
+    padding-left: 4vw;
+  }
+  #copyright {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background: #FFFFFF;
+  }
+  .rounded {
+    break-inside: avoid-column;
+  }
 }

@@ -29,7 +29,7 @@ async function auth() {
 
 auth();
 
-function buyWebinar(webinarId, creatorId, categoryId) {
+function buyWebinar(webinarId, creatorId) {
   if (status == 'true') {
     const creditAmountJSON = axios.get("https://server.piwebinars.co.uk/profile");
     const creditAmount = JSON.parse(creditAmountJSON);
@@ -58,13 +58,13 @@ function buyWebinar(webinarId, creatorId, categoryId) {
     axios.post("https://server.piwebinars.co.uk/payment/complete", function(res, req) {
       res.send(user_id, paymentId, txid);
     });
-    showWebinar(webinarId, creatorId, categoryId);
+    showWebinar(webinarId, creatorId);
     const profileCurrentUser2 = axios.get("https://server.piwebinars.co.uk/profile");
     const profileCurrentUser1 = JSON.parse(profileCurrentUser2);
     const profileCurrentUser = obj["profile"];
     const userId1 = profileCurrentUser[i].userId;
     axios.post(
-      `https://server.piwebinars.co.uk/post/purchases/${userId1}/${categoryId}/${creatorId}/${webinarId}`
+      `https://server.piwebinars.co.uk/post/purchases/${userId1}/${creatorId}/${webinarId}`
     );
   },
   onCancel: function(paymentId) { /* ... */ },
@@ -80,14 +80,16 @@ function buyWebinar(webinarId, creatorId, categoryId) {
 };
   
 function buyCredit() {
-  var creditAmount = prompt('Amount:', '');
+  //var creditAmount = prompt('Amount:', '');
   if (status == 'true') {
   try {
     Pi.createPayment({
-      amount: creditAmount,
-      memo: `Buy ${creditAmount} credits`,
-      metadata: { purchaseCredits }
-}, {
+      // amount: creditAmount,
+      // memo: `Buy ${creditAmount} credits`,
+      amount: 1;
+      memo: "testnet developing";
+      metadata: { "testing" }
+}), {
   onReadyForServerApproval: function(paymentId) {           
     axios.post("https://server.piwebinars.co.uk/payment/approve", function(res, req) {
       res.send(paymentId);
@@ -96,12 +98,12 @@ function buyCredit() {
   onReadyForServerCompletion: function(paymentId, txid) {
     axios.post("https://server.piwebinars.co.uk/payment/complete", function(res, req) {
       res.send(paymentId, txid);
-      buyCredits(creditAmount);
+      //buyCredits(creditAmount);
     });
   },
   onCancel: function(paymentId) { /* ... */ },
   onError: function(error, payment) { /* ... */ },
-});
+};
   } catch (error) {
     console.error(error);
   }

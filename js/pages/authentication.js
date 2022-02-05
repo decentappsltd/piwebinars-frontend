@@ -712,6 +712,14 @@ function closeModal6() {
   document.getElementById("modal6").classList.remove("is-visible");
 }
 
+function openModal7() {
+  document.getElementById("modal7").classList.add("is-visible");
+}
+
+function closeModal7() {
+  document.getElementById("modal7").classList.remove("is-visible");
+}
+
 function showMore(featured, webinars) {
   var x = featured.length;
   var feature = webinars.slice(0, x + 20);

@@ -11,7 +11,10 @@
     </script>
             
     <script src="https://sdk.minepi.com/pi-sdk.js"></script>
-    <script>Pi.init({ version: "2.0", sandbox: true });</script>
+    <script>
+      const Pi = window.Pi;
+      Pi.init({ version: "2.0", sandbox: true })
+    </script>
     <!--CSS-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/styles.css">
@@ -55,7 +58,9 @@
         
     <h2 class="rounded" >Featured Webinars</h2>
     
-    <div class="postFeaturedSection">
+    <div class="postFeaturedSection"></div>
+      
+    <button onclick="buyCredit()">Test Payment</button>
     
     <!--Demo webinars for styling
     <div id="title" class="rounded">
@@ -132,13 +137,10 @@
     </script>
   
   <br/><br/><br/><br/>
-  </div>
+    </div>
   
   <div class="desktop">
-        <!-- Google Tag Manager (noscript) -->
-    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KRPNL55"
-    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-    <!-- End Google Tag Manager (noscript) -->
+
    
     <!--Header-->
     <div class="row footer">
@@ -191,6 +193,8 @@
   <i style="margin-left: 5px;" class="fas fa-search" id="search" onclick="search()"></i></br>
       
     <div class="postFeaturedSection"></div>
+  </div>
+  </div>
   
     <div class="purchasedWebinars">
       <!--Your Purchases Render Div-->
@@ -237,13 +241,12 @@
 -->
     <h5 id="copyright">&copy; Decent Apps Ltd</h5></br>
 
-
+</div>
     <script src="https://sdk.minepi.com/pi-sdk.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="../js/pages/authentication.js"></script>
     <script src="/js/routes.js"></script>
-    <!-- <script src="/js/pipayment.js"></script> -->
+    <script src="/js/pipayment.js"></script>
     <script src="https://kit.fontawesome.com/3aea44e36d.js" crossorigin="anonymous"></script>
-  </div>
   </body>
 </html>

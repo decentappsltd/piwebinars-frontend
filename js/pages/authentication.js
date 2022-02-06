@@ -365,6 +365,9 @@ if (uploadBtn !== null) {
           withCredentials: true,
           credentials: "same-origin",
         });
+        const percentUpload = response.body;
+        const message = percentUpload;
+        flashMessage = message;
         if (response.status === 200) {
           const message = "Successfully uploaded your webinar !!!";
           flashMessage = message;

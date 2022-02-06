@@ -32,7 +32,7 @@ function buyWebinar(webinarId, creatorId) {
       axios.post("https://server.piwebinars.co.uk/payments/credit", async function(req, res) {
         await res.send(currentUser);
       });
-    showWebinar(webinarId, creatorId, categoryId);
+    showWebinar(webinarId, creatorId);
   } else {
   try {
    Pi.createPayment({
@@ -72,13 +72,11 @@ function buyWebinar(webinarId, creatorId) {
 };
   
 function buyCredit() {
-  //var creditAmount = prompt('Amount:', '');
+  var creditAmount = prompt('Amount:', '');
   if (status == 'true') {
     Pi.createPayment({
-      // amount: creditAmount,
-      // memo: `Buy ${creditAmount} credits`,
-      amount: 1,
-      memo: "testnet developing",
+      amount: creditAmount,
+      memo: `Buy ${creditAmount} credits`,
       metadata: { },
 }, {
   onReadyForServerApproval: function(paymentId) {           
@@ -89,7 +87,7 @@ function buyCredit() {
   onReadyForServerCompletion: function(paymentId, txid) {
     axios.post("https://server.piwebinars.co.uk/payment/complete", function(res, req) {
       res.send(paymentId, txid);
-      //buyCredits(creditAmount);
+      buyCredits(creditAmount);
     });
   },
   onCancel: function(paymentId) { /* ... */ },
@@ -102,4 +100,27 @@ function buyCredit() {
   
 function withdrawCredit() {
   alert('Payments are not availble until mainnet')
+}
+/******Debugging Payment*********/
+const onReadyForServerApproval = (paymentId) => {
+  return axios.post('https://server.piwebinars.co.uk/payment/approve', {paymentId});
+}
+
+const onReadyForServerCompletion = (paymentId, txid) => {
+  return axios.post('https://server.piwebinars.co.uk/payment/complete', {paymentId, txid});
+}
+
+function testPayment(onReadyForServerApproval, onReadyForServerCompletion, onCancel, onError) {
+  const paymentData = {
+    amount: 1,
+    memo: "testPayment",
+    metadata: {productId: "test"}
+  };
+  const callbacks = {
+    onReadyForServerApproval: onReadyForServerApproval,
+    onReadyForServerCompletion: onReadyForServerCompletion,
+    onCancel: onCancel,
+    onError: onError
+  };
+  window.Pi.createPayment(paymentData, callbacks);
 }

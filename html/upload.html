@@ -28,8 +28,8 @@
       <img height="60" style="position:relative;top:0;display: inline; float: left;" src="https://app.piwebinars.co.uk/img/logo-text.png" alt="logo"></img>
    
     <li class="li"><a class="a" href="/index.html"><img src="https://app.piwebinars.co.uk/img/Home_Icon.png" width="40px;">Home</a></li>
+      <li class="li"><a class="a" href="./search.html"><img src="https://app.piwebinars.co.uk/img/Search_Icon.png" width="40px;">Search</a></li>
     <li class="li"><a class="a" href="./upload.html"><img src="https://app.piwebinars.co.uk/img/Upload_Icon.png" width="40px;">Upload</a></li>
-    <li class="li"><a class="a" href="./search.html"><img src="https://app.piwebinars.co.uk/img/Search_Icon.png" width="40px;">Search</a></li>
     <li class="li"><a class="a" href="./profile.html"><img src="https://app.piwebinars.co.uk/img/Profile_Icon.png" width="40px;">Profile</a></li>
     </div>
 </nav>    
@@ -58,6 +58,8 @@
 <label for="price">Set a Price:</label></br>
   <input style="width: 100%; margin-bottom: 10px;"  type="number" id="price" name="amount">
 
+<a id="priceGuide" onclick="openModal7()">See Price Guide</a>
+<br><br>
 
  <label>Choose a Category:</label>
   <select id="category">
@@ -84,6 +86,39 @@
 </form>
 
 <br/><br/><br/>
+
+<div class="modal" id="modal7">
+      <div class="modal-dialog">
+        <header class="modal-header">
+          Price Guide:
+          <button class="close-modal" onclick="closeModal7()">✕</button>
+        </header>
+          <section class="modal-content">
+            <table>
+              <tr>
+                <th>Webinar Length</th>
+                <th>Recommended Price</th>
+              </tr>
+              <tr>
+                <th>5-10mins</th>
+                <th>2Pi</th>
+              </tr>
+              <tr>
+                <th>10-20mins</th>
+                <th>5Pi</th>
+              </tr>
+              <tr>
+                <th>20-40mins</th>
+                <th>8Pi</th>
+              </tr>
+              <tr>
+                <th>40-60mins</th>
+                <th>10Pi</th>
+              </tr>
+            </table>
+          </section>
+        </div>
+      </div>
 
 <script src="https://sdk.minepi.com/pi-sdk.js"></script>
 <script>

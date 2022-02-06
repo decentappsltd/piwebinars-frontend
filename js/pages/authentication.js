@@ -365,6 +365,9 @@ if (uploadBtn !== null) {
           withCredentials: true,
           credentials: "same-origin",
         });
+        const percentUpload = response.body;
+        const message = percentUpload;
+        flashMessage = message;
         if (response.status === 200) {
           const message = "Successfully uploaded your webinar !!!";
           flashMessage = message;
@@ -710,6 +713,14 @@ function openModal6() {
 
 function closeModal6() {
   document.getElementById("modal6").classList.remove("is-visible");
+}
+
+function openModal7() {
+  document.getElementById("modal7").classList.add("is-visible");
+}
+
+function closeModal7() {
+  document.getElementById("modal7").classList.remove("is-visible");
 }
 
 function showMore(featured, webinars) {

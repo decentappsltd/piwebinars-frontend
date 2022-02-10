@@ -26,14 +26,14 @@ iframe {
 }
 .profile{
   height: auto;
-  width: 90%;
+  width: 85%;
   display: flex;
   min-height: 15vh;
   justify-content: space-between;
   align-items: center;
   flex-direction: column;
   margin: 2rem auto;
-  padding: 2rem 1rem;
+  padding: 2rem .5rem;
   border: .4rem solid #000;
 }
 .avatar{
@@ -68,8 +68,8 @@ iframe {
   font-size: 1.3rem;
 }
 .user_stats{
-  width: auto;
-  min-width: 100%;
+  width: 100%;
+  min-width: auto;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -78,7 +78,7 @@ iframe {
 .user_stats p{
   width: 100%;
   font-weight: bolder;
-  font-size: 1.3rem;
+  font-size: 1.2rem;
 }
 .searchedUserLink{
   width: 40%;

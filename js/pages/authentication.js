@@ -25,6 +25,7 @@ const imgTag = document.createElement("img");
 const linkDom = document.createElement("a");
 const divDom = document.createElement("div");
 const authToken = localStorage.getItem("userSession");
+const sessToken = sessionStorage.getItem("userSession");
 const instance = axios.create({
   baseURL: "https://piwebinars-server.herokuapp.com",
   headers: {
@@ -36,7 +37,7 @@ const instance = axios.create({
 });
 // const instance = axios.create({ baseURL: "http://localhost:5000" });
 
-if (authToken !== null) {
+if (sessToken !== null) {
   authNavv.forEach((elem) => {
     elem.classList.remove("authNav");
     elem.classList.add("showNav");
@@ -351,23 +352,39 @@ if (uploadBtn !== null) {
     if ((title || description) === "" || video === null)
       return "Unable to process.";
     else {
-      const message = "Please wait, Uploading your webinar . . . ";
-      pTag.textContent = message;
-      errorFlash.appendChild(pTag);
-      flashBool = true;
       try {
-        const response = await instance.post(`/upload/file_upload`, formData, {
-          headers: {
-            "Content-Type": "multipart/form-data; boundary='--sampleBoundary'",
-            "Access-Control-Allow-Origin": "*",
-            Authorization: `Bearer ${authToken}`,
+        let message = `Preparing your upload . . .`;
+        pTag.textContent = message;
+        errorFlash.appendChild(pTag);
+        flashBool = true;
+        const config = {
+          onUploadProgress: (progressEvent) => {
+            const percentCompleted = Math.round(
+              (progressEvent.loaded * 100) / progressEvent.total
+            );
+            let message = `Uploading your webinar . . . ${percentCompleted}%`;
+            if (percentCompleted === 100)
+              message = "Please wait, verifying your upload . . .";
+            pTag.textContent = message;
+            errorFlash.appendChild(pTag);
+            flashBool = true;
           },
-          withCredentials: true,
-          credentials: "same-origin",
-        });
-        const percentUpload = response.body;
-        const message = percentUpload;
-        flashMessage = message;
+        };
+        const response = await instance.post(
+          `/upload/file_upload`,
+          formData,
+          config,
+          {
+            headers: {
+              "Content-Type":
+                "multipart/form-data; boundary='--sampleBoundary'",
+              "Access-Control-Allow-Origin": "*",
+              Authorization: `Bearer ${authToken}`,
+            },
+            withCredentials: true,
+            credentials: "same-origin",
+          }
+        );
         if (response.status === 200) {
           const message = "Successfully uploaded your webinar !!!";
           flashMessage = message;
@@ -743,6 +760,6 @@ function googleTranslate() {
   document.getElementById("translate").style.display = "none";
 }
 
-window.onload = function () {
-  console.clear();
-};
+// window.onload = function () {
+//   console.clear();
+// };

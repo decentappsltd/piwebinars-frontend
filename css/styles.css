@@ -6,8 +6,8 @@
 }
 body {
   font-family: 'Ubuntu', sans-serif;
-  background-image: url("https://app.piwebinars.co.uk/img/background.png");
-  color: #36454F;
+/*   background-image: url("https://app.piwebinars.co.uk/img/background.png"); */
+  color: #b44afb;
   text-align: center;
 }
 h1 {
@@ -138,8 +138,8 @@ span {
   font-weight: bold;
 }
 .error_log{
-  background-color: #e05151;
-  color: #fff;
+  background-color: #4afbb4;
+  color: #b44afb;
   width: 90%;
   min-height: 10vh;
   height: auto;
@@ -152,7 +152,7 @@ span {
 }
 h5 {
   display: block;
-  color: #36454F;
+/*   color: #36454F; */
   margin-left: auto;
   margin-right: auto;
   margin-top: 20px;
@@ -160,16 +160,24 @@ h5 {
 #webinar {
   display: none;
 }
-#title {
+.title {
   border-style: solid;
-  border-color: #36454F;
+  border-color: #4afbb4;
   border-radius: 5px;
   margin-top: 20px;
   background: #FFFFFF;
 }
+#upload_btn {
+  padding: 5px;
+  border: outset 2px;
+  border-color: #b44afb;
+  background-color: #fbb44a;
+  font-size: 15px;
+  font-weight: bold;
+}
 button {
   background-color: #FBB44A;
-  color: #36454F;
+/*   color: #36454F; */
   padding: 0px 30px;
   font-size: 15px;
   border: outset;
@@ -225,7 +233,7 @@ button {
   text-decoration: none;
   display: inline-block;
   text-align: left;
-  color: #36454F;
+/*   color: #36454F; */
   margin-bottom: 20px;
   border-style: solid;
   border-color: #FBB44A;
@@ -236,7 +244,7 @@ button {
 .list {
   font-size: 15px;
   background: #FFFFFF;
-  color: #36454F;
+/*   color: #36454F; */
   margin-bottom: 1px;
   text-decoration: none;
   text-align: center;
@@ -275,7 +283,7 @@ label {
   box-shadow: none;
 }
 #translate {
-  color: blue;
+  color: #4afbb4;
   margin-top:10px;
   background: #FFFFFF;
   border-style: none;
@@ -283,9 +291,9 @@ label {
   box-shadow: none;
 }
 .register, .login {
-  color: blue;
+  color: #b44afb;
   margin-top: 10px;
-  background: #E9E9E9;
+  background: #4afbb4;
   border-style: none;
   font-size: 15px;
   padding: 5px;
@@ -298,6 +306,45 @@ label {
   --white: #fff;
   --black: rgba(0, 0, 0, 0.8);
   --bounceEasing: cubic-bezier(0.51, 0.92, 0.24, 1.15);
+}
+.landing {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: black;
+  visibility: hidden;
+  opacity: 0;
+  transition: all 1s ease-out;
+  z-index: 200;
+  padding: 10px;
+  line-height: 1.8;
+}
+.landingBtn {
+  padding: 5px;
+  border: outset 2px;
+  border-color: #b44afb;
+  background-color: #fbb44a;
+  font-size: 15px;
+  font-weight: bold;
+  width: 80vw;
+  opacity: 1;
+}
+.landingBtnDesk {
+  padding: 5px;
+  border: outset 2px;
+  border-color: #b44afb;
+  background-color: #fbb44a;
+  font-size: 15px;
+  font-weight: bold;
+  width: 40vw;
+  opacity: 1;
+/*   position: absolute;
+  left: 50px; */
 }
 .modal {
   position: fixed;
@@ -316,7 +363,7 @@ label {
 }
 .is-visible {
   visibility: visible;
-  opacity: 1;
+  opacity: 0.9;
 }
 .modal-dialog {
   width: 95%;
@@ -341,6 +388,10 @@ label {
   text-decoration: none;
   margin: 5px 2px;
   float: right;
+  color: black;
+}
+.fas {
+  color: #36454F;
 }
 .fa:hover, .fab:hover {
     opacity: 0.7;
@@ -425,6 +476,9 @@ td, th {
 }
 tr:nth-child(even) {
   background-color: #E9E9E9;
+}
+.thumbnail {
+  width: 80vw;
 }
 
 
@@ -609,9 +663,9 @@ label {
   display: none;
 }
 .register, .login {
-  color: blue;
+  color: #b44afb;
   margin-top: 10px;
-  background: #E9E9E9;
+  background: #4afbb4;
   border-style: none;
   font-size: 25px;
   padding: 10px;
@@ -770,5 +824,8 @@ label {
   }
   .rounded {
     break-inside: avoid-column;
+  }
+  .thumbnail {
+    width: 20vw;
   }
 }

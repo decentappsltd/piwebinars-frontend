@@ -27,7 +27,7 @@ const divDom = document.createElement("div");
 const authToken = localStorage.getItem("userSession");
 const sessToken = sessionStorage.getItem("userSession");
 const instance = axios.create({
-  baseURL: "https://piwebinars-server.herokuapp.com",
+  baseURL: "https://piwebinarsdev.herokuapp.com",
   headers: {
     "Access-Control-Allow-Origin": "*",
     Authorization: `Bearer ${authToken}`,
@@ -238,6 +238,7 @@ const myProfile = async () => {
         people_Who_Follow_Me,
         people_Who_I_Follow,
         credit: piCredit,
+        following: userFollowing
       } = data;
 
       followers.textContent = people_Who_Follow_Me;
@@ -247,6 +248,7 @@ const myProfile = async () => {
       credit.appendChild(elem);
       fullName.textContent = full_name;
       userHandle.textContent = `@${user_handle}`;
+      localStorage.setItem("following", userFollowing);
 
       // Dynamic profile dom stats display
       createUserProfile.style.display = "none";
@@ -258,7 +260,7 @@ const myProfile = async () => {
   }
 };
 const userProfile = async () => {
-  const getUserFromStorage = localStorage.getItem("userProfileName");
+  const getUserFromStorage = localStorage.getItem("user_id");
   const fullName = document.querySelector("#displayFullName");
   const userHandle = document.querySelector("#displayUserHandle");
   const followers = document.querySelector("#user_followers");
@@ -269,10 +271,10 @@ const userProfile = async () => {
 
   try {
     const response = await instance.get(
-      `/profile/handle/${getUserFromStorage}`,
+      `/profile/user/${getUserFromStorage}`,
       {
         params: {
-          handle: getUserFromStorage,
+          user_id: getUserFromStorage,
         },
       }
     );
@@ -552,11 +554,12 @@ if (searchBtn !== null) {
           },
         });
         if (response.status === 200) {
-          localStorage.setItem("userProfileName", searchName);
+          // localStorage.setItem("userProfileName", searchName);
           const {
             handle,
-            user: { name: user_name },
+            user: { name: user_name, _id: userId },
           } = response.data.profile;
+          localStorage.setItem("user_id", userId);
 
           pTag.setAttribute("class", "searched_user_name");
           pTag2.setAttribute("class", "searched_user_handle");
@@ -625,24 +628,6 @@ if (followBtn !== null) {
     }
   });
 }
-
-// Display webinars
-const showWebinar = (webinarId, creatorId, categoryId) => {
-  var userId = creatorId;
-  var file_id = webinarId;
-  var collection_name = categoryId;
-  const purchasedWebinarJSON = axios.get(
-    `/upload/${collection_name}/${userId}/${file_id}`
-  );
-  const purchasedWebinar = JSON.parse(purchasedWebinarJSON);
-  const currentWebinar = purchasedWebinar["upload"];
-  document.getElementById("modal1").classList.add("isVisible");
-  document.getElementById("usersPurchase").src = currentWebinar[i].file;
-  renderComments(purchasedWebinar);
-  document.getElementById("followCreator").onclick = function () {
-    axios.post(`/auth_follow_unfollow/${userId}`);
-  };
-};
 
 function renderComments(purchasedWebinar) {
   const currentComments = purchasedWebinar["comments"];
@@ -738,6 +723,14 @@ function openModal7() {
 
 function closeModal7() {
   document.getElementById("modal7").classList.remove("is-visible");
+}
+
+function openLandingPage() {
+  document.getElementById("landingPage").classList.add("is-visible");
+}
+
+function closeLandingPage() {
+  document.getElementById("landingPage").classList.remove("is-visible");
 }
 
 function showMore(featured, webinars) {

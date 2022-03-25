@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html>
-  <head>      
+  <head>
     <!--Scripts-->
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <!--     <script src="/js/pipayment.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="/js/pages/authentication.js"></script>
     <script src="/js/pages/all-webinars.js"></script>
             
@@ -18,7 +18,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;700&display=swap" rel="stylesheet">
   </head>
   <body>
-  <h1 >Pi Webinars</h1>
+  <h1>Pi Webinars</h1>
   
 <nav class="footer" style="z-index: 100">
   <ul class="ul">
@@ -39,18 +39,17 @@
     <li class="li"><a id="profile" class="a unAuthNav" href="./login.html"><img src="https://app.piwebinars.co.uk/img/Login_Icon.png" width="40px;">Login</a></li>
       <li class="li"><a id="profile" class="a unAuthNav" href="./register.html"><img src="https://app.piwebinars.co.uk/img/Register_Icon.png" width="40px;">Register</a></li>
     </div>
-</nav>     
+</nav> 
     
-    <a class="back_button" href="/html/profile.html">Back</a>
+    <a class="back_button" href="/html/userProfile.html">Back</a>
+
+    <h2>Creator's Webinars:</h2>
     
-    <h2>Your Purchased Webinars:</h2>
+    <div class="creatorSection"></div><br><br><br>
     
-    <div class="purchasesSection"></div><br><br><br>
-    
-  <script>
-    renderPurchasedWebinars();
+    <script>
+      renderCreatorsWebinars();
   </script>
-    
-    <br><br><br>
+        <br><br><br>
 </body>
 </html>

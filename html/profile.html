@@ -46,7 +46,7 @@
     <div class="stats">
       <div class="user_stats">
         <p>Followers <span id="my_followers"></span></p>
-        <p>Following <span id="my_following"></span></p>
+        <p onclick="seeFollowing()"><u>Following <span id="my_following"></span></u></p>
         <p>Credit <span id="my_credit"></span></p>
         </div>
     </div>
@@ -77,9 +77,10 @@
 </div>
 </div>
 
-<br><br><br><br><br><br><br><br>
+<br><br>
 
-<div class="error_log" id="error_log"></div>
+<div style="margin-top: 120px;" class="error_log desktop" id="error_log"></div>
+<div class="error_log mobile" id="error_log"></div>
 
 <br><br>
 <button class="logout" id="logout">Logout</button>
@@ -89,11 +90,16 @@
     <br><br><br>
 </div>
 
+<script>
+  async function seeFollowing() {
+    
+    location.href='/html/following.html';
+  }
+</script>
 
     <!--Scripts-->
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="/js/pages/authentication.js"></script>
-    <script src="/js/routes.js"></script>
     <script src="/js/pipayment.js"></script>
     <script src="https://kit.fontawesome.com/3aea44e36d.js" crossorigin="anonymous"></script>
 </body>

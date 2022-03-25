@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html>
-  <head>      
+  <head>
     <!--Scripts-->
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <!--     <script src="/js/pipayment.js"></script> -->
-    <script src="/js/pages/authentication.js"></script>
-    <script src="/js/pages/all-webinars.js"></script>
+<!--     <script src="/js/pages/authentication.js"></script> -->
+<!--     <script src="/js/pages/all-webinars.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
             
     <!--CSS-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,7 +18,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;700&display=swap" rel="stylesheet">
   </head>
   <body>
-  <h1 >Pi Webinars</h1>
+  <h1>Pi Webinars</h1>
   
 <nav class="footer" style="z-index: 100">
   <ul class="ul">
@@ -39,18 +39,46 @@
     <li class="li"><a id="profile" class="a unAuthNav" href="./login.html"><img src="https://app.piwebinars.co.uk/img/Login_Icon.png" width="40px;">Login</a></li>
       <li class="li"><a id="profile" class="a unAuthNav" href="./register.html"><img src="https://app.piwebinars.co.uk/img/Register_Icon.png" width="40px;">Register</a></li>
     </div>
-</nav>     
+</nav> 
     
     <a class="back_button" href="/html/profile.html">Back</a>
+
+    <h2>Following:</h2>
     
-    <h2>Your Purchased Webinars:</h2>
+    <div class="yourSection"></div><br><br><br>
     
-    <div class="purchasesSection"></div><br><br><br>
-    
-  <script>
-    renderPurchasedWebinars();
+    <script>
+      function render_following(uploadsObj) {
+  const postSection = document.querySelector(".yourSection");
+  const following = uploadsObj["data"]["profile"]["following"];
+ for (const creator of following) {
+    const renderDiv = document.createElement("article");
+    const renderTitle = document.createElement("h3");
+    renderDiv.className = "title";
+    renderDiv.onclick = function () {
+      localStorage.setItem("user_id", creator.user);
+      window.location.href = "/html/userProfile.html";
+    };
+    renderTitle.textContent = creator.handle;
+   
+    renderDiv.appendChild(renderTitle);
+    postSection.appendChild(renderDiv);
+  };
+}
+      
+async function renderFollowing() {
+  const auth_token = localStorage.getItem("userSession");
+  const profile = await axios.get(`https://piwebinarsdev.herokuapp.com/profile`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${auth_token}`,
+      },
+    });
+  console.log(profile);
+    render_following(profile);
+  }
+      renderFollowing();
   </script>
-    
-    <br><br><br>
+        <br><br><br>
 </body>
 </html>

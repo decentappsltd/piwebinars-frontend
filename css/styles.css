@@ -822,7 +822,7 @@ label {
     left: 0;
     background: #FFFFFF;
   }
-  .rounded {
+  .title {
     break-inside: avoid-column;
   }
   .thumbnail {

@@ -233,7 +233,7 @@ Storage.prototype.getObj = function(key) {
 async function renderAllWebinars() {
   if ( sessionStorage.getItem("all") == undefined ) {
   const auth_token = localStorage.getItem("userSession");
-  const webinarUploads = await axios.get("https://piwebinarsdev.herokuapp.com/post/all", {
+  const webinarUploads = await axios.get("https://piwebinars-server.herokuapp.com/post/all", {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${auth_token}`,
@@ -250,7 +250,7 @@ async function renderAllWebinars() {
 async function renderFeaturedWebinars() {
   if ( sessionStorage.getItem("featured") == undefined ) {
   const auth_token = localStorage.getItem("userSession");
-  const webinarUploads = await axios.get("https://piwebinarsdev.herokuapp.com/post/all", {
+  const webinarUploads = await axios.get("https://piwebinars-server.herokuapp.com/post/all", {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${auth_token}`,
@@ -267,7 +267,7 @@ async function renderFeaturedWebinars() {
 async function renderYourWebinars() {
   if ( sessionStorage.getItem("your") == undefined ) {
   const auth_token = localStorage.getItem("userSession");
-  const webinarUploads = await axios.get("https://piwebinarsdev.herokuapp.com/post", {
+  const webinarUploads = await axios.get("https://piwebinars-server.herokuapp.com/post", {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${auth_token}`,
@@ -284,7 +284,7 @@ async function renderYourWebinars() {
 async function renderCreatorsWebinars() {
   const auth_token = localStorage.getItem("userSession");
   const userId = localStorage.getItem("user_id");
-  const webinarUploads = await axios.get(`https://piwebinarsdev.herokuapp.com/post/creator/${userId}`, {
+  const webinarUploads = await axios.get(`https://piwebinars-server.herokuapp.com/post/creator/${userId}`, {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${auth_token}`,

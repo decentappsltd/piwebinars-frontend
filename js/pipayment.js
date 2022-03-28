@@ -17,10 +17,16 @@ async function addUID() {
   const config = {
     uid: localStorage.uid,
   };
-  const response = axios.post(`https://piwebinarsdev.herokuapp.com/login/add`, config);
+  const authToken = localStorage.getItem("userSession");
+  const response = axios.post(`https://piwebinarsdev.herokuapp.com/login/add`, config, {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${authToken}`,
+    },
+  });
   if (response.status === 200) {
     alert("Pi account linked to Pi Webinars");
-  }
+  };
 }
 
 async function auth() {

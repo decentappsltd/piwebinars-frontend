@@ -68,7 +68,7 @@
       
 async function renderFollowing() {
   const auth_token = localStorage.getItem("userSession");
-  const profile = await axios.get(`https://piwebinarsdev.herokuapp.com/profile`, {
+  const profile = await axios.get(`https://piwebinars-server.herokuapp.com/profile`, {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${auth_token}`,

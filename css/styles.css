@@ -824,6 +824,7 @@ label {
   }
   .title {
     break-inside: avoid-column;
+    color: #b44afb
   }
   .thumbnail {
     width: 20vw;

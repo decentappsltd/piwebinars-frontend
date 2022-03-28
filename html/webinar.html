@@ -60,17 +60,17 @@
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
       async function renderUpload() {
-      const collection_name = "video";
       const userId = localStorage.getItem("user_id");
       const post_id = localStorage.getItem("post_id");
       const authTkn = localStorage.getItem("userSession");
       
-    //   const upload = await axios.get(`https://piwebinars-server.herokuapp.com/upload/${collection_name}/${userId}/${file_id}`, {
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //     Authorization: `Bearer ${authTkn}`,
-    //   },
-    // })
+      const upload = await axios.get(`https://piwebinarsdev.herokuapp.com/upload/${userId}/${post_id}`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${authTkn}`,
+      },
+    })
+      console.log("upload", upload);
         
         document.getElementById("title").textContent = localStorage.getItem("webinarTitle");
         document.getElementById("description").textContent = localStorage.getItem("webinarDesc");

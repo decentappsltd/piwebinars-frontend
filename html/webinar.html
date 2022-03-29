@@ -64,13 +64,13 @@
       const post_id = localStorage.getItem("post_id");
       const authTkn = localStorage.getItem("userSession");
       
-      const upload = await axios.get(`https://piwebinarsdev.herokuapp.com/upload/${userId}/${post_id}`, {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${authTkn}`,
-      },
-    })
-      console.log("upload", upload);
+//       const upload = await axios.get(`https://piwebinarsdev.herokuapp.com/upload/${userId}/${post_id}`, {
+//       headers: {
+//         "Content-Type": "application/json",
+//         Authorization: `Bearer ${authTkn}`,
+//       },
+//     })
+//       console.log("upload", upload);
         
         document.getElementById("title").textContent = localStorage.getItem("webinarTitle");
         document.getElementById("description").textContent = localStorage.getItem("webinarDesc");

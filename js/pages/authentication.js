@@ -82,10 +82,10 @@ if (loginBtn !== null) {
           sessionStorage.setItem("userSession", token);
           localStorage.setItem("userSession", token);
           flashMessage = message;
-          window.location.href = "/";
           if (navigator.userAgent.toLowerCase().indexOf("pibrowser")>=0) {
             addUID();
           }
+          window.location.href = "/";
         }
         username = "";
         password = "";

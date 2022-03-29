@@ -19,7 +19,7 @@ async function auth() {
 
 async function piLogin() {
   if (localStorage.uid !== undefined) {
-    if (sessionStorage.userSession !== undefined) {
+    if (sessionStorage.userSession == undefined) {
   const config = {
     uid: localStorage.uid,
   };

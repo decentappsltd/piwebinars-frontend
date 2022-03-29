@@ -17,6 +17,7 @@ async function addUID() {
   const config = {
     uid: localStorage.uid,
   };
+  alert(config);
   const authToken = localStorage.getItem("userSession");
   const response = axios.post(`https://piwebinarsdev.herokuapp.com/login/add`, config, {
     headers: {

@@ -23,7 +23,7 @@ async function piLogin() {
   const config = {
     uid: localStorage.uid,
   };
-    const response = await axios.post(`https://piwebinarsdev.herokuapp.com/lin/pi`, config);
+    const response = await axios.post(`https://piwebinarsdev.herokuapp.com/login/pi`, config);
     if (response.status === 200) {
       const token = response.data.token;
       sessionStorage.removeItem("userSession");

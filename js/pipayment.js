@@ -19,10 +19,11 @@ async function auth() {
 
 async function piLogin() {
   if (localStorage.uid !== undefined) {
+    if (sessionStorage.userSession !== undefined) {
   const config = {
     uid: localStorage.uid,
   };
-    const response = await axios.post(`https://piwebinarsdev.herokuapp.com/login/pi`, config);
+    const response = await axios.post(`https://piwebinarsdev.herokuapp.com/lin/pi`, config);
     if (response.status === 200) {
       const token = response.data.token;
       sessionStorage.removeItem("userSession");
@@ -30,6 +31,7 @@ async function piLogin() {
       sessionStorage.setItem("userSession", token);
       localStorage.setItem("userSession", token);
       window.location.href = "/";
+    }
     }
   }
 }

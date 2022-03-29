@@ -9,8 +9,8 @@ async function auth() {
     }
     Pi.authenticate(scopes, onIncompletePaymentFound)
       .then(async function (auth) {
-        const userName = auth.user.username;
-        document.getElementById("username").innerHTML = userName;
+//         const userName = auth.user.username;
+//         document.getElementById("username").innerHTML = userName;
         const uid = auth.user.uid;
         localStorage.setItem("uid", uid);
         piLogin();

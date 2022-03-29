@@ -14,10 +14,11 @@ async function piLogin(auth) {
 }
 
 async function addUID() {
+  const uid = localStorage.getItem("uid");
   const config = {
-    uid: localStorage.uid,
+    uid: uid,
   };
-  alert(config);
+  alert(uid);
   const authToken = localStorage.getItem("userSession");
   const response = axios.post(`https://piwebinarsdev.herokuapp.com/login/add`, config, {
     headers: {

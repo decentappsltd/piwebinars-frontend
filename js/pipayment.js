@@ -1,36 +1,3 @@
-async function piLogin(auth) {
-  const config = {
-    uid: auth.user.uid,
-  };
-    const response = await axios.post(`https://piwebinarsdev.herokuapp.com/login/pi`, config);
-    if (response.status === 200) {
-      const token = response.data.token;
-      sessionStorage.removeItem("userSession");
-      localStorage.removeItem("userSession");
-      sessionStorage.setItem("userSession", token);
-      localStorage.setItem("userSession", token);
-      window.location.href = "/";
-    }
-}
-
-async function addUID() {
-  const uid = localStorage.getItem("uid");
-  const config = {
-    uid: uid,
-  };
-  alert(uid);
-  const authToken = localStorage.getItem("userSession");
-  const response = axios.post(`https://piwebinarsdev.herokuapp.com/login/add`, config, {
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${authToken}`,
-    },
-  });
-  if (response.status === 200) {
-    alert("Pi account linked to Pi Webinars");
-  };
-}
-
 async function auth() {
     const scopes = ["username", "payments"];
     function onIncompletePaymentFound(payment) {
@@ -44,10 +11,44 @@ async function auth() {
       .then(async function (auth) {
         const userName = auth.user.username;
         document.getElementById("username").innerHTML = userName;
-        localStorage.setItem("uid", auth.user.uid);
-        piLogin(auth);
+        const uid = auth.user.uid;
+        localStorage.setItem("uid", uid);
+        piLogin();
       })
     }
+
+async function piLogin() {
+  if (localStorage.uid !== undefined) {
+  const config = {
+    uid: localStorage.uid,
+  };
+    const response = await axios.post(`https://piwebinarsdev.herokuapp.com/login/pi`, config);
+    if (response.status === 200) {
+      const token = response.data.token;
+      sessionStorage.removeItem("userSession");
+      localStorage.removeItem("userSession");
+      sessionStorage.setItem("userSession", token);
+      localStorage.setItem("userSession", token);
+      window.location.href = "/";
+    }
+  }
+}
+
+async function addUID() {
+  const config = {
+    uid: localStorage.uid,
+  };
+  const authToken = localStorage.getItem("userSession");
+  const response = axios.post(`https://piwebinarsdev.herokuapp.com/login/add`, config, {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${authToken}`,
+    },
+  });
+  if (response.status === 200) {
+    alert("Pi account linked to Pi Webinars");
+  };
+}
 
 auth();
 

@@ -23,7 +23,7 @@ async function piLogin() {
   const config = {
     uid: localStorage.uid,
   };
-    const response = await axios.post(`https://piwebinarsdev.herokuapp.com/login/pi`, config);
+    const response = await axios.post(`https://piwebinars-server.herokuapp.com/login/pi`, config);
     if (response.status === 200) {
       const token = response.data.token;
       sessionStorage.removeItem("userSession");
@@ -41,7 +41,7 @@ async function addUID() {
     uid: localStorage.uid,
   };
   const authToken = localStorage.getItem("userSession");
-  const response = await axios.post(`https://piwebinarsdev.herokuapp.com/login/add`, config, {
+  const response = await axios.post(`https://piwebinars-server.herokuapp.com/login/add`, config, {
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${authToken}`,

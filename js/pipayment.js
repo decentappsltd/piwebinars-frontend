@@ -18,22 +18,25 @@ async function auth() {
     }
 
 async function piLogin() {
-  if (localStorage.uid !== undefined) {
-    if (sessionStorage.userSession == undefined) {
-  const config = {
-    uid: localStorage.uid,
-  };
-    const response = await axios.post(`https://piwebinars-server.herokuapp.com/login/pi`, config);
+    const config = {
+      uid: localStorage.uid,
+    };
+    const response = await axios.post(`https://piwebinarsdev.herokuapp.com/login/pi`, config);
     if (response.status === 200) {
       const token = response.data.token;
       sessionStorage.removeItem("userSession");
       localStorage.removeItem("userSession");
       sessionStorage.setItem("userSession", token);
       localStorage.setItem("userSession", token);
-      window.location.href = "/";
+      // show logged in
+      authNavv.forEach((elem) => {
+        elem.classList.remove("authNav");
+        elem.classList.add("showNav");
+      });
+      unAuthNavv.forEach((elem) => {
+        elem.classList.remove(elem);
+      });
     }
-    }
-  }
 }
 
 async function addUID() {

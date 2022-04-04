@@ -81,6 +81,7 @@ if (loginBtn !== null) {
           localStorage.removeItem("userSession");
           sessionStorage.setItem("userSession", token);
           localStorage.setItem("userSession", token);
+          sessionStorage.setItem("username", username)
           flashMessage = message;
           if (navigator.userAgent.toLowerCase().indexOf("pibrowser")>=0) {
             addUID();

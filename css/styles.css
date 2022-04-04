@@ -482,7 +482,7 @@ tr:nth-child(even) {
 }
 
 
-/******************Desktop Styling******************/
+/**************************************Desktop Styling*******************************************/
 
 
 
@@ -828,5 +828,11 @@ label {
   }
   .thumbnail {
     width: 20vw;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .searchHeader {
+    display: none;
   }
 }

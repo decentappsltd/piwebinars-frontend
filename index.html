@@ -37,7 +37,7 @@
  
     <img src="/img/loadImage.png" class="loadImage" id="loadImage" alt="load"></img>
   
-    <img width="75%" onclick="addUID()" style="padding-left: 12.5%; padding-right: 12.5%; padding-bottom: 5px; border-bottom: solid black" src="/img/logo-text.png" alt="logo"/>
+    <img width="75%" onclick="openLandingPage()" style="padding-left: 12.5%; padding-right: 12.5%; padding-bottom: 5px; border-bottom: solid black" src="/img/logo-text.png" alt="logo"/>
   
     <nav id="footer" style="display: none;">
       <ul class="ul">
@@ -122,13 +122,18 @@
     <!--Header-->
     <div class="row footer">
       <img height="60" style="position:relative;top:0;display: inline; float: left;" src="https://app.piwebinars.co.uk/img/logo-text.png" alt="logo"></img>
+    
+    <input style="height: 40px; margin-top: 5px; width: 35vw;" type="text" placeholder="Search Webinars.." id="search" class="searchbar searchHeader">
+  <i style="margin-left: 5px;" class="searchHeader fas fa-search" id="search" onclick="search()"></i>
    
+    <div style="float:right">
     <li class="li"><a class="a" href="/index.html"><img src="https://app.piwebinars.co.uk/img/Home_Icon.png" width="40px;">Home</a></li>
         <li class="li"><a class="a" href="/html/search.html"><img src="https://app.piwebinars.co.uk/img/Search_Icon.png" width="40px;">Search</a></li>
       <li class="li"><a class="a authNav" id="uploaddesktopmodal" href="./html/upload.html"><img src="https://app.piwebinars.co.uk/img/Upload_Icon.png" width="40px;">Upload</a></li>
     <li class="li"><a id="profile" class="a unAuthNav" href="/html/login.html"><img src="https://app.piwebinars.co.uk/img/Login_Icon.png" width="40px;">Login</a></li>
     <li class="li"><a id="profile" class="a unAuthNav" href="/html/register.html"><img src="https://app.piwebinars.co.uk/img/Register_Icon.png" width="40px;">Register</a></li>
     <li class="li"><a class="a authNav" href="/html/profile.html"><img src="https://app.piwebinars.co.uk/img/Profile_Icon.png" width="40px;">Profile</a></li>
+    </div>
     </div>
   
     <!--Main Content-->
@@ -165,10 +170,6 @@
     <option class="list" value="technology">Technology</option><br />
   </select><i style="margin-left: 5px;" class="fas fa-search" id="searchCat" onclick="searchCat()"></i><br />
   
-  <i class="fas fa-filter"></i>
-  <input type="text" placeholder="Search Webinars.." id="search" class="searchbar">
-  <i style="margin-left: 5px;" class="fas fa-search" id="search" onclick="search()"></i></br>
-      
     <div class="postSection"></div>
   </div>
   </div>

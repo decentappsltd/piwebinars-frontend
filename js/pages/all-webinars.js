@@ -37,7 +37,8 @@ function renderYour(uploadsObj) {
     const renderTitle = document.createElement("h3");
     renderDiv.className = "title";
     renderDiv.onclick = function () {
-      localStorage.setItem("post_id", webinar.upload);
+      localStorage.setItem("post_id", webinar._id);
+      localStorage.setItem("file_id", webinar.upload);
       localStorage.setItem("user_id", webinar.user);
       localStorage.setItem("webinarTitle", webinar.title);
       localStorage.setItem("webinarDesc", webinar.description);
@@ -72,7 +73,8 @@ function renderPurchases(uploadsObj) {
     const renderTitle = document.createElement("h3");
     renderDiv.className = "title";
     renderDiv.onclick = function () {
-      localStorage.setItem("post_id", webinar[1].upload);
+      localStorage.setItem("post_id", webinar[1]._id);
+      localStorage.setItem("file_id", webinar[1].upload);
       localStorage.setItem("user_id", webinar[1].user);
       localStorage.setItem("webinarTitle", webinar[1].title);
       localStorage.setItem("webinarDesc", webinar[1].description);
@@ -107,7 +109,8 @@ function renderAll(uploadsObj) {
     const renderTitle = document.createElement("h3");
     renderDiv.className = "title";
     renderDiv.onclick = function () {
-      localStorage.setItem("post_id", webinar[1].upload);
+      localStorage.setItem("post_id", webinar[1]._id);
+      localStorage.setItem("file_id", webinar[1].upload);
       localStorage.setItem("user_id", webinar[1].user);
       localStorage.setItem("webinarTitle", webinar[1].title);
       localStorage.setItem("webinarDesc", webinar[1].description);
@@ -142,7 +145,8 @@ function renderFeatured(uploadsObj) {
     const renderTitle = document.createElement("h3");
     renderDiv.className = "title";
     renderDiv.onclick = function () {
-      localStorage.setItem("post_id", webinar[1].upload);
+      localStorage.setItem("post_id", webinar[1]._id);
+      localStorage.setItem("file_id", webinar[1].upload);
       localStorage.setItem("user_id", webinar[1].user);
       localStorage.setItem("webinarTitle", webinar[1].title);
       localStorage.setItem("webinarDesc", webinar[1].description);
@@ -177,7 +181,8 @@ function renderCreators(uploadsObj) {
     const renderTitle = document.createElement("h3");
     renderDiv.className = "title";
     renderDiv.onclick = function () {
-      localStorage.setItem("post_id", webinar.upload);
+      localStorage.setItem("post_id", webinar._id);
+      localStorage.setItem("file_id", webinar.upload);
       localStorage.setItem("user_id", webinar.user);
       localStorage.setItem("webinarTitle", webinar.title);
       localStorage.setItem("webinarDesc", webinar.description);
@@ -309,3 +314,21 @@ async function renderCreatorsWebinars() {
 //     renderPurchases(webinarUploads);
 //   }
 // }
+
+async function comment() {
+  const userId = localStorage.getItem("user_id");
+  const post_id = localStorage.getItem("post_id");
+  const authToken = localStorage.userSession;
+  const text = prompt("Write comment", "");
+  const response = await axios.post(`https://piwebinarsdev.herokuapp.com/post/comment/${userId}/${post_id}`, text, {
+    headers: {
+    "Access-Control-Allow-Origin": "*",
+    Authorization: `Bearer ${authToken}`,
+  },
+  });
+  if (response.status == 200) {
+    alert("success");
+  } else {
+    alert("Comment failed, please retry");
+  }
+}

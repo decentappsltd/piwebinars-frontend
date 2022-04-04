@@ -34,7 +34,8 @@ async function piLogin() {
         elem.classList.add("showNav");
       });
       unAuthNavv.forEach((elem) => {
-        elem.classList.remove(elem);
+        elem.classList.remove("unAuthNav");
+        elem.classList.add("hideNav");
       });
     }
 }

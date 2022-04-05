@@ -13,7 +13,7 @@ async function auth() {
 //         document.getElementById("username").innerHTML = userName;
         const uid = auth.user.uid;
         localStorage.setItem("uid", uid);
-        piLogin();
+//         piLogin();
       })
     }
 

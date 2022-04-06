@@ -1,5 +1,7 @@
 const searchCat = document.querySelector("#searchCat");
 const search = document.querySelector("#search");
+// const urlApi = "https://piwebinars-server.herokuapp.com";
+const urlApi = "https://server.piwebinars.co.uk/";
 
 if (searchCat !== null) {
   searchCat.addEventListener("click", function (e) {
@@ -31,7 +33,7 @@ if (search !== null) {
 function renderYour(uploadsObj) {
   const postSection = document.querySelector(".yourSection");
   const webinars = uploadsObj["data"]["post"];
- for (const webinar of webinars) {
+  for (const webinar of webinars) {
     const renderDiv = document.createElement("article");
     const renderThumb = document.createElement("img");
     const renderTitle = document.createElement("h3");
@@ -59,17 +61,17 @@ function renderYour(uploadsObj) {
     } else {
       renderThumb.src = webinar.thumbnail;
     }
-   
+
     renderDiv.appendChild(renderThumb);
     renderDiv.appendChild(renderTitle);
     postSection.appendChild(renderDiv);
-  };
+  }
 }
 
 function renderPurchases(uploadsObj) {
   const postSection = document.querySelector(".purchaseSection");
   const webinars = uploadsObj["data"]["posts"];
- for (const webinar of webinars) {
+  for (const webinar of webinars) {
     const renderDiv = document.createElement("article");
     const renderVid = document.createElement("iframe");
     const renderTitle = document.createElement("h3");
@@ -77,17 +79,17 @@ function renderPurchases(uploadsObj) {
     renderTitle.textContent = webinar.title;
     renderVid.src = webinar.url;
     renderVid.className = "video";
-    
+
     renderDiv.appendChild(renderVid);
     renderDiv.appendChild(renderTitle);
     postSection.appendChild(renderDiv);
-  };
+  }
 }
 
 function renderAll(uploadsObj) {
   const postSection = document.querySelector(".postSection");
   const webinars = uploadsObj["data"]["list"];
- for (const webinar of webinars) {
+  for (const webinar of webinars) {
     const renderDiv = document.createElement("article");
     const renderThumb = document.createElement("img");
     const renderTitle = document.createElement("h3");
@@ -115,17 +117,17 @@ function renderAll(uploadsObj) {
     } else {
       renderThumb.src = webinar[1].thumbnail;
     }
-   
+
     renderDiv.appendChild(renderThumb);
     renderDiv.appendChild(renderTitle);
     postSection.appendChild(renderDiv);
-  };
+  }
 }
 
 function renderFeatured(uploadsObj) {
   const postSection = document.querySelector(".featuredSection");
   const webinars = uploadsObj["data"]["list"];
- for (const webinar of webinars.slice(0, 24)) {
+  for (const webinar of webinars.slice(0, 24)) {
     const renderDiv = document.createElement("article");
     const renderThumb = document.createElement("img");
     const renderTitle = document.createElement("h3");
@@ -153,17 +155,17 @@ function renderFeatured(uploadsObj) {
     } else {
       renderThumb.src = webinar[1].thumbnail;
     }
-   
+
     renderDiv.appendChild(renderThumb);
     renderDiv.appendChild(renderTitle);
     postSection.appendChild(renderDiv);
-  };
+  }
 }
 
 function renderCreators(uploadsObj) {
   const postSection = document.querySelector(".creatorSection");
   const webinars = uploadsObj["data"]["posts"];
- for (const webinar of webinars) {
+  for (const webinar of webinars) {
     const renderDiv = document.createElement("article");
     const renderThumb = document.createElement("img");
     const renderTitle = document.createElement("h3");
@@ -191,33 +193,33 @@ function renderCreators(uploadsObj) {
     } else {
       renderThumb.src = webinar.thumbnail;
     }
-   
+
     renderDiv.appendChild(renderThumb);
     renderDiv.appendChild(renderTitle);
     postSection.appendChild(renderDiv);
-  };
+  }
 }
 
 //saving arrays to session storage
-Storage.prototype.setObj = function(key, obj) {
-    return this.setItem(key, JSON.stringify(obj))
-}
-Storage.prototype.getObj = function(key) {
-    return JSON.parse(this.getItem(key))
-}
+Storage.prototype.setObj = function (key, obj) {
+  return this.setItem(key, JSON.stringify(obj));
+};
+Storage.prototype.getObj = function (key) {
+  return JSON.parse(this.getItem(key));
+};
 
 //getting webinars
 async function renderAllWebinars() {
-  if ( sessionStorage.getItem("all") == undefined ) {
-  const auth_token = localStorage.getItem("userSession");
-  const webinarUploads = await axios.get("https://piwebinars-server.herokuapp.com/post/all", {
+  if (sessionStorage.getItem("all") == undefined) {
+    const auth_token = localStorage.getItem("userSession");
+    const webinarUploads = await axios.get(`${urlApi}/post/all`, {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${auth_token}`,
       },
     });
-  sessionStorage.setObj("all", webinarUploads);
-  renderAll(webinarUploads);
+    sessionStorage.setObj("all", webinarUploads);
+    renderAll(webinarUploads);
   } else {
     const webinarUploads = sessionStorage.getObj("all");
     renderAll(webinarUploads);
@@ -225,9 +227,9 @@ async function renderAllWebinars() {
 }
 
 async function renderFeaturedWebinars() {
-  if ( sessionStorage.getItem("featured") == undefined ) {
-  const auth_token = localStorage.getItem("userSession");
-  const webinarUploads = await axios.get("https://piwebinars-server.herokuapp.com/post/all", {
+  if (sessionStorage.getItem("featured") == undefined) {
+    const auth_token = localStorage.getItem("userSession");
+    const webinarUploads = await axios.get(`${urlApi}/post/all`, {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${auth_token}`,
@@ -242,15 +244,15 @@ async function renderFeaturedWebinars() {
 }
 
 async function renderYourWebinars() {
-  if ( sessionStorage.getItem("your") == undefined ) {
-  const auth_token = localStorage.getItem("userSession");
-  const webinarUploads = await axios.get("https://piwebinars-server.herokuapp.com/post", {
+  if (sessionStorage.getItem("your") == undefined) {
+    const auth_token = localStorage.getItem("userSession");
+    const webinarUploads = await axios.get(`${urlApi}/post`, {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${auth_token}`,
       },
     });
-  sessionStorage.setObj("your", webinarUploads);
+    sessionStorage.setObj("your", webinarUploads);
     renderYour(webinarUploads);
   } else {
     const webinarUploads = sessionStorage.getObj("your");
@@ -261,25 +263,25 @@ async function renderYourWebinars() {
 async function renderCreatorsWebinars() {
   const auth_token = localStorage.getItem("userSession");
   const userId = localStorage.getItem("user_id");
-  const webinarUploads = await axios.get(`https://piwebinars-server.herokuapp.com/post/creator/${userId}`, {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${auth_token}`,
-      },
-    });
-    renderCreators(webinarUploads);
+  const webinarUploads = await axios.get(`${urlApi}/post/creator/${userId}`, {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${auth_token}`,
+    },
+  });
+  renderCreators(webinarUploads);
 }
 
 async function renderPurchasedWebinars() {
-  if ( sessionStorage.getItem("purchases") == undefined ) {
-  const auth_token = localStorage.getItem("userSession");
-  const webinarUploads = await axios.get("https://piwebinars-server.herokuapp.com/post/purchases", {
+  if (sessionStorage.getItem("purchases") == undefined) {
+    const auth_token = localStorage.getItem("userSession");
+    const webinarUploads = await axios.get(`${urlApi}/post/purchases`, {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${auth_token}`,
       },
     });
-  sessionStorage.setObj("purchases", webinarUploads);
+    sessionStorage.setObj("purchases", webinarUploads);
     renderPurchases(webinarUploads);
   } else {
     const webinarUploads = sessionStorage.getObj("purchases");
@@ -292,12 +294,16 @@ async function comment() {
   const post_id = localStorage.getItem("post_id");
   const authToken = localStorage.userSession;
   const text = prompt("Write comment", "");
-  const response = await axios.post(`https://piwebinarsdev.herokuapp.com/post/comment/${userId}/${post_id}`, text, {
-    headers: {
-    "Access-Control-Allow-Origin": "*",
-    Authorization: `Bearer ${authToken}`,
-  },
-  });
+  const response = await axios.post(
+    `https://piwebinarsdev.herokuapp.com/post/comment/${userId}/${post_id}`,
+    text,
+    {
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        Authorization: `Bearer ${authToken}`,
+      },
+    }
+  );
   if (response.status == 200) {
     alert("success");
   } else {

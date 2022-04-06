@@ -35,7 +35,7 @@
         
     <title>Pi Webinars</title>
  
-    <img src="/img/loadImage.png" class="loadImage" id="loadImage" alt="load"></img>
+<!--     <img src="/img/loadImage.png" class="loadImage" id="loadImage" alt="load"></img> -->
   
     <img width="75%" onclick="openLandingPage()" style="padding-left: 12.5%; padding-right: 12.5%; padding-bottom: 5px; border-bottom: solid black" src="/img/logo-text.png" alt="logo"/>
   
@@ -69,7 +69,7 @@
     
     
     <!--Modals-->   
-    <div class="landing" id="landingPage">
+<!--     <div class="landing" id="landingPage">
       <section class="modal-content">
         <h3 style="background: linear-gradient(to right, #b44afb, #4afbb4); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-align: center;">Welcome to Pi Webinars!<br><br>Your educational video platform powered by Pi.</h3>
         <ul style="color: #fbb44a; text-align: justify;">
@@ -82,7 +82,7 @@
         <br><br>
         <button class="landingBtn" onclick="closeLandingPage()">Continue to app</button>
       </section>
-    </div>
+    </div> -->
     
   <br>
   <button id="translate" onclick="googleTranslate()">Translate Page</button><br>
@@ -172,6 +172,9 @@
     <option class="list" value="sports">Sports</option><br />
     <option class="list" value="technology">Technology</option><br />
   </select><i style="margin-left: 5px;" class="fas fa-search" id="searchCat" onclick="searchCat()"></i><br />
+          
+          <!--     ads -->
+    <iframe data-aa='1980365' src='//acceptable.a-ads.com/1980365' style='border:0px; padding:0; width:100%; height:100%; overflow:hidden; background-color: transparent;'></iframe>
   
     <div class="postSection"></div>
   </div>
@@ -191,32 +194,6 @@
     
       <h5 id="copyright">&copy; Decent Apps Ltd</h5></br>
 
-
-    <div class="landing" id="landingPageDesktop">
-      <section class="modal-content">
-        <h3 style="background: linear-gradient(to right, #b44afb, #4afbb4); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-align: center; position: absolute; top: 10vh; left: 35%">Welcome to Pi Webinars!<br><br>Your educational video platform powered by Pi.</h3>
-        <ul style="color: #fbb44a; text-align: justify; position: absolute; left: 50px; bottom: 40vh;">
-        <li onclick="window.open('pi://www.piwebinars.co.uk')">Sign up on our app through the <u>Pi Browser</u></li>
-        <li>Choose webinars produced by fellow Pioneers and experts!</li>
-        <li>Save your webinars to your smartphone, desktop or laptop!</li>
-        <li>Have lifetime & unlimited access to your saved webinars!</li>
-      </ul>
-        <div style="position: absolute; bottom: 10vh; left: 50px;">
-        <button class="landingBtnDesk" onclick="location.href='/html/register.html'">Sign up for free!</button>
-        <br><br>
-        <button class="landingBtnDesk" onclick="document.getElementById('landingPageDesktop').classList.remove('is-visible');">Continue to app</button>
-        </div>
-        <img style="width: 40vw; position: absolute; right: 50px; bottom: 5vh;" src="/img/landing.png">
-      </section>
-    </div>
-
-<script>
-  if (sessionStorage.landing != 'true') {
-        document.getElementById("landingPageDesktop").classList.add("is-visible");
-        sessionStorage.setItem("landing", "true");
-        sessionStorage.setItem("landing", "true");
-      }
-</script>
 </div>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="../js/pages/authentication.js"></script>
@@ -225,7 +202,7 @@
 <script>
   renderFeaturedWebinars();
   renderAllWebinars();
-  // renderPurchasedWebinars();
+  renderPurchasedWebinars();
   renderYourWebinars();
 </script>
   </body>

@@ -100,7 +100,7 @@
     <script>
       if (sessionStorage.landing != 'true') {
         const loadTimeout = setTimeout(loadImage, 500);
-        document.getElementById("landingPage").classList.add("is-visible");
+//         document.getElementById("landingPage").classList.add("is-visible");
         sessionStorage.setItem("landing", "true");
       } else {
         loadImage();

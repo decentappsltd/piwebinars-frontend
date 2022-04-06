@@ -28,7 +28,7 @@
     <div class="mobile">
       <li class="li"><a class="a" href="/index.html"><img src="https://app.piwebinars.co.uk/img/Home_Icon.png" width="30px;">Home</a></li>
       <li class="li" style="margin-left:-10px;"><a class="a" href="./all-webinars.html"><img src="https://app.piwebinars.co.uk/img/Watch_Icon.png" width="30px;">Webinars</a></li>
-      <li class="li" ><a class="a authNav" id="uploaddesktopmodal" href="./upload.html"><img src="https://app.piwebinars.co.uk/img/Upload_Icon.png" width="30px;">Upload</a></li>
+      <li class="li" ><a class="a authNav" id="uploaddesktopmodal" onclick="openUploadPage()"><img src="https://app.piwebinars.co.uk/img/Upload_Icon.png" width="30px;">Upload</a></li>
       <li class="li" style="margin-left:-17px;"><a id="profile" class="a unAuthNav" href="./login.html"><img src="https://app.piwebinars.co.uk/img/Login_Icon.png" width="30px;">Login</a></li>
           <li class="li" style="margin-left:-10px; border-right:none;"><a id="profile" class="a unAuthNav" href="./register.html"><img src="https://app.piwebinars.co.uk/img/Register_Icon.png" width="30px;">Register</a></li>
       <li class="li" style="margin-left:-10px;"><a class="a authNav" href="./profile.html"><img src="https://app.piwebinars.co.uk/img/Profile_Icon.png" width="30px;">Profile</a></li>
@@ -60,9 +60,7 @@
     
     <div id="Video"></div>
     <br><br>
-    
-    <button onclick="alert('webinars are locked until mainnet')"><span id="price"></span> Pi</button>
-    <br><i>Pay to watch</i>
+    <button onclick="alert('coming soon!');">Edit Webinar</button>
     <br><br><br>
     <p2>Comments:</p2>
     <div id="comments"></div>
@@ -70,11 +68,15 @@
     <br><br><br><br>
     
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script>
+    <script>     
       async function renderUpload() {
       const userId = localStorage.getItem("user_id");
       const post_id = localStorage.getItem("post_id");
       const authTkn = localStorage.getItem("userSession");
+        
+        if (localStorage.user_id != sessionStorage.user) {
+          window.location.href = "/html/webinar.html";
+        }
         
         document.getElementById("title").textContent = localStorage.getItem("webinarTitle");
         document.getElementById("description").textContent = localStorage.getItem("webinarDesc");
@@ -100,22 +102,6 @@
       };
 
       var videoPlayer = new Vimeo.Player('Video', options);
-
-      setInterval(function() {
-        videoPlayer.on('timeupdate', function (getAll)
-          {
-            currentPos = getAll.seconds; //get currentime
-            if (currentPos >= 30) {
-              videoPlayer.pause();
-              videoPlayer.setCurrentTime(0);
-              const payTimeout = setTimeout(endPreview, 1000);
-            }
-          });
-      }, 10000);
-      
-      function endPreview() {
-        alert("Please purchase webinar to continue watching");
-      }
       
       async function goToProfile() {
         const userProfileName = localStorage.getItem("user_id");
@@ -138,7 +124,7 @@
         <button class="close-modal" onclick="closeCinema()">✕</button>
       </header>
       <section class="modal-content">
-        <iframe id="url" src="" width="350px" frameborder="0" allow="autoplay; fullscreen; picture-in-picture"></iframe>
+        <iframe id="url" src="" width="100%" frameborder="0" allow="autoplay; fullscreen; picture-in-picture"></iframe>
         <div class="row">
           <svg class="likePost column" style="margin-right: 10px;" viewBox="0 0 512 512" width="20px" title="thumbs-up">
             <path d="M104 224H24c-13.255 0-24 10.745-24 24v240c0 13.255 10.745 24 24 24h80c13.255 0 24-10.745 24-24V248c0-13.255-10.745-24-24-24zM64 472c-13.255 0-24-10.745-24-24s10.745-24 24-24 24 10.745 24 24-10.745 24-24 24zM384 81.452c0 42.416-25.97 66.208-33.277 94.548h101.723c33.397 0 59.397 27.746 59.553 58.098.084 17.938-7.546 37.249-19.439 49.197l-.11.11c9.836 23.337 8.237 56.037-9.308 79.469 8.681 25.895-.069 57.704-16.382 74.757 4.298 17.598 2.244 32.575-6.148 44.632C440.202 511.587 389.616 512 346.839 512l-2.845-.001c-48.287-.017-87.806-17.598-119.56-31.725-15.957-7.099-36.821-15.887-52.651-16.178-6.54-.12-11.783-5.457-11.783-11.998v-213.77c0-3.2 1.282-6.271 3.558-8.521 39.614-39.144 56.648-80.587 89.117-113.111 14.804-14.832 20.188-37.236 25.393-58.902C282.515 39.293 291.817 0 312 0c24 0 72 8 72 81.452z" />

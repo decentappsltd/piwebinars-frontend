@@ -62,6 +62,7 @@ if (loginBtn !== null) {
     e.preventDefault();
     let username = document.querySelector("#pi_username").value;
     let password = document.querySelector("#user_password").value;
+    let uid = localStorage.uid;
 
     try {
       if ((username || password) === "") {
@@ -71,6 +72,7 @@ if (loginBtn !== null) {
         const user = {
           username,
           password,
+          uid,
         };
         const response = await instance.post(`/login`, user);
         if (response.status === 200) {
@@ -83,9 +85,9 @@ if (loginBtn !== null) {
           localStorage.setItem("userSession", token);
           sessionStorage.setItem("username", username)
           flashMessage = message;
-          if (navigator.userAgent.toLowerCase().indexOf("pibrowser")>=0) {
-            addUID();
-          }
+          // if (navigator.userAgent.toLowerCase().indexOf("pibrowser")>=0) {
+          //   addUID();
+          // }
           window.location.href = "/";
         }
         username = "";
@@ -244,6 +246,8 @@ const myProfile = async () => {
         credit: piCredit,
         following: userFollowing
       } = data;
+      console.log(response.data);
+      sessionStorage.user = response.data.profile.user._id;
 
       followers.textContent = people_Who_Follow_Me;
       following.textContent = people_Who_I_Follow;
@@ -674,11 +678,11 @@ function buyCredits(creditAmount) {
 }
 
 function openCinema() {
-  document.getElementById("modal1").classList.add("is-visible");
+  document.getElementById("modal1").classList.add("cinema-visible");
 }
 
 function closeCinema() {
-  document.getElementById("modal1").classList.remove("is-visible");
+  document.getElementById("modal1").classList.remove("cinema-visible");
 }
 
 function openUploadPage() {

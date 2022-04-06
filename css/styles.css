@@ -365,6 +365,10 @@ label {
   visibility: visible;
   opacity: 0.9;
 }
+.cinema-visible {
+  visibility: visible;
+  opacity: 1;
+}
 .modal-dialog {
   width: 95%;
   background: var(--white);
@@ -479,6 +483,16 @@ tr:nth-child(even) {
 }
 .thumbnail {
   width: 80vw;
+}
+#Video, .video {
+  width: 100vw;
+  height: 56.2vw;
+}
+.videoTitle {
+  border-bottom: solid;
+  border-color: #4afbb4;
+  margin-top: 20px;
+  background: #FFFFFF;
 }
 
 
@@ -828,6 +842,9 @@ label {
   }
   .thumbnail {
     width: 20vw;
+  }
+  #Video, .video {
+    width: 500px;
   }
 }
 

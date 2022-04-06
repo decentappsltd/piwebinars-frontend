@@ -9,19 +9,22 @@ async function auth() {
     }
     Pi.authenticate(scopes, onIncompletePaymentFound)
       .then(async function (auth) {
-//         const userName = auth.user.username;
-//         document.getElementById("username").innerHTML = userName;
+        // const userName = auth.user.username;
+        // document.getElementById("username").innerHTML = userName;
         const uid = auth.user.uid;
         localStorage.setItem("uid", uid);
-//         piLogin();
+        if (!sessionStorage.userSession) {
+          piLogin();
+        }
       })
     }
 
 async function piLogin() {
+  try {
     const config = {
       uid: localStorage.uid,
     };
-    const response = await axios.post(`https://piwebinarsdev.herokuapp.com/login/pi`, config);
+    const response = await axios.post(`https://piwebinars-server.herokuapp.com/login/pi`, config);
     if (response.status === 200) {
       const token = response.data.token;
       sessionStorage.removeItem("userSession");
@@ -34,41 +37,29 @@ async function piLogin() {
         elem.classList.add("showNav");
       });
       unAuthNavv.forEach((elem) => {
-        elem.classList.remove("unAuthNav");
-        elem.classList.add("hideNav");
+        elem.classList.remove(elem);
       });
     }
-}
-
-async function addUID() {
-  const config = {
-    uid: localStorage.uid,
-  };
-  const authToken = localStorage.getItem("userSession");
-  const response = await axios.post(`https://piwebinars-server.herokuapp.com/login/add`, config, {
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${authToken}`,
-    },
-  });
-  if (response.status === 200) {
-    alert("Pi account linked to Pi Webinars");
-  };
+  } catch (error) {
+      console.log(error);
+    }
 }
 
 auth();
 
 function buyWebinar() {
-  const collection_id = "video";
   const userId = localStorage.getItem("user_id");
-  const file_id = localStorage.getItem("post_id");
-  const price = localStorage.getItem("price");
+  const post_id = localStorage.getItem("post_id");
+  const price = localStorage.getItem("amount");
+  const username = sessionStorage.username;
+  const title = localStorage.webinarTitle;
+  const url = "https://player.vimeo.com/video/"+localStorage.video_id;
   
   const payment = Pi.createPayment(
   {
     amount: price,
-    memo: "testing",
-    metadata: { paymentType: "testing" }
+    memo: "Buy Webinar",
+    metadata: { paymentType: "webinar_purchase" }
   },
   {
     onReadyForServerApproval: function (paymentId) {
@@ -78,16 +69,27 @@ function buyWebinar() {
       };
       axios.post("https://piwebinars-server.herokuapp.com/payment/approve", data)
     },
-    onReadyForServerCompletion: function (paymentId, txid) {
+    onReadyForServerCompletion: async function (paymentId, txid) {
       var data = {
         paymentId: paymentId,
         txid: txid,
-        collection_id: collection_id,
+        username: username,
         userId: userId,
-        file_id: file_id,
+        post_id: post_id,
+        url: url,
+        title: title,
+        price: price,
       };
-      axios.post("https://piwebinars-server.herokuapp.com/payment/complete", data)
-      showWebinar();
+      const authToken = localStorage.getItem("userSession");
+      const response = await axios.post("https://piwebinars-server.herokuapp.com/payment/complete", data, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${authToken}`,
+      },
+      withCredentials: true,
+      credentials: "same-origin",
+    })
+      showWebinar(response);
     },
     onCancel: function (paymentId, txid) {
       var data = {

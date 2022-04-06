@@ -35,7 +35,7 @@
         
     <title>Pi Webinars</title>
  
-<!--     <img src="/img/loadImage.png" class="loadImage" id="loadImage" alt="load"></img> -->
+    <img src="/img/loadImage.png" class="loadImage" id="loadImage" alt="load"></img>
   
     <img width="75%" onclick="openLandingPage()" style="padding-left: 12.5%; padding-right: 12.5%; padding-bottom: 5px; border-bottom: solid black" src="/img/logo-text.png" alt="logo"/>
   
@@ -69,7 +69,7 @@
     
     
     <!--Modals-->   
-<!--     <div class="landing" id="landingPage">
+    <div class="landing" id="landingPage">
       <section class="modal-content">
         <h3 style="background: linear-gradient(to right, #b44afb, #4afbb4); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-align: center;">Welcome to Pi Webinars!<br><br>Your educational video platform powered by Pi.</h3>
         <ul style="color: #fbb44a; text-align: justify;">
@@ -82,7 +82,7 @@
         <br><br>
         <button class="landingBtn" onclick="closeLandingPage()">Continue to app</button>
       </section>
-    </div> -->
+    </div>
     
   <br>
   <button id="translate" onclick="googleTranslate()">Translate Page</button><br>
@@ -100,7 +100,7 @@
     <script>
       if (sessionStorage.landing != 'true') {
         const loadTimeout = setTimeout(loadImage, 500);
-//         document.getElementById("landingPage").classList.add("is-visible");
+        document.getElementById("landingPage").classList.add("is-visible");
         sessionStorage.setItem("landing", "true");
       } else {
         loadImage();
@@ -183,12 +183,16 @@
     <div class="purchasedWebinars">
       <!--Your Purchases Render Div-->
       <h2>Purchases</h2>
+      <!--     ads -->
+    <iframe data-aa='1980365' src='//acceptable.a-ads.com/1980365' style='border:0px; padding:0; width:100%; height:100%; overflow:hidden; background-color: transparent;'></iframe>
       <div class="purchasesSection"></div>
     </div>
     
     <!--Your Webinars Render Div-->
     <div class="yourWebinars">
       <h2>Uploads</h2>
+      <!--     ads -->
+    <iframe data-aa='1980365' src='//acceptable.a-ads.com/1980365' style='border:0px; padding:0; width:100%; height:100%; overflow:hidden; background-color: transparent;'></iframe>
       <div class="yourSection"></div>
     </div>
     

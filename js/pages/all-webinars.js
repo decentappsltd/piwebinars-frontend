@@ -1,7 +1,7 @@
 const searchCat = document.querySelector("#searchCat");
 const search = document.querySelector("#search");
 // const urlApi = "https://piwebinars-server.herokuapp.com";
-const urlApi = "https://server.piwebinars.co.uk/";
+const urlApi = "https://server.piwebinars.co.uk";
 
 if (searchCat !== null) {
   searchCat.addEventListener("click", function (e) {

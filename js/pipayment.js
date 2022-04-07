@@ -48,6 +48,10 @@ async function piLogin() {
 auth();
 
 function buyWebinar() {
+  if ( navigator.userAgent.toLowerCase().indexOf("pibrowser")<0 ) {
+    alert("Please go to the Pi Browser to make a crypto payment");
+    window.open("pi://www.piwebinars.co.uk");
+  }
   const userId = localStorage.getItem("user_id");
   const post_id = localStorage.getItem("post_id");
   const price = localStorage.getItem("amount");

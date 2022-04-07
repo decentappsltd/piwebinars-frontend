@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- Google Tag Manager -->
+    <script>
+      (function (w, d, s, l, i) {
+        w[l] = w[l] || [];
+        w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
+        var f = d.getElementsByTagName(s)[0],
+          j = d.createElement(s),
+          dl = l != "dataLayer" ? "&l=" + l : "";
+        j.async = true;
+        j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
+        f.parentNode.insertBefore(j, f);
+      })(window, document, "script", "dataLayer", "GTM-KRPNL55");
+    </script>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-2N939D6C1C"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-2N939D6C1C");
+    </script>
+
+    <!--CSS-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/styles.css" />
+    <link rel="icon" type="image/png" href="/img/logo.png" />
+
+    <!--Google Fonts-->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <h1>Pi Webinars</h1>
+
+        <nav class="footer" style="z-index: 100">
+  <ul class="ul">
+    <div class="mobile">
+    <li class="li"><a class="a" href="/index.html"><img src="https://app.piwebinars.co.uk/img/Home_Icon.png" width="30px;">Home</a></li>
+  </ul>
+    </div>
+  <div class="row footer desktop">
+      <img height="60" style="position:relative;top:0;display: inline; float: left;" src="https://app.piwebinars.co.uk/img/logo-text.png" alt="logo"></img>
+   
+          <div style="float:right">
+    <li class="li"><a class="a" href="/index.html"><img src="https://app.piwebinars.co.uk/img/Home_Icon.png" width="40px;">Home</a></li>
+    <li class="li"><a class="a" href="/html/search.html"><img src="https://app.piwebinars.co.uk/img/Search_Icon.png" width="40px;">Search</a></li>
+      <li class="li"><a id="profile" class="a" href="/html/login.html"><img src="https://app.piwebinars.co.uk/img/Login_Icon.png" width="40px;">Login</a></li>
+          </div>
+    </div>
+</nav>
+  <div id="join">
+    <h2>Sign up for free!</h2>
+    <form action="/register" method="POST">
+      <label for="full_name">Full Name:</label></br>
+      <input id="full_name" required></br></br>
+      <label for="pi_username">Enter Pi Username:</label></br>
+      <input id="pi_username"></br></br>
+      <label for="user_password">Enter Password:</label></br>
+      <input type="password" id="user_password" required></br></br>
+      <label for="confirm_password">Confirm Password:</label></br>
+      <input type="password" id="confirm_password" required></br></br>
+      <label for="register">
+      <input type="submit" value="Submit" class="register" id="register"></input></label></br>
+    </form>
+  </div>
+  <img src="/img/join.png" alt="Join & Enjoy" id="joinImg"></img>
+
+<div class="modal" id="firstLoginModal">
+      <div class="modal-dialog">
+        <header style="color: #36454F" class="modal-header">
+          Now please login:
+        </header>
+          <section class="modal-content">
+    <div class="error_log" id="error_log"></div>
+      <form action="/login" method="POST">
+        <label for="pi_username">Enter Pi Username:</label></br>
+        <input id="pi_username" required></br></br>
+        <label for="user_password">Enter Password:</label></br>
+        <input type="password" id="user_password" required></br></br>
+        <label for="login">
+        <input type="submit" value="Submit" class="login" id="firstLogin"></input></label></br>
+      </form><br><br>
+          </section>
+        </div>
+      </div>
+  <br><br><br>
+
+    <!--Scripts-->
+      <script src="https://sdk.minepi.com/pi-sdk.js"></script>
+      <script>
+        Pi.init({ version: "2.0" });
+      </script>
+      <script
+        src="https://kit.fontawesome.com/3aea44e36d.js"
+        crossorigin="anonymous"
+      ></script>
+      <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+      <script src="../js/pages/join.js"></script>
+    <script src="/js/pipayment.js"></script>
+    <script
+      src="https://kit.fontawesome.com/3aea44e36d.js"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

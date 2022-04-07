@@ -494,6 +494,18 @@ tr:nth-child(even) {
   margin-top: 20px;
   background: #FFFFFF;
 }
+#stats {
+  text-align: left;
+}
+#join {
+  position: relative;
+}
+#joinImg {
+  position: relative;
+  width: 90vw;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
 
 
 /**************************************Desktop Styling*******************************************/
@@ -843,13 +855,62 @@ label {
   .thumbnail {
     width: 20vw;
   }
-  #Video, .video {
-    width: 500px;
+  #title {
+    border-style: none;
+    color: #b44afb;
+    font-size: 30px;
+  }
+  #Video {
+    position: absolute;
+    right: 10px;
+    top: 400px;
+    width: 50vw;
+    height: 35vh;
+  }
+  .video {
+    width: 25vw;
+    height: 14vw;
+  }
+  .videoTitle {
+    border: solid;
+    border-radius: 5px;
+    border-color: #4afbb4;
+    margin-top: 20px;
+    background: #FFFFFF;
+  }
+  #stats {
+    position: absolute;
+    left: 50px;
+    top: 400px;
+  }
+  #paymentButton {
+    margin-top: 300px;
+  }
+  #join {
+    position: absolute;
+    left: 15vw;
+    top: 100px;
+  }
+  #joinImg {
+    position: absolute;
+    right: 15vw;
+    top: 100px;
+    width: 60vh;
+  }
+  .cinema-visible {
+    visibility: visible;
+    opacity: 1;
   }
 }
 
-@media screen and (max-width: 900px) {
+@media screen and (max-width: 900px) and (min-width: 620px) {
   .searchHeader {
     display: none;
+  }
+  #joinImg {
+    position: absolute;
+    right: 2vw;
+    top: 100px;
+    width: 60vh;
   }
 }

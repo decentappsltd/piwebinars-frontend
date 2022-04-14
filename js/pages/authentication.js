@@ -244,7 +244,8 @@ const myProfile = async () => {
         people_Who_Follow_Me,
         people_Who_I_Follow,
         credit: piCredit,
-        following: userFollowing
+        following: userFollowing,
+        verified: verified,
       } = data;
       console.log(response.data);
       sessionStorage.user = response.data.profile.user._id;
@@ -257,6 +258,9 @@ const myProfile = async () => {
       fullName.textContent = full_name;
       userHandle.textContent = `@${user_handle}`;
       localStorage.setItem("following", userFollowing);
+      if (verified == true) {
+        document.getElementById("verified_icon").src = "/img/Verified_Icon.png";
+      }
 
       // Dynamic profile dom stats display
       createUserProfile.style.display = "none";
@@ -301,6 +305,7 @@ const userProfile = async () => {
         credit: piCredit,
         followers: userFollowers,
         following: userFollowing,
+        verified: verified,
       } = response.data.profile;
       const {
         user: { _id: self_id },
@@ -314,7 +319,9 @@ const userProfile = async () => {
       fullName.textContent = full_name;
       userHandle.textContent = `@${user_handle}`;
       followBtn.dataset.userId = `${user_id}${hashedId}`;
-
+      if (verified == true) {
+        document.getElementById("verified_icon").src = "/img/Verified_Icon.png";
+      }
       if (self_id === user_id) {
         followBtn.style.display = "none";
       } else {

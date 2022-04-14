@@ -21,21 +21,20 @@
   </head>
   <body>
     <div>
-  <h1 >Pi Webinars</h1>
   
 <nav class="footer" style="z-index: 100">
   <ul class="ul">
     <div class="mobile">
       <li class="li"><a class="a" href="/index.html"><img src="https://app.piwebinars.co.uk/img/Home_Icon.png" width="30px;">Home</a></li>
       <li class="li" style="margin-left:-10px;"><a class="a" href="./all-webinars.html"><img src="https://app.piwebinars.co.uk/img/Watch_Icon.png" width="30px;">Webinars</a></li>
-      <li class="li" ><a class="a authNav" id="uploaddesktopmodal" href="./upload.html"><img src="https://app.piwebinars.co.uk/img/Upload_Icon.png" width="30px;">Upload</a></li>
+      <li class="li" ><a class="a authNav" id="uploaddesktopmodal" onclick="openUploadPage()"><img src="https://app.piwebinars.co.uk/img/Upload_Icon.png" width="30px;">Upload</a></li>
       <li class="li" style="margin-left:-17px;"><a id="profile" class="a unAuthNav" href="./login.html"><img src="https://app.piwebinars.co.uk/img/Login_Icon.png" width="30px;">Login</a></li>
           <li class="li" style="margin-left:-10px; border-right:none;"><a id="profile" class="a unAuthNav" href="./register.html"><img src="https://app.piwebinars.co.uk/img/Register_Icon.png" width="30px;">Register</a></li>
       <li class="li" style="margin-left:-10px;"><a class="a authNav" href="./profile.html"><img src="https://app.piwebinars.co.uk/img/Profile_Icon.png" width="30px;">Profile</a></li>
   </ul>
     </div>
   <div class="row footer desktop">
-      <img height="60" style="position:relative;top:0;display: inline; float: left;" src="https://app.piwebinars.co.uk/img/logo-text.png" alt="logo"></img>
+      <img height="60" onclick="location.href='/'" style="position:relative;top:0;display: inline; float: left;" src="https://app.piwebinars.co.uk/img/logo-text.png" alt="logo"></img>
    
   <div style="float:right">
     <li class="li"><a class="a" href="/index.html"><img src="https://app.piwebinars.co.uk/img/Home_Icon.png" width="40px;">Home</a></li>
@@ -48,28 +47,36 @@
     </div>
 </nav>  
     
-  <!--     ads -->
-    <iframe data-aa='1980365' src='//acceptable.a-ads.com/1980365' style='border:0px; padding:0; width:100%; height:100%; overflow:hidden; background-color: transparent;'></iframe>
+  <div id="grid">
     
-    <img id="thumbnail" src="" style="position:relative;top:0;width:100%"><br>
-    <h3 id="title"></h3>
-    <p2 id="description"></p2><br><br><br>
-    <div id="stats">
-    <p2><strong>Catagory: </strong><span id="category"></span></p2><br>
-    <p2><strong>Creator:  </strong><u><span onclick="goToProfile();" id="name"></span></u></p2><br>
-    <p2>Likes, <span id="likes"></span></p2><br>
-    <p2><strong>Date uploaded:  </strong><span id="date"></span></p2><br>
+      <div class="grid_1" id="Video"></div><br>
+
+    <div class="grid_2">
+      <h3 id="title"></h3>
+      <p2 id="description"></p2><br><br><br>
+      <button id="paymentButton" onclick="buyWebinar()"><span id="price"></span> Pi</button>
+      <br><i>Pay to watch</i>
+    </div>
+    <br><br><br>
+      
+    <div id="stats" class="grid_3">
+      <p2><strong>Catagory: </strong><span id="category"></span></p2><br>
+      <p2><strong>Creator:  </strong><u><span onclick="goToProfile();" id="name"></span></u></p2><br>
+      <p2>Likes, <span id="likes"></span></p2><br>
+      <p2><strong>Date uploaded:  </strong><span id="date"></span></p2><br>
     </div><br>
     
-    <div id="Video"></div>
-    
-    <button id="paymentButton" onclick="alert('Webinar locked until Mainnet!')"><span id="price"></span> Pi</button>
-    <br><i>Pay to watch</i>
-    <br><br><br>
-    <p2>Comments:</p2>
-    <div id="comments"></div>
-    
-    <br><br><br><br>
+    <div class="grid_4">
+      <iframe data-aa='1980365' src='//acceptable.a-ads.com/1980365' style='border:0px; padding:0; width:100%; height:100%; overflow:hidden; background-color: transparent;'></iframe>
+    </div>   
+      
+    <div class="grid_5">
+      <p2>Comments:</p2>
+      <div id="comments"></div>
+    </div>
+      
+  </div>
+  <br><br><br><br>  
     
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
@@ -95,11 +102,20 @@
       
       const video_id = localStorage.getItem("video_id");
       const url = "https://player.vimeo.com/video/"+video_id;
+      var w = window.innerWidth;
+      if (w >= 900) {
       var options = {
+        url: url,
+        controls: true,
+        width: 500,
+      };
+      } else {
+        var options = {
         url: url,
         controls: true,
         width: 350,
       };
+      }
 
       var videoPlayer = new Vimeo.Player('Video', options);
 

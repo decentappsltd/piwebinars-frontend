@@ -1,11 +1,6 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <!-- Ezoic Code -->
-    	<script>var ezoicId = 341632;</script>
-	    <script type="text/javascript" src="//go.ezoic.net/ezoic/ezoic.js"></script>
-    <!-- Ezoic Code -->
-    
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-DHEX8LQ19E"></script>
     <script>
@@ -47,18 +42,18 @@
     <nav id="footer" style="display: none;">
       <ul class="ul">
         <li class="li">
-          <a class="a" href="/index.html"><img src="https://app.piwebinars.co.uk/img/Home_Icon.png" width="30px;">Home</a>
+          <a class="a" href="/index.html"><img src="/img/Home_Icon.png" width="30px;">Home</a>
         </li>
         <li class="li">
-          <a class="a" href="/html/all-webinars.html"><img src="https://app.piwebinars.co.uk/img/Watch_Icon.png" width="30px;">Webinars</a>
+          <a class="a" href="/html/all-webinars.html"><img src="/img/Watch_Icon.png" width="30px;">Webinars</a>
         </li>
         <li class="li">
-          <a class="a authNav" href="/html/upload.html"><img src="https://app.piwebinars.co.uk/img/Upload_Icon.png" width="30px;">Upload</a>
+          <a class="a authNav" href="/html/upload.html"><img src="/img/Upload_Icon.png" width="30px;">Upload</a>
         </li>
-    <li class="li" style="margin-left:-15px;"><a id="profile" class="a unAuthNav" href="/html/login.html"><img src="https://app.piwebinars.co.uk/img/Login_Icon.png" width="30px;">Login</a></li>
-    <li class="li" style="margin-left:-10px; border-right:none;"><a id="profile" class="a unAuthNav" href="/html/register.html"><img src="https://app.piwebinars.co.uk/img/Register_Icon.png" width="30px;">Register</a></li>
+    <li class="li" style="margin-left:-15px;"><a id="profile" class="a unAuthNav" href="/html/login.html"><img src="/img/Login_Icon.png" width="30px;">Login</a></li>
+    <li class="li" style="margin-left:-10px; border-right:none;"><a id="profile" class="a unAuthNav" href="/html/register.html"><img src="/img/Register_Icon.png" width="30px;">Register</a></li>
         <li class="li" style="margin-left:-15px;">
-          <a class="a authNav" href="/html/profile.html"><img src="https://app.piwebinars.co.uk/img/Profile_Icon.png" width="30px;">Profile</a>
+          <a class="a authNav" href="/html/profile.html"><img src="/img/Profile_Icon.png" width="30px;">Profile</a>
         </li>
       </ul>
     </nav>   
@@ -69,7 +64,7 @@
     
 <!--     ads -->
     <iframe data-aa='1980365' src='//acceptable.a-ads.com/1980365' style='border:0px; padding:0; width:100%; height:100%; overflow:hidden; background-color: transparent;'></iframe>
-    
+
     <div class="featuredSection"></div>
     
     
@@ -91,6 +86,10 @@
     
   <br>
   <button id="translate" onclick="googleTranslate()">Translate Page</button><br>
+    
+  <a href="/policies/privacy.html">Privacy Policy</a><br>
+  <a href="/policies/terms.html">Terms & Conditions</a><br>
+  <a href="mailto:contact@piwebinars.co.uk">Contact Us</a><br>
   
   <h5 style="color: #36454F;">&copy; Decent Apps Ltd</h5>
 
@@ -132,7 +131,8 @@
       <img height="60" style="position:relative;top:0;display: inline; float: left;" src="https://app.piwebinars.co.uk/img/logo-text.png" alt="logo"></img>
     
     <input style="height: 40px; margin-top: 5px; width: 35vw;" type="text" placeholder="Search Webinars.." id="search" class="searchbar searchHeader">
-  <i style="margin-left: 5px;" class="searchHeader fas fa-search" id="search" onclick="search()"></i>
+    <i style="margin-left: 5px;" class="searchHeader fas fa-search" id="search" onclick="search()"></i>
+    <i class="searchHeader" onclick="location.href='/'">clear</i>
    
     <div style="float:right">
     <li class="li"><a class="a" href="/index.html"><img src="https://app.piwebinars.co.uk/img/Home_Icon.png" width="40px;">Home</a></li>
@@ -154,9 +154,44 @@
 
   </style>
     <br><br><br><br>
+  <div class="grid">
+    
+    <div class="selection" style="text-align: left;">
+      <h4 style="color:#fbb44a">Webinars</h4>
+      
+    <a class="filter" onclick="location.href='/'">All</a><br>
+    <a class="filter" onclick="localStorage.filter = 'cryptocurrency'; filter();">Cryptocurrency</a><br>
+    <a class="filter" onclick="localStorage.filter = 'diy'; filter();">DIY</a><br>
+    <a class="filter" onclick="localStorage.filter = 'education'; filter();">Education</a><br>
+    <a class="filter" onclick="localStorage.filter = 'finance'; filter();">Finance</a><br>
+    <a class="filter" onclick="localStorage.filter = 'fitness'; filter();">Fitness</a><br>
+    <a class="filter" onclick="localStorage.filter = 'food'; filter();">Food</a><br>
+    <a class="filter" onclick="localStorage.filter = 'gaming'; filter();">Gaming</a><br>
+    <a class="filter" onclick="localStorage.filter = 'history'; filter();">History</a><br>
+    <a class="filter" onclick="localStorage.filter = 'music'; filter();">Music</a><br>
+    <a class="filter" onclick="localStorage.filter = 'nature'; filter();">Nature</a><br>
+    <a class="filter" onclick="localStorage.filter = 'pets'; filter();">Pets</a><br>
+    <a class="filter" onclick="localStorage.filter = 'pi network'; filter();">Pi Network</a><br>
+    <a class="filter" onclick="localStorage.filter = 'politics'; filter();">Politics</a><br>
+    <a class="filter" onclick="localStorage.filter = 'sports'; filter();">Sports</a><br>
+    <a class="filter" onclick="localStorage.filter = 'technology'; filter();">Technology</a><br>
+      
+      <h4 style="color:#fbb44a;">Wishlist</h4>
+      <div class="wishlist"></div>
+      
+      <h4 style="color:#fbb44a;">Following</h4>
+      <div class="following"></div>
+      
+      <a href="/policies/privacy.html">Privacy Policy</a><br>
+      <a href="/policies/terms.html">Terms & Conditions</a><br>
+      <a href="mailto:contact@piwebinars.co.uk">Contact Us</a>
+      <br><br>
+   </div>
+    
     <div class="mainWebinars">
         <div class="mainWebinarsContain">
 
+    <div class="tablet">
     <h2>Webinars</h2>
     <i class="fas fa-filter"></i>
   <select style="margin-bottom: 5px;" name="categories" id="select">
@@ -177,10 +212,11 @@
     <option class="list" value="sports">Sports</option><br />
     <option class="list" value="technology">Technology</option><br />
   </select><i style="margin-left: 5px;" class="fas fa-search" id="searchCat" onclick="searchCat()"></i><br />
-          
-          <!--     ads -->
+  </div>
+                 
+  <!--     ads -->
     <iframe data-aa='1980365' src='//acceptable.a-ads.com/1980365' style='border:0px; padding:0; width:100%; height:100%; overflow:hidden; background-color: transparent;'></iframe>
-  
+ 
     <div class="postSection"></div>
   </div>
   </div>
@@ -190,7 +226,7 @@
       <h2>Purchases</h2>
       <div class="purchaseSection"></div>
       <!--     ads -->
-      <iframe data-aa='1980365' src='//acceptable.a-ads.com/1980365' style='border:0px; padding:0; width:100%; height:100%; overflow:hidden; background-color: transparent;'></iframe>
+    <iframe data-aa='1980365' src='//acceptable.a-ads.com/1980365' style='border:0px; padding:0; width:100%; height:100%; overflow:hidden; background-color: transparent;'></iframe>
     </div>
     
     <!--Your Webinars Render Div-->
@@ -198,11 +234,11 @@
       <h2>Uploads</h2>
       <div class="yourSection"></div>
       <!--     ads -->
-      <iframe data-aa='1980365' src='//acceptable.a-ads.com/1980365' style='border:0px; padding:0; width:100%; height:100%; overflow:hidden; background-color: transparent;'></iframe>
+    <iframe data-aa='1980365' src='//acceptable.a-ads.com/1980365' style='border:0px; padding:0; width:100%; height:100%; overflow:hidden; background-color: transparent;'></iframe>
     </div>
     
+  </div>
       <h5 id="copyright">&copy; Decent Apps Ltd</h5></br>
-
 </div>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="../js/pages/authentication.js"></script>
@@ -213,6 +249,25 @@
   renderAllWebinars();
   renderPurchasedWebinars();
   renderYourWebinars();
+  renderFollowing();
 </script>
+<style>
+  @media screen and (min-width: 900px) {
+    .tablet {
+      display: none;
+    }
+    .followingStyle {
+      border: none;
+      color: black;
+    }
+  }
+  @media screen and (max-width: 900px) and (min-width: 620px) {
+  .tablet {
+    display: block;
+  }
+  .searchHeader {
+    display: none;
+  }
+</style>
   </body>
 </html>

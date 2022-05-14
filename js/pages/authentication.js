@@ -409,6 +409,7 @@ const webinarPost = async () => {
         );
         if (response.status === 200) {
           // Like and Unlike comments
+          window.location.reload(true);
           return "success";
         }
       } catch (error) {
@@ -429,6 +430,7 @@ const webinarPost = async () => {
         );
         if (response.status === 200) {
           // Dislike comments
+          window.location.reload(true);
           return "success";
         }
       } catch (error) {
@@ -462,6 +464,7 @@ const webinarPost = async () => {
         console.log("Response: ", response);
         if (response.status === 200) {
           // Make comment
+          window.location.reload(true);
           // console.log(response.data);
         }
       });

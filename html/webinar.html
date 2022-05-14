@@ -36,14 +36,14 @@
   <div class="row footer desktop">
       <img height="60" onclick="location.href='/'" style="position:relative;top:0;display: inline; float: left;" src="https://app.piwebinars.co.uk/img/logo-text.png" alt="logo"></img>
    
-  <div style="float:right">
+  <ul style="float:right">
     <li class="li"><a class="a" href="/index.html"><img src="https://app.piwebinars.co.uk/img/Home_Icon.png" width="40px;">Home</a></li>
     <li class="li"><a class="a" href="./search.html"><img src="https://app.piwebinars.co.uk/img/Search_Icon.png" width="40px;">Search</a></li>
     <li class="li"><a class="a authNav" href="./upload.html"><img src="https://app.piwebinars.co.uk/img/Upload_Icon.png" width="40px;">Upload</a></li>
     <li class="li"><a id="profile" class="a unAuthNav" href="./login.html"><img src="https://app.piwebinars.co.uk/img/Login_Icon.png" width="40px;">Login</a></li>
         <li class="li"><a id="profile" class="a unAuthNav" href="./register.html"><img src="https://app.piwebinars.co.uk/img/Register_Icon.png" width="40px;">Register</a></li>
     <li class="li"><a class="a authNav" href="./profile.html"><img src="https://app.piwebinars.co.uk/img/Profile_Icon.png" width="40px;">Profile</a></li>
-  </div>
+  </ul>
     </div>
 </nav>  
     
@@ -51,19 +51,29 @@
     
       <div class="grid_1" id="Video"></div><br>
 
+      <div class="likedislike">
+        <div class="like_unlike_post">
+          <span id="likeUnlikePost">Loading . . .</span>
+        </div>
+        <div class="dislike_post">
+          <span id="dislikePost">Loading . . .</span>
+        </div>
+      </div>
+
     <div class="grid_2">
       <h3 id="title"></h3>
-      <p2 id="description"></p2><br><br><br>
+      <p id="description"></p><br><br><br>
       <button id="paymentButton" onclick="alert('Purchases are blocked until Mainnet')"><span id="price"></span> Pi</button>
       <br><i>Pay to watch</i>
     </div>
     <br><br><br>
       
     <div id="stats" class="grid_3">
-      <p2><strong>Catagory: </strong><span id="category"></span></p2><br>
-      <p2><strong>Creator:  </strong><u><span onclick="goToProfile();" id="name"></span></u></p2><br>
-      <p2>Likes, <span id="likes"></span></p2><br>
-      <p2><strong>Date uploaded:  </strong><span id="date"></span></p2><br>
+      <p><strong>Category: </strong><span id="category"></span></p><br>
+      <p><strong>Creator:  </strong><u><span onclick="goToProfile();" id="name"></span></u></p><br>
+      <p>Likes: <span class="styleContent" id="totalLikes">NaN</span></p><br>
+      <p>Dislikes: <span class="styleContent" id="totalDislikes">NaN</span></p><br>
+      <p><strong>Date uploaded:  </strong><span class="styleContent" id="date"></span></p><br>
     </div><br>
     
     <div class="grid_4">
@@ -71,8 +81,13 @@
     </div>   
       
     <div class="grid_5">
-      <p2>Comments:</p2>
-      <div id="comments"></div>
+      <h1>Comments:</h1>
+      <form class="commentField" id="commentForm">
+        <label for="text" style="position: absolute; right: 999999px;">Comment</label>
+        <textarea style="display: block; width: 90%; height: 100%" id="text" name="text" required placeholder="Comment on this post"></textarea>
+        <button type="submit" id="postComment">Comment</button>
+      </form>
+      <div id="commentsContainer"></div>
     </div>
       
   </div>

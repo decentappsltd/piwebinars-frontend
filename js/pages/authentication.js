@@ -11,6 +11,7 @@ const errorFlash = document.querySelector("#error_log");
 const followBtn = document.querySelector("#follow_btn");
 const searchBtn = document.querySelector("#search_btn");
 const searchDisplay = document.querySelector("#searchedUser");
+const commentsDisplay = document.querySelector("#commentsContainer");
 const authNavv = document.querySelectorAll(".authNav");
 const unAuthNavv = document.querySelectorAll(".unAuthNav");
 
@@ -83,7 +84,7 @@ if (loginBtn !== null) {
           localStorage.removeItem("userSession");
           sessionStorage.setItem("userSession", token);
           localStorage.setItem("userSession", token);
-          sessionStorage.setItem("username", username)
+          sessionStorage.setItem("username", username);
           flashMessage = message;
           // if (navigator.userAgent.toLowerCase().indexOf("pibrowser")>=0) {
           //   addUID();
@@ -271,6 +272,7 @@ const myProfile = async () => {
     if (errorMessage.length > 0) return errorMessage, error.response;
   }
 };
+
 const userProfile = async () => {
   const getUserFromStorage = localStorage.getItem("user_id");
   const fullName = document.querySelector("#displayFullName");
@@ -282,14 +284,11 @@ const userProfile = async () => {
   if (authToken === null) followBtn.style.display = "none";
 
   try {
-    const response = await instance.get(
-      `/profile/user/${getUserFromStorage}`,
-      {
-        params: {
-          user_id: getUserFromStorage,
-        },
-      }
-    );
+    const response = await instance.get(`/profile/user/${getUserFromStorage}`, {
+      params: {
+        user_id: getUserFromStorage,
+      },
+    });
     const myProfile = await instance.get(`/profile`, {
       headers: {
         "Content-Type": "application/json",
@@ -339,8 +338,145 @@ const userProfile = async () => {
       return errorMessage, error.response;
   }
 };
+
+// Render contents of the selected post
+const webinarPost = async () => {
+  const likesCount = document.querySelector("#totalLikes");
+  const dislikesCount = document.querySelector("#totalDislikes");
+  const likeUnlikePostBtn = document.querySelector("#likeUnlikePost");
+  const dislikePostBtn = document.querySelector("#dislikePost");
+  const postCommentBtn = document.querySelector("#postComment");
+  const commentValue = document.querySelector("#text");
+  const commentFormSection = document.querySelector("#commentForm");
+
+  const userId = localStorage.getItem("user_id");
+  const post_id = localStorage.getItem("post_id");
+  const authToken = localStorage.getItem("userSession");
+
+  const getPostResponse = await instance.get(`/post/${userId}/${post_id}`, {
+    params: {
+      userId,
+    },
+  });
+
+  console.log("post ", getPostResponse);
+
+  try {
+    const myProfile = await instance.get(`/profile`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${authToken}`,
+      },
+    });
+    if (getPostResponse.status === 200) {
+      // Render comments
+      const { comments, dislike, likes } = await getPostResponse.data.Post;
+
+      likesCount.textContent = likes.length;
+      dislikesCount.textContent = dislike.length;
+
+      if (comments.length <= 0) {
+        const noComments = `<p class="noComments">No Comments made yet on this post, be the first to comment</p>`;
+        commentsDisplay.innerHTML = noComments;
+      } else {
+        // commentsDisplay.appendChild(commentSection)
+      }
+    }
+  } catch (error) {
+    const errorMessage = error.response.data.message;
+    if (errorMessage && errorMessage.length > 0)
+      return errorMessage, error.response;
+  }
+
+  if (getPostResponse.status === 200) {
+    const { likes, dislike } = getPostResponse.data.Post;
+    const liked = likes.find(({ user }) => user.toString() === userId);
+    const disLiked = dislike.find(({ user }) => user.toString() === userId);
+    if (liked === undefined) likeUnlikePostBtn.textContent = "Like";
+    else likeUnlikePostBtn.textContent = "Unlike";
+    if (disLiked === undefined) dislikePostBtn.textContent = "Dislike";
+    else dislikePostBtn.textContent = "Disliked";
+
+    likeUnlikePostBtn.addEventListener("click", async (e) => {
+      try {
+        const response = await instance.post(
+          `/post/like_unlike_post/${userId}/${post_id}`,
+          {
+            params: {
+              userId,
+            },
+          }
+        );
+        if (response.status === 200) {
+          // Like and Unlike comments
+          return "success";
+        }
+      } catch (error) {
+        const errorMessage = error.response.data.message;
+        if (errorMessage && errorMessage.length > 0)
+          return errorMessage, error.response;
+      }
+    });
+    dislikePostBtn.addEventListener("click", async (e) => {
+      try {
+        const response = await instance.post(
+          `/post/dislike_post/${userId}/${post_id}`,
+          {
+            params: {
+              userId,
+            },
+          }
+        );
+        if (response.status === 200) {
+          // Dislike comments
+          return "success";
+        }
+      } catch (error) {
+        const errorMessage = error.response.data.message;
+        if (errorMessage && errorMessage.length > 0)
+          return errorMessage, error.response;
+      }
+    });
+  }
+
+  if (postCommentBtn !== null) {
+    try {
+      postCommentBtn.addEventListener("click", async (e) => {
+        e.preventDefault();
+        if (commentValue.length <= 0) return;
+        const data = { text: commentValue.value };
+        const response = await instance.post(
+          `/post/comment/${userId}/${post_id}`,
+          data,
+          {
+            headers: {
+              "Content-Type":
+                "multipart/form-data; boundary='--sampleBoundary'",
+              "Access-Control-Allow-Origin": "*",
+              Authorization: `Bearer ${authToken}`,
+            },
+            withCredentials: true,
+            credentials: "same-origin",
+          }
+        );
+        console.log("Response: ", response);
+        if (response.status === 200) {
+          // Make comment
+          // console.log(response.data);
+        }
+      });
+    } catch (error) {
+      console.log("Error: ", error);
+      const errorMessage = error.response.data.message;
+      if (errorMessage && errorMessage.length > 0)
+        return errorMessage, error.response;
+    }
+  }
+};
+
 if (urlPath === "profile.html") myProfile();
 if (urlPath === "userProfile.html") userProfile();
+if (urlPath === "webinar.html") webinarPost();
 
 // Upload webinar
 const video = document.querySelector("#videoUpload");
@@ -409,6 +545,9 @@ if (uploadBtn !== null) {
       } catch (error) {
         const errorMessage = error.response.data.message;
         if (errorMessage.length > 0) flashMessage = errorMessage;
+      } finally {
+        const message = "Successfully uploaded your webinar !!!";
+        flashMessage = message;
       }
       flashBool = true;
 
@@ -642,40 +781,6 @@ if (followBtn !== null) {
       return errorMessage;
     }
   });
-}
-
-function renderComments(purchasedWebinar) {
-  const currentComments = purchasedWebinar["comments"];
-  const commentDiv = document.getElementById("comments");
-  for (let i = 0; i < currentComments.length; i++) {
-    const renderMessage = document.createElement("p3");
-    const renderCommentLikes = document.createElement("h6");
-    const renderLikeButton = document.createElement("button");
-    renderLikeButton.className = "likeComment";
-    renderLikeButton.onclick = function () {
-      var webinarId = currentComments[i].post_id;
-      var creatorId = currentComments[i].userId;
-      var commentId = currentComments[i].comment_;
-    };
-    const renderReplyButton = document.createElement("button");
-    renderReplyButton.className = "replyComment";
-    renderReplyButton.onclick = function () {
-      var webinarId = currentComments[i].post_id;
-      var creatorId = currentComments[i].userId;
-      var commentId = currentComments[i].comment_id;
-    };
-    renderMessage.textContent = currentComments[i].comment_text;
-    renderCommentLikes.textContent = currentComments[i].comment_likes;
-    renderLikeButton.textContent = "Like Comment";
-    renderReplyButton.textContent = "Reply Comment";
-
-    commentDiv.appendChild(renderMessage);
-    commentDiv.appendChild(renderCommentLikes);
-    commentDiv.appendChild(renderLikeButton);
-    commentDiv.appendChild(renderReplyButton);
-
-    section.appendChild(commentDiv);
-  }
 }
 
 function buyCredits(creditAmount) {

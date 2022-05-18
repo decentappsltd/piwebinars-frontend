@@ -1,48 +1,59 @@
 async function auth() {
-    const scopes = ["username", "payments"];
-    function onIncompletePaymentFound(payment) {
-      var data = {
-        paymentId: payment.identifier,
-        txid: payment.transaction.txid,
-      };
-      axios.post("https://piwebinars-server.herokuapp.com/payment/incomplete", data);
+  const scopes = ["username", "payments"];
+  function onIncompletePaymentFound(payment) {
+    var data = {
+      paymentId: payment.identifier,
+      txid: payment.transaction.txid
+    };
+    axios.post(
+      "https://piwebinars-server.herokuapp.com/payment/incomplete",
+      data
+    );
+  }
+  Pi.authenticate(scopes, onIncompletePaymentFound).then(async function (auth) {
+    const userName = auth.user.username;
+    const uid = auth.user.uid;
+    localStorage.uid = uid;
+    localStorage.piName = userName;
+    if (!sessionStorage.userSession) {
+      piLogin();
     }
-    Pi.authenticate(scopes, onIncompletePaymentFound)
-      .then(async function (auth) {
-        // const userName = auth.user.username;
-        // document.getElementById("username").innerHTML = userName;
-        const uid = auth.user.uid;
-        localStorage.setItem("uid", uid);
-        if (!sessionStorage.userSession) {
-          piLogin();
-        }
-      })
-    }
+  });
+}
 
 async function piLogin() {
   try {
     const config = {
-      uid: localStorage.uid,
+      name: localStorage.piName,
+      username: localStorage.piName,
+      uid: localStorage.uid
     };
-    const response = await axios.post(`https://piwebinars-server.herokuapp.com/login/pi`, config);
-    if (response.status === 200) {
+    const response = await axios.post(
+      `https://piwebinarsdev.herokuapp.com/login/pi`,
+      config
+    );
+    if (response.status === 200 || response.status === 201) {
       const token = response.data.token;
       sessionStorage.removeItem("userSession");
       localStorage.removeItem("userSession");
       sessionStorage.setItem("userSession", token);
       localStorage.setItem("userSession", token);
+      sessionStorage.setItem("username", localStorage.piName);
       // show logged in
       authNavv.forEach((elem) => {
         elem.classList.remove("authNav");
         elem.classList.add("showNav");
       });
       unAuthNavv.forEach((elem) => {
-        elem.classList.remove(elem);
+        elem.style.display = "none";
       });
     }
-  } catch (error) {
-      console.log(error);
+    if (response.status === 201) {
+      alert("Welcome to Pi Webinars!");
     }
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 auth();

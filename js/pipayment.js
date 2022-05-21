@@ -6,7 +6,7 @@ async function auth() {
       txid: payment.transaction.txid
     };
     axios.post(
-      "https://piwebinarsdev.herokuapp.com/payment/incomplete",
+      "https://piwebinars-server.herokuapp.com/payment/incomplete",
       data
     );
   }

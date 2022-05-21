@@ -29,7 +29,7 @@ async function piLogin() {
       uid: localStorage.uid
     };
     const response = await axios.post(
-      `https://piwebinarsdev.herokuapp.com/login/pi`,
+      `https://piwebinars-server.herokuapp.com/login/pi`,
       config
     );
     if (response.status === 200 || response.status === 201) {

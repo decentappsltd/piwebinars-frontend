@@ -26,10 +26,10 @@ const instance = axios.create({
   baseURL: "https://piwebinars-server.herokuapp.com",
   headers: {
     "Access-Control-Allow-Origin": "*",
-    Authorization: `Bearer ${authToken}`,
+    Authorization: `Bearer ${authToken}`
   },
   withCredentials: true,
-  credentials: "same-origin",
+  credentials: "same-origin"
 });
 
 // Register a new user
@@ -55,14 +55,16 @@ if (registerBtn !== null) {
         const newUser = {
           name: fullName,
           username,
-          password,
+          password
         };
         const response = await instance.post(`/register`, newUser);
         if (response.status === 201) {
           flashMessage = `New User successfully register!!!`;
           flashBool = true;
           setTimeout(() => {
-            document.getElementById("firstLoginModal").classList.add("cinema-visible");
+            document
+              .getElementById("firstLoginModal")
+              .classList.add("cinema-visible");
           }, 3000);
         }
         password = "";
@@ -102,7 +104,7 @@ if (loginFirstBtn !== null) {
       } else {
         const user = {
           username,
-          password,
+          password
         };
         const response = await instance.post(`/login`, user);
         if (response.status === 200) {
@@ -120,13 +122,13 @@ if (loginFirstBtn !== null) {
         password = "";
         //create new profile
         createProfile(handle);
-       }
-      } catch (error) {
-        const errorMessage = error.response.data.message;
-        if (errorMessage.length > 0) flashMessage = errorMessage;
       }
+    } catch (error) {
+      const errorMessage = error.response.data.message;
+      if (errorMessage.length > 0) flashMessage = errorMessage;
+    }
 
-      flashBool = true;
+    flashBool = true;
 
     // Flash message
     if (flashBool && flashMessage.length > 0) {
@@ -143,44 +145,44 @@ if (loginFirstBtn !== null) {
 
 // Create a user profile
 async function createProfile(handle) {
-    const authToken = localStorage.getItem("userSession");
+  const authToken = localStorage.getItem("userSession");
 
-    try {
-      if (handle === "") {
-        const message = "Cannot send empty fields!!!";
-        flashMessage = message;
-      } else {
-        const userHandle = {
-          handle,
-        };
-        const responseProfile = await instance.post(`/profile`, userHandle, {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${authToken}`,
-          },
-        });
-        if (responseProfile.status === 200) {
-          const message = "User Profile was successfully created !!!";
-          flashMessage = message;
-          window.location.href = "/";
+  try {
+    if (handle === "") {
+      const message = "Cannot send empty fields!!!";
+      flashMessage = message;
+    } else {
+      const userHandle = {
+        handle
+      };
+      const responseProfile = await instance.post(`/profile`, userHandle, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${authToken}`
         }
+      });
+      if (responseProfile.status === 200) {
+        const message = "User Profile was successfully created !!!";
+        flashMessage = message;
+        window.location.href = "/";
       }
-    } catch (error) {
-      const errorMessage = error.response.data.message;
-      if (errorMessage.length > 0) flashMessage = errorMessage;
     }
+  } catch (error) {
+    const errorMessage = error.response.data.message;
+    if (errorMessage.length > 0) flashMessage = errorMessage;
+  }
 
-    flashBool = true;
-    handle.textContent = "";
+  flashBool = true;
+  handle.textContent = "";
 
-    // Flash message
-    if (flashBool && flashMessage.length > 0) {
-      pTag.textContent = flashMessage;
-      errorFlash.appendChild(pTag);
-      setTimeout(() => {
-        flashMessage = "";
-        flashBool = false;
-        errorFlash.removeChild(pTag);
-      }, flashTime);
-    }
+  // Flash message
+  if (flashBool && flashMessage.length > 0) {
+    pTag.textContent = flashMessage;
+    errorFlash.appendChild(pTag);
+    setTimeout(() => {
+      flashMessage = "";
+      flashBool = false;
+      errorFlash.removeChild(pTag);
+    }, flashTime);
+  }
 }

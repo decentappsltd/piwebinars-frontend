@@ -1,170 +1,279 @@
 <!DOCTYPE html>
 <html>
-  <head>    
-    <!--CSS-->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/styles.css">
-    <link rel="icon" type="image/png" href="/img/logo.png">
-    
-    <!--Google Fonts-->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;700&display=swap" rel="stylesheet">
-    <title>Pi Webinars || Webinar</title>
-    
-    <script src="https://sdk.minepi.com/pi-sdk.js"></script>
-    <script>
-      const Pi = window.Pi;
-      Pi.init({ version: "2.0", sandbox: false })
-    </script>
-    <script src="https://player.vimeo.com/api/player.js"></script>
-  </head>
-  <body>
-    <div>
-  
-<nav class="footer" style="z-index: 100">
-  <ul class="ul">
-    <div class="mobile">
-      <li class="li"><a class="a" href="/index.html"><img src="https://app.piwebinars.co.uk/img/Home_Icon.png" width="30px;">Home</a></li>
-      <li class="li" style="margin-left:-10px;"><a class="a" href="./all-webinars.html"><img src="https://app.piwebinars.co.uk/img/Watch_Icon.png" width="30px;">Webinars</a></li>
-      <li class="li" ><a class="a authNav" id="uploaddesktopmodal" onclick="openUploadPage()"><img src="https://app.piwebinars.co.uk/img/Upload_Icon.png" width="30px;">Upload</a></li>
-      <li class="li" style="margin-left:-17px;"><a id="profile" class="a unAuthNav" href="./login.html"><img src="https://app.piwebinars.co.uk/img/Login_Icon.png" width="30px;">Login</a></li>
-          <li class="li" style="margin-left:-10px; border-right:none;"><a id="profile" class="a unAuthNav" href="./register.html"><img src="https://app.piwebinars.co.uk/img/Register_Icon.png" width="30px;">Register</a></li>
-      <li class="li" style="margin-left:-10px;"><a class="a authNav" href="./profile.html"><img src="https://app.piwebinars.co.uk/img/Profile_Icon.png" width="30px;">Profile</a></li>
-  </ul>
-    </div>
-  <div class="row footer desktop">
-      <img height="60" onclick="location.href='/'" style="position:relative;top:0;display: inline; float: left;" src="https://app.piwebinars.co.uk/img/logo-text.png" alt="logo"></img>
-   
-  <ul style="float:right">
-    <li class="li"><a class="a" href="/index.html"><img src="https://app.piwebinars.co.uk/img/Home_Icon.png" width="40px;">Home</a></li>
-    <li class="li"><a class="a" href="./search.html"><img src="https://app.piwebinars.co.uk/img/Search_Icon.png" width="40px;">Search</a></li>
-    <li class="li"><a class="a authNav" href="./upload.html"><img src="https://app.piwebinars.co.uk/img/Upload_Icon.png" width="40px;">Upload</a></li>
-    <li class="li"><a id="profile" class="a unAuthNav" href="./login.html"><img src="https://app.piwebinars.co.uk/img/Login_Icon.png" width="40px;">Login</a></li>
-        <li class="li"><a id="profile" class="a unAuthNav" href="./register.html"><img src="https://app.piwebinars.co.uk/img/Register_Icon.png" width="40px;">Register</a></li>
-    <li class="li"><a class="a authNav" href="./profile.html"><img src="https://app.piwebinars.co.uk/img/Profile_Icon.png" width="40px;">Profile</a></li>
-  </ul>
-    </div>
-</nav>  
-    
-  <div id="grid">
-    
-      <div class="grid_1" id="Video"></div><br>
 
-      <div class="likedislike">
-        <div class="like_unlike_post">
-          <span id="likeUnlikePost">Loading . . .</span>
-        </div>
-        <div class="dislike_post">
-          <span id="dislikePost">Loading . . .</span>
+<head>
+  <!--CSS-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" id="dark">
+  <link rel="icon" type="image/png" href="/img/logo.png">
+
+  <!--Google Fonts-->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;700&display=swap" rel="stylesheet">
+  <title>Pi Webinars || Webinar</title>
+
+  <script src="https://sdk.minepi.com/pi-sdk.js"></script>
+  <script>
+    const Pi = window.Pi;
+    Pi.init({
+      version: "2.0",
+      sandbox: false
+    })
+  </script>
+  <script src="https://player.vimeo.com/api/player.js"></script>
+</head>
+
+<body>
+  <div>
+
+    <nav class="footer" style="z-index: 100">
+      <div class="mobile">
+        <ul class="ul">
+          <li class="li">
+            <a class="a" href="/index.html"><img src="/img/Home_Icon.png" width="30px;">Home</a>
+          </li>
+          <li class="li">
+            <a class="a" href="/html/all-webinars.html"><img src="/img/Watch_Icon.png" width="30px;">Webinars</a>
+          </li>
+          <li class="li">
+            <a class="a authNav" href="/html/upload.html"><img src="/img/Upload_Icon.png" width="30px;">Upload</a>
+          </li>
+          <li class="li" style="">
+            <a class="a authNav" href="/html/profile.html"><img src="/img/Profile_Icon.png" width="30px;">Profile</a>
+          </li>
+          <li class="li" style="margin-left: -40px;"><a id="profile" class="a unAuthNav" href="/html/login.html"><img src="/img/Login_Icon.png" width="30px;">Login</a></li>
+          <li class="li" style=" border-right:none;"><a id="profile" class="a unAuthNav" href="/html/register.html"><img src="/img/Register_Icon.png" width="30px;">Register</a></li>
+        </ul>
+      </div>
+      <div class="row footer desktop">
+        <img height="60" onclick="location.href='/'" style="position:relative;top:0;display: inline; float: left;" src="https://app.piwebinars.co.uk/img/logo-text.png" alt="logo"></img>
+
+        <div style="float:right">
+          <li class="li"><a class="a" href="/index.html"><img src="https://app.piwebinars.co.uk/img/Home_Icon.png" width="40px;">Home</a></li>
+          <li class="li"><a class="a" href="./search.html"><img src="https://app.piwebinars.co.uk/img/Search_Icon.png" width="40px;">Search</a></li>
+          <li class="li"><a class="a authNav" href="./upload.html"><img src="https://app.piwebinars.co.uk/img/Upload_Icon.png" width="40px;">Upload</a></li>
+          <li class="li"><a id="profile" class="a unAuthNav" href="./login.html"><img src="https://app.piwebinars.co.uk/img/Login_Icon.png" width="40px;">Login</a></li>
+          <li class="li"><a id="profile" class="a unAuthNav" href="./register.html"><img src="https://app.piwebinars.co.uk/img/Register_Icon.png" width="40px;">Register</a></li>
+          <li class="li"><a class="a authNav" href="./profile.html"><img src="https://app.piwebinars.co.uk/img/Profile_Icon.png" width="40px;">Profile</a></li>
         </div>
       </div>
+    </nav>
 
-    <div class="grid_2">
-      <h3 id="title"></h3>
-      <p id="description"></p><br><br><br>
-      <button id="paymentButton" onclick="alert('Purchases are blocked until Mainnet')"><span id="price"></span> Pi</button>
-      <br><i>Pay to watch</i>
-    </div>
-    <br><br><br>
-      
-    <div id="stats" class="grid_3">
-      <p><strong>Category: </strong><span id="category"></span></p><br>
-      <p><strong>Creator:  </strong><u><span onclick="goToProfile();" id="name"></span></u></p><br>
-      <p>Likes: <span class="styleContent" id="totalLikes">NaN</span></p><br>
-      <p>Dislikes: <span class="styleContent" id="totalDislikes">NaN</span></p><br>
-      <p><strong>Date uploaded:  </strong><span class="styleContent" id="date"></span></p><br>
-    </div><br>
-    
-    <div class="grid_4">
-      <iframe data-aa='1980365' src='//acceptable.a-ads.com/1980365' style='border:0px; padding:0; width:100%; height:100%; overflow:hidden; background-color: transparent;'></iframe>
-    </div>   
-      
-    <div class="grid_5">
-      <h1>Comments:</h1>
-      <form class="commentField" id="commentForm">
-        <label for="text" style="position: absolute; right: 999999px;">Comment</label>
-        <textarea style="display: block; width: 90%; height: 100%" id="text" name="text" required placeholder="Comment on this post"></textarea>
-        <button type="submit" id="postComment">Comment</button>
-      </form>
-      <div id="commentsContainer"></div>
-    </div>
-      
+    <di id="grid">
+      <div class="grid_1" id="Video"></div><br>
+
+      <div class="grid_2">
+        <h3 id="title"></h3>
+        <p2 id="description"></p2>
+      </div><br>
+
+      <div class="grid_3">
+      <div style="border-bottom: solid 1px #000; column-count: 2; width: 95%; margin-left: 2.5%; color: #36454f;">
+        <div style="break-inside: avoid-column;" id="likes">
+          <i class="fa fa-thumbs-down" id="dislikePost" aria-hidden="true"><span id="totalDislikes"></span></i>
+          <i class="fa fa-thumbs-up" id="likeUnlikePost" aria-hidden="true"><span id="totalLikes"></span></i>
+        </div><br><br><br>
+        <span id="category"></span>
+        <span id="date"></span><br>
+      </div><br><br>
+
+      <div id="profileBox">
+        <img style="width: 50px; height: 50px; display: flex; align-items: left; flex-direction: row; margin-left: -10px;" src="https://www.piwebinars.co.uk/img/avatar.png" alt="avatar"></img>
+        <u class="grid_3" id="name" style="display: flex;  align-items: center; flex-direction: row; margin-right: auto; font-weight: bold;" onclick="goToProfile();"></u><br>
+        <div class="followBtn" style="display: flex; align-items: center; flex-direction: row; padding-right: 10px;">
+          <button type="submit" id="follow_btn">Follow</button>
+        </div>
+      </div><br><br>
+      <div class="desktop"><br><br><br><br></div>
+      <i id="shareBtn" onclick="shareWebinar()" class="fas fa-share"></i><br>
+      <input id="urlBar" style="display:none;width:80%;margin-left:8%;" onclick="copyURL()"></input>
+      <br>
+      </div>
+
+      <button class="grid_2" id="paymentButton" onclick="buyWebinar()"><span id="price"></span></button>
+      <i id="wishlistButton" onclick="addWishlist()" class="fas fa-heart"></i>
+      <br><br>
+
+      <div class="grid_4">
+        <iframe data-aa='1980365' src='//acceptable.a-ads.com/1980365' style='border:0px; padding:0; width:100%; height:100%; overflow:hidden; background-color: transparent;'></iframe>
+      </div>
+
+      <div class="grid_5">
+        <p2 style="border-top: solid 3px;">Comments:</p2><br><br>
+        <form class="commentField" id="commentForm">
+          <input style="border: none;" id="text" type="text" placeholder="Write a comment.."></input>
+          <input style="text-align: center;" type="button" value="Comment" id="postComment"></input>
+        </form><br>
+        <div id="commentsContainer"></div>
+        <br><br><br><br>
+      </div>
+
   </div>
-  <br><br><br><br>  
-    
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script>
-      async function renderUpload() {
+
+  <!--   Floating tab -->
+  <div id="back-float">
+    <a class="fas fa-arrow-left" onclick="history.back()"></a>
+  </div>
+
+  <br><br><br><br>
+
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script>
+    //saving arrays to session storage
+    Storage.prototype.setObj = function(key, obj) {
+      return this.setItem(key, JSON.stringify(obj));
+    };
+    Storage.prototype.getObj = function(key) {
+      return JSON.parse(this.getItem(key));
+    };
+    async function onLoad() {
+      const queryString = window.location.search;
+      const urlParams = new URLSearchParams(queryString);
+      const user = urlParams.get('u');
+      const post = urlParams.get('w');
+      if (post !== null && user !== null) {
+        const webinarFromUrl = await axios.get(`https://piwebinars-server.herokuapp.com/post/${user}/${post}`);
+        const webinar = webinarFromUrl.data.Post;
+        localStorage.user_id = webinar.user;
+        localStorage.post_id = webinar._id;
+        localStorage.video_id = webinar.video_id;
+        localStorage.webinarTitle = webinar.title;
+        localStorage.webinarDesc = webinar.description;
+        localStorage.webinarCat = webinar.category;
+        localStorage.webinarName = webinar.name;
+        localStorage.webinarDate = webinar.dateAdded;
+        localStorage.amount = webinar.amount;
+        renderUpload();
+        renderVideo();
+      } else {
+        renderVideo();
+      }
+    }
+    async function renderUpload() {
+      // Get ids from localStorage
       const userId = localStorage.getItem("user_id");
       const post_id = localStorage.getItem("post_id");
       const authTkn = localStorage.getItem("userSession");
-        
-        document.getElementById("title").textContent = localStorage.getItem("webinarTitle");
-        document.getElementById("description").textContent = localStorage.getItem("webinarDesc");
-        document.getElementById("category").textContent = localStorage.getItem("webinarCat");
-        document.getElementById("name").textContent = localStorage.getItem("webinarName");
-        document.getElementById("likes").textContent = localStorage.getItem("webinarLikes");
-        // document.getElementById("dislikes").textContent = localStorage.getItem("webinarDislikes");
-        document.getElementById("date").textContent = localStorage.getItem("webinarDate");
-        document.getElementById("price").textContent = localStorage.getItem("amount");
-        
-        const commentsArray = localStorage.getItem("webinarComments");
-        const commentDiv = document.getElementById("comments");
-        
-      }
-      renderUpload();
-      
+      // Initial render of post
+      document.getElementById("title").textContent = localStorage.getItem("webinarTitle");
+      document.getElementById("description").textContent = localStorage.getItem("webinarDesc");
+      document.getElementById("category").textContent = localStorage.getItem("webinarCat");
+      document.getElementById("name").textContent = localStorage.getItem("webinarName");
+      document.getElementById("date").textContent = localStorage.getItem("webinarDate").substring(0, 10);
+      document.getElementById("price").textContent = "Pay " + localStorage.getItem("amount") + " Pi to Unlock";
+      // Get post from server
+      const webinarFromServer = await axios.get(`https://piwebinars-server.herokuapp.com/post/${userId}/${post_id}`);
+      const webinar = webinarFromServer.data.Post;
+      // secondary render (check up to date
+      document.getElementById("title").textContent = webinar.title;
+      document.getElementById("description").textContent = webinar.description;
+      document.getElementById("category").textContent = webinar.category;
+      document.getElementById("name").textContent = webinar.name;
+      document.getElementById("date").textContent = webinar.dateAdded.substring(0, 10);
+      document.getElementById("price").textContent = "Pay " + webinar.amount + " Pi to Unlock";
+      webinarPost(webinarFromServer);
+      // Find user's interactions with post
+      const userWishlist = localStorage.getObj("wishlist");
+      let matchWishlist = userWishlist.filter(function(e) {
+        return e.user === localStorage.user_id;
+      });
+      if (matchWishlist.length) {
+        document.getElementById("wishlistButton").style.color = "#b44afb";
+      };
+      // render comments
+      const commentsArray = localStorage.getItem("webinarComments");
+      const commentDiv = document.getElementById("comments");
+      const comments = webinar.comments;
+      // find following
+      const following = localStorage.getObj("following");
+      let matchFollowing = following.filter(function(e) {
+        return e.user === localStorage.user_id;
+      });
+      if (matchFollowing.length) {
+        document.getElementById("follow_btn").textContent = "Unfollow";
+      };
+    }
+
+    function renderVideo() {
       const video_id = localStorage.getItem("video_id");
-      const url = "https://player.vimeo.com/video/"+video_id;
+      const url = "https://player.vimeo.com/video/" + video_id;
       var w = window.innerWidth;
       if (w >= 900) {
-      var options = {
-        url: url,
-        controls: true,
-        width: 500,
-      };
+        var options = {
+          url: url,
+          controls: true,
+          width: 500,
+          height: 500,
+        };
       } else {
         var options = {
-        url: url,
-        controls: true,
-        width: 350,
-      };
+          url: url,
+          controls: true,
+          width: 340,
+          height: 230,
+        };
       }
-
       var videoPlayer = new Vimeo.Player('Video', options);
-
       setInterval(function() {
-        videoPlayer.on('timeupdate', function (getAll)
-          {
-            currentPos = getAll.seconds; //get currentime
-            if (currentPos >= 30) {
-              videoPlayer.pause();
-              videoPlayer.setCurrentTime(0);
-              const payTimeout = setTimeout(endPreview, 1000);
-            }
-          });
+        videoPlayer.on('timeupdate', function(getAll) {
+          currentPos = getAll.seconds; //get currentime
+          if (currentPos >= 30) {
+            videoPlayer.pause();
+            videoPlayer.setCurrentTime(0);
+            const payTimeout = setTimeout(endPreview, 1000);
+          }
+        });
       }, 10000);
-      
-      function endPreview() {
-        alert("Please purchase webinar to continue watching");
-      }
-      
-      async function goToProfile() {
-        const userProfileName = localStorage.getItem("user_id");
-        location.href="/html/userProfile.html";
-      }
-      
-      async function showWebinar(response) {
-        const url = response.data.url;
-        openCinema();
-        document.getElementById("url").src = url;
-      }
-    </script>
-    
-    
-<!--   cinema to watch webinar   -->
-      <div class="modal" id="modal1">
+    }
+    onLoad();
+    renderUpload();
+
+    function endPreview() {
+      alert("Please purchase webinar to continue watching");
+    }
+    async function goToProfile() {
+      const userProfileName = localStorage.getItem("user_id");
+      location.href = "/html/userProfile.html";
+    }
+    async function showWebinar(response) {
+      const url = response.data.url;
+      openCinema();
+      document.getElementById("url").src = url;
+    }
+    // share post
+    async function shareWebinar() {
+      const userId = localStorage.getItem("user_id");
+      const post_id = localStorage.getItem("post_id");
+      const authTkn = localStorage.getItem("userSession");
+      const response = await axios.post(`https://piwebinars-server.herokuapp.com/post/share/${userId}/${post_id}`, {
+        params: {
+          userId,
+        },
+      }, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${authTkn}`
+        }
+      });
+      document.getElementById("shareBtn").style.display = "none";
+      const url = "https://piwebinars.co.uk/html/webinar?u=" + userId + "&w=" + post_id;
+      const urlBar = document.getElementById("urlBar");
+      urlBar.style.display = "block";
+      urlBar.value = url;
+      document.getElementById("buttonURL").style.display = "none";
+    }
+
+    function copyURL() {
+      const url = document.getElementById("urlBar");
+      navigator.clipboard.writeText(url.value);
+      alert("Copied");
+    }
+  </script>
+
+  <!--   cinema to watch webinar   -->
+  <div class="modal" id="modal1">
     <div class="modal-dialog">
       <header class="modal-header">
         Cinema
@@ -180,17 +289,151 @@
             <path d="M0 56v240c0 13.255 10.745 24 24 24h80c13.255 0 24-10.745 24-24V56c0-13.255-10.745-24-24-24H24C10.745 32 0 42.745 0 56zm40 200c0-13.255 10.745-24 24-24s24 10.745 24 24-10.745 24-24 24-24-10.745-24-24zm272 256c-20.183 0-29.485-39.293-33.931-57.795-5.206-21.666-10.589-44.07-25.393-58.902-32.469-32.524-49.503-73.967-89.117-113.111a11.98 11.98 0 0 1-3.558-8.521V59.901c0-6.541 5.243-11.878 11.783-11.998 15.831-.29 36.694-9.079 52.651-16.178C256.189 17.598 295.709.017 343.995 0h2.844c42.777 0 93.363.413 113.774 29.737 8.392 12.057 10.446 27.034 6.148 44.632 16.312 17.053 25.063 48.863 16.382 74.757 17.544 23.432 19.143 56.132 9.308 79.469l.11.11c11.893 11.949 19.523 31.259 19.439 49.197-.156 30.352-26.157 58.098-59.553 58.098H350.723C358.03 364.34 384 388.132 384 430.548 384 504 336 512 312 512z" />
           </svg>
         </div>
-<!--         <button type="submit" id="follow_btn">Follow Creator</button> -->
+        <!--         <button type="submit" id="follow_btn">Follow Creator</button> -->
         <button onclick="comment()">Comment</button>
         <div id="comments"></div>
       </section>
     </div>
   </div>
 
-    <!--Scripts-->
-    <script src="/js/pipayment.js"></script>
-    <script src="/js/pages/authentication.js"></script>
-    <script src="/js/pages/all-webinars.js"></script>
-    <script src="https://kit.fontawesome.com/3aea44e36d.js" crossorigin="anonymous"></script>
+  <!--Scripts-->
+  <script src="/js/pipayment.js"></script>
+  <script src="/js/pages/authentication.js"></script>
+  <script src="/js/pages/all-webinars.js"></script>
+  <script src="https://kit.fontawesome.com/3aea44e36d.js" crossorigin="anonymous"></script>
+
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+    }
+
+    #stats {
+      margin: 10px;
+      padding: 10px;
+      column-count: 2;
+      color: #36454f;
+    }
+
+    #title {
+      color: #fbb44a;
+    }
+
+    #description {
+      color: #36454f;
+    }
+
+    #paymentButton {
+      display: inline-block;
+      width: 75vw;
+      height: 40px;
+      border: inset #b44afb 3px;
+      background: #4afbb4;
+    }
+
+    #wishlistButton,
+    #dislikePost,
+    #likeUnlikePost {
+      display: inline-block;
+      width: 50px;
+      font-size: 22px;
+      color: #ffffff;
+      background: none;
+      text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+    }
+
+    #likes {
+      float: left;
+    }
+
+    #wishlistButton {
+      width: 10vw;
+    }
+
+    #totalDislikes,
+    #totalLikes {
+      display: inline-block;
+      padding-left: 8px;
+    }
+
+    #wishlistButton:active {
+      color: #fbb44a;
+    }
+
+    #shareBtn {
+      font-size: 20px;
+      display: flex;
+      margin-left: 25px;
+    }
+
+    #urlBar {
+      margin-top: -30px;
+    }
+
+    #postComment {
+      width: 20vw;
+    }
+
+    #text {
+      width: 75vw;
+    }
+
+    #follow_btn {
+      background: none;
+      border: solid 1px #b44afb;
+      padding: 5px;
+      border-radius: 5px;
+    }
+
+    #profileBox {
+      max-width: 85%;
+      margin-left: 2.5%;
+      border-bottom: solid 1px #000;
+      height: 40px;
+      display: flex;
+      padding: 20px;
+      margin-top: -50px;
+    }
+
+    @media screen and (min-width: 620px) {
+      #paymentButton {
+        width: 23vw;
+        margin-top: 200px;
+      }
+
+      #wishlistButton {
+        margin-bottom: 50px;
+      }
+
+      #postComment {
+        width: 100px;
+        float: right;
+      }
+
+      #text {
+        width: 20vw;
+      }
+
+      #likeUnlikePost {
+        float: none;
+        position: absolute;
+        left: 50vw;
+        top: 500px;
+      }
+
+      #dislikePost {
+        position: absolute;
+        left: 57vw;
+        top: 500px;
+      }
+
+      #wishlistButton {
+        position: absolute;
+        left: 40vw;
+        top: 515px;
+      }
+    }
+  </style>
 </body>
+
 </html>

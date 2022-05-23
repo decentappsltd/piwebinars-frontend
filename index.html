@@ -1,42 +1,49 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-DHEX8LQ19E"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-DHEX8LQ19E');
-    </script>
-    
-    <meta name="propeller" content="422194255f67948cce6fd65639880b37">
-            
-    <script src="https://sdk.minepi.com/pi-sdk.js"></script>
-    <script>
-      const Pi = window.Pi;
-      Pi.init({ version: "2.0", sandbox: false })
-    </script>
-    <script src="/js/pages/all-webinars.js"></script>
-    <!--CSS-->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/styles.css">
-    <link rel="icon" type="image/png" href="../img/logo.png">
-    
-    <!--Google Fonts-->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;700&display=swap" rel="stylesheet">
-  </head>
-  <body>
-    <div class="mobile">
-        
+
+<head>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-DHEX8LQ19E"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+    gtag('config', 'G-DHEX8LQ19E');
+  </script>
+
+  <script src="https://sdk.minepi.com/pi-sdk.js"></script>
+  <script>
+    const Pi = window.Pi;
+    Pi.init({
+      version: "2.0",
+      sandbox: false
+    })
+  </script>
+  <script src="/js/pages/all-webinars.js"></script>
+  <!--CSS-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" id="dark">
+  <link rel="icon" type="image/png" href="../img/logo.png">
+
+  <!--Google Fonts-->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <div class="mobile">
+
     <title>Pi Webinars</title>
- 
+
     <img src="/img/loadImage.png" class="loadImage" id="loadImage" alt="load"></img>
-  
-    <img width="75%" onclick="openLandingPage()" style="padding-left: 12.5%; padding-right: 12.5%; padding-bottom: 5px; border-bottom: solid black" src="/img/logo-text.png" alt="logo"/>
-  
+
+    <img width="75%" onclick="openLandingPage()" style="padding-left: 12.5%; padding-right: 12.5%; padding-bottom: 5px; border-bottom: solid black 1px" src="/img/logo-text.png" alt="logo" />
+
     <nav id="footer" style="display: none;">
       <ul class="ul">
         <li class="li">
@@ -48,227 +55,319 @@
         <li class="li">
           <a class="a authNav" href="/html/upload.html"><img src="/img/Upload_Icon.png" width="30px;">Upload</a>
         </li>
-    <li class="li" style="margin-left:-15px;"><a id="profile" class="a unAuthNav" href="/html/login.html"><img src="/img/Login_Icon.png" width="30px;">Login</a></li>
-    <li class="li" style="margin-left:-10px; border-right:none;"><a id="profile" class="a unAuthNav" href="/html/register.html"><img src="/img/Register_Icon.png" width="30px;">Register</a></li>
-        <li class="li" style="margin-left:-15px;">
+        <li class="li" style="">
           <a class="a authNav" href="/html/profile.html"><img src="/img/Profile_Icon.png" width="30px;">Profile</a>
         </li>
+        <li class="li" style="margin-left: -40px;"><a id="profile" class="a unAuthNav" href="/html/login.html"><img src="/img/Login_Icon.png" width="30px;">Login</a></li>
+        <li class="li" style=" border-right:none;"><a id="profile" class="a unAuthNav" href="/html/register.html"><img src="/img/Register_Icon.png" width="30px;">Register</a></li>
       </ul>
-    </nav>   
-        
+    </nav>
+
     <br>
 
-    <h2 class="rounded" >Featured Webinars</h2>
-    
+    <h2 class="rounded">Featured Webinars</h2>
+
     <!--     ads -->
-    <iframe data-aa='1980365' src='//acceptable.a-ads.com/1980365' style='border:0px; padding:0; width:100%; height:100%; overflow:hidden; background-color: transparent;'></iframe>
-    
+    <iframe data-aa='1980365' src='//acceptable.a-ads.com/1980365' style='border:0px; padding:0; width:300px; max-height:250px; overflow:hidden; background-color: transparent;'></iframe>
+
     <div class="featuredSection"></div>
-    
-    <!--     ads -->
+    <a class="b:ck_button" style="border: none; margin-top: 10px;" href="/html/all-webinars.html">See more</a>
     <br>
-    <a target="_blank" href="https://shareasale.com/r.cfm?b=1003557&amp;u=3225499&amp;m=57377&amp;urllink=&amp;afftrack="><img src="https://static.shareasale.com/image/57377/300x250.png" border="0" alt="Sync.com - private cloud" /></a>
-    <i>Ad</i>    
-    
-    <!--Modals-->   
+    <!--     ads -->
+    <iframe data-aa='1980365' src='//acceptable.a-ads.com/1980365' style='border:0px; padding:0; width:300px; max-height:250px; overflow:hidden; background-color: transparent;'></iframe>
+
+    <!--Modals-->
     <div class="landing" id="landingPage">
       <section class="modal-content">
         <h3 style="background: linear-gradient(to right, #b44afb, #4afbb4); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-align: center;">Welcome to Pi Webinars!<br><br>Your educational video platform powered by Pi.</h3>
         <ul style="color: #fbb44a; text-align: justify;">
-        <li onclick="window.open('pi://www.piwebinars.co.uk')">Sign up on our app through the <u>Pi Browser</u></li>
-        <li>Choose webinars produced by fellow Pioneers and experts!</li>
-        <li>Save your webinars to your smartphone, desktop or laptop!</li>
-        <li>Have lifetime & unlimited access to your saved webinars!</li>
-      </ul>
+          <li onclick="window.open('pi://www.piwebinars.co.uk')">Sign up on our app through the <u>Pi Browser</u></li>
+          <li>Choose webinars produced by fellow Pioneers and experts!</li>
+          <li>Save your webinars to your smartphone, desktop or laptop!</li>
+          <li>Have lifetime & unlimited access to your saved webinars!</li>
+        </ul>
         <button class="landingBtn" onclick="location.href='/html/register.html'">Sign up for free!</button>
         <br><br>
         <button class="landingBtn" onclick="closeLandingPage()">Continue to app</button>
       </section>
     </div>
-    
-  <br>
-  <button id="translate" onclick="googleTranslate()">Translate Page</button><br>
-    
-  <a href="/policies/privacy.html">Privacy Policy</a><br>
-  <a href="/policies/terms.html">Terms & Conditions</a><br>
-  <a href="mailto:contact@piwebinars.co.uk">Contact Us</a><br>
-  
-  <h5 style="color: #36454F;">&copy; Decent Apps Ltd</h5>
 
-  <div id="google_translate_element"></div>
-  <script>
-    function googleTranslateElementInit() {
-      new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
-    }
-  </script>
-  <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-    
+    <div class="modal" id="info">
+      <div class="modal-dialog">
+        <header style="color: #b44afb" class="modal-header">
+          <h3>Welcome to Pi Webinars</h3>
+            <button class="close-modal" style="float: right;" onclick="closeInfo()">✕</button>
+          
+        </header>
+        <section class="modal-content">
+          <h4>What is Pi Webinars?</h4><br>
+          <p3> Pi Webinars is the first DeEd video platform that runs on the Pi Network. Upload and watch educational videos to earn Pi! You can browse our selection of webinars and watch them through the Pi Browser, or upload your own content to start earning. </p3><br><br><br>
+
+          <h4>How to watch a webinar:</h4><br>
+          <ol>
+            <li>
+              Browse our selection and choose one you like. Go to the 'Webinars' page to use the search tools and see them categorised.
+            </li>
+            <li>
+              Click on the webinar and navigate to the large payment button. Complete the Pi Payment flow.
+            </li>
+            <li>
+              The webinar will appear in a popup for you to watch and can always be re-watched from your 'Purchases' page in your profile.
+            </li>
+          </ol><br><br>
+
+          <h4>How to upload a webinar:</h4><br>
+          <ol>
+            <li>
+              Film your webinar, ensuring you make it high quality and interesting to others. It can be in any language, but must not have any obscene material.
+            </li>
+            <li>
+              Navigate to the 'Upload' tab in Pi Webinars and fill out all the fields. 
+            </li>
+            <li>
+              Press upload and wait for it to be complete. A progress bar will be displayed- please don't leave the app until complete.
+            </li>
+            <li>
+              You can now find your webinar in the 'Your Webinars' page in your profile. Pi will automatically be added to your balance when one of your webinars is purchased. 
+            </li>
+          </ol><br><br>
+          
+          <h4>Our mission:</h4><br>
+          <p3>Our world is in the middle of a new economic era propelled by Information Technology (IT) which touches everything in our lives. The learning process is not an exception, with a decentralized education (DeEd) revolution opening fresh possibilities, especially for people historically away to participate in the current obsolete educational model.
+<br><br>
+Just imagine millions of students from Africa, India, China and the developing world enjoying a learning process about any subject without the high cost and long development timelines inherent to our current education. This is possible thanks to new technologies such as the blockchain where P2P open-source platforms may enter to reach large audiences eager to learn and bring money to the economy. The future of learning is bright with DeEd platforms such as Pi Webinars.</p3>
+
+        </section>
+      </div>
+    </div>
+
+    <!--   Floating tab -->
+    <div id="float">
+      <a style="font-size:24px" class="fa" onclick="openInfo()">&#xf05a;</a>
+    </div>
+
+<!--     Translate tab -->
+    <div id="google_translate_element"></div>
+    <script>
+      function googleTranslateElementInit() {
+        new google.translate.TranslateElement({
+          pageLanguage: 'en'
+        }, 'google_translate_element');
+      }
+    </script>
+    <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+    <br>
+    <!--   Bottom section -->
+    <div style="background: #b44afb; color: #fbb44a; width: 100%;">
+
+      <a id="translate" onclick="googleTranslate()">Translate Page</a><br><br>
+
+      <a style="margin-bottom: 20px;" onclick="darkMode()">Dark Mode:</a>
+      <a id="darkOn" style="color: #4afbb4; display: none;">On</a>
+      <a id="darkOff" style="color: red; display: none;">Off</a><br><br>
+
+      <a style="color: #fbb44a" href="/policies/privacy.html">Privacy |</a>
+      <a style="color: #fbb44a" href="/policies/terms.html">Terms |</a>
+      <a style="color: #fbb44a" href="mailto:contact@piwebinars.co.uk">Contact</a>
+
+      <h5 style="padding-bottom: 10px;">&copy; Decent Apps Ltd</h5>
+    </div>
+
     <script>
       if (sessionStorage.landing != 'true') {
+        if (window.matchMedia("(prefers-color-scheme:dark)").matches) {
+          localStorage.dark = "true";
+        }
         const loadTimeout = setTimeout(loadImage, 500);
         document.getElementById("landingPage").classList.add("is-visible");
         sessionStorage.setItem("landing", "true");
       } else {
         loadImage();
       }
+
       function loadImage() {
         var l = document.getElementById("loadImage");
         l.style.display = "none";
         l.classList.remove('loadImage')
         document.getElementById('footer').style.display = "block";
       }
-      if ( navigator.userAgent.toLowerCase().indexOf("pibrowser")>=0 ) {
+      if (navigator.userAgent.toLowerCase().indexOf("pibrowser") >= 0) {
         auth();
       }
+      if (localStorage.dark == "true") {
+        document.getElementById("dark").setAttribute("href", "/css/dark.css");
+        document.getElementById("darkOn").style.display = "inline-block";
+      } else {
+        document.getElementById("darkOff").style.display = "inline-block";
+      }
     </script>
-  
-  <br/><br/><br/>
-    </div>
-  
+
+    <br /><br /><br />
+  </div>
+
   <div class="desktop">
 
-   
     <!--Header-->
     <div class="row footer">
-      <img height="60" style="position:relative;top:0;display: inline; float: left;" src="https://app.piwebinars.co.uk/img/logo-text.png" alt="logo"></img>
-    
-    <input style="height: 40px; margin-top: 5px; width: 35vw;" type="text" placeholder="Search Webinars.." id="search" class="searchbar searchHeader">
-    <i style="margin-left: 5px;" class="searchHeader fas fa-search" id="search" onclick="search()"></i>
-    <i class="searchHeader" onclick="location.href='/'">clear</i>
-   
-    <div style="float:right">
-    <li class="li"><a class="a" href="/index.html"><img src="https://app.piwebinars.co.uk/img/Home_Icon.png" width="40px;">Home</a></li>
-        <li class="li"><a class="a" href="/html/search.html"><img src="https://app.piwebinars.co.uk/img/Search_Icon.png" width="40px;">Search</a></li>
-      <li class="li"><a class="a authNav" id="uploaddesktopmodal" href="./html/upload.html"><img src="https://app.piwebinars.co.uk/img/Upload_Icon.png" width="40px;">Upload</a></li>
-    <li class="li"><a id="profile" class="a unAuthNav" href="/html/login.html"><img src="https://app.piwebinars.co.uk/img/Login_Icon.png" width="40px;">Login</a></li>
-    <li class="li"><a id="profile" class="a unAuthNav" href="/html/register.html"><img src="https://app.piwebinars.co.uk/img/Register_Icon.png" width="40px;">Register</a></li>
-    <li class="li"><a class="a authNav" href="/html/profile.html"><img src="https://app.piwebinars.co.uk/img/Profile_Icon.png" width="40px;">Profile</a></li>
+      <img height="60" style="position:relative;top:0;display: inline; float: left;" src="/img/logo-text.png" alt="logo"></img>
+
+      <input style="height: 40px; margin-top: 5px; width: 35vw;border-radius:7.5px;" type="text" placeholder="Search Webinars.." id="search" class="searchbar searchHeader">
+      <i style="margin-left: 5px;" class="searchHeader fas fa-search" id="search" onclick="search()"></i>
+      <i class="searchHeader" onclick="location.href='/'" style="color: #fbb44a; font-size: 30px;">×</i>
+      </input>
+
+      <div style="float:right">
+        <li class="li"><a class="a" href="/index.html"><img src="https://www.piwebinars.co.uk/img/Home_Icon.png" width="40px;">Home</a></li>
+        <li class="li"><a class="a" href="/html/search.html"><img src="https://www.piwebinars.co.uk/img/Search_Icon.png" width="40px;">Search</a></li>
+        <li class="li"><a class="a authNav" id="uploaddesktopmodal" href="./html/upload.html"><img src="https://www.piwebinars.co.uk/img/Upload_Icon.png" width="40px;">Upload</a></li>
+        <li class="li"><a class="a authNav" href="/html/profile.html"><img src="https://www.piwebinars.co.uk/img/Profile_Icon.png" width="40px;">Profile</a></li>
+        <li class="li"><a id="profile" class="a unAuthNav" href="/html/login.html"><img src="https://www.piwebinars.co.uk/img/Login_Icon.png" width="40px;">Login</a></li>
+        <li class="li"><a id="profile" class="a unAuthNav" href="/html/register.html"><img src="https://www.piwebinars.co.uk/img/Register_Icon.png" width="40px;">Register</a></li>
+      </div>
     </div>
-    </div>
-  
+
     <!--Main Content-->
+    <style>
+      @media screen and (min-width: 620px) {
+        body {
+          overflow: hidden;
+        }
+      }
+    </style>
+    <!--     <br><br><br><br> -->
+    <div class="grid">
+
+      <div class="selection" style="text-align: left;">
+        <h4 style="color:#fbb44a">Webinars</h4>
+
+        <a class="filter" onclick="location.href='/'">All</a><br>
+        <a class="filter" onclick="localStorage.filter = 'cryptocurrency'; filter();">Cryptocurrency</a><br>
+        <a class="filter" onclick="localStorage.filter = 'diy'; filter();">DIY</a><br>
+        <a class="filter" onclick="localStorage.filter = 'education'; filter();">Education</a><br>
+        <a class="filter" onclick="localStorage.filter = 'finance'; filter();">Finance</a><br>
+        <a class="filter" onclick="localStorage.filter = 'fitness'; filter();">Fitness</a><br>
+        <a class="filter" onclick="localStorage.filter = 'food'; filter();">Food</a><br>
+        <a class="filter" onclick="localStorage.filter = 'gaming'; filter();">Gaming</a><br>
+        <a class="filter" onclick="localStorage.filter = 'history'; filter();">History</a><br>
+        <a class="filter" onclick="localStorage.filter = 'music'; filter();">Music</a><br>
+        <a class="filter" onclick="localStorage.filter = 'nature'; filter();">Nature</a><br>
+        <a class="filter" onclick="localStorage.filter = 'pets'; filter();">Pets</a><br>
+        <a class="filter" onclick="localStorage.filter = 'pi network'; filter();">Pi Network</a><br>
+        <a class="filter" onclick="localStorage.filter = 'politics'; filter();">Politics</a><br>
+        <a class="filter" onclick="localStorage.filter = 'sports'; filter();">Sports</a><br>
+        <a class="filter" onclick="localStorage.filter = 'technology'; filter();">Technology</a><br>
+
+        <h4 style="color:#fbb44a;">Wishlist</h4>
+        <div class="wishlist"></div>
+
+        <h4 style="color:#fbb44a;">Following</h4>
+        <div class="following"></div><br><br>
+
+        <a style="font-size: 12px;" onclick="darkMode()">Dark Mode |</a>
+        <a id="translate" onclick="document.getElementById('google_translate').style.display = 'block';" style="font-size: 12px; background: none;">Translate</a><br><br>
+        <div id="google_translate"></div>
+        <script>
+          function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+              pageLanguage: 'en'
+            }, 'google_translate');
+          }
+        </script>
+        <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+        <a style="color: #b44afb" href="/policies/privacy.html">Privacy |</a>
+        <a style="color: #b44afb" href="/policies/terms.html">Terms |</a>
+        <a style="color: #b44afb" href="mailto:contact@piwebinars.co.uk">Contact</a>
+        <br><br>
+      </div>
+
+      <div class="mainWebinars">
+        <div class="mainWebinarsContain">
+
+          <div class="tablet">
+            <h2>Webinars</h2>
+            <i class="fas fa-filter"></i>
+            <select style="margin-bottom: 5px;" name="categories" id="select">
+              <option class="list" value="all">All</option><br />
+              <option class="list" value="cryptocurrency">Cryptocurrency</option><br />
+              <option class="list" value="diy">DIY</option><br />
+              <option class="list" value="education">Eduction</option><br />
+              <option class="list" value="finance">Finance</option><br />
+              <option class="list" value="fitness">Fitness</option><br />
+              <option class="list" value="food">Food</option><br />
+              <option class="list" value="gaming">Gaming</option><br />
+              <option class="list" value="history">History</option><br />
+              <option class="list" value="music">Music</option><br />
+              <option class="list" value="nature">Nature</option><br />
+              <option class="list" value="pets">Pets</option><br />
+              <option class="list" value="pinetwork">Pi Network</option><br />
+              <option class="list" value="politics">Politics</option><br />
+              <option class="list" value="sports">Sports</option><br />
+              <option class="list" value="technology">Technology</option><br />
+            </select><i style="margin-left: 5px;" class="fas fa-search" id="searchCat" onclick="searchCat()"></i><br />
+          </div>
+
+          <!--     ads -->
+          <!--           <a target="_blank" href="https://shareasale.com/r.cfm?b=1888003&amp;u=3225499&amp;m=53993&amp;urllink=&amp;afftrack="><img src="https://static.shareasale.com/image/53993/banner_300_250.jpg" border="0" /></a>
+          <i>Ad- ^Want to make a $ earning website?^</i> -->
+
+          <div class="postSection"></div>
+        </div>
+      </div>
+
+      <div class="purchasedWebinars">
+        <!--Your Purchases Render Div-->
+        <h2>Purchases</h2>
+        <div class="purchaseSection"></div>
+        <!--     ads -->
+        <iframe data-aa='1980365' src='//acceptable.a-ads.com/1980365' style='border:0px; padding:0; width:100%; height:100%; overflow:hidden; background-color: transparent;'></iframe>
+
+      </div>
+
+      <!--Your Webinars Render Div-->
+      <div class="yourWebinars">
+        <h2>Uploads</h2>
+        <div class="yourSection"></div>
+        <!--     ads -->
+        <iframe data-aa='1980365' src='//acceptable.a-ads.com/1980365' style='border:0px; padding:0; width:100%; height:100%; overflow:hidden; background-color: transparent;'></iframe>
+      </div>
+
+    </div>
+    <h5 id="copyright">&copy; Decent Apps Ltd</h5></br>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="../js/pages/authentication.js"></script>
+  <script src="/js/pipayment.js"></script>
+  <script src="https://kit.fontawesome.com/3aea44e36d.js" crossorigin="anonymous"></script>
+  <script>
+    renderFeaturedWebinars();
+    renderAllWebinars();
+    renderPurchasedWebinars();
+    renderYourWebinars();
+    renderFollowing();
+  </script>
   <style>
-    @media screen and (min-width: 620px) {
-      body {
-        overflow: hidden;
+    @media screen and (min-width: 900px) {
+      .tablet {
+        display: none;
+      }
+
+      .followingStyle {
+        border: none;
       }
     }
 
-  </style>
-    <br><br><br><br>
-  <div class="grid">
-    
-    <div class="selection" style="text-align: left;">
-      <h4 style="color:#fbb44a">Webinars</h4>
-      
-    <a class="filter" onclick="location.href='/'">All</a><br>
-    <a class="filter" onclick="localStorage.filter = 'cryptocurrency'; filter();">Cryptocurrency</a><br>
-    <a class="filter" onclick="localStorage.filter = 'diy'; filter();">DIY</a><br>
-    <a class="filter" onclick="localStorage.filter = 'education'; filter();">Education</a><br>
-    <a class="filter" onclick="localStorage.filter = 'finance'; filter();">Finance</a><br>
-    <a class="filter" onclick="localStorage.filter = 'fitness'; filter();">Fitness</a><br>
-    <a class="filter" onclick="localStorage.filter = 'food'; filter();">Food</a><br>
-    <a class="filter" onclick="localStorage.filter = 'gaming'; filter();">Gaming</a><br>
-    <a class="filter" onclick="localStorage.filter = 'history'; filter();">History</a><br>
-    <a class="filter" onclick="localStorage.filter = 'music'; filter();">Music</a><br>
-    <a class="filter" onclick="localStorage.filter = 'nature'; filter();">Nature</a><br>
-    <a class="filter" onclick="localStorage.filter = 'pets'; filter();">Pets</a><br>
-    <a class="filter" onclick="localStorage.filter = 'pi network'; filter();">Pi Network</a><br>
-    <a class="filter" onclick="localStorage.filter = 'politics'; filter();">Politics</a><br>
-    <a class="filter" onclick="localStorage.filter = 'sports'; filter();">Sports</a><br>
-    <a class="filter" onclick="localStorage.filter = 'technology'; filter();">Technology</a><br>
-      
-      <h4 style="color:#fbb44a;">Wishlist</h4>
-      <div class="wishlist"></div>
-      
-      <h4 style="color:#fbb44a;">Following</h4>
-      <div class="following"></div>
-      
-      <a href="/policies/privacy.html">Privacy Policy</a><br>
-      <a href="/policies/terms.html">Terms & Conditions</a><br>
-      <a href="mailto:contact@piwebinars.co.uk">Contact Us</a>
-      <br><br>
-   </div>
-    
-    <div class="mainWebinars">
-        <div class="mainWebinarsContain">
+    @media screen and (max-width: 900px) and (min-width: 620px) {
+      .tablet {
+        display: block;
+      }
 
-    <div class="tablet">
-    <h2>Webinars</h2>
-    <i class="fas fa-filter"></i>
-  <select style="margin-bottom: 5px;" name="categories" id="select">
-    <option class="list" value="all">All</option><br />
-    <option class="list" value="cryptocurrency">Cryptocurrency</option><br />
-    <option class="list" value="diy">DIY</option><br />
-    <option class="list" value="education">Eduction</option><br />
-    <option class="list" value="finance">Finance</option><br />
-    <option class="list" value="fitness">Fitness</option><br />
-    <option class="list" value="food">Food</option><br />
-    <option class="list" value="gaming">Gaming</option><br />
-    <option class="list" value="history">History</option><br />
-    <option class="list" value="music">Music</option><br />
-    <option class="list" value="nature">Nature</option><br />
-    <option class="list" value="pets">Pets</option><br />
-    <option class="list" value="pinetwork">Pi Network</option><br />
-    <option class="list" value="politics">Politics</option><br />
-    <option class="list" value="sports">Sports</option><br />
-    <option class="list" value="technology">Technology</option><br />
-  </select><i style="margin-left: 5px;" class="fas fa-search" id="searchCat" onclick="searchCat()"></i><br />
-  </div>
-                 
-  <!--     ads -->
-    <iframe data-aa='1980365' src='//acceptable.a-ads.com/1980365' style='border:0px; padding:0; width:100%; height:100%; overflow:hidden; background-color: transparent;'></iframe>
-          
-    <div class="postSection"></div>
-  </div>
-  </div>
-  
-    <div class="purchasedWebinars">
-      <!--Your Purchases Render Div-->
-      <h2>Purchases</h2>
-      <div class="purchaseSection"></div>
-      <!--     ads -->
-<a target="_blank" href="https://shareasale.com/r.cfm?b=922018&amp;u=3225499&amp;m=47&amp;urllink=&amp;afftrack="><img src="https://static.shareasale.com/image/47/ShareASale-336x260-A.png" border="0" /></a>    </div>
-    
-    <!--Your Webinars Render Div-->
-    <div class="yourWebinars">
-      <h2>Uploads</h2>
-      <div class="yourSection"></div>
-      <!--     ads -->
-    <iframe data-aa='1980365' src='//acceptable.a-ads.com/1980365' style='border:0px; padding:0; width:100%; height:100%; overflow:hidden; background-color: transparent;'></iframe>
-    </div>
-    
-  </div>
-      <h5 id="copyright">&copy; Decent Apps Ltd</h5></br>
-</div>
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script src="../js/pages/authentication.js"></script>
-    <script src="/js/pipayment.js"></script>
-    <script src="https://kit.fontawesome.com/3aea44e36d.js" crossorigin="anonymous"></script>
-<script>
-  renderFeaturedWebinars();
-  renderAllWebinars();
-  renderPurchasedWebinars();
-  renderYourWebinars();
-  renderFollowing();
-</script>
-<style>
-  @media screen and (min-width: 900px) {
-    .tablet {
-      display: none;
+      .searchHeader {
+        display: none;
+      }
     }
-    .followingStyle {
-      border: none;
-      color: black;
-    }
-  }
-  @media screen and (max-width: 900px) and (min-width: 620px) {
-  .tablet {
-    display: block;
-  }
-  .searchHeader {
-    display: none;
-  }
-</style>
-  </body>
+  </style>
+</body>
+
 </html>

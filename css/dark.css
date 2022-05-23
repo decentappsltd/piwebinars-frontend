@@ -1,0 +1,27 @@
+body, .title {
+  background: #202020;
+}
+input {
+  background: #36454f;
+}
+#footer, .footer, .selection {
+  background: #111;
+}
+@media screen and (min-width: 620px) {
+  body {
+    color: #4afbb4;
+    background: #36454f;
+  }
+  .followingStyle, #translate {
+    color: #4afbb4;
+  }
+  .purchasedWebinars::-webkit-scrollbar, .selection::-webkit-scrollbar, .yourWebinars::-webkit-scrollbar {
+    background: none;
+  }
+  .title, .videoTitle {
+    box-shadow: 5px 1px 10px 5px rgb(74, 251, 180, 0.5);
+  }
+  .footer {
+    color: #fbb44a;
+  }
+}

@@ -1,110 +1,110 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <!-- Google Tag Manager -->
-    <script>
-      (function (w, d, s, l, i) {
-        w[l] = w[l] || [];
-        w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
-        var f = d.getElementsByTagName(s)[0],
-          j = d.createElement(s),
-          dl = l != "dataLayer" ? "&l=" + l : "";
-        j.async = true;
-        j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
-        f.parentNode.insertBefore(j, f);
-      })(window, document, "script", "dataLayer", "GTM-KRPNL55");
-    </script>
 
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script
-      async
-      src="https://www.googletagmanager.com/gtag/js?id=G-2N939D6C1C"
-    ></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag() {
-        dataLayer.push(arguments);
-      }
-      gtag("js", new Date());
-      gtag("config", "G-2N939D6C1C");
-    </script>
+<head>
+  <!-- Google Tag Manager -->
+  <script>
+    (function(w, d, s, l, i) {
+      w[l] = w[l] || [];
+      w[l].push({
+        "gtm.start": new Date().getTime(),
+        event: "gtm.js"
+      });
+      var f = d.getElementsByTagName(s)[0],
+        j = d.createElement(s),
+        dl = l != "dataLayer" ? "&l=" + l : "";
+      j.async = true;
+      j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
+      f.parentNode.insertBefore(j, f);
+    })(window, document, "script", "dataLayer", "GTM-KRPNL55");
+  </script>
 
-    <!--CSS-->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="/css/styles.css" />
-    <link rel="icon" type="image/png" href="/img/logo.png" />
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-2N939D6C1C"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
 
-    <!--Google Fonts-->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;700&display=swap"
-      rel="stylesheet"
-    />
-  </head>
-  <body>
-    <h1>Pi Webinars</h1>
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+    gtag("js", new Date());
+    gtag("config", "G-2N939D6C1C");
+  </script>
 
-        <nav class="footer" style="z-index: 100">
-  <ul class="ul">
-    <div class="mobile">
-    <li class="li"><a class="a" href="/index.html"><img src="https://app.piwebinars.co.uk/img/Home_Icon.png" width="30px;">Home</a></li>
-  </ul>
+  <!--CSS-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="/css/styles.css" />
+  <link rel="stylesheet" id="dark">
+  <link rel="icon" type="image/png" href="/img/logo.png" />
+
+  <!--Google Fonts-->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;700&display=swap" rel="stylesheet" />
+</head>
+
+<body>
+  <h1>Pi Webinars</h1>
+
+  <nav class="footer" style="z-index: 100">
+    <ul class="ul">
+      <div class="mobile">
+        <li class="li"><a class="a" href="/index.html"><img src="https://app.piwebinars.co.uk/img/Home_Icon.png" width="30px;">Home</a></li>
+    </ul>
     </div>
-  <div class="row footer desktop">
+    <div class="row footer desktop">
       <img height="60" onclick="location.href='/'" style="position:relative;top:0;display: inline; float: left;" src="https://app.piwebinars.co.uk/img/logo-text.png" alt="logo"></img>
-   
-          <div style="float:right">
-    <li class="li"><a class="a" href="/index.html"><img src="https://app.piwebinars.co.uk/img/Home_Icon.png" width="40px;">Home</a></li>
-    <li class="li"><a class="a" href="/html/search.html"><img src="https://app.piwebinars.co.uk/img/Search_Icon.png" width="40px;">Search</a></li>
-      <li class="li"><a id="profile" class="a" href="/html/register.html"><img src="https://app.piwebinars.co.uk/img/Register_Icon.png" width="40px;">Register</a></li>
-          </div>
-    </div>
-</nav>
 
-    <a href="./login.html#login_btn" >Login</a>
-<button class="register" onclick="openModal3()" id="register_btn">Register</button></br>
-
-    <div class="modal" id="modal3">
-        <div class="modal-dialog">
-          <header class="modal-header">
-            Register:
-            <button class="close-modal" onclick="closeModal3()">✕</button>
-          </header>
-            <div class="error_log" id="error_log"></div>
-          <section class="modal-content">
-            <form action="/register" method="POST">
-              <label for="full_name">Full Name:</label></br>
-              <input id="full_name" required></br></br>
-              <label for="pi_username">Enter Pi Username:</label></br>
-              <input id="pi_username"></br></br>
-              <label for="user_password">Enter Password:</label></br>
-              <input type="password" id="user_password" required></br></br>
-              <label for="confirm_password">Confirm Password:</label></br>
-              <input type="password" id="confirm_password" required></br></br>
-              <label for="register">
-              <input type="submit" value="Submit" class="register" id="register"></input></label></br>
-            </form>
-          </section>
-        </div>
+      <div style="float:right">
+        <li class="li"><a class="a" href="/index.html"><img src="https://app.piwebinars.co.uk/img/Home_Icon.png" width="40px;">Home</a></li>
+        <li class="li"><a class="a" href="/html/search.html"><img src="https://app.piwebinars.co.uk/img/Search_Icon.png" width="40px;">Search</a></li>
+        <li class="li"><a id="profile" class="a" href="/html/register.html"><img src="https://app.piwebinars.co.uk/img/Register_Icon.png" width="40px;">Register</a></li>
       </div>
-        <br><br><br>
+    </div>
+  </nav>
 
-    <!--Scripts-->
-      <script src="https://sdk.minepi.com/pi-sdk.js"></script>
-      <script>
-        Pi.init({ version: "2.0" });
-      </script>
-      <script
-        src="https://kit.fontawesome.com/3aea44e36d.js"
-        crossorigin="anonymous"
-      ></script>
-      <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-      <script src="../js/pages/authentication.js"></script>
-    <script src="/js/pipayment.js"></script>
-    <script
-      src="https://kit.fontawesome.com/3aea44e36d.js"
-      crossorigin="anonymous"
-    ></script>
-  </body>
+  <a href="./login.html#login_btn">Login</a>
+  <button class="register" onclick="openModal3()" id="register_btn">Register</button></br>
+
+  <div class="modal" id="modal3">
+    <div class="modal-dialog">
+      <header class="modal-header">
+        Register:
+        <button class="close-modal" onclick="closeModal3()">✕</button>
+      </header>
+      <div class="error_log" id="error_log"></div>
+      <section class="modal-content">
+        <form action="/register" method="POST">
+          <label for="full_name">Full Name:</label></br>
+          <input id="full_name" required></br></br>
+          <label for="pi_username">Enter Pi Username:</label></br>
+          <input id="pi_username"></br></br>
+          <label for="user_password">Enter Password:</label></br>
+          <input type="password" id="user_password" required></br></br>
+          <label for="confirm_password">Confirm Password:</label></br>
+          <input type="password" id="confirm_password" required></br></br>
+          <label for="referral">Referral (optional):</label><br><br>
+          <input id="referral"><br><br>
+          <label for="register">
+            <input type="submit" value="Submit" class="register" id="register"></input></label></br>
+        </form>
+      </section>
+    </div>
+  </div>
+  <br><br><br>
+
+  <!--Scripts-->
+<!--   <script src="https://kit.fontawesome.com/3aea44e36d.js" crossorigin="anonymous"></script> -->
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="../js/pages/authentication.js"></script>
+<!--   <script src="/js/pipayment.js"></script> -->
+  <script>
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const referral = urlParams.get('r');
+    if (referral) openModal3();
+    document.getElementById("referral").value = referral;
+  </script>
+</body>
+
 </html>

@@ -15,6 +15,14 @@ const commentsDisplay = document.querySelector("#commentsContainer");
 const authNavv = document.querySelectorAll(".authNav");
 const unAuthNavv = document.querySelectorAll(".unAuthNav");
 
+//saving arrays to session storage
+Storage.prototype.setObj = function (key, obj) {
+  return this.setItem(key, JSON.stringify(obj));
+};
+Storage.prototype.getObj = function (key) {
+  return JSON.parse(this.getItem(key));
+};
+
 // Variables
 let token;
 let flashMessage = "";
@@ -31,12 +39,11 @@ const instance = axios.create({
   baseURL: "https://piwebinars-server.herokuapp.com",
   headers: {
     "Access-Control-Allow-Origin": "*",
-    Authorization: `Bearer ${authToken}`,
+    Authorization: `Bearer ${authToken}`
   },
   withCredentials: true,
-  credentials: "same-origin",
+  credentials: "same-origin"
 });
-// const instance = axios.create({ baseURL: "http://localhost:5000" });
 
 if (sessToken !== null) {
   authNavv.forEach((elem) => {
@@ -57,6 +64,28 @@ if (sessToken !== null) {
   });
 }
 
+// Dark mode
+if (localStorage.dark == "true") {
+  document.getElementById("dark").setAttribute("href", "/css/dark.css");
+}
+
+function darkMode() {
+  if (localStorage.dark == "true") {
+    localStorage.dark = "false";
+  } else {
+    localStorage.dark = "true";
+  }
+  if (localStorage.dark == "true") {
+    document.getElementById("dark").setAttribute("href", "/css/dark.css");
+    document.getElementById("darkOn").style.display = "inline-block";
+    document.getElementById("darkOff").style.display = "none";
+  } else {
+    document.getElementById("dark").setAttribute("href", "");
+    document.getElementById("darkOn").style.display = "none";
+    document.getElementById("darkOff").style.display = "inline-block";
+  }
+}
+
 // Login a user
 if (loginBtn !== null) {
   loginBtn.addEventListener("click", async (e) => {
@@ -73,7 +102,7 @@ if (loginBtn !== null) {
         const user = {
           username,
           password,
-          uid,
+          uid
         };
         const response = await instance.post(`/login`, user);
         if (response.status === 200) {
@@ -86,9 +115,6 @@ if (loginBtn !== null) {
           localStorage.setItem("userSession", token);
           sessionStorage.setItem("username", username);
           flashMessage = message;
-          // if (navigator.userAgent.toLowerCase().indexOf("pibrowser")>=0) {
-          //   addUID();
-          // }
           window.location.href = "/";
         }
         username = "";
@@ -122,6 +148,7 @@ if (registerBtn !== null) {
     const username = document.querySelector("#pi_username").value;
     let password = document.querySelector("#user_password").value;
     let confirmPassword = document.querySelector("#confirm_password").value;
+    const referral = document.querySelector("#referral").value;
 
     try {
       if ((fullName || username || password || confirmPassword) === "") {
@@ -138,6 +165,7 @@ if (registerBtn !== null) {
           name: fullName,
           username,
           password,
+          referral
         };
         const response = await instance.post(`/register`, newUser);
         if (response.status === 201) {
@@ -182,13 +210,13 @@ if (handleBtn !== null) {
         flashMessage = message;
       } else {
         const userHandle = {
-          handle,
+          handle
         };
         const response = await instance.post(`/profile`, userHandle, {
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${authToken}`,
-          },
+            Authorization: `Bearer ${authToken}`
+          }
         });
         if (response.status === 200) {
           const message = "User Profile was successfully created !!!";
@@ -217,10 +245,38 @@ if (handleBtn !== null) {
   });
 }
 
+// Edit handle
+async function editProfile() {
+  const handle = prompt("Enter new handle", "");
+  const authToken = localStorage.getItem("userSession");
+  if (handle === "" || handle === null) {
+    alert("Handle cannot be null");
+  } else {
+    const userHandle = {
+      handle
+    };
+    const response = await instance.post(`/profile`, userHandle, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${authToken}`
+      }
+    });
+    if (response.status === 200) {
+      alert("Profile update!");
+      window.location.href = "/html/profile.html";
+    } else if (response.status === 201) {
+      alert("Entered name is the same as your existing name");
+    } else {
+      alert("Handle is taken");
+    }
+  }
+}
+
 // Display profile names
 const splitUrl = window.location.href.split("/");
 const urlLength = splitUrl.length;
 const urlPath = splitUrl[urlLength - 1];
+
 const myProfile = async () => {
   const fullName = document.querySelector("#displayFullName");
   const userHandle = document.querySelector("#displayUserHandle");
@@ -234,8 +290,8 @@ const myProfile = async () => {
     const response = await instance.get(`/profile`, {
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${authToken}`,
-      },
+        Authorization: `Bearer ${authToken}`
+      }
     });
     if (response.status === 200) {
       const data = await response.data.profile;
@@ -247,6 +303,7 @@ const myProfile = async () => {
         credit: piCredit,
         following: userFollowing,
         verified: verified,
+        wishlist: userWishlist
       } = data;
       console.log(response.data);
       sessionStorage.user = response.data.profile.user._id;
@@ -258,7 +315,8 @@ const myProfile = async () => {
       credit.appendChild(elem);
       fullName.textContent = full_name;
       userHandle.textContent = `@${user_handle}`;
-      localStorage.setItem("following", userFollowing);
+      localStorage.setObj("following", userFollowing);
+      localStorage.setObj("wishlist", userWishlist);
       if (verified == true) {
         document.getElementById("verified_icon").src = "/img/Verified_Icon.png";
       }
@@ -266,6 +324,8 @@ const myProfile = async () => {
       // Dynamic profile dom stats display
       createUserProfile.style.display = "none";
       document.querySelector(".stats").style.display = "block";
+    } else {
+      document.getElementById("interactWithProfile").style.display = "none";
     }
   } catch (error) {
     const errorMessage = error.response.data.message;
@@ -286,14 +346,14 @@ const userProfile = async () => {
   try {
     const response = await instance.get(`/profile/user/${getUserFromStorage}`, {
       params: {
-        user_id: getUserFromStorage,
-      },
+        user_id: getUserFromStorage
+      }
     });
     const myProfile = await instance.get(`/profile`, {
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${authToken}`,
-      },
+        Authorization: `Bearer ${authToken}`
+      }
     });
     if ((response.status && myProfile.status) === 200) {
       const {
@@ -304,10 +364,10 @@ const userProfile = async () => {
         credit: piCredit,
         followers: userFollowers,
         following: userFollowing,
-        verified: verified,
+        verified: verified
       } = response.data.profile;
       const {
-        user: { _id: self_id },
+        user: { _id: self_id }
       } = myProfile.data.profile;
       const hashedId =
         "d1e8a70b5ccab1dc2f56bbf7e99f064a660c08e361a35751b9c483c88943d082";
@@ -338,9 +398,10 @@ const userProfile = async () => {
       return errorMessage, error.response;
   }
 };
+if (urlPath === "profile.html") myProfile();
+if (urlPath === "userProfile.html") userProfile();
 
-// Render contents of the selected post
-const webinarPost = async () => {
+const webinarPost = async (getPostResponse) => {
   const likesCount = document.querySelector("#totalLikes");
   const dislikesCount = document.querySelector("#totalDislikes");
   const likeUnlikePostBtn = document.querySelector("#likeUnlikePost");
@@ -353,21 +414,9 @@ const webinarPost = async () => {
   const post_id = localStorage.getItem("post_id");
   const authToken = localStorage.getItem("userSession");
 
-  const getPostResponse = await instance.get(`/post/${userId}/${post_id}`, {
-    params: {
-      userId,
-    },
-  });
-
   console.log("post ", getPostResponse);
 
   try {
-    const myProfile = await instance.get(`/profile`, {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${authToken}`,
-      },
-    });
     if (getPostResponse.status === 200) {
       // Render comments
       const { comments, dislike, likes } = await getPostResponse.data.Post;
@@ -376,10 +425,11 @@ const webinarPost = async () => {
       dislikesCount.textContent = dislike.length;
 
       if (comments.length <= 0) {
-        const noComments = `<p class="noComments">No Comments made yet on this post, be the first to comment</p>`;
+        const noComments = `<br><p class="noComments">No comments made on this post yet, be the first</p>`;
         commentsDisplay.innerHTML = noComments;
       } else {
-        // commentsDisplay.appendChild(commentSection)
+        // commentsDisplay.appendChild(commentSection);
+        renderComments(comments);
       }
     }
   } catch (error) {
@@ -390,12 +440,16 @@ const webinarPost = async () => {
 
   if (getPostResponse.status === 200) {
     const { likes, dislike } = getPostResponse.data.Post;
-    const liked = likes.find(({ user }) => user.toString() === userId);
-    const disLiked = dislike.find(({ user }) => user.toString() === userId);
-    if (liked === undefined) likeUnlikePostBtn.textContent = "Like";
-    else likeUnlikePostBtn.textContent = "Unlike";
-    if (disLiked === undefined) dislikePostBtn.textContent = "Dislike";
-    else dislikePostBtn.textContent = "Disliked";
+    let liked = likes.filter(function (e) {
+      return e.user === sessionStorage.user;
+    });
+    let disLiked = dislike.filter(function (e) {
+      return e.user === sessionStorage.user;
+    });
+    if (!liked.length) likeUnlikePostBtn.style.color = "#ffffff";
+    else likeUnlikePostBtn.style.color = "#fbb44a";
+    if (!disLiked.length) dislikePostBtn.style.color = "#ffffff";
+    else dislikePostBtn.style.color = "#fbb44a";
 
     likeUnlikePostBtn.addEventListener("click", async (e) => {
       try {
@@ -403,8 +457,8 @@ const webinarPost = async () => {
           `/post/like_unlike_post/${userId}/${post_id}`,
           {
             params: {
-              userId,
-            },
+              userId
+            }
           }
         );
         if (response.status === 200) {
@@ -424,8 +478,8 @@ const webinarPost = async () => {
           `/post/dislike_post/${userId}/${post_id}`,
           {
             params: {
-              userId,
-            },
+              userId
+            }
           }
         );
         if (response.status === 200) {
@@ -447,19 +501,10 @@ const webinarPost = async () => {
         e.preventDefault();
         if (commentValue.length <= 0) return;
         const data = { text: commentValue.value };
+        console.log(data);
         const response = await instance.post(
           `/post/comment/${userId}/${post_id}`,
-          data,
-          {
-            headers: {
-              "Content-Type":
-                "multipart/form-data; boundary='--sampleBoundary'",
-              "Access-Control-Allow-Origin": "*",
-              Authorization: `Bearer ${authToken}`,
-            },
-            withCredentials: true,
-            credentials: "same-origin",
-          }
+          data
         );
         console.log("Response: ", response);
         if (response.status === 200) {
@@ -476,10 +521,6 @@ const webinarPost = async () => {
     }
   }
 };
-
-if (urlPath === "profile.html") myProfile();
-if (urlPath === "userProfile.html") userProfile();
-if (urlPath === "webinar.html") webinarPost();
 
 // Upload webinar
 const video = document.querySelector("#videoUpload");
@@ -524,7 +565,7 @@ if (uploadBtn !== null) {
             pTag.textContent = message;
             errorFlash.appendChild(pTag);
             flashBool = true;
-          },
+          }
         };
         const response = await instance.post(
           `/upload/file_upload`,
@@ -535,10 +576,10 @@ if (uploadBtn !== null) {
               "Content-Type":
                 "multipart/form-data; boundary='--sampleBoundary'",
               "Access-Control-Allow-Origin": "*",
-              Authorization: `Bearer ${authToken}`,
+              Authorization: `Bearer ${authToken}`
             },
             withCredentials: true,
-            credentials: "same-origin",
+            credentials: "same-origin"
           }
         );
         if (response.status === 200) {
@@ -548,9 +589,6 @@ if (uploadBtn !== null) {
       } catch (error) {
         const errorMessage = error.response.data.message;
         if (errorMessage.length > 0) flashMessage = errorMessage;
-      } finally {
-        const message = "Successfully uploaded your webinar !!!";
-        flashMessage = message;
       }
       flashBool = true;
 
@@ -659,10 +697,10 @@ if (deleteAccountBtn !== null) {
           const response = await instance.delete(`/profile`, {
             headers: {
               "Access-Control-Allow-Origin": "*",
-              Authorization: `Bearer ${authToken}`,
+              Authorization: `Bearer ${authToken}`
             },
             withCredentials: true,
-            credentials: "same-origin",
+            credentials: "same-origin"
           });
           if (response.status === 200) {
             flashMessage = `You have successfully deleted your account!!!`;
@@ -707,14 +745,14 @@ if (searchBtn !== null) {
       } else {
         const response = await instance.get(`/profile/handle/${searchName}`, {
           params: {
-            handle: searchName,
-          },
+            handle: searchName
+          }
         });
         if (response.status === 200) {
           // localStorage.setItem("userProfileName", searchName);
           const {
             handle,
-            user: { name: user_name, _id: userId },
+            user: { name: user_name, _id: userId }
           } = response.data.profile;
           localStorage.setItem("user_id", userId);
 
@@ -763,7 +801,7 @@ if (createUserProfile !== null) {
 if (followBtn !== null) {
   followBtn.addEventListener("click", async (e) => {
     e.preventDefault();
-    let user_id = await followBtn.dataset.userId.substr(0, 24).toString();
+    let user_id = localStorage.user_id;
 
     try {
       const response = await instance.post(
@@ -772,18 +810,56 @@ if (followBtn !== null) {
           headers: {
             "Content-Type": "application/json",
             "Access-Control-Allow-Origin": "*",
-            Authorization: `Bearer ${authToken}`,
+            Authorization: `Bearer ${authToken}`
           },
           withCredentials: true,
-          credentials: "same-origin",
+          credentials: "same-origin"
         }
       );
-      if (response.status === 200) window.location.reload();
+      if (response.status === 200) {
+        const profile = await instance.get(`/profile`);
+        if (profile.status === 200)
+          localStorage.setObj("following", profile.data.profile.following);
+        window.location.reload();
+      }
     } catch (error) {
       const errorMessage = error.response.data.message;
       return errorMessage;
     }
   });
+}
+
+function renderComments(comments) {
+  const commentsBox = document.querySelector("#commentsContainer");
+  console.log(comments);
+  for (const comment of comments) {
+    console.log(comment);
+    const commentDiv = document.createElement("div");
+    const message = document.createElement("p");
+    const name = document.createElement("p");
+    const date = document.createElement("p");
+    const avatar = document.createElement("img");
+
+    commentDiv.className = "commentDiv";
+    message.className = "commentText";
+    name.className = "commentName";
+    date.className = "commentDate";
+    avatar.className = "commentAvatar";
+    message.textContent = comment.text;
+    name.textContent = comment.name;
+    date.textContent = comment.dateAdded.substring(0, 10);
+    if (comment.avatar) {
+      avatar.src = comment.avatar;
+    } else {
+      avatar.src = "/img/avatar.png";
+    }
+
+    commentDiv.appendChild(avatar);
+    commentDiv.appendChild(name);
+    commentDiv.appendChild(date);
+    commentsBox.appendChild(commentDiv);
+    commentsBox.appendChild(message);
+  }
 }
 
 function buyCredits(creditAmount) {
@@ -854,6 +930,14 @@ function openLandingPage() {
 
 function closeLandingPage() {
   document.getElementById("landingPage").classList.remove("is-visible");
+}
+
+function openInfo() {
+  document.getElementById("info").classList.add("cinema-visible");
+}
+
+function closeInfo() {
+  document.getElementById("info").classList.remove("cinema-visible");
 }
 
 function showMore(featured, webinars) {

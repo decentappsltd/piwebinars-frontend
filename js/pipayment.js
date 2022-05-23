@@ -56,7 +56,7 @@ async function piLogin() {
   }
 }
 
-// auth();
+auth();
 
 function buyWebinar() {
   if (navigator.userAgent.toLowerCase().indexOf("pibrowser") < 0) {

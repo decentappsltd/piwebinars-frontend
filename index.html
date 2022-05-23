@@ -1,252 +1,373 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-DHEX8LQ19E"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-DHEX8LQ19E');
-    </script>
-            
-    <script src="https://sdk.minepi.com/pi-sdk.js"></script>
-    <script>
-      const Pi = window.Pi;
-      Pi.init({ version: "2.0", sandbox: false })
-    </script>
-    <!--CSS-->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/styles.css">
-    <link rel="icon" type="image/png" href="../img/logo.png">
-    
-    <!--Google Fonts-->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;700&display=swap" rel="stylesheet">
-  </head>
-  <body>
-    <div class="mobile">
-        
+
+<head>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-DHEX8LQ19E"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+    gtag('config', 'G-DHEX8LQ19E');
+  </script>
+
+  <script src="https://sdk.minepi.com/pi-sdk.js"></script>
+  <script>
+    const Pi = window.Pi;
+    Pi.init({
+      version: "2.0",
+      sandbox: false
+    })
+  </script>
+  <script src="/js/pages/all-webinars.js"></script>
+  <!--CSS-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" id="dark">
+  <link rel="icon" type="image/png" href="../img/logo.png">
+
+  <!--Google Fonts-->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <div class="mobile">
+
     <title>Pi Webinars</title>
- 
+
     <img src="/img/loadImage.png" class="loadImage" id="loadImage" alt="load"></img>
-  
-    <img width="75%" style="position: -webkit-sticky; position: relative; top: 0; z-index: 100;" src="/img/logo-text.png" alt="logo"/>
-  
-    <h4><span id="username"></span></h4>
-    <h5> Welcome to Pi Webinars!<br/>Your educational video platform powered by Pi.<br/></h5>
-  
+
+    <img width="75%" onclick="openLandingPage()" style="padding-left: 12.5%; padding-right: 12.5%; padding-bottom: 5px; border-bottom: solid black 1px" src="/img/logo-text.png" alt="logo" />
+
     <nav id="footer" style="display: none;">
       <ul class="ul">
         <li class="li">
-          <a class="a" href="/index.html"><img src="https://app.piwebinars.co.uk/img/Home_Icon.png" width="30px;">Home</a>
+          <a class="a" href="/index.html"><img src="/img/Home_Icon.png" width="30px;">Home</a>
         </li>
         <li class="li">
-          <a class="a" href="/html/all-webinars.html"><img src="https://app.piwebinars.co.uk/img/Watch_Icon.png" width="30px;">Webinars</a>
+          <a class="a" href="/html/all-webinars.html"><img src="/img/Watch_Icon.png" width="30px;">Webinars</a>
         </li>
         <li class="li">
-          <a class="a authNav" href="/html/upload.html"><img src="https://app.piwebinars.co.uk/img/Upload_Icon.png" width="30px;">Upload</a>
+          <a class="a authNav" href="/html/upload.html"><img src="/img/Upload_Icon.png" width="30px;">Upload</a>
         </li>
-    <li class="li" style="margin-left:-15px;"><a id="profile" class="a unAuthNav" href="/html/login.html"><img src="https://app.piwebinars.co.uk/img/Login_Icon.png" width="30px;">Login</a></li>
-    <li class="li" style="margin-left:-10px; border-right:none;"><a id="profile" class="a unAuthNav" href="/html/register.html"><img src="https://app.piwebinars.co.uk/img/Register_Icon.png" width="30px;">Register</a></li>
-        <li class="li" style="margin-left:-15px;">
-          <a class="a authNav" href="/html/profile.html"><img src="https://app.piwebinars.co.uk/img/Profile_Icon.png" width="30px;">Profile</a>
+        <li class="li" style="">
+          <a class="a authNav" href="/html/profile.html"><img src="/img/Profile_Icon.png" width="30px;">Profile</a>
         </li>
+        <li class="li" style="margin-left: -40px;"><a id="profile" class="a unAuthNav" href="/html/login.html"><img src="/img/Login_Icon.png" width="30px;">Login</a></li>
+        <li class="li" style=" border-right:none;"><a id="profile" class="a unAuthNav" href="/html/register.html"><img src="/img/Register_Icon.png" width="30px;">Register</a></li>
       </ul>
-    </nav>   
-        
-    <h2 class="rounded" >Featured Webinars</h2>
-    
-    <div class="postFeaturedSection"></div>
-      
-    <button onclick="testPayment()">Test Payment</button>
-    
-    <!--Demo webinars for styling
-    <div id="title" class="rounded">
-  <img src=https://img.youtube.com/vi/KfDB9e_cO4k/maxresdefault.jpg style="position:relative;top:0;width:100%">
-    <h3>What is Value Investing?</h3></div>
-  
-  <div id="title" class="rounded">
-  <img src=https://img.youtube.com/vi/6dGYVKt1zw4/maxresdefault.jpg style="position:relative;top:0;width:100%">
-    <h3>South Korea: The Silent Cultural Superpower - Full Documentary</h3>
-  </div>
-  
-  <div id="title" class="rounded">
-  <img src=https://img.youtube.com/vi/YIhYCRBDOUo/maxresdefault.jpg style="position:relative;top:0;width:100%">
-    <h3>Winston Churchill ‘A Giant in The Century’ Documentary</h3>
-  </div>
-    
-   <div id="title" class="rounded" onclick="location.href='/html/webinar.html'">
-  <img src=https://img.youtube.com/vi/rvrmaDu61Tc/maxresdefault.jpg style="position:relative;top:0;width:100%">
-    <h3>Pi Payments (Pi Hackathon Workshop)</h3>
-  </div>-->
-    
-    <!--Modals-->
-    <div class="modal" id="modal1">
-    <div class="modal-dialog">
-    <header class="modal-header">
-      Cinema
-      <button class="close-modal" aria-label="close modal" onclick="closeCinema()">✕</button>
-    </header>
-    <section class="modal-content">
-      <video id="usersPurchase"></video>
-      <div class="row">
-        <svg class="likePost column" style="margin-right: 10px;" viewBox="0 0 512 512" width="20px" title="thumbs-up">
-  <path d="M104 224H24c-13.255 0-24 10.745-24 24v240c0 13.255 10.745 24 24 24h80c13.255 0 24-10.745 24-24V248c0-13.255-10.745-24-24-24zM64 472c-13.255 0-24-10.745-24-24s10.745-24 24-24 24 10.745 24 24-10.745 24-24 24zM384 81.452c0 42.416-25.97 66.208-33.277 94.548h101.723c33.397 0 59.397 27.746 59.553 58.098.084 17.938-7.546 37.249-19.439 49.197l-.11.11c9.836 23.337 8.237 56.037-9.308 79.469 8.681 25.895-.069 57.704-16.382 74.757 4.298 17.598 2.244 32.575-6.148 44.632C440.202 511.587 389.616 512 346.839 512l-2.845-.001c-48.287-.017-87.806-17.598-119.56-31.725-15.957-7.099-36.821-15.887-52.651-16.178-6.54-.12-11.783-5.457-11.783-11.998v-213.77c0-3.2 1.282-6.271 3.558-8.521 39.614-39.144 56.648-80.587 89.117-113.111 14.804-14.832 20.188-37.236 25.393-58.902C282.515 39.293 291.817 0 312 0c24 0 72 8 72 81.452z" /></svg> 
-        <svg class="dislikePost column" viewBox="0 0 512 512" width="20px" title="thumbs-down">
-  <path d="M0 56v240c0 13.255 10.745 24 24 24h80c13.255 0 24-10.745 24-24V56c0-13.255-10.745-24-24-24H24C10.745 32 0 42.745 0 56zm40 200c0-13.255 10.745-24 24-24s24 10.745 24 24-10.745 24-24 24-24-10.745-24-24zm272 256c-20.183 0-29.485-39.293-33.931-57.795-5.206-21.666-10.589-44.07-25.393-58.902-32.469-32.524-49.503-73.967-89.117-113.111a11.98 11.98 0 0 1-3.558-8.521V59.901c0-6.541 5.243-11.878 11.783-11.998 15.831-.29 36.694-9.079 52.651-16.178C256.189 17.598 295.709.017 343.995 0h2.844c42.777 0 93.363.413 113.774 29.737 8.392 12.057 10.446 27.034 6.148 44.632 16.312 17.053 25.063 48.863 16.382 74.757 17.544 23.432 19.143 56.132 9.308 79.469l.11.11c11.893 11.949 19.523 31.259 19.439 49.197-.156 30.352-26.157 58.098-59.553 58.098H350.723C358.03 364.34 384 388.132 384 430.548 384 504 336 512 312 512z" />
-</svg>
-      </div>
-      <button onclick="followCreator()">FollowCreator</button>
-      <button onclick="comment()">Comment</button>
-      <div id="comments"></div>
-    </section>
-  </div>
-</div>
-    
-    <br>
-  <button id="translate" onclick="googleTranslate()">Translate Page</button><br>
-  
-  <h5>&copy; Decent Apps Ltd</h5>
+    </nav>
 
-  <div id="google_translate_element"></div>
-  <script>
-    function googleTranslateElementInit() {
-      new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
-    }
-  </script>
-  <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-    
+    <br>
+
+    <h2 class="rounded">Featured Webinars</h2>
+
+    <!--     ads -->
+    <iframe data-aa='1980365' src='//acceptable.a-ads.com/1980365' style='border:0px; padding:0; width:300px; max-height:250px; overflow:hidden; background-color: transparent;'></iframe>
+
+    <div class="featuredSection"></div>
+    <a class="b:ck_button" style="border: none; margin-top: 10px;" href="/html/all-webinars.html">See more</a>
+    <br>
+    <!--     ads -->
+    <iframe data-aa='1980365' src='//acceptable.a-ads.com/1980365' style='border:0px; padding:0; width:300px; max-height:250px; overflow:hidden; background-color: transparent;'></iframe>
+
+    <!--Modals-->
+    <div class="landing" id="landingPage">
+      <section class="modal-content">
+        <h3 style="background: linear-gradient(to right, #b44afb, #4afbb4); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-align: center;">Welcome to Pi Webinars!<br><br>Your educational video platform powered by Pi.</h3>
+        <ul style="color: #fbb44a; text-align: justify;">
+          <li onclick="window.open('pi://www.piwebinars.co.uk')">Sign up on our app through the <u>Pi Browser</u></li>
+          <li>Choose webinars produced by fellow Pioneers and experts!</li>
+          <li>Save your webinars to your smartphone, desktop or laptop!</li>
+          <li>Have lifetime & unlimited access to your saved webinars!</li>
+        </ul>
+        <button class="landingBtn" onclick="location.href='/html/register.html'">Sign up for free!</button>
+        <br><br>
+        <button class="landingBtn" onclick="closeLandingPage()">Continue to app</button>
+      </section>
+    </div>
+
+    <div class="modal" id="info">
+      <div class="modal-dialog">
+        <header style="color: #b44afb" class="modal-header">
+          <h3>Welcome to Pi Webinars</h3>
+            <button class="close-modal" style="float: right;" onclick="closeInfo()">✕</button>
+          
+        </header>
+        <section class="modal-content">
+          <h4>What is Pi Webinars?</h4><br>
+          <p3> Pi Webinars is the first DeEd video platform that runs on the Pi Network. Upload and watch educational videos to earn Pi! You can browse our selection of webinars and watch them through the Pi Browser, or upload your own content to start earning. </p3><br><br><br>
+
+          <h4>How to watch a webinar:</h4><br>
+          <ol>
+            <li>
+              Browse our selection and choose one you like. Go to the 'Webinars' page to use the search tools and see them categorised.
+            </li>
+            <li>
+              Click on the webinar and navigate to the large payment button. Complete the Pi Payment flow.
+            </li>
+            <li>
+              The webinar will appear in a popup for you to watch and can always be re-watched from your 'Purchases' page in your profile.
+            </li>
+          </ol><br><br>
+
+          <h4>How to upload a webinar:</h4><br>
+          <ol>
+            <li>
+              Film your webinar, ensuring you make it high quality and interesting to others. It can be in any language, but must not have any obscene material.
+            </li>
+            <li>
+              Navigate to the 'Upload' tab in Pi Webinars and fill out all the fields. 
+            </li>
+            <li>
+              Press upload and wait for it to be complete. A progress bar will be displayed- please don't leave the app until complete.
+            </li>
+            <li>
+              You can now find your webinar in the 'Your Webinars' page in your profile. Pi will automatically be added to your balance when one of your webinars is purchased. 
+            </li>
+          </ol><br><br>
+          
+          <h4>Our mission:</h4><br>
+          <p3>Our world is in the middle of a new economic era propelled by Information Technology (IT) which touches everything in our lives. The learning process is not an exception, with a decentralized education (DeEd) revolution opening fresh possibilities, especially for people historically away to participate in the current obsolete educational model.
+<br><br>
+Just imagine millions of students from Africa, India, China and the developing world enjoying a learning process about any subject without the high cost and long development timelines inherent to our current education. This is possible thanks to new technologies such as the blockchain where P2P open-source platforms may enter to reach large audiences eager to learn and bring money to the economy. The future of learning is bright with DeEd platforms such as Pi Webinars.</p3>
+
+        </section>
+      </div>
+    </div>
+
+    <!--   Floating tab -->
+    <div id="float">
+      <a style="font-size:24px" class="fa" onclick="openInfo()">&#xf05a;</a>
+    </div>
+
+<!--     Translate tab -->
+    <div id="google_translate_element"></div>
     <script>
-      let image = sessionStorage.getItem("image");
-      const loadTimeout = setTimeout(loadImage, 500);
-      // if (image != 'true') {
-      //   const loadTimeout = setTimeout(loadImage, 500);
-      //   auth();
-      //   sessionStorage.setItem("image", "true");
-      // } else {
-      //   loadImage()
-      // }
+      function googleTranslateElementInit() {
+        new google.translate.TranslateElement({
+          pageLanguage: 'en'
+        }, 'google_translate_element');
+      }
+    </script>
+    <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+    <br>
+    <!--   Bottom section -->
+    <div style="background: #b44afb; color: #fbb44a; width: 100%;">
+
+      <a id="translate" onclick="googleTranslate()">Translate Page</a><br><br>
+
+      <a style="margin-bottom: 20px;" onclick="darkMode()">Dark Mode:</a>
+      <a id="darkOn" style="color: #4afbb4; display: none;">On</a>
+      <a id="darkOff" style="color: red; display: none;">Off</a><br><br>
+
+      <a style="color: #fbb44a" href="/policies/privacy.html">Privacy |</a>
+      <a style="color: #fbb44a" href="/policies/terms.html">Terms |</a>
+      <a style="color: #fbb44a" href="mailto:contact@piwebinars.co.uk">Contact</a>
+
+      <h5 style="padding-bottom: 10px;">&copy; Decent Apps Ltd</h5>
+    </div>
+
+    <script>
+      if (sessionStorage.landing != 'true') {
+        if (window.matchMedia("(prefers-color-scheme:dark)").matches) {
+          localStorage.dark = "true";
+        }
+        const loadTimeout = setTimeout(loadImage, 500);
+        document.getElementById("landingPage").classList.add("is-visible");
+        sessionStorage.setItem("landing", "true");
+      } else {
+        loadImage();
+      }
+
       function loadImage() {
         var l = document.getElementById("loadImage");
         l.style.display = "none";
         l.classList.remove('loadImage')
         document.getElementById('footer').style.display = "block";
       }
+      if (navigator.userAgent.toLowerCase().indexOf("pibrowser") >= 0) {
+        auth();
+      }
+      if (localStorage.dark == "true") {
+        document.getElementById("dark").setAttribute("href", "/css/dark.css");
+        document.getElementById("darkOn").style.display = "inline-block";
+      } else {
+        document.getElementById("darkOff").style.display = "inline-block";
+      }
     </script>
-  
-  <br/><br/><br/><br/>
-    </div>
-  
+
+    <br /><br /><br />
+  </div>
+
   <div class="desktop">
 
-   
     <!--Header-->
     <div class="row footer">
-      <img height="60" style="position:relative;top:0;display: inline; float: left;" src="https://app.piwebinars.co.uk/img/logo-text.png" alt="logo"></img>
-   
-    <li class="li"><a class="a" href="/index.html"><img src="https://app.piwebinars.co.uk/img/Home_Icon.png" width="40px;">Home</a></li>
-        <li class="li"><a class="a" href="/html/search.html"><img src="https://app.piwebinars.co.uk/img/Search_Icon.png" width="40px;">Search</a></li>
-      <li class="li"><a class="a authNav" id="uploaddesktopmodal" href="./html/upload.html"><img src="https://app.piwebinars.co.uk/img/Upload_Icon.png" width="40px;">Upload</a></li>
-    <li class="li"><a id="profile" class="a unAuthNav" href="/html/login.html"><img src="https://app.piwebinars.co.uk/img/Login_Icon.png" width="40px;">Login</a></li>
-    <li class="li"><a id="profile" class="a unAuthNav" href="/html/register.html"><img src="https://app.piwebinars.co.uk/img/Register_Icon.png" width="40px;">Register</a></li>
-    <li class="li"><a class="a authNav" href="/html/profile.html"><img src="https://app.piwebinars.co.uk/img/Profile_Icon.png" width="40px;">Profile</a></li>
+      <img height="60" style="position:relative;top:0;display: inline; float: left;" src="/img/logo-text.png" alt="logo"></img>
+
+      <input style="height: 40px; margin-top: 5px; width: 35vw;border-radius:7.5px;" type="text" placeholder="Search Webinars.." id="search" class="searchbar searchHeader">
+      <i style="margin-left: 5px;" class="searchHeader fas fa-search" id="search" onclick="search()"></i>
+      <i class="searchHeader" onclick="location.href='/'" style="color: #fbb44a; font-size: 30px;">×</i>
+      </input>
+
+      <div style="float:right">
+        <li class="li"><a class="a" href="/index.html"><img src="https://www.piwebinars.co.uk/img/Home_Icon.png" width="40px;">Home</a></li>
+        <li class="li"><a class="a" href="/html/search.html"><img src="https://www.piwebinars.co.uk/img/Search_Icon.png" width="40px;">Search</a></li>
+        <li class="li"><a class="a authNav" id="uploaddesktopmodal" href="./html/upload.html"><img src="https://www.piwebinars.co.uk/img/Upload_Icon.png" width="40px;">Upload</a></li>
+        <li class="li"><a class="a authNav" href="/html/profile.html"><img src="https://www.piwebinars.co.uk/img/Profile_Icon.png" width="40px;">Profile</a></li>
+        <li class="li"><a id="profile" class="a unAuthNav" href="/html/login.html"><img src="https://www.piwebinars.co.uk/img/Login_Icon.png" width="40px;">Login</a></li>
+        <li class="li"><a id="profile" class="a unAuthNav" href="/html/register.html"><img src="https://www.piwebinars.co.uk/img/Register_Icon.png" width="40px;">Register</a></li>
+      </div>
     </div>
-  
+
     <!--Main Content-->
+    <style>
+      @media screen and (min-width: 620px) {
+        body {
+          overflow: hidden;
+        }
+      }
+    </style>
+    <!--     <br><br><br><br> -->
+    <div class="grid">
+
+      <div class="selection" style="text-align: left;">
+        <h4 style="color:#fbb44a">Webinars</h4>
+
+        <a class="filter" onclick="location.href='/'">All</a><br>
+        <a class="filter" onclick="localStorage.filter = 'cryptocurrency'; filter();">Cryptocurrency</a><br>
+        <a class="filter" onclick="localStorage.filter = 'diy'; filter();">DIY</a><br>
+        <a class="filter" onclick="localStorage.filter = 'education'; filter();">Education</a><br>
+        <a class="filter" onclick="localStorage.filter = 'finance'; filter();">Finance</a><br>
+        <a class="filter" onclick="localStorage.filter = 'fitness'; filter();">Fitness</a><br>
+        <a class="filter" onclick="localStorage.filter = 'food'; filter();">Food</a><br>
+        <a class="filter" onclick="localStorage.filter = 'gaming'; filter();">Gaming</a><br>
+        <a class="filter" onclick="localStorage.filter = 'history'; filter();">History</a><br>
+        <a class="filter" onclick="localStorage.filter = 'music'; filter();">Music</a><br>
+        <a class="filter" onclick="localStorage.filter = 'nature'; filter();">Nature</a><br>
+        <a class="filter" onclick="localStorage.filter = 'pets'; filter();">Pets</a><br>
+        <a class="filter" onclick="localStorage.filter = 'pi network'; filter();">Pi Network</a><br>
+        <a class="filter" onclick="localStorage.filter = 'politics'; filter();">Politics</a><br>
+        <a class="filter" onclick="localStorage.filter = 'sports'; filter();">Sports</a><br>
+        <a class="filter" onclick="localStorage.filter = 'technology'; filter();">Technology</a><br>
+
+        <h4 style="color:#fbb44a;">Wishlist</h4>
+        <div class="wishlist"></div>
+
+        <h4 style="color:#fbb44a;">Following</h4>
+        <div class="following"></div><br><br>
+
+        <a style="font-size: 12px;" onclick="darkMode()">Dark Mode |</a>
+        <a id="translate" onclick="document.getElementById('google_translate').style.display = 'block';" style="font-size: 12px; background: none;">Translate</a><br><br>
+        <div id="google_translate"></div>
+        <script>
+          function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+              pageLanguage: 'en'
+            }, 'google_translate');
+          }
+        </script>
+        <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+        <a style="color: #b44afb" href="/policies/privacy.html">Privacy |</a>
+        <a style="color: #b44afb" href="/policies/terms.html">Terms |</a>
+        <a style="color: #b44afb" href="mailto:contact@piwebinars.co.uk">Contact</a>
+        <br><br>
+      </div>
+
+      <div class="mainWebinars">
+        <div class="mainWebinarsContain">
+
+          <div class="tablet">
+            <h2>Webinars</h2>
+            <i class="fas fa-filter"></i>
+            <select style="margin-bottom: 5px;" name="categories" id="select">
+              <option class="list" value="all">All</option><br />
+              <option class="list" value="cryptocurrency">Cryptocurrency</option><br />
+              <option class="list" value="diy">DIY</option><br />
+              <option class="list" value="education">Eduction</option><br />
+              <option class="list" value="finance">Finance</option><br />
+              <option class="list" value="fitness">Fitness</option><br />
+              <option class="list" value="food">Food</option><br />
+              <option class="list" value="gaming">Gaming</option><br />
+              <option class="list" value="history">History</option><br />
+              <option class="list" value="music">Music</option><br />
+              <option class="list" value="nature">Nature</option><br />
+              <option class="list" value="pets">Pets</option><br />
+              <option class="list" value="pinetwork">Pi Network</option><br />
+              <option class="list" value="politics">Politics</option><br />
+              <option class="list" value="sports">Sports</option><br />
+              <option class="list" value="technology">Technology</option><br />
+            </select><i style="margin-left: 5px;" class="fas fa-search" id="searchCat" onclick="searchCat()"></i><br />
+          </div>
+
+          <!--     ads -->
+          <!--           <a target="_blank" href="https://shareasale.com/r.cfm?b=1888003&amp;u=3225499&amp;m=53993&amp;urllink=&amp;afftrack="><img src="https://static.shareasale.com/image/53993/banner_300_250.jpg" border="0" /></a>
+          <i>Ad- ^Want to make a $ earning website?^</i> -->
+
+          <div class="postSection"></div>
+        </div>
+      </div>
+
+      <div class="purchasedWebinars">
+        <!--Your Purchases Render Div-->
+        <h2>Purchases</h2>
+        <div class="purchaseSection"></div>
+        <!--     ads -->
+        <iframe data-aa='1980365' src='//acceptable.a-ads.com/1980365' style='border:0px; padding:0; width:100%; height:100%; overflow:hidden; background-color: transparent;'></iframe>
+
+      </div>
+
+      <!--Your Webinars Render Div-->
+      <div class="yourWebinars">
+        <h2>Uploads</h2>
+        <div class="yourSection"></div>
+        <!--     ads -->
+        <iframe data-aa='1980365' src='//acceptable.a-ads.com/1980365' style='border:0px; padding:0; width:100%; height:100%; overflow:hidden; background-color: transparent;'></iframe>
+      </div>
+
+    </div>
+    <h5 id="copyright">&copy; Decent Apps Ltd</h5></br>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="../js/pages/authentication.js"></script>
+  <script src="/js/pipayment.js"></script>
+  <script src="https://kit.fontawesome.com/3aea44e36d.js" crossorigin="anonymous"></script>
+  <script>
+    renderFeaturedWebinars();
+    renderAllWebinars();
+    renderPurchasedWebinars();
+    renderYourWebinars();
+    renderFollowing();
+  </script>
   <style>
-    @media screen and (min-width: 620px) {
-      body {
-        overflow: hidden;
+    @media screen and (min-width: 900px) {
+      .tablet {
+        display: none;
+      }
+
+      .followingStyle {
+        border: none;
       }
     }
 
+    @media screen and (max-width: 900px) and (min-width: 620px) {
+      .tablet {
+        display: block;
+      }
+
+      .searchHeader {
+        display: none;
+      }
+    }
   </style>
-    <br><br><br><br>
-    <div class="mainWebinars">
-        <div class="mainWebinarsContain">
+</body>
 
-    <h2>Webinars</h2>
-    <i class="fas fa-filter"></i>
-  <select style="margin-bottom: 5px;" name="categories" id="select">
-    <option class="list" value="all">All</option><br />
-    <option class="list" value="cryptocurrency">Cryptocurrency</option><br />
-    <option class="list" value="diy">DIY</option><br />
-    <option class="list" value="education">Eduction</option><br />
-    <option class="list" value="finance">Finance</option><br />
-    <option class="list" value="fitness">Fitness</option><br />
-    <option class="list" value="food">Food</option><br />
-    <option class="list" value="gaming">Gaming</option><br />
-    <option class="list" value="history">History</option><br />
-    <option class="list" value="music">Music</option><br />
-    <option class="list" value="nature">Nature</option><br />
-    <option class="list" value="pets">Pets</option><br />
-    <option class="list" value="pinetwork">Pi Network</option><br />
-    <option class="list" value="politics">Politics</option><br />
-    <option class="list" value="sports">Sports</option><br />
-    <option class="list" value="technology">Technology</option><br />
-  </select><i style="margin-left: 5px;" class="fas fa-search" id="searchCat" onclick="searchCat()"></i><br />
-  
-  <i class="fas fa-filter"></i>
-  <input type="text" placeholder="Search Webinars.." id="search" class="searchbar">
-  <i style="margin-left: 5px;" class="fas fa-search" id="search" onclick="search()"></i></br>
-      
-    <div class="postFeaturedSection"></div>
-  </div>
-  </div>
-  
-    <div class="purchasedWebinars">
-      <!--Your Purchases Render Div-->
-      <h2>Purchases</h2>
-      <div id="postPurchasesSection"></div>
-      <div class="force-overflow"></div>
-    </div>
-    
-    
-    <!--Your Webinars Render Div-->
-    <div class="yourWebinars">
-      <h2>Uploads</h2>
-      <div id="postUploadsSection"></div>
-      <div class="force-overflow"></div>
-    </div>
-    
-  
-    <!--Cinema Modal-->
-    <div class="modal" id="modal1">
-      <div class="modal-dialog">
-        <header class="modal-header">
-          Cinema
-          <button class="close-modal" aria-label="close modal" onclick="closeCinema()">✕</button>
-        </header>
-      <section class="modal-content">
-        <video id="usersPurchase"></video>
-        <div class="row">
-          <svg class="likePost column" style="margin-right: 10px;" viewBox="0 0 512 512" width="20px" title="thumbs-up">
-          <path d="M104 224H24c-13.255 0-24 10.745-24 24v240c0 13.255 10.745 24 24 24h80c13.255 0 24-10.745 24-24V248c0-13.255-10.745-24-24-24zM64 472c-13.255 0-24-10.745-24-24s10.745-24 24-24 24 10.745 24 24-10.745 24-24 24zM384 81.452c0 42.416-25.97 66.208-33.277 94.548h101.723c33.397 0 59.397 27.746 59.553 58.098.084 17.938-7.546 37.249-19.439 49.197l-.11.11c9.836 23.337 8.237 56.037-9.308 79.469 8.681 25.895-.069 57.704-16.382 74.757 4.298 17.598 2.244 32.575-6.148 44.632C440.202 511.587 389.616 512 346.839 512l-2.845-.001c-48.287-.017-87.806-17.598-119.56-31.725-15.957-7.099-36.821-15.887-52.651-16.178-6.54-.12-11.783-5.457-11.783-11.998v-213.77c0-3.2 1.282-6.271 3.558-8.521 39.614-39.144 56.648-80.587 89.117-113.111 14.804-14.832 20.188-37.236 25.393-58.902C282.515 39.293 291.817 0 312 0c24 0 72 8 72 81.452z" /></svg> 
-          <svg class="dislikePost column" viewBox="0 0 512 512" width="20px" title="thumbs-down">
-          <path d="M0 56v240c0 13.255 10.745 24 24 24h80c13.255 0 24-10.745 24-24V56c0-13.255-10.745-24-24-24H24C10.745 32 0 42.745 0 56zm40 200c0-13.255 10.745-24 24-24s24 10.745 24 24-10.745 24-24 24-24-10.745-24-24zm272 256c-20.183 0-29.485-39.293-33.931-57.795-5.206-21.666-10.589-44.07-25.393-58.902-32.469-32.524-49.503-73.967-89.117-113.111a11.98 11.98 0 0 1-3.558-8.521V59.901c0-6.541 5.243-11.878 11.783-11.998 15.831-.29 36.694-9.079 52.651-16.178C256.189 17.598 295.709.017 343.995 0h2.844c42.777 0 93.363.413 113.774 29.737 8.392 12.057 10.446 27.034 6.148 44.632 16.312 17.053 25.063 48.863 16.382 74.757 17.544 23.432 19.143 56.132 9.308 79.469l.11.11c11.893 11.949 19.523 31.259 19.439 49.197-.156 30.352-26.157 58.098-59.553 58.098H350.723C358.03 364.34 384 388.132 384 430.548 384 504 336 512 312 512z" />
-          </svg>
-        </div>
-        <button class="comment">Comment</button>
-        <div id="comments"></div>
-      </section>
-    </div>
-    </div>
-  
-  <!--
-    <a href="https://instagram.com/pi_webinars" class="fa fa-instagram"></a>
-    <a href="https://twitter.com/pi_webinars" class="fa fa-twitter"></a>
-    <a href="https://discord.gg/uT3yqpDXcj" class="fab fa-discord"></a>
--->
-    <h5 id="copyright">&copy; Decent Apps Ltd</h5></br>
-
-</div>
-    <script src="https://sdk.minepi.com/pi-sdk.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script src="../js/pages/authentication.js"></script>
-    <script src="/js/routes.js"></script>
-    <script src="/js/pipayment.js"></script>
-    <script src="https://kit.fontawesome.com/3aea44e36d.js" crossorigin="anonymous"></script>
-  </body>
 </html>

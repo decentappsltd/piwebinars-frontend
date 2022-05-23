@@ -1,136 +1,155 @@
 <!DOCTYPE html>
 <html>
-  <head>    
-    <!--CSS-->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/styles.css">
-    <link rel="icon" type="image/png" href="/img/logo.png">
-    
-    <!--Google Fonts-->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;700&display=swap" rel="stylesheet">
-  </head>
-  
-  <body>
-  <h1 >Pi Webinars</h1>
-  
-<nav class="footer" style="z-index: 100">
-  <ul class="ul">
-    <div class="mobile">
-    <li class="li"><a class="a" href="/index.html"><img src="https://app.piwebinars.co.uk/img/Home_Icon.png" width="30px;">Home</a></li>
-    <li class="li"><a class="a" href="./all-webinars.html"><img src="https://app.piwebinars.co.uk/img/Watch_Icon.png" width="30px;">Webinars</a></li>
-      <li class="li"><a class="a" href="./upload.html"><img src="https://app.piwebinars.co.uk/img/Upload_Icon.png" width="30px;">Upload</a></li>
-    <li class="li"><a class="a" href="./profile.html"><img src="https://app.piwebinars.co.uk/img/Profile_Icon.png" width="30px;">Profile</a></li>
-  </ul>
+
+<head>
+  <!--CSS-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" id="dark">
+  <link rel="icon" type="image/png" href="/img/logo.png">
+
+  <!--Google Fonts-->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <h1>Pi Webinars</h1>
+
+  <nav class="footer" style="z-index: 100">
+    <ul class="ul">
+      <div class="mobile">
+        <li class="li"><a class="a" href="/index.html"><img src="https://app.piwebinars.co.uk/img/Home_Icon.png" width="30px;">Home</a></li>
+        <li class="li"><a class="a" href="./all-webinars.html"><img src="https://app.piwebinars.co.uk/img/Watch_Icon.png" width="30px;">Webinars</a></li>
+        <li class="li"><a class="a" href="./upload.html"><img src="https://app.piwebinars.co.uk/img/Upload_Icon.png" width="30px;">Upload</a></li>
+        <li class="li"><a class="a" href="./profile.html"><img src="https://app.piwebinars.co.uk/img/Profile_Icon.png" width="30px;">Profile</a></li>
+    </ul>
     </div>
-  <div class="row footer desktop">
-      <img height="60" style="position:relative;top:0;display: inline; float: left;" src="https://app.piwebinars.co.uk/img/logo-text.png" alt="logo"></img>
-   
-    <li class="li"><a class="a" href="/index.html"><img src="https://app.piwebinars.co.uk/img/Home_Icon.png" width="40px;">Home</a></li>
-      <li class="li"><a class="a" href="./search.html"><img src="https://app.piwebinars.co.uk/img/Search_Icon.png" width="40px;">Search</a></li>
-    <li class="li"><a class="a" href="./upload.html"><img src="https://app.piwebinars.co.uk/img/Upload_Icon.png" width="40px;">Upload</a></li>
-    <li class="li"><a class="a" href="./profile.html"><img src="https://app.piwebinars.co.uk/img/Profile_Icon.png" width="40px;">Profile</a></li>
-    </div>
-</nav>    
-  
-  <h2>Upload a Webinar</h2><br><br>
-  <div class="error_log" id="error_log"></div>
-   
- <form style="text-align: left; padding:5px;" action="/upload" method="POST" id="form">
-  <label for="videoUpload">Video :</label>
-   <input  type="file" id="videoUpload" name="videoUpload"></input></br>
- <label for="file_type">Select Filetype:</label>
-  <select id="file_type" style="margin-bottom: 10px; margin-top: 10px;">
-    <option class="list" value="MP4">MP4</option><br/>
-    <option class="list" value="MOV">MOV</option><br/>
-  </select><br/>
+    <div class="row footer desktop">
+      <img height="60" onclick="location.href='/'" style="position:relative;top:0;display: inline; float: left;" src="https://app.piwebinars.co.uk/img/logo-text.png" alt="logo"></img>
 
-  <label for="thumbnailUpload">Thumbnail:</label>
-  <input type="file" id="thumbnailUpload" name="thumbnailUpload" style="margin-bottom: 20px;"></input></br>
-  
-<label for="title">Add a Title:</label></br>
-  <input style="width: 100%; margin-bottom: 10px;"  type="text" id="title" name="title" required>
-
-<label for="description">Add a Description:</label></br>
-  <input style="width: 100%; height: 50px; margin-bottom: 10px;" name="description" type="text" id="description">
-
-<label for="price">Set a Price:</label></br>
-  <input style="width: 100%; margin-bottom: 10px;"  type="number" id="price" name="amount">
-
-<a id="priceGuide" onclick="openModal7()">See Price Guide</a>
-<br><br>
-
- <label>Choose a Category:</label>
-  <select id="category">
-    <option class="list" value="none"  name="category">None</option><br/>
-    <option class="list" value="cryptocurrency"  name="category">Cryptocurrency</option><br/>
-    <option class="list" value="education"  name="category">Eduction</option><br/>
-    <option class="list" value="fitness"  name="category">Fitness</option><br/>
-    <option class="list" value="food"  name="category">Food</option><br/>
-    <option class="list" value="history"  name="category">History</option><br/>
-    <option class="list" value="money"  name="category">Money</option><br/>
-    <option class="list" value="nature"  name="category">Nature</option><br/>
-    <option class="list" value="pi-network"  name="category">Pi Network</option><br/>
-    <option class="list" value="politics"  name="category">Politics</option><br/>
-    <option class="list" value="sports"  name="category">Sports</option><br/>
-    <option class="list" value="technology"  name="category">Technology</option><br/>
-  </select>
-
-<div style="text-align: left; margin-top: 20px;">
-  <input type="checkbox" id="certify" required>
-  <label for="certify"> I certify that I own this content</label></br></div><br/>
-
-  <label for="upload_btn"></label>
-<input style="text-align: center" type="button" value="Upload" id="upload_btn"></input>
-</form>
-
-<br/><br/><br/>
-
-<div class="modal" id="modal7">
-      <div class="modal-dialog">
-        <header class="modal-header">
-          Price Guide:
-          <button class="close-modal" onclick="closeModal7()">✕</button>
-        </header>
-          <section class="modal-content">
-            <table>
-              <tr>
-                <th>Webinar Length</th>
-                <th>Recommended Price</th>
-              </tr>
-              <tr>
-                <th>5-10mins</th>
-                <th>2Pi</th>
-              </tr>
-              <tr>
-                <th>10-20mins</th>
-                <th>5Pi</th>
-              </tr>
-              <tr>
-                <th>20-40mins</th>
-                <th>8Pi</th>
-              </tr>
-              <tr>
-                <th>40-60mins</th>
-                <th>10Pi</th>
-              </tr>
-            </table>
-          </section>
-        </div>
+      <div style="float:right">
+        <li class="li"><a class="a" href="/index.html"><img src="https://app.piwebinars.co.uk/img/Home_Icon.png" width="40px;">Home</a></li>
+        <li class="li"><a class="a" href="./search.html"><img src="https://app.piwebinars.co.uk/img/Search_Icon.png" width="40px;">Search</a></li>
+        <li class="li"><a class="a" href="./upload.html"><img src="https://app.piwebinars.co.uk/img/Upload_Icon.png" width="40px;">Upload</a></li>
+        <li class="li"><a class="a" href="./profile.html"><img src="https://app.piwebinars.co.uk/img/Profile_Icon.png" width="40px;">Profile</a></li>
       </div>
+    </div>
+  </nav>
 
-<script src="https://sdk.minepi.com/pi-sdk.js"></script>
-<script>
-  Pi.init({ version: "2.0" });
-</script>
-<script
-  src="https://kit.fontawesome.com/3aea44e36d.js"
-  crossorigin="anonymous"
-></script>
-<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-<script src="../js/pages/authentication.js"></script>
-<script src="/js/routes.js"></script>
-<!-- <script src="/js/pipayment.js"></script> -->
+  <h2 style="margin-bottom: -30px;">Upload a Webinar</h2><br><br>
+  <div class="error_log" id="error_log" style="max-width: 500px; margin: auto;"></div><br>
+
+  <form style="text-align: left; padding:5px; max-width: 500px; margin: auto;" action="/upload" method="POST" id="form">
+    <label for="videoUpload">Video :</label>
+    <input type="file" id="videoUpload" name="videoUpload"></input><br><br>
+
+    <label for="file_type">Select Filetype:</label>
+    <select id="file_type" style="margin-bottom: 10px; margin-top: 10px;">
+      <option class="list" value="MP4">MP4</option><br>
+      <option class="list" value="MOV">MOV</option><br>
+    </select><br><br>
+
+    <label for="thumbnailUpload">Thumbnail:</label>
+    <input type="file" id="thumbnailUpload" name="thumbnailUpload"></input></br><br>
+
+    <label for="title">Add a Title:</label>
+    <input id="title" style="width: 100%; margin-bottom: 10px;" type="text" name="title" required>
+    <br><br>
+
+    <label for="description">Add a Description:</label></br>
+    <input style="width: 100%; height: 50px; margin-bottom: 10px;" name="description" type="text" id="description">
+    <br><br>
+
+    <label for="price">Set a Price:</label></br>
+    <input style="width: 100%; margin-bottom: 10px;" type="number" id="price" name="amount">
+
+    <a id="priceGuide" onclick="openModal7()">See Price Guide</a>
+    <br><br>
+
+    <label>Choose a Category:</label>
+    <select id="category">
+      <option class="list" value="none" name="category">None</option><br />
+      <option class="list" value="cryptocurrency" name="category">Cryptocurrency</option><br />
+      <option class="list" value="education" name="category">Education</option><br />
+      <option class="list" value="fitness" name="category">Fitness</option><br />
+      <option class="list" value="food" name="category">Food</option><br />
+      <option class="list" value="history" name="category">History</option><br />
+      <option class="list" value="money" name="category">Money</option><br />
+      <option class="list" value="nature" name="category">Nature</option><br />
+      <option class="list" value="pi-network" name="category">Pi Network</option><br />
+      <option class="list" value="politics" name="category">Politics</option><br />
+      <option class="list" value="sports" name="category">Sports</option><br />
+      <option class="list" value="technology" name="category">Technology</option><br />
+    </select>
+
+    <div style="text-align: left; margin-top: 20px;">
+      <input type="checkbox" id="certify" required>
+      <label for="certify"> I certify that I own this content</label></br>
+    </div><br />
+
+    <label for="upload_btn"></label>
+    <input style="text-align: center" type="button" value="Upload" id="upload_btn"></input>
+  </form>
+
+  <br /><br /><br />
+
+  <div class="modal" id="modal7">
+    <div class="modal-dialog">
+      <header style="color: #36454F" class="modal-header">
+        Price Guide:
+        <button class="close-modal" onclick="closeModal7()">✕</button>
+      </header>
+      <section class="modal-content">
+        <table>
+          <tr>
+            <th>Webinar Length</th>
+            <th>Recommended Price</th>
+          </tr>
+          <tr>
+            <th>5-10mins</th>
+            <th>2Pi</th>
+          </tr>
+          <tr>
+            <th>10-20mins</th>
+            <th>5Pi</th>
+          </tr>
+          <tr>
+            <th>20-40mins</th>
+            <th>8Pi</th>
+          </tr>
+          <tr>
+            <th>40-60mins</th>
+            <th>10Pi</th>
+          </tr>
+        </table>
+      </section>
+    </div>
+  </div>
+
+  <script>
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const cat = urlParams.get('cat');
+    const selection = document.getElementById("category");
+    const title = document.getElementById("title");
+    if (cat) {
+      selection.value = cat;
+      title.value = "My " + cat + " webinar";
+    }
+  </script>
+
+  <script src="https://sdk.minepi.com/pi-sdk.js"></script>
+  <script>
+    Pi.init({
+      version: "2.0"
+    });
+  </script>
+  <script src="https://kit.fontawesome.com/3aea44e36d.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="../js/pages/authentication.js"></script>
+  <!-- <script src="/js/pipayment.js"></script> -->
 </body>
+
 </html>

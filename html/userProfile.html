@@ -1,84 +1,123 @@
 <!DOCTYPE html>
 <html>
-  <head>    
-    <!--CSS-->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/styles.css">
-    <link rel="icon" type="image/png" href="/img/logo.png">
-    
-    <!--Google Fonts-->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;700&display=swap" rel="stylesheet">
-    <title>PI Webinars || Profile</title>
-  </head>
-  <body>
-    <div>
-  <h1 >Pi Webinars</h1>
-  
-<nav class="footer" style="z-index: 100">
-  <ul class="ul">
-    <div class="mobile">
-      <li class="li"><a class="a" href="/index.html"><img src="https://app.piwebinars.co.uk/img/Home_Icon.png" width="30px;">Home</a></li>
-            <li class="li"><a class="a" href="./search.html"><img src="https://app.piwebinars.co.uk/img/Search_Icon.png" width="30px;">Search</a></li>
-      <li class="li"><a class="a authNav" href="./upload.html"><img src="https://app.piwebinars.co.uk/img/Upload_Icon.png" width="30px;">Upload</a></li>
-      <li class="li"><a class="a authNav" href="./profile.html"><img src="https://app.piwebinars.co.uk/img/Profile_Icon.png" width="30px;">Profile</a></li>
-    <li class="li"><a id="profile" class="a unAuthNav" href="./login.html"><img src="https://app.piwebinars.co.uk/img/Login_Icon.png" width="30px;">Login</a></li>
-      <li class="li"><a id="profile" class="a unAuthNav" href="./register.html"><img src="https://app.piwebinars.co.uk/img/Register_Icon.png" width="30px;">Register</a></li>
-  </ul>
-    </div>
-  <div class="row footer desktop">
-      <img height="60" style="position:relative;top:0;display: inline; float: left;" src="https://app.piwebinars.co.uk/img/logo-text.png" alt="logo"></img>
-   
-      <li class="li"><a class="a" href="/index.html"><img src="https://app.piwebinars.co.uk/img/Home_Icon.png" width="40px;">Home</a></li>
-        <li class="li"><a class="a" href="./search.html"><img src="https://app.piwebinars.co.uk/img/Search_Icon.png" width="40px;">Search</a></li>
-      <li class="li"><a class="a authNav" href="./upload.html"><img src="https://app.piwebinars.co.uk/img/Upload_Icon.png" width="40px;">Upload</a></li>
-      <li class="li"><a class="a authNav" href="./profile.html"><img src="https://app.piwebinars.co.uk/img/Profile_Icon.png" width="40px;">Profile</a></li>
-    <li class="li"><a id="profile" class="a unAuthNav" href="./login.html"><img src="https://app.piwebinars.co.uk/img/Login_Icon.png" width="40px;">Login</a></li>
-      <li class="li"><a id="profile" class="a unAuthNav" href="./register.html"><img src="https://app.piwebinars.co.uk/img/Register_Icon.png" width="40px;">Register</a></li>
-    </div>
-</nav>  
-  
+
+<head>
+  <!--CSS-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" id="dark">
+  <link rel="icon" type="image/png" href="/img/logo.png">
+
+  <!--Google Fonts-->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;700&display=swap" rel="stylesheet">
+  <title>Pi Webinars || Profile</title>
+</head>
+
+<body>
+  <div>
+    <h1>Pi Webinars</h1>
+
+    <nav class="footer" style="z-index: 100">
+      <div class="mobile">
+        <ul class="ul">
+          <li class="li">
+            <a class="a" href="/index.html"><img src="/img/Home_Icon.png" width="30px;">Home</a>
+          </li>
+          <li class="li">
+            <a class="a" href="/html/all-webinars.html"><img src="/img/Watch_Icon.png" width="30px;">Webinars</a>
+          </li>
+          <li class="li">
+            <a class="a authNav" href="/html/upload.html"><img src="/img/Upload_Icon.png" width="30px;">Upload</a>
+          </li>
+          <li class="li" style="">
+            <a class="a authNav" href="/html/profile.html"><img src="/img/Profile_Icon.png" width="30px;">Profile</a>
+          </li>
+          <li class="li" style="margin-left: -40px;"><a id="profile" class="a unAuthNav" href="/html/login.html"><img src="/img/Login_Icon.png" width="30px;">Login</a></li>
+          <li class="li" style=" border-right:none;"><a id="profile" class="a unAuthNav" href="/html/register.html"><img src="/img/Register_Icon.png" width="30px;">Register</a></li>
+        </ul>
+      </div>
+      <div class="row footer desktop">
+        <img height="60" onclick="location.href='/'" style="position:relative;top:0;display: inline; float: left;" src="https://app.piwebinars.co.uk/img/logo-text.png" alt="logo"></img>
+
+        <div style="float:right">
+          <li class="li"><a class="a" href="/index.html"><img src="https://app.piwebinars.co.uk/img/Home_Icon.png" width="40px;">Home</a></li>
+          <li class="li"><a class="a" href="./search.html"><img src="https://app.piwebinars.co.uk/img/Search_Icon.png" width="40px;">Search</a></li>
+          <li class="li"><a class="a authNav" href="./upload.html"><img src="https://app.piwebinars.co.uk/img/Upload_Icon.png" width="40px;">Upload</a></li>
+          <li class="li"><a id="profile" class="a unAuthNav" href="./login.html"><img src="https://app.piwebinars.co.uk/img/Login_Icon.png" width="40px;">Login</a></li>
+          <li class="li"><a id="profile" class="a unAuthNav" href="./register.html"><img src="https://app.piwebinars.co.uk/img/Register_Icon.png" width="40px;">Register</a></li>
+          <li class="li"><a class="a authNav" href="./profile.html"><img src="https://app.piwebinars.co.uk/img/Profile_Icon.png" width="40px;">Profile</a></li>
+        </div>
+      </div>
+    </nav>
+
     <div id="profile" class="profile">
-   <div class="avatar">
-     <img id="avatar" src="https://app.piwebinars.co.uk/img/avatar.png" onclick="alert('Custom avatar coming soon...')" alt="avatar"></img>
-     <div class="user-details">  
-       <h1 id="displayFullName"></h1>
-       <h3 id="displayUserHandle"></h3>
-     </div>
-    </div>
-    <div class="stats">
-      <div class="user_stats">
-        <p>Followers <span id="user_followers"></span></p>
-        <p>Following <span id="user_following"></span></p>
+      <div class="avatar">
+        <img id="avatar" src="https://app.piwebinars.co.uk/img/avatar.png" onclick="alert('Custom avatar coming soon...')" alt="avatar"></img>
+        <div class="user-details">
+          <h1 id="displayFullName"></h1>
+          <h3 style="display:inline-block" id="displayUserHandle"></h3>
+          <img style="display:inline-block" id="verified_icon"></img>
+        </div>
+      </div>
+      <div class="stats">
+        <div class="user_stats">
+          <p>Followers <span id="user_followers"></span></p>
+          <p>Following <span id="user_following"></span></p>
         </div>
         <div class="followBtn">
           <button type="submit" id="follow_btn">Follow</button>
         </div>
+      </div>
     </div>
-    </div>
-  
-  <div class="row mobile" style="margin-bottom: 50px;">
-    <img class="column" style="width: 25%; margin-right: 20px;" src="https://app.piwebinars.co.uk/img/your_webinars.png" alt="sub-logo"></img>
-  <h2 class="column">Webinars</h2>
-  <div id="webinar_container"></div>
-  </div>
 
-<div class="row desktop" style="margin-bottom: 50px; margin-right: 20vw;">
-    <img class="column" style="width: 100px; margin-right: 20px;" src="https://app.piwebinars.co.uk/img/your_webinars.png" alt="sub-logo"></img>
-  <h2 class="column">Webinars</h2>
-  <div id="webinar_container"></div>
-  </div>
+<!--     <div class="row mobile" style="margin-bottom: 50px;" onclick="location.href='/html/creatorsWebinars.html'">
+      <img class="column" style="width: 25%; margin-right: 20px;" src="https://app.piwebinars.co.uk/img/your_webinars.png" alt="sub-logo"></img>
+      <h2 class="column">Webinars</h2>
+      <div id="webinar_container"></div>
+    </div>
+
+    <div class="row desktop" style="margin-bottom: 50px; margin-right: 20vw;" onclick="location.href='/html/creatorsWebinars.html'">
+      <img class="column" style="width: 100px; margin-right: 20px;" src="https://app.piwebinars.co.uk/img/your_webinars.png" alt="sub-logo"></img>
+      <h2 class="column">Webinars</h2>
+      <div id="webinar_container"></div>
+    </div> -->
+
+    <div class="creatorSection"></div><br><br><br>
+
+    <!--   Floating tab -->
+    <div id="back-float">
+      <a class="fas fa-arrow-left" onclick="history.back()"></a>
+    </div>
 
     <br><br><br>
-</div>
+  </div>
 
+  <!--Scripts-->
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="/js/pages/authentication.js"></script>
+  <script src="/js/pages/all-webinars.js"></script>
+  <!--     <script src="/js/pipayment.js"></script> -->
+  <script src="https://kit.fontawesome.com/3aea44e36d.js" crossorigin="anonymous"></script>
 
-    <!--Scripts-->
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script src="/js/pages/authentication.js"></script>
-    <script src="/js/routes.js"></script>
-    <script src="/js/pipayment.js"></script>
-    <script src="https://kit.fontawesome.com/3aea44e36d.js" crossorigin="anonymous"></script>
+  <script>
+    renderCreatorsWebinars();
+  </script>
+  <style>
+    @media screen and (min-width: 620px) {
+      .creatorSection {
+        display: flex;
+        flex-wrap: wrap;
+      }
+      .title {
+        margin: 10px;
+      }
+      h2 {
+        margin-top: 80px;
+      }
+    }
+  </style>
 </body>
+
 </html>

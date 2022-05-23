@@ -5,9 +5,8 @@
   <!--Scripts-->
   <!--     <script src="/js/pipayment.js"></script> -->
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-  <script src="/js/pages/authentication.js"></script>
+<!--   <script src="/js/pages/authentication.js"></script> -->
   <script src="/js/pages/all-webinars.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   <script src="https://kit.fontawesome.com/3aea44e36d.js" crossorigin="anonymous"></script>
 
   <!--CSS-->
@@ -23,16 +22,26 @@
 </head>
 
 <body>
-  <!--   <h1>Pi Webinars</h1> -->
+  <h1>Pi Webinars</h1>
 
   <nav class="footer" style="z-index: 100">
-    <ul class="ul">
-      <div class="mobile">
-        <li class="li"><a class="a" href="/index.html"><img src="https://app.piwebinars.co.uk/img/Home_Icon.png" width="30px;">Home</a></li>
-        <li class="li"><a class="a" href="./all-webinars.html"><img src="https://www.piwebinars.co.uk/img/Watch_Icon.png" width="30px;">Webinars</a></li>
-        <li class="li"><a class="a" href="./upload.html"><img src="https://app.piwebinars.co.uk/img/Upload_Icon.png" width="30px;">Upload</a></li>
-        <li class="li"><a class="a" href="./profile.html"><img src="https://app.piwebinars.co.uk/img/Profile_Icon.png" width="30px;">Profile</a></li>
-    </ul>
+    <div class="mobile">
+      <ul class="ul">
+        <li class="li">
+          <a class="a" href="/index.html"><img src="/img/Home_Icon.png" width="30px;">Home</a>
+        </li>
+        <li class="li">
+          <a class="a" href="/html/all-webinars.html"><img src="/img/Watch_Icon.png" width="30px;">Webinars</a>
+        </li>
+        <li class="li">
+          <a class="a authNav" href="/html/upload.html"><img src="/img/Upload_Icon.png" width="30px;">Upload</a>
+        </li>
+        <li class="li" style="">
+          <a class="a authNav" href="/html/profile.html"><img src="/img/Profile_Icon.png" width="30px;">Profile</a>
+        </li>
+        <li class="li" style="margin-left: -40px;"><a id="profile" class="a unAuthNav" href="/html/login.html"><img src="/img/Login_Icon.png" width="30px;">Login</a></li>
+        <li class="li" style=" border-right:none;"><a id="profile" class="a unAuthNav" href="/html/register.html"><img src="/img/Register_Icon.png" width="30px;">Register</a></li>
+      </ul>
     </div>
     <div class="row footer desktop">
       <img height="60" onclick="location.href='/'" style="position:relative;top:0;display: inline; float: left;" src="https://app.piwebinars.co.uk/img/logo-text.png" alt="logo"></img>
@@ -53,26 +62,14 @@
     <a class="fas fa-arrow-left" onclick="history.back()"></a>
   </div>
 
-  <h2>Your Webinars:</h2>
+  <h2>Creator's Webinars:</h2>
 
-  <div class="yourSection"></div><br><br><br>
+  <div class="creatorSection"></div><br><br><br>
 
   <script>
-    renderYourWebinars();
+    renderCreatorsWebinars();
   </script>
-  <style>
-    @media screen and (min-width: 620px) {
-      .yourSection {
-        display: flex;
-      }
-      .title {
-        margin: 20px;
-      }
-      h2 {
-        margin-top: 80px;
-      }
-    }
-  </style>
+  <script src="/js/pages/authentication.js"></script>
   <br><br><br>
 </body>
 

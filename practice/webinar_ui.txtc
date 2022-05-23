@@ -1,0 +1,29 @@
+<!-- thumbSrc, thumbAlt, duration, userAvatar, userName, webinarTitle, userHandle,
+uploadDate -->
+<div class="webinar_content" data-webinar-id="webinar id">
+  <div class="thumbnail_content">
+    <img src="./img/pi-browser.png" alt="thumbnail name" />
+    <div class="duration_content">
+      <p class="duration_content__text">1:15:06</p>
+    </div>
+  </div>
+
+  <div class="information_content">
+    <div class="information_content__avatar">
+      <img src="./img/avatar.png" alt="User Avatar" class="avatar___user" />
+    </div>
+    <div class="information_content__details">
+      <h2>Webinar Title</h2>
+      <div class="details___content">
+        <span>User handle</span>
+        <span>Webinar Views</span>
+        <span>Upload Date</span>
+      </div>
+    </div>
+    <div class="information_content__options">
+      <p class="options___btn">:</p>
+    </div>
+  </div>
+</div>
+
+///

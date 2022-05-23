@@ -1,116 +1,78 @@
 <!DOCTYPE html>
 <html>
-  <head>      
-    <!--Scripts-->
-    <script src="/js/routes.js"></script>
-    <script src="/js/pipayment.js"></script>
-    <script src="/js/pages/authentication.js"></script>
-            
-    <!--CSS-->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/styles.css">
-    <link rel="icon" type="image/png" href="/img/logo.png">
-    
-    <!--Google Fonts-->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;700&display=swap" rel="stylesheet">
-  </head>
-  <body>
-  <h1 >Pi Webinars</h1>
-  
-<nav class="footer" style="z-index: 100">
-  <ul class="ul">
-    <div class="mobile">
-      <li class="li"><a class="a" href="/index.html"><img src="https://app.piwebinars.co.uk/img/Home_Icon.png" width="30px;">Home</a></li>
-      <li class="li"><a class="a" href="./all-webinars.html"><img src="https://www.piwebinars.co.uk/img/Watch_Icon.png" width="30px;">Webinars</a></li>
-      <li class="li"><a class="a" href="./upload.html"><img src="https://app.piwebinars.co.uk/img/Upload_Icon.png" width="30px;">Upload</a></li>
-      <li class="li"><a class="a" href="./profile.html"><img src="https://app.piwebinars.co.uk/img/Profile_Icon.png" width="30px;">Profile</a></li>
-  </ul>
+
+<head>
+  <!--Scripts-->
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <!--     <script src="/js/pipayment.js"></script> -->
+  <script src="/js/pages/authentication.js"></script>
+  <script src="/js/pages/all-webinars.js"></script>
+  <script src="https://kit.fontawesome.com/3aea44e36d.js" crossorigin="anonymous"></script>
+
+  <!--CSS-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" id="dark">
+  <link rel="icon" type="image/png" href="/img/logo.png">
+
+  <!--Google Fonts-->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <!--   <h1>Pi Webinars</h1> -->
+
+  <nav class="footer" style="z-index: 100">
+    <ul class="ul">
+      <div class="mobile">
+        <li class="li"><a class="a" href="/index.html"><img src="https://app.piwebinars.co.uk/img/Home_Icon.png" width="30px;">Home</a></li>
+        <li class="li"><a class="a" href="./all-webinars.html"><img src="https://www.piwebinars.co.uk/img/Watch_Icon.png" width="30px;">Webinars</a></li>
+        <li class="li"><a class="a" href="./upload.html"><img src="https://app.piwebinars.co.uk/img/Upload_Icon.png" width="30px;">Upload</a></li>
+        <li class="li"><a class="a" href="./profile.html"><img src="https://app.piwebinars.co.uk/img/Profile_Icon.png" width="30px;">Profile</a></li>
+    </ul>
     </div>
-  <div class="row footer desktop">
-      <img height="60" style="position:relative;top:0;display: inline; float: left;" src="https://app.piwebinars.co.uk/img/logo-text.png" alt="logo"></img>
-   
-      <li class="li"><a class="a" href="/index.html"><img src="https://app.piwebinars.co.uk/img/Home_Icon.png" width="40px;">Home</a></li>
-      <li class="li"><a class="a authNav" href="./upload.html"><img src="https://app.piwebinars.co.uk/img/Upload_Icon.png" width="30px;">Upload</a></li>
-      <li class="li"><a class="a" href="./search.html"><img src="https://app.piwebinars.co.uk/img/Search_Icon.png" width="40px;">Search</a></li>
-      <li class="li"><a class="a authNav" href="./profile.html"><img src="https://app.piwebinars.co.uk/img/Profile_Icon.png" width="40px;">Profile</a></li>
-    <li class="li"><a id="profile" class="a unAuthNav" href="./login.html"><img src="https://app.piwebinars.co.uk/img/Login_Icon.png" width="40px;">Login</a></li>
-      <li class="li"><a id="profile" class="a unAuthNav" href="./register.html"><img src="https://app.piwebinars.co.uk/img/Register_Icon.png" width="40px;">Register</a></li>
-    </div>
-</nav>     
-    
-    <a class="back_button" href="/html/profile.html">Back</a>
-    
-    <h2>Your Purchased Webinars:</h2>
-    
-    <script>
-   document.addEventListener("DOMContentLoaded", function(event) {      
-     const webinarPurchasesUploadsJson = axios.get("https://server.piwebinars.co.uk/profile");
-     const webinarPurchasesUploads = JSON.parse(webinarPurchasesUploadsJson);
-     showWebinars2(webinarPurchasesUploads);
-      }); 
-    
-    function showWebinars2(obj) {
-  const webinars = obj['purchases'];
+    <div class="row footer desktop">
+      <img height="60" onclick="location.href='/'" style="position:relative;top:0;display: inline; float: left;" src="https://app.piwebinars.co.uk/img/logo-text.png" alt="logo"></img>
 
-  for (let i = 0; i < webinars.length; i++) {
-    const renderDiv2 = document.createElement('article');
-    renderDiv2.className = "title";
-    const renderText2 = document.createElement('h3');
-    const renderDesc2 = document.createElement('p');
-    const renderImg2 = document.createElement('img');
-    renderImg2.className = "thumbnail";
-    const renderLikes2 = document.createElement('p');
-    renderLikes2.className = "likes";
-    const renderButton2 = document.createElement('button');
-    renderButton2.className = "watch_again";
-    renderButton2.onclick = function () {
-      var webinarId = webinars[i].post_id;
-      var creatorId = webinars[i].userId;
-      var categoryId = webinars[i].collection_name;
-      showWebinar(webinarId, creatorId, categoryId);
-};
-
-    renderText2.textContent = webinars[i].text;
-    renderDesc2.textContent = webinars[i].description;
-    renderImg2.imgContent = webinars[i].thumbnail;
-    renderLikes2.textContent = webinars[i].likes;
-    renderButton2.textContent = "Watch Again";
-
-    renderDiv2.appendChild(renderText2);
-    renderDiv2.appendChild(renderDesc2);
-    renderDiv2.appendChild(renderImg2);
-    renderDiv2.appendChild(renderLikes2);
-    renderDiv2.appendChild(renderButton2);
-
-    section.appendChild(renderDiv2);
-  }
-}
-    </script>
-    
-    <div class="modal" id="modal1">
-  <div class="modal-dialog">
-    <header class="modal-header">
-      Cinema
-      <button class="close-modal" aria-label="close modal" onclick="closeCinema()">✕</button>
-    </header>
-    <section class="modal-content">
-      <video id="usersPurchase"></video>
-      <div class="row">
-        <svg class="likePost column" style="margin-right: 10px;" viewBox="0 0 512 512" width="20px" title="thumbs-up">
-  <path d="M104 224H24c-13.255 0-24 10.745-24 24v240c0 13.255 10.745 24 24 24h80c13.255 0 24-10.745 24-24V248c0-13.255-10.745-24-24-24zM64 472c-13.255 0-24-10.745-24-24s10.745-24 24-24 24 10.745 24 24-10.745 24-24 24zM384 81.452c0 42.416-25.97 66.208-33.277 94.548h101.723c33.397 0 59.397 27.746 59.553 58.098.084 17.938-7.546 37.249-19.439 49.197l-.11.11c9.836 23.337 8.237 56.037-9.308 79.469 8.681 25.895-.069 57.704-16.382 74.757 4.298 17.598 2.244 32.575-6.148 44.632C440.202 511.587 389.616 512 346.839 512l-2.845-.001c-48.287-.017-87.806-17.598-119.56-31.725-15.957-7.099-36.821-15.887-52.651-16.178-6.54-.12-11.783-5.457-11.783-11.998v-213.77c0-3.2 1.282-6.271 3.558-8.521 39.614-39.144 56.648-80.587 89.117-113.111 14.804-14.832 20.188-37.236 25.393-58.902C282.515 39.293 291.817 0 312 0c24 0 72 8 72 81.452z" /></svg> 
-        <svg class="dislikePost column" viewBox="0 0 512 512" width="20px" title="thumbs-down">
-  <path d="M0 56v240c0 13.255 10.745 24 24 24h80c13.255 0 24-10.745 24-24V56c0-13.255-10.745-24-24-24H24C10.745 32 0 42.745 0 56zm40 200c0-13.255 10.745-24 24-24s24 10.745 24 24-10.745 24-24 24-24-10.745-24-24zm272 256c-20.183 0-29.485-39.293-33.931-57.795-5.206-21.666-10.589-44.07-25.393-58.902-32.469-32.524-49.503-73.967-89.117-113.111a11.98 11.98 0 0 1-3.558-8.521V59.901c0-6.541 5.243-11.878 11.783-11.998 15.831-.29 36.694-9.079 52.651-16.178C256.189 17.598 295.709.017 343.995 0h2.844c42.777 0 93.363.413 113.774 29.737 8.392 12.057 10.446 27.034 6.148 44.632 16.312 17.053 25.063 48.863 16.382 74.757 17.544 23.432 19.143 56.132 9.308 79.469l.11.11c11.893 11.949 19.523 31.259 19.439 49.197-.156 30.352-26.157 58.098-59.553 58.098H350.723C358.03 364.34 384 388.132 384 430.548 384 504 336 512 312 512z" />
-</svg>
+      <div style="float:right">
+        <li class="li"><a class="a" href="/index.html"><img src="https://app.piwebinars.co.uk/img/Home_Icon.png" width="40px;">Home</a></li>
+        <li class="li"><a class="a authNav" href="./upload.html"><img src="https://app.piwebinars.co.uk/img/Upload_Icon.png" width="30px;">Upload</a></li>
+        <li class="li"><a class="a" href="./search.html"><img src="https://app.piwebinars.co.uk/img/Search_Icon.png" width="40px;">Search</a></li>
+        <li class="li"><a class="a authNav" href="./profile.html"><img src="https://app.piwebinars.co.uk/img/Profile_Icon.png" width="40px;">Profile</a></li>
+        <li class="li"><a id="profile" class="a unAuthNav" href="./login.html"><img src="https://app.piwebinars.co.uk/img/Login_Icon.png" width="40px;">Login</a></li>
+        <li class="li"><a id="profile" class="a unAuthNav" href="./register.html"><img src="https://app.piwebinars.co.uk/img/Register_Icon.png" width="40px;">Register</a></li>
       </div>
-      <button onclick="followCreator()">Follow Creator</button>
-      <button onclick="comment()">Comment</button>
-      <div id="comments"></div>
-    </section>
+    </div>
+  </nav>
+
+  <!--   Floating tab -->
+  <div id="back-float">
+    <a class="fas fa-arrow-left" onclick="history.back()"></a>
   </div>
-</div>
-    
-    <br><br><br>
+
+  <h2>Purchases:</h2>
+
+  <div class="purchaseSection"></div><br><br><br>
+
+  <script>
+    renderPurchasedWebinars();
+  </script>
+  <style>
+    @media screen and (min-width: 620px) {
+      .purchaseSection {
+        display: flex;
+      }
+      .videoTitle {
+        margin: 20px;
+      }
+      h2 {
+        margin-top: 80px;
+      }
+    }
+  </style>
+  <br><br><br>
 </body>
+
 </html>

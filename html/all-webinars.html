@@ -1,104 +1,178 @@
-  <!DOCTYPE html>
+<!--   <!DOCTYPE html> -->
 <html>
-  <head>
-    <!--Scripts-->
-    <script src="https://sdk.minepi.com/pi-sdk.js"></script>
-    <script>
-      Pi.init({ version: "2.0" });
-    </script>
-            
-    <!--CSS-->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/styles.css">
-    <link rel="icon" type="image/png" href="/img/logo.png">
-    
-    <!--Google Fonts-->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;700&display=swap" rel="stylesheet">
-  </head>
 
-  <body>
+<head>
+  <!--Scripts-->
+  <script src="https://sdk.minepi.com/pi-sdk.js"></script>
+  <script>
+    Pi.init({
+      version: "2.0"
+    });
+  </script>
 
-    <h1>Pi Webinars</h1>
+  <!--CSS-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" id="dark">
+  <link rel="icon" type="image/png" href="/img/logo.png">
 
-    <nav class="footer" style="z-index: 100">
-  <ul class="ul">
+  <!--Google Fonts-->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;700&display=swap" rel="stylesheet">
+
+  <!--Adsense-->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7095325310319034" crossorigin="anonymous"></script>
+</head>
+
+<body>
+
+  <h1>Pi Webinars</h1>
+
+  <nav class="footer" style="z-index: 100">
     <div class="mobile">
-      <li class="li"><a class="a" href="/index.html"><img src="https://app.piwebinars.co.uk/img/Home_Icon.png" width="30px;">Home</a></li>
-      <li class="li" style="margin-left:-10px;"><a class="a" href="./search.html"><img src="https://app.piwebinars.co.uk/img/Search_Icon.png" width="30px;">Search</a></li>
-      <li class="li"><a class="a authNav" href="./upload.html"><img src="https://app.piwebinars.co.uk/img/Upload_Icon.png" width="30px;">Upload</a></li>
-      <li class="li" style="margin-left:-17px;"><a id="profile" class="a unAuthNav" href="./login.html"><img src="https://app.piwebinars.co.uk/img/Login_Icon.png" width="30px;">Login</a></li>
-          <li class="li" style="margin-left:-10px; border-right:none;"><a id="profile" class="a unAuthNav" href="./register.html"><img src="https://app.piwebinars.co.uk/img/Register_Icon.png" width="30px;">Register</a></li>
-      <li class="li" style="margin-left:-10px;"><a class="a authNav" href="./profile.html"><img src="https://app.piwebinars.co.uk/img/Profile_Icon.png" width="30px;">Profile</a></li>
-  </ul>
+      <ul class="ul">
+        <li class="li">
+          <a class="a" href="/index.html"><img src="/img/Home_Icon.png" width="30px;">Home</a>
+        </li>
+        <li class="li">
+          <a class="a" href="/html/all-webinars.html"><img src="/img/Watch_Icon.png" width="30px;">Webinars</a>
+        </li>
+        <li class="li">
+          <a class="a authNav" href="/html/upload.html"><img src="/img/Upload_Icon.png" width="30px;">Upload</a>
+        </li>
+        <li class="li" style="">
+          <a class="a authNav" href="/html/profile.html"><img src="/img/Profile_Icon.png" width="30px;">Profile</a>
+        </li>
+        <li class="li" style="margin-left: -40px;"><a id="profile" class="a unAuthNav" href="/html/login.html"><img src="/img/Login_Icon.png" width="30px;">Login</a></li>
+        <li class="li" style=" border-right:none;"><a id="profile" class="a unAuthNav" href="/html/register.html"><img src="/img/Register_Icon.png" width="30px;">Register</a></li>
+      </ul>
     </div>
-  <div class="row footer desktop">
-      <img height="60" style="position:relative;top:0;display: inline; float: left;" src="https://app.piwebinars.co.uk/img/logo-text.png" alt="logo"></img>
-   
-    <li class="li"><a class="a" href="/index.html"><img src="https://app.piwebinars.co.uk/img/Home_Icon.png" width="40px;">Home</a></li>
-    <li class="li"><a class="a" href="./search.html"><img src="https://app.piwebinars.co.uk/img/Search_Icon.png" width="40px;">Search</a></li>
-    <li class="li"><a class="a authNav" href="./upload.html"><img src="https://app.piwebinars.co.uk/img/Upload_Icon.png" width="40px;">Upload</a></li>
-    <li class="li"><a id="profile" class="a unAuthNav" href="./login.html"><img src="https://app.piwebinars.co.uk/img/Login_Icon.png" width="40px;">Login</a></li>
+    <div class="row footer desktop">
+      <img height="60" onclick="location.href='/'" style="position:relative;top:0;display: inline; float: left;" src="https://app.piwebinars.co.uk/img/logo-text.png" alt="logo"></img>
+
+      <div style="float:right">
+        <li class="li"><a class="a" href="/index.html"><img src="https://app.piwebinars.co.uk/img/Home_Icon.png" width="40px;">Home</a></li>
+        <li class="li"><a class="a" href="./search.html"><img src="https://app.piwebinars.co.uk/img/Search_Icon.png" width="40px;">Search</a></li>
+        <li class="li"><a class="a authNav" href="./upload.html"><img src="https://app.piwebinars.co.uk/img/Upload_Icon.png" width="40px;">Upload</a></li>
+        <li class="li"><a id="profile" class="a unAuthNav" href="./login.html"><img src="https://app.piwebinars.co.uk/img/Login_Icon.png" width="40px;">Login</a></li>
         <li class="li"><a id="profile" class="a unAuthNav" href="./register.html"><img src="https://app.piwebinars.co.uk/img/Register_Icon.png" width="40px;">Register</a></li>
-    <li class="li"><a class="a authNav" href="./profile.html"><img src="https://app.piwebinars.co.uk/img/Profile_Icon.png" width="40px;">Profile</a></li>
+        <li class="li"><a class="a authNav" href="./profile.html"><img src="https://app.piwebinars.co.uk/img/Profile_Icon.png" width="40px;">Profile</a></li>
+      </div>
     </div>
-</nav> 
+  </nav>
 
-    <div class="categories_container">
-      <h1 id="categories">Categories:</h1>
+  <input style="width: 80vw;" type="text" placeholder="Search Webinars.." id="search" class="searchbar">
+  <i style="margin-left: 5px;" class="fas fa-search" id="search" onclick="searchAllWebinars()"></i></br></br>
+  <i id="clear" style="display: none;" onclick="location.href='/html/all-webinars.html'">clear</i>
 
-      <i class="fas fa-filter"></i>
-  <select style="margin-bottom: 5px;" name="categories" id="select">
-    <option class="list" value="all">All</option><br />
-    <option class="list" value="cryptocurrency">Cryptocurrency</option><br />
-    <option class="list" value="diy">DIY</option><br />
-    <option class="list" value="education">Eduction</option><br />
-    <option class="list" value="finance">Finance</option><br />
-    <option class="list" value="fitness">Fitness</option><br />
-    <option class="list" value="food">Food</option><br />
-    <option class="list" value="gaming">Gaming</option><br />
-    <option class="list" value="history">History</option><br />
-    <option class="list" value="music">Music</option><br />
-    <option class="list" value="nature">Nature</option><br />
-    <option class="list" value="pets">Pets</option><br />
-    <option class="list" value="pinetwork">Pi Network</option><br />
-    <option class="list" value="politics">Politics</option><br />
-    <option class="list" value="sports">Sports</option><br />
-    <option class="list" value="technology">Technology</option><br />
-  </select><i style="margin-left: 5px;" class="fas fa-search" id="searchCat" onclick="searchCat()"></i><br />
-  
-  <i class="fas fa-filter"></i>
-  <input type="text" placeholder="Search Webinars.." id="search" class="searchbar">
-      <i style="margin-left: 5px;" class="fas fa-search" id="search" onclick="search()"></i></br></br>
+  <div class="postSection"></div>
 
-  <button onclick="openCinema()">Open Cinema...</button>
+  <!-- <iframe data-aa='1980365' src='//acceptable.a-ads.com/1980365' style='border:0px; padding:0; width:100%; overflow:hidden; background-color: transparent;'></iframe> -->
+  <!-- <i>Ad</i> -->
 
-  <div id="postSection"></div>
+  <!--   <a class="prev" onclick="plusSlides(-1)">❮</a>
+  <a class="next" onclick="plusSlides(1)">❯</a> -->
 
-  <div class="modal" id="modal1">
-    <div class="modal-dialog">
-      <header class="modal-header">
-        Cinema
-        <button class="close-modal" onclick="closeCinema()">✕</button>
-      </header>
-      <section class="modal-content">
-        <video id="usersPurchase" src="" controls></video>
-        <!--<iframe id="usersPurchase" src="" width="80%" allow="fullscreen" allowfullscreen></iframe>-->
-        <div class="row">
-          <svg class="likePost column" style="margin-right: 10px;" viewBox="0 0 512 512" width="20px" title="thumbs-up">
-            <path d="M104 224H24c-13.255 0-24 10.745-24 24v240c0 13.255 10.745 24 24 24h80c13.255 0 24-10.745 24-24V248c0-13.255-10.745-24-24-24zM64 472c-13.255 0-24-10.745-24-24s10.745-24 24-24 24 10.745 24 24-10.745 24-24 24zM384 81.452c0 42.416-25.97 66.208-33.277 94.548h101.723c33.397 0 59.397 27.746 59.553 58.098.084 17.938-7.546 37.249-19.439 49.197l-.11.11c9.836 23.337 8.237 56.037-9.308 79.469 8.681 25.895-.069 57.704-16.382 74.757 4.298 17.598 2.244 32.575-6.148 44.632C440.202 511.587 389.616 512 346.839 512l-2.845-.001c-48.287-.017-87.806-17.598-119.56-31.725-15.957-7.099-36.821-15.887-52.651-16.178-6.54-.12-11.783-5.457-11.783-11.998v-213.77c0-3.2 1.282-6.271 3.558-8.521 39.614-39.144 56.648-80.587 89.117-113.111 14.804-14.832 20.188-37.236 25.393-58.902C282.515 39.293 291.817 0 312 0c24 0 72 8 72 81.452z" />
-          </svg>
-          <svg class="dislikePost column" viewBox="0 0 512 512" width="20px" title="thumbs-down">
-            <path d="M0 56v240c0 13.255 10.745 24 24 24h80c13.255 0 24-10.745 24-24V56c0-13.255-10.745-24-24-24H24C10.745 32 0 42.745 0 56zm40 200c0-13.255 10.745-24 24-24s24 10.745 24 24-10.745 24-24 24-24-10.745-24-24zm272 256c-20.183 0-29.485-39.293-33.931-57.795-5.206-21.666-10.589-44.07-25.393-58.902-32.469-32.524-49.503-73.967-89.117-113.111a11.98 11.98 0 0 1-3.558-8.521V59.901c0-6.541 5.243-11.878 11.783-11.998 15.831-.29 36.694-9.079 52.651-16.178C256.189 17.598 295.709.017 343.995 0h2.844c42.777 0 93.363.413 113.774 29.737 8.392 12.057 10.446 27.034 6.148 44.632 16.312 17.053 25.063 48.863 16.382 74.757 17.544 23.432 19.143 56.132 9.308 79.469l.11.11c11.893 11.949 19.523 31.259 19.439 49.197-.156 30.352-26.157 58.098-59.553 58.098H350.723C358.03 364.34 384 388.132 384 430.548 384 504 336 512 312 512z" />
-          </svg>
-        </div>
-        <button onclick="followCreator();">Follow Creator</button>
-        <button onclick="comment()">Comment</button>
-        <div id="comments"></div>
-      </section>
-    </div>
+  <div style="text-align: center; color: #36454f;">
+    <i class="dot" onclick="currentSlide(1)">Crypto |</i>
+    <i class="dot" onclick="currentSlide(2)">Pi |</i>
+    <i class="dot" onclick="currentSlide(3)">Education |</i>
+    <i class="dot" onclick="currentSlide(4)">Fitness |</i>
+    <i class="dot" onclick="currentSlide(5)">Food |</i>
+    <i class="dot" onclick="currentSlide(6)">History |</i>
+    <i class="dot" onclick="currentSlide(7)">Finance |</i>
+    <i class="dot" onclick="currentSlide(8)">Nature |</i>
+    <i class="dot" onclick="currentSlide(9)">Politics |</i>
+    <i class="dot" onclick="currentSlide(10)">Tech |</i>
+    <i class="dot" onclick="currentSlide(11)">Sports |</i>
+    <i class="dot" onclick="currentSlide(12)">Other</i>
+  </div><br>
+
+  <div id="cryptocurrency" class="categoryBlock">
+    <h2>Cryptocurrency</h2>
+    <p1>Want to learn about the future of blockchain technology?</p1>
+    <div class="cryptocurrency"></div>
+    <a class="authNav" style="color: #b44afb; margin-top: 10px;" href="/html/upload.html?cat=cryptocurrency">Create</a>
   </div>
+
+  <div id="pinetwork" class="categoryBlock">
+    <h2>Pi Network</h2>
+    <p1>Pi Network is the blockchain that empowers this app and 30+ million Pioneers.</p1>
+    <div class="pinetwork"></div>
+    <a class="authNav" style="color: #b44afb; margin-top: 10px;" href="/html/upload.html?cat=pi-network">Create</a>
+  </div>
+
+  <div id="education" class="categoryBlock">
+    <h2>Education</h2>
+    <p1>This is your library of educational videos for all topics. Learn from scratch or intermediate/advanced levels.</p1>
+    <div class="education"></div>
+    <a class="authNav" style="color: #b44afb; margin-top: 10px;" href="/html/upload.html?cat=education">Create</a>
+  </div>
+
+  <div id="fitness" class="categoryBlock">
+    <h2>Fitness</h2>
+    <p1>Got into fitness over lockdown, or want to start now? Here's a great place to look.</p1>
+    <div class="fitness"></div>
+    <a class="authNav" style="color: #b44afb; margin-top: 10px;" href="/html/upload.html?cat=fitness">Create</a>
+  </div>
+
+  <div id="food" class="categoryBlock">
+    <h2>Food</h2>
+    <p1>Don't know how to cook, or want to master that great recipe? Browse our selection of easy-to-follow tutorials.</p1>
+    <div class="food"></div>
+    <a class="authNav" style="color: #b44afb; margin-top: 10px;" href="/html/upload.html?cat=food">Create</a>
+  </div>
+
+  <div id="history" class="categoryBlock">
+    <h2>History</h2>
+    <p1>History is what makes us what we are today. Find out about our heritage here.</p1>
+    <div class="history"></div>
+    <a class="authNav" style="color: #b44afb; margin-top: 10px;" href="/html/upload.html?cat=history">Create</a>
+  </div>
+
+  <div id="money" class="categoryBlock">
+    <h2>Finance</h2>
+    <p1>If financial freedom interests you or if you want to learn some vital money skills, have a look at our selection of finance webinars.</p1>
+    <div class="money"></div>
+    <a class="authNav" style="color: #b44afb; margin-top: 10px;" href="/html/upload.html?cat=money">Create</a>
+  </div>
+
+  <div id="nature" class="categoryBlock">
+    <h2>Nature</h2>
+    <p1>Find out more about the planet we live in and its other inhabitants here.</p1>
+    <div class="nature"></div>
+    <a class="authNav" style="color: #b44afb; margin-top: 10px;" href="/html/upload.html?cat=nature">Create</a>
+  </div>
+
+  <div id="politics" class="categoryBlock">
+    <h2>Politics</h2>
+    <p1>Learn about the way we run our countries here.</p1>
+    <div class="politics"></div>
+    <a class="authNav" style="color: #b44afb; margin-top: 10px;" href="/html/upload.html?cat=politics">Create</a>
+  </div>
+
+  <div id="technology" class="categoryBlock">
+    <h2>Technology</h2>
+    <p1>Technologies take many forms and are essential to the human race. Here's the place to learn about them.</p1>
+    <div class="technology"></div>
+    <a class="authNav" style="color: #b44afb; margin-top: 10px;" href="/html/upload.html?cat=technology">Create</a>
+  </div>
+
+  <div id="sports" class="categoryBlock">
+    <h2>Sports</h2>
+    <p1>Whether you play or just like to watch, here is a great place to be.</p1>
+    <div class="sports"></div>
+    <a class="authNav" style="color: #b44afb; margin-top: 10px;" href="/html/upload.html?cat=sports">Create</a>
+  </div>
+
+  <div id="none" class="categoryBlock">
+    <h2>Other</h2>
+    <p1>Browse our other webinars here:</p1>
+    <div class="none"></div>
+  </div>
+
+  <br><br><br>
 
   <div style="margin-top: 100px;" id="google_translate_element"></div>
   <script>
@@ -110,14 +184,193 @@
   </script>
   <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script> </br></br>
 
-<!--Scripts-->
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script src="/js/pages/authentication.js"></script>
-    <script src="/js/routes.js"></script>
-    <script src="/js/pipayment.js"></script>
-    <script
-      src="https://kit.fontawesome.com/3aea44e36d.js"
-      crossorigin="anonymous"
-    ></script>
-    </body>
+  <!--Scripts-->
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="/js/pages/authentication.js"></script>
+  <script src="/js/pages/all-webinars.js"></script>
+  <!--     <script src="/js/pipayment.js"></script> -->
+  <script src="https://kit.fontawesome.com/3aea44e36d.js" crossorigin="anonymous"></script>
+  <script>
+    renderCategoryWebinars();
+    let slideIndex = 1;
+    showSlides(slideIndex);
+    document.addEventListener("swiped-left", function(e) {
+      showSlides((slideIndex += 1));
+    });
+    document.addEventListener("swiped-right", function() {
+      showSlides((slideIndex -= 1));
+    });
+
+    function plusSlides(n) {
+      showSlides((slideIndex += n));
+    }
+
+    function currentSlide(n) {
+      showSlides((slideIndex = n));
+    }
+
+    function showSlides(n) {
+      let i;
+      let slides = document.getElementsByClassName("categoryBlock");
+      let dots = document.getElementsByClassName("dot");
+      if (n > slides.length) {
+        slideIndex = 1;
+      }
+      if (n < 1) {
+        slideIndex = slides.length;
+      }
+      for (i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";
+      }
+      for (i = 0; i < dots.length; i++) {
+        dots[i].className = dots[i].className.replace(" active", "");
+      }
+      slides[slideIndex - 1].style.display = "block";
+      dots[slideIndex - 1].className += " active";
+    }
+    (function(window, document) {
+      "use strict";
+      // patch CustomEvent to allow constructor creation (IE/Chrome)
+      if (typeof window.CustomEvent !== "function") {
+        window.CustomEvent = function(event, params) {
+          params = params || {
+            bubbles: false,
+            cancelable: false,
+            detail: undefined
+          };
+          var evt = document.createEvent("CustomEvent");
+          evt.initCustomEvent(
+            event,
+            params.bubbles,
+            params.cancelable,
+            params.detail
+          );
+          return evt;
+        };
+        window.CustomEvent.prototype = window.Event.prototype;
+      }
+      document.addEventListener("touchstart", handleTouchStart, false);
+      document.addEventListener("touchmove", handleTouchMove, false);
+      document.addEventListener("touchend", handleTouchEnd, false);
+      var xDown = null;
+      var yDown = null;
+      var xDiff = null;
+      var yDiff = null;
+      var timeDown = null;
+      var startEl = null;
+      /**
+       * Fires swiped event if swipe detected on touchend
+       * @param {object} e - browser event object
+       * @returns {void}
+       */
+      function handleTouchEnd(e) {
+        // if the user released on a different target, cancel!
+        if (startEl !== e.target) return;
+        var swipeThreshold = parseInt(
+          getNearestAttribute(startEl, "data-swipe-threshold", "20"),
+          10
+        ); // default 20px
+        var swipeTimeout = parseInt(
+          getNearestAttribute(startEl, "data-swipe-timeout", "500"),
+          10
+        ); // default 500ms
+        var timeDiff = Date.now() - timeDown;
+        var eventType = "";
+        var changedTouches = e.changedTouches || e.touches || [];
+        if (Math.abs(xDiff) > Math.abs(yDiff)) {
+          // most significant
+          if (Math.abs(xDiff) > swipeThreshold && timeDiff < swipeTimeout) {
+            if (xDiff > 0) {
+              eventType = "swiped-left";
+            } else {
+              eventType = "swiped-right";
+            }
+          }
+        } else if (Math.abs(yDiff) > swipeThreshold && timeDiff < swipeTimeout) {
+          if (yDiff > 0) {
+            eventType = "swiped-up";
+          } else {
+            eventType = "swiped-down";
+          }
+        }
+        if (eventType !== "") {
+          var eventData = {
+            dir: eventType.replace(/swiped-/, ""),
+            touchType: (changedTouches[0] || {}).touchType || "direct",
+            xStart: parseInt(xDown, 10),
+            xEnd: parseInt((changedTouches[0] || {}).clientX || -1, 10),
+            yStart: parseInt(yDown, 10),
+            yEnd: parseInt((changedTouches[0] || {}).clientY || -1, 10)
+          };
+          // fire `swiped` event event on the element that started the swipe
+          startEl.dispatchEvent(
+            new CustomEvent("swiped", {
+              bubbles: true,
+              cancelable: true,
+              detail: eventData
+            })
+          );
+          // fire `swiped-dir` event on the element that started the swipe
+          startEl.dispatchEvent(
+            new CustomEvent(eventType, {
+              bubbles: true,
+              cancelable: true,
+              detail: eventData
+            })
+          );
+        }
+        // reset values
+        xDown = null;
+        yDown = null;
+        timeDown = null;
+      }
+      /**
+       * Records current location on touchstart event
+       * @param {object} e - browser event object
+       * @returns {void}
+       */
+      function handleTouchStart(e) {
+        // if the element has data-swipe-ignore="true" we stop listening for swipe events
+        if (e.target.getAttribute("data-swipe-ignore") === "true") return;
+        startEl = e.target;
+        timeDown = Date.now();
+        xDown = e.touches[0].clientX;
+        yDown = e.touches[0].clientY;
+        xDiff = 0;
+        yDiff = 0;
+      }
+      /**
+       * Records location diff in px on touchmove event
+       * @param {object} e - browser event object
+       * @returns {void}
+       */
+      function handleTouchMove(e) {
+        if (!xDown || !yDown) return;
+        var xUp = e.touches[0].clientX;
+        var yUp = e.touches[0].clientY;
+        xDiff = xDown - xUp;
+        yDiff = yDown - yUp;
+      }
+      /**
+       * Gets attribute off HTML element or nearest parent
+       * @param {object} el - HTML element to retrieve attribute from
+       * @param {string} attributeName - name of the attribute
+       * @param {any} defaultValue - default value to return if no match found
+       * @returns {any} attribute value or defaultValue
+       */
+      function getNearestAttribute(el, attributeName, defaultValue) {
+        // walk up the dom tree looking for attributeName
+        while (el && el !== document.documentElement) {
+          var attributeValue = el.getAttribute(attributeName);
+          if (attributeValue) {
+            return attributeValue;
+          }
+          el = el.parentNode;
+        }
+        return defaultValue;
+      }
+    })(window, document);
+  </script>
+</body>
+
 </html>

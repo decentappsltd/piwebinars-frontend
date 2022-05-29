@@ -17,8 +17,6 @@
 
 <body>
   <div>
-    <h1>Pi Webinars</h1>
-
     <nav class="footer" style="z-index: 100">
       <ul class="ul">
         <div class="mobile">
@@ -39,10 +37,12 @@
     </div>
   </div>
   </nav>
+  
+  <div class="desktop"><br><br><br><br><br></div>
 
   <div id="profile" class="profile">
     <div class="avatar">
-      <img id="avatar" src="https://www.piwebinars.co.uk/img/avatar.png" alt="avatar"></img>
+      <img class="invert" id="avatar" src="https://www.piwebinars.co.uk/img/avatar.png" alt="avatar"></img>
       <div class="user-details">
         <h1 id="displayFullName"></h1>
         <h3 style="display:inline-block" id="displayUserHandle"></h3>
@@ -51,9 +51,9 @@
     </div>
     <div class="stats">
       <div class="user_stats">
-        <p>Followers <span id="my_followers"></span></p>
-        <p onclick="seeFollowing()"><u>Following <span id="my_following"></span></u></p>
-        <p>Credit <span id="my_credit"></span></p>
+        <p class="statStyle">Followers <span class="statStyle" id="my_followers"></span></p>
+        <p class="statStyle" onclick="seeFollowing()"><u>Following <span class="statStyle" id="my_following"></span></u></p>
+        <p class="statStyle">Credit <span class="statStyle" id="my_credit"></span></p>
       </div>
     </div>
     <a class="searchuserbuttonhref" href="./createProfile.html" id="create_profile">Create Profile</a>
@@ -70,37 +70,35 @@
 
   <div class="mobile" style="border-bottom: 1px solid #000; margin-bottom: 20px;">
     <div class="row" style="margin-bottom: 50px;" onclick="location.href='/html/your-webinars.html';">
-      <img class="column" style="width: 25%; margin-right: 20px;" src="https://www.piwebinars.co.uk/img/your_webinars.png" alt="sub-logo"></img>
+      <img class="column invert" style="width: 12%; margin-right: 20px;" src="https://www.piwebinars.co.uk/img/your_webinars.png" alt="sub-logo"></img>
       <h2 class="column">Your Webinars</h2>
     </div>
 
     <div class="row" style="margin-bottom: 50px;" onclick="location.href='/html/your-purchases.html';">
-      <img class="column" style="width: 25%; margin-right: 20px;" src="https://www.piwebinars.co.uk/img/purchases.png" alt="sub-logo"></img>
+      <img class="column invert" style="width: 12%; margin-right: 20px;" src="https://www.piwebinars.co.uk/img/purchases.png" alt="sub-logo"></img>
       <h2 class="column">Purchases</h2>
     </div>
 
     <div class="row" style="margin-bottom: 40px;" onclick="location.href='/html/wishlist.html';">
-      <img class="column" style="width: 25%; margin-right: 20px;" src="/img/wishlist.jpg" alt="sub-logo"></img>
+      <img class="column invert" style="width: 12%; margin-right: 20px;" src="/img/wishlist.jpg" alt="sub-logo"></img>
       <h2 class="column">Wishlist</h2>
     </div>
   </div>
 
   <div class="desktop">
     <div class="row" style="position: absolute; top: 200; left: 10vw;" onclick="location.href='/html/wishlist.html';">
-      <img class="column" style="width: 100px;" src="/img/wishlist.jpg" alt="sub-logo"></img>
+      <img class="column invert" style="width: 100px;" src="/img/wishlist.jpg" alt="sub-logo"></img>
       <h2 class="column">Wishlist</h2>
     </div>
 
     <div class="row" style="position: absolute; top: 200; left: 50vw;" onclick="location.href='/html/your-purchases.html';">
-      <img class="column" style="width: 100px;" src="https://www.piwebinars.co.uk/img/purchases.png" alt="sub-logo"></img>
+      <img class="column invert" style="width: 100px;" src="https://www.piwebinars.co.uk/img/purchases.png" alt="sub-logo"></img>
       <h2 class="column">Purchases</h2>
     </div>
   </div>
 
-  <br><br>
-
-  <div style="margin-top: 120px;" class="error_log desktop" id="error_log"></div>
-  <div class="error_log mobile" id="error_log"></div>
+  <div style="margin-top: 140px;" class="error_log desktop" id="error_log"></div>
+  <div class="mobile" id="error_log"></div>
 
   <br><br>
   <button class="logout" id="logout">Logout</button>

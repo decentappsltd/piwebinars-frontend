@@ -85,7 +85,7 @@ function buyWebinar() {
           paymentId: paymentId,
           txid: ""
         };
-        axios.post("https://piwebinarsdev.herokuapp.com/payment/approve", data);
+        axios.post("https://piwebinars-server.herokuapp.com/payment/approve", data);
       },
       onReadyForServerCompletion: async function (paymentId, txid) {
         var data = {
@@ -100,7 +100,7 @@ function buyWebinar() {
         };
         const authToken = localStorage.getItem("userSession");
         const response = await axios.post(
-          "https://piwebinarsdev.herokuapp.com/payment/complete",
+          "https://piwebinars-server.herokuapp.com/payment/complete",
           data,
           {
             headers: {

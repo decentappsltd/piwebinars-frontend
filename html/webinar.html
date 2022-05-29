@@ -61,7 +61,7 @@
       </div>
     </nav>
 
-    <di id="grid">
+    <div id="grid">
       <div class="grid_1" id="Video"></div><br>
 
       <div class="grid_2">
@@ -70,7 +70,7 @@
       </div><br>
 
       <div class="grid_3">
-      <div style="border-bottom: solid 1px #000; column-count: 2; width: 95%; margin-left: 2.5%; color: #36454f;">
+      <div style="border-bottom: solid 1px #000; column-count: 2; width: 95%; margin-left: 2.5%;">
         <div style="break-inside: avoid-column;" id="likes">
           <i class="fa fa-thumbs-down" id="dislikePost" aria-hidden="true"><span id="totalDislikes"></span></i>
           <i class="fa fa-thumbs-up" id="likeUnlikePost" aria-hidden="true"><span id="totalLikes"></span></i>
@@ -80,7 +80,7 @@
       </div><br><br>
 
       <div id="profileBox">
-        <img style="width: 50px; height: 50px; display: flex; align-items: left; flex-direction: row; margin-left: -10px;" src="https://www.piwebinars.co.uk/img/avatar.png" alt="avatar"></img>
+        <img class="invert" style="width: 50px; height: 50px; display: flex; align-items: left; flex-direction: row; margin-left: -10px;" src="https://www.piwebinars.co.uk/img/avatar.png" alt="avatar"></img>
         <u class="grid_3" id="name" style="display: flex;  align-items: center; flex-direction: row; margin-right: auto; font-weight: bold;" onclick="goToProfile();"></u><br>
         <div class="followBtn" style="display: flex; align-items: center; flex-direction: row; padding-right: 10px;">
           <button type="submit" id="follow_btn">Follow</button>
@@ -96,9 +96,9 @@
       <i id="wishlistButton" onclick="addWishlist()" class="fas fa-heart"></i>
       <br><br>
 
-      <div class="grid_4">
+      <div class="mobile">
         <iframe data-aa='1980365' src='//acceptable.a-ads.com/1980365' style='border:0px; padding:0; width:100%; height:100%; overflow:hidden; background-color: transparent;'></iframe>
-      </div>
+      </div><br>
 
       <div class="grid_5">
         <p2 style="border-top: solid 3px;">Comments:</p2><br><br>
@@ -114,7 +114,7 @@
 
   <!--   Floating tab -->
   <div id="back-float">
-    <a class="fas fa-arrow-left" onclick="history.back()"></a>
+    <a class="fas fa-arrow-left" style="color: #36454f;" onclick="history.back()"></a>
   </div>
 
   <br><br><br><br>
@@ -317,10 +317,6 @@
 
     #title {
       color: #fbb44a;
-    }
-
-    #description {
-      color: #36454f;
     }
 
     #paymentButton {

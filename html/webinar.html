@@ -101,13 +101,12 @@
       </div><br>
 
       <div class="grid_5">
-        <p2 style="border-top: solid 3px;">Comments:</p2><br><br>
+        <p2 style="border-top: solid 3px #b44afb;">Comments:</p2><br><br>
         <form class="commentField" id="commentForm">
           <input style="border: none;" id="text" type="text" placeholder="Write a comment.."></input>
           <input style="text-align: center;" type="button" value="Comment" id="postComment"></input>
         </form><br>
         <div id="commentsContainer"></div>
-        <br><br><br><br>
       </div>
 
   </div>
@@ -323,15 +322,18 @@
       display: inline-block;
       width: 75vw;
       height: 40px;
-      border: inset #b44afb 3px;
-      background: #4afbb4;
+      background: #b44afb;
+      background-image: linear-gradient(to right, #b44afb, #4afbb4);
+      color: #ffffff;
+      border: none;
+      border-radius: 2px;
     }
 
     #wishlistButton,
     #dislikePost,
     #likeUnlikePost {
       display: inline-block;
-      width: 50px;
+      width: 70px;
       font-size: 22px;
       color: #ffffff;
       background: none;
@@ -368,6 +370,15 @@
 
     #postComment {
       width: 20vw;
+      border: solid #b44afb;
+      border-radius: 2px;
+      background: #b44afb;
+      color: #ffffff;
+    }
+    
+    #commentsContainer {
+      max-height: 60vh;
+      overflow-y: scroll;
     }
 
     #text {

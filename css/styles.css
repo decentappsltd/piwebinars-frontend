@@ -8,7 +8,7 @@ body {
   font-family: "Ubuntu", sans-serif;
   background: #ffffff;
   /*   background-image: url("https://app.piwebinars.co.uk/img/background.png"); */
-  color: #b44afb;
+  color: #36454f;
   text-align: center;
 }
 h1 {
@@ -135,6 +135,9 @@ h2 {
   text-align: center;
   border-radius: 5px;
   margin-top: 0px;
+}
+h3 {
+  font-weight: normal;
 }
 span {
   display: block;
@@ -491,11 +494,19 @@ tr:nth-child(even) {
 }
 .title {
   border-bottom: solid 1px;
+  border-image: 
+    linear-gradient(
+      to right, 
+      #b44afb, 
+      #4afbb4
+    ) 1 0%;
   border-color: #4afbb4;
 /*   border-radius: 5px; */
   margin-top: 10px;
   padding-bottom: 10px;
   background: #ffffff;
+  color: #36454f;
+  font-weight: normal;
 }
 .title:first-child {
   border-top: solid 1px;
@@ -512,9 +523,15 @@ tr:nth-child(even) {
   height: 56.2vw;
 }
 .videoTitle {
-  border-bottom: solid;
+  border-bottom: solid 1px;
+  border-image: 
+    linear-gradient(
+      to right, 
+      #b44afb, 
+      #4afbb4
+    ) 1 0%;
   border-color: #4afbb4;
-  margin-top: 20px;
+  margin-top: 30px;
   background: #ffffff;
 }
 #stats {

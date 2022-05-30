@@ -832,9 +832,7 @@ if (followBtn !== null) {
 
 function renderComments(comments) {
   const commentsBox = document.querySelector("#commentsContainer");
-  console.log(comments);
   for (const comment of comments) {
-    console.log(comment);
     const commentDiv = document.createElement("div");
     const message = document.createElement("p");
     const name = document.createElement("p");

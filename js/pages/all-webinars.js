@@ -108,56 +108,56 @@ function renderAll(uploadsObj) {
     const renderPrice = document.createElement("p2");
     renderDiv.className = "title";
     renderName.onclick = function () {
-      localStorage.setItem("user_id", webinar[1].user);
+      localStorage.setItem("user_id", webinar.user);
       location.href = "/html/userProfile.html";
     };
     renderThumb.onclick = function () {
-      localStorage.setItem("post_id", webinar[1]._id);
-      localStorage.setItem("file_id", webinar[1].upload);
-      localStorage.setItem("user_id", webinar[1].user);
-      localStorage.setItem("video_id", webinar[1].video_id);
-      localStorage.setItem("webinarTitle", webinar[1].title);
-      localStorage.setItem("webinarDesc", webinar[1].description);
-      localStorage.setItem("webinarCat", webinar[1].category);
-      localStorage.setItem("webinarName", webinar[1].name);
-      localStorage.setItem("webinarLikes", webinar[1].likes.length);
-      localStorage.setItem("webinarDislikes", webinar[1].dislikes);
-      localStorage.setItem("webinarDate", webinar[1].dateAdded);
-      localStorage.setItem("webinarComments", webinar[1].comments);
-      localStorage.setItem("amount", webinar[1].amount);
+      localStorage.setItem("post_id", webinar._id);
+      localStorage.setItem("file_id", webinar.upload);
+      localStorage.setItem("user_id", webinar.user);
+      localStorage.setItem("video_id", webinar.video_id);
+      localStorage.setItem("webinarTitle", webinar.title);
+      localStorage.setItem("webinarDesc", webinar.description);
+      localStorage.setItem("webinarCat", webinar.category);
+      localStorage.setItem("webinarName", webinar.name);
+      localStorage.setItem("webinarLikes", webinar.likes.length);
+      localStorage.setItem("webinarDislikes", webinar.dislikes);
+      localStorage.setItem("webinarDate", webinar.dateAdded);
+      localStorage.setItem("webinarComments", webinar.comments);
+      localStorage.setItem("amount", webinar.amount);
       window.location.href = "/html/webinar.html";
     };
     renderTitle.onclick = function () {
-      localStorage.setItem("post_id", webinar[1]._id);
-      localStorage.setItem("file_id", webinar[1].upload);
-      localStorage.setItem("user_id", webinar[1].user);
-      localStorage.setItem("video_id", webinar[1].video_id);
-      localStorage.setItem("webinarTitle", webinar[1].title);
-      localStorage.setItem("webinarDesc", webinar[1].description);
-      localStorage.setItem("webinarCat", webinar[1].category);
-      localStorage.setItem("webinarName", webinar[1].name);
-      localStorage.setItem("webinarLikes", webinar[1].likes.length);
-      localStorage.setItem("webinarDislikes", webinar[1].dislikes);
-      localStorage.setItem("webinarDate", webinar[1].dateAdded);
-      localStorage.setItem("webinarComments", webinar[1].comments);
-      localStorage.setItem("amount", webinar[1].amount);
+      localStorage.setItem("post_id", webinar._id);
+      localStorage.setItem("file_id", webinar.upload);
+      localStorage.setItem("user_id", webinar.user);
+      localStorage.setItem("video_id", webinar.video_id);
+      localStorage.setItem("webinarTitle", webinar.title);
+      localStorage.setItem("webinarDesc", webinar.description);
+      localStorage.setItem("webinarCat", webinar.category);
+      localStorage.setItem("webinarName", webinar.name);
+      localStorage.setItem("webinarLikes", webinar.likes.length);
+      localStorage.setItem("webinarDislikes", webinar.dislikes);
+      localStorage.setItem("webinarDate", webinar.dateAdded);
+      localStorage.setItem("webinarComments", webinar.comments);
+      localStorage.setItem("amount", webinar.amount);
       window.location.href = "/html/webinar.html";
     };
-    renderTitle.textContent = webinar[1].title;
+    renderTitle.textContent = webinar.title;
     renderThumb.className = "thumbnail";
-    if (webinar[1].thumbnail == undefined) {
+    if (webinar.thumbnail == undefined) {
       renderThumb.src = "/img/empty.png";
     } else {
-      renderThumb.src = webinar[1].thumbnail;
+      renderThumb.src = webinar.thumbnail;
     }
     statDiv.className = "statDiv";
-    renderName.textContent = webinar[1].name;
+    renderName.textContent = webinar.name;
     renderName.className = "webinarName";
-    renderPrice.textContent = webinar[1].amount + " Pi";
+    renderPrice.textContent = webinar.amount + " Pi";
     renderPrice.className = "webinarPrice";
-    renderLike.textContent = "👍" + webinar[1].likes.length;
+    renderLike.textContent = "👍" + webinar.likes.length;
     renderLike.className = "webinarLike";
-    renderCategory.textContent = webinar[1].category;
+    renderCategory.textContent = webinar.category;
     renderCategory.className = "webinarCategory";
 
     renderDiv.appendChild(renderThumb);
@@ -185,56 +185,56 @@ function renderFeatured(uploadsObj) {
     const renderPrice = document.createElement("p2");
     renderDiv.className = "title";
     renderName.onclick = function () {
-      localStorage.setItem("user_id", webinar[1].user);
+      localStorage.setItem("user_id", webinar.user);
       location.href = "/html/userProfile.html";
     };
     renderThumb.onclick = function () {
-      localStorage.setItem("post_id", webinar[1]._id);
-      localStorage.setItem("file_id", webinar[1].upload);
-      localStorage.setItem("user_id", webinar[1].user);
-      localStorage.setItem("video_id", webinar[1].video_id);
-      localStorage.setItem("webinarTitle", webinar[1].title);
-      localStorage.setItem("webinarDesc", webinar[1].description);
-      localStorage.setItem("webinarCat", webinar[1].category);
-      localStorage.setItem("webinarName", webinar[1].name);
-      localStorage.setItem("webinarLikes", webinar[1].likes.length);
-      localStorage.setItem("webinarDislikes", webinar[1].dislikes);
-      localStorage.setItem("webinarDate", webinar[1].dateAdded);
-      localStorage.setItem("webinarComments", webinar[1].comments);
-      localStorage.setItem("amount", webinar[1].amount);
+      localStorage.setItem("post_id", webinar._id);
+      localStorage.setItem("file_id", webinar.upload);
+      localStorage.setItem("user_id", webinar.user);
+      localStorage.setItem("video_id", webinar.video_id);
+      localStorage.setItem("webinarTitle", webinar.title);
+      localStorage.setItem("webinarDesc", webinar.description);
+      localStorage.setItem("webinarCat", webinar.category);
+      localStorage.setItem("webinarName", webinar.name);
+      localStorage.setItem("webinarLikes", webinar.likes.length);
+      localStorage.setItem("webinarDislikes", webinar.dislikes);
+      localStorage.setItem("webinarDate", webinar.dateAdded);
+      localStorage.setItem("webinarComments", webinar.comments);
+      localStorage.setItem("amount", webinar.amount);
       window.location.href = "/html/webinar.html";
     };
     renderTitle.onclick = function () {
-      localStorage.setItem("post_id", webinar[1]._id);
-      localStorage.setItem("file_id", webinar[1].upload);
-      localStorage.setItem("user_id", webinar[1].user);
-      localStorage.setItem("video_id", webinar[1].video_id);
-      localStorage.setItem("webinarTitle", webinar[1].title);
-      localStorage.setItem("webinarDesc", webinar[1].description);
-      localStorage.setItem("webinarCat", webinar[1].category);
-      localStorage.setItem("webinarName", webinar[1].name);
-      localStorage.setItem("webinarLikes", webinar[1].likes.length);
-      localStorage.setItem("webinarDislikes", webinar[1].dislikes);
-      localStorage.setItem("webinarDate", webinar[1].dateAdded);
-      localStorage.setItem("webinarComments", webinar[1].comments);
-      localStorage.setItem("amount", webinar[1].amount);
+      localStorage.setItem("post_id", webinar._id);
+      localStorage.setItem("file_id", webinar.upload);
+      localStorage.setItem("user_id", webinar.user);
+      localStorage.setItem("video_id", webinar.video_id);
+      localStorage.setItem("webinarTitle", webinar.title);
+      localStorage.setItem("webinarDesc", webinar.description);
+      localStorage.setItem("webinarCat", webinar.category);
+      localStorage.setItem("webinarName", webinar.name);
+      localStorage.setItem("webinarLikes", webinar.likes.length);
+      localStorage.setItem("webinarDislikes", webinar.dislikes);
+      localStorage.setItem("webinarDate", webinar.dateAdded);
+      localStorage.setItem("webinarComments", webinar.comments);
+      localStorage.setItem("amount", webinar.amount);
       window.location.href = "/html/webinar.html";
     };
-    renderTitle.textContent = webinar[1].title;
+    renderTitle.textContent = webinar.title;
     renderThumb.className = "thumbnail";
-    if (webinar[1].thumbnail == undefined) {
+    if (webinar.thumbnail == undefined) {
       renderThumb.src = "/img/empty.png";
     } else {
-      renderThumb.src = webinar[1].thumbnail;
+      renderThumb.src = webinar.thumbnail;
     }
     statDiv.className = "statDiv";
-    renderName.textContent = webinar[1].name;
+    renderName.textContent = webinar.name;
     renderName.className = "webinarName";
-    renderPrice.textContent = webinar[1].amount + " Pi";
+    renderPrice.textContent = webinar.amount + " Pi";
     renderPrice.className = "webinarPrice";
-    renderLike.textContent = "👍" + webinar[1].likes.length;
+    renderLike.textContent = "👍" + webinar.likes.length;
     renderLike.className = "webinarLike";
-    renderCategory.textContent = webinar[1].category;
+    renderCategory.textContent = webinar.category;
     renderCategory.className = "webinarCategory";
 
     renderDiv.appendChild(renderThumb);
@@ -385,36 +385,36 @@ function renderCategories(uploadsObj) {
     const renderPrice = document.createElement("p2");
     renderDiv.className = "title";
     renderDiv.onclick = function () {
-      localStorage.setItem("post_id", webinar[1]._id);
-      localStorage.setItem("file_id", webinar[1].upload);
-      localStorage.setItem("user_id", webinar[1].user);
-      localStorage.setItem("video_id", webinar[1].video_id);
-      localStorage.setItem("webinarTitle", webinar[1].title);
-      localStorage.setItem("webinarDesc", webinar[1].description);
-      localStorage.setItem("webinarCat", webinar[1].category);
-      localStorage.setItem("webinarName", webinar[1].name);
-      localStorage.setItem("webinarLikes", webinar[1].likes.length);
-      localStorage.setItem("webinarDislikes", webinar[1].dislikes);
-      localStorage.setItem("webinarDate", webinar[1].dateAdded);
-      localStorage.setItem("webinarComments", webinar[1].comments);
-      localStorage.setItem("amount", webinar[1].amount);
+      localStorage.setItem("post_id", webinar._id);
+      localStorage.setItem("file_id", webinar.upload);
+      localStorage.setItem("user_id", webinar.user);
+      localStorage.setItem("video_id", webinar.video_id);
+      localStorage.setItem("webinarTitle", webinar.title);
+      localStorage.setItem("webinarDesc", webinar.description);
+      localStorage.setItem("webinarCat", webinar.category);
+      localStorage.setItem("webinarName", webinar.name);
+      localStorage.setItem("webinarLikes", webinar.likes.length);
+      localStorage.setItem("webinarDislikes", webinar.dislikes);
+      localStorage.setItem("webinarDate", webinar.dateAdded);
+      localStorage.setItem("webinarComments", webinar.comments);
+      localStorage.setItem("amount", webinar.amount);
       window.location.href = "/html/webinar.html";
     };
-    renderTitle.textContent = webinar[1].title;
+    renderTitle.textContent = webinar.title;
     renderThumb.className = "thumbnail";
-    if (webinar[1].thumbnail == undefined) {
+    if (webinar.thumbnail == undefined) {
       renderThumb.src = "/img/empty.png";
     } else {
-      renderThumb.src = webinar[1].thumbnail;
+      renderThumb.src = webinar.thumbnail;
     }
     statDiv.className = "statDiv";
-    renderName.textContent = webinar[1].name;
+    renderName.textContent = webinar.name;
     renderName.className = "webinarName";
-    renderPrice.textContent = webinar[1].amount + " Pi";
+    renderPrice.textContent = webinar.amount + " Pi";
     renderPrice.className = "webinarPrice";
-    renderLike.textContent = "👍" + webinar[1].likes.length;
+    renderLike.textContent = "👍" + webinar.likes.length;
     renderLike.className = "webinarLike";
-    renderCategory.textContent = webinar[1].category;
+    renderCategory.textContent = webinar.category;
     renderCategory.className = "webinarCategory";
     renderDiv.appendChild(renderThumb);
     renderDiv.appendChild(renderTitle);
@@ -423,29 +423,29 @@ function renderCategories(uploadsObj) {
     statDiv.appendChild(renderPrice);
     statDiv.appendChild(renderLike);
     renderDiv.appendChild(statDiv);
-    if (webinar[1].category == "Cryptocurrency") {
+    if (webinar.category == "Cryptocurrency") {
       cryptocurrency.appendChild(renderDiv);
-    } else if (webinar[1].category == "Technology") {
+    } else if (webinar.category == "Technology") {
       technology.appendChild(renderDiv);
-    } else if (webinar[1].category == "Fitness") {
+    } else if (webinar.category == "Fitness") {
       fitness.appendChild(renderDiv);
-    } else if (webinar[1].category == "Food") {
+    } else if (webinar.category == "Food") {
       food.appendChild(renderDiv);
-    } else if (webinar[1].category == "History") {
+    } else if (webinar.category == "History") {
       history.appendChild(renderDiv);
-    } else if (webinar[1].category == "Money") {
+    } else if (webinar.category == "Money") {
       money.appendChild(renderDiv);
-    } else if (webinar[1].category == "Nature") {
+    } else if (webinar.category == "Nature") {
       nature.appendChild(renderDiv);
-    } else if (webinar[1].category == "Pi Network") {
+    } else if (webinar.category == "Pi Network") {
       pinetwork.appendChild(renderDiv);
-    } else if (webinar[1].category == "Sports") {
+    } else if (webinar.category == "Sports") {
       sports.appendChild(renderDiv);
-    } else if (webinar[1].category == "Politics") {
+    } else if (webinar.category == "Politics") {
       politics.appendChild(renderDiv);
     } else if (
-      webinar[1].category == "Education" ||
-      webinar[1].category == "Eduction"
+      webinar.category == "Education" ||
+      webinar.category == "Eduction"
     ) {
       education.appendChild(renderDiv);
     } else {
@@ -550,9 +550,17 @@ async function renderCategoryWebinars() {
 }
 
 async function renderFeaturedWebinars() {
-  if (sessionStorage.getItem("featured") == undefined) {
+  if (sessionStorage.getItem("all") == undefined) {
     const auth_token = localStorage.getItem("userSession");
-    const webinarUploads = await axios.get(`${urlApi}/post/all`, {
+    const webinarUploads = await axios.get(`${urlApi}/post/featured`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${auth_token}`
+      }
+    });
+    console.log(webinarUploads);
+    renderFeatured(webinarUploads);
+    const allWebinars = await axios.get(`${urlApi}/post/all`, {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${auth_token}`
@@ -571,10 +579,9 @@ async function renderFeaturedWebinars() {
         webinarUploads.data.list[currentIndex]
       ];
     }
-    sessionStorage.setObj("featured", webinarUploads);
-    renderFeatured(webinarUploads);
+    sessionStorage.setObj("all", allWebinars);
   } else {
-    const webinarUploads = sessionStorage.getObj("featured");
+    const webinarUploads = sessionStorage.getObj("all");
     let currentIndex = webinarUploads.data.list.length,
       randomIndex;
     while (currentIndex != 0) {

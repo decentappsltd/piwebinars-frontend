@@ -6,7 +6,7 @@ async function auth() {
       txid: payment.transaction.txid
     };
     axios.post(
-      "https://piwebinars-server.herokuapp.com/payment/incomplete",
+      "https://piwebinars-server.onrender.com/payment/incomplete",
       data
     );
   }
@@ -29,7 +29,7 @@ async function piLogin() {
       uid: localStorage.uid
     };
     const response = await axios.post(
-      `https://piwebinars-server.herokuapp.com/login/pi`,
+      `https://piwebinars-server.onrender.com/login/pi`,
       config
     );
     if (response.status === 200 || response.status === 201) {
@@ -85,7 +85,7 @@ function buyWebinar() {
           paymentId: paymentId,
           txid: ""
         };
-        axios.post("https://piwebinars-server.herokuapp.com/payment/approve", data);
+        axios.post("https://piwebinars-server.onrender.com/payment/approve", data);
       },
       onReadyForServerCompletion: async function (paymentId, txid) {
         var data = {
@@ -119,7 +119,7 @@ function buyWebinar() {
           txid: txid
         };
         axios.post(
-          "https://piwebinars-server.herokuapp.com/payment/incomplete",
+          "https://piwebinars-server.onrender.com/payment/incomplete",
           data
         );
       },
@@ -129,7 +129,7 @@ function buyWebinar() {
           txid: txid
         };
         axios.post(
-          "https://piwebinars-server.herokuapp.com/payment/incomplete",
+          "https://piwebinars-server.onrender.com/payment/incomplete",
           data
         );
       }

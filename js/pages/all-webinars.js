@@ -1,4 +1,4 @@
-const urlApi = "https://piwebinars-server.herokuapp.com";
+const urlApi = "https://piwebinars-server.onrender.com";
 
 function filter() {
   const category = localStorage.filter;
@@ -25,7 +25,7 @@ function search() {
 
 function searchAllWebinars() {
   renderAllWebinars();
-  const postSection = document.querySelector(".postSection");
+  const postSection = document.querySelector(".webinarsSection");
   let input = document.getElementById("search").value;
   input = input.toLowerCase();
   let x = postSection.getElementsByClassName("title");
@@ -95,7 +95,12 @@ function renderPurchases(uploadsObj) {
 }
 
 function renderAll(uploadsObj) {
-  const postSection = document.querySelector(".postSection");
+  if (window.innerWidth > 619) {
+    var postSection = document.querySelector(".webinarsDesktopSection");
+  } else {
+    var postSection = document.querySelector(".webinarsSection");
+  }
+  console.log(uploadsObj);
   const webinars = uploadsObj["data"]["list"];
   for (const webinar of webinars) {
     const renderDiv = document.createElement("article");
@@ -172,7 +177,11 @@ function renderAll(uploadsObj) {
 }
 
 function renderFeatured(uploadsObj) {
-  const postSection = document.querySelector(".featuredSection");
+  if (window.innerWidth > 619) {
+    var postSection = document.querySelector(".webinarsDesktopSection");
+  } else {
+    var postSection = document.querySelector(".webinarsSection");
+  }
   const webinars = uploadsObj["data"]["list"];
   for (const webinar of webinars.slice(0, 24)) {
     const renderDiv = document.createElement("article");
@@ -463,8 +472,7 @@ Storage.prototype.getObj = function (key) {
 };
 
 //getting webinars
-async function renderAllWebinars() {
-  if (sessionStorage.getItem("all") == undefined) {
+async function renderMoreWebinars() {
     const auth_token = localStorage.getItem("userSession");
     const webinarUploads = await axios.get(`${urlApi}/post/all`, {
       headers: {
@@ -472,65 +480,29 @@ async function renderAllWebinars() {
         Authorization: `Bearer ${auth_token}`
       }
     });
-    let currentIndex = webinarUploads.data.list.length,
-      randomIndex;
-    while (currentIndex != 0) {
-      randomIndex = Math.floor(Math.random() * currentIndex);
-      currentIndex--;
-      [
-        webinarUploads.data.list[currentIndex],
-        webinarUploads.data.list[randomIndex]
-      ] = [
-        webinarUploads.data.list[randomIndex],
-        webinarUploads.data.list[currentIndex]
-      ];
-    }
-    sessionStorage.setObj("all", webinarUploads);
     renderAll(webinarUploads);
-  } else {
-    const webinarUploads = sessionStorage.getObj("all");
-    let currentIndex = webinarUploads.data.list.length,
-      randomIndex;
-    while (currentIndex != 0) {
-      randomIndex = Math.floor(Math.random() * currentIndex);
-      currentIndex--;
-      [
-        webinarUploads.data.list[currentIndex],
-        webinarUploads.data.list[randomIndex]
-      ] = [
-        webinarUploads.data.list[randomIndex],
-        webinarUploads.data.list[currentIndex]
-      ];
+    const webinars = sessionStorage.getObj("all");
+    for (const webinar of webinarUploads.data.list) {
+      webinars.data.list.push(webinar);
     }
-    renderAll(webinarUploads);
-  }
+    sessionStorage.setObj("all", webinars);
 }
 
-async function renderCategoryWebinars() {
-  if (sessionStorage.getItem("all") == undefined) {
+async function renderMoreCategoryWebinars(category) {
     const auth_token = localStorage.getItem("userSession");
-    const webinarUploads = await axios.get(`${urlApi}/post/all`, {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${auth_token}`
-      }
-    });
-    let currentIndex = webinarUploads.data.list.length,
-      randomIndex;
-    while (currentIndex != 0) {
-      randomIndex = Math.floor(Math.random() * currentIndex);
-      currentIndex--;
-      [
-        webinarUploads.data.list[currentIndex],
-        webinarUploads.data.list[randomIndex]
-      ] = [
-        webinarUploads.data.list[randomIndex],
-        webinarUploads.data.list[currentIndex]
-      ];
+    const data = {
+      category,
     }
-    sessionStorage.setObj("all", webinarUploads);
-    renderAll(webinarUploads);
-  } else {
+    const webinarUploads = await axios.get(`${urlApi}/post/category`, data);
+    renderCategory(webinarUploads);
+    const webinars = sessionStorage.getObj("all");
+    for (const webinar of webinarUploads.data.list) {
+      webinars.data.list.push(webinar);
+    }
+    sessionStorage.setObj("all", webinars);
+}
+
+function renderCategoryWebinars() {
     const webinarUploads = sessionStorage.getObj("all");
     let currentIndex = webinarUploads.data.list.length,
       randomIndex;
@@ -546,7 +518,6 @@ async function renderCategoryWebinars() {
       ];
     }
     renderCategories(webinarUploads);
-  }
 }
 
 async function renderFeaturedWebinars() {
@@ -558,14 +529,7 @@ async function renderFeaturedWebinars() {
         Authorization: `Bearer ${auth_token}`
       }
     });
-    console.log(webinarUploads);
     renderFeatured(webinarUploads);
-    const allWebinars = await axios.get(`${urlApi}/post/all`, {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${auth_token}`
-      }
-    });
     let currentIndex = webinarUploads.data.list.length,
       randomIndex;
     while (currentIndex != 0) {
@@ -579,7 +543,7 @@ async function renderFeaturedWebinars() {
         webinarUploads.data.list[currentIndex]
       ];
     }
-    sessionStorage.setObj("all", allWebinars);
+    sessionStorage.setObj("all", webinarUploads);
   } else {
     const webinarUploads = sessionStorage.getObj("all");
     let currentIndex = webinarUploads.data.list.length,

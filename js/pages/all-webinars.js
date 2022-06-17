@@ -94,7 +94,7 @@ function renderPurchases(uploadsObj) {
   }
 }
 
-function renderAll(uploadsObj) {
+function renderWebinars(uploadsObj) {
   if (window.innerWidth > 619) {
     var postSection = document.querySelector(".webinarsDesktopSection");
   } else {
@@ -108,87 +108,6 @@ function renderAll(uploadsObj) {
     const renderTitle = document.createElement("h3");
     const statDiv = document.createElement("div");
     const renderName = document.createElement("p2");
-    const renderCategory = document.createElement("p2");
-    const renderLike = document.createElement("p2");
-    const renderPrice = document.createElement("p2");
-    renderDiv.className = "title";
-    renderName.onclick = function () {
-      localStorage.setItem("user_id", webinar.user);
-      location.href = "/html/userProfile.html";
-    };
-    renderThumb.onclick = function () {
-      localStorage.setItem("post_id", webinar._id);
-      localStorage.setItem("file_id", webinar.upload);
-      localStorage.setItem("user_id", webinar.user);
-      localStorage.setItem("video_id", webinar.video_id);
-      localStorage.setItem("webinarTitle", webinar.title);
-      localStorage.setItem("webinarDesc", webinar.description);
-      localStorage.setItem("webinarCat", webinar.category);
-      localStorage.setItem("webinarName", webinar.name);
-      localStorage.setItem("webinarLikes", webinar.likes.length);
-      localStorage.setItem("webinarDislikes", webinar.dislikes);
-      localStorage.setItem("webinarDate", webinar.dateAdded);
-      localStorage.setItem("webinarComments", webinar.comments);
-      localStorage.setItem("amount", webinar.amount);
-      window.location.href = "/html/webinar.html";
-    };
-    renderTitle.onclick = function () {
-      localStorage.setItem("post_id", webinar._id);
-      localStorage.setItem("file_id", webinar.upload);
-      localStorage.setItem("user_id", webinar.user);
-      localStorage.setItem("video_id", webinar.video_id);
-      localStorage.setItem("webinarTitle", webinar.title);
-      localStorage.setItem("webinarDesc", webinar.description);
-      localStorage.setItem("webinarCat", webinar.category);
-      localStorage.setItem("webinarName", webinar.name);
-      localStorage.setItem("webinarLikes", webinar.likes.length);
-      localStorage.setItem("webinarDislikes", webinar.dislikes);
-      localStorage.setItem("webinarDate", webinar.dateAdded);
-      localStorage.setItem("webinarComments", webinar.comments);
-      localStorage.setItem("amount", webinar.amount);
-      window.location.href = "/html/webinar.html";
-    };
-    renderTitle.textContent = webinar.title;
-    renderThumb.className = "thumbnail";
-    if (webinar.thumbnail == undefined) {
-      renderThumb.src = "/img/empty.png";
-    } else {
-      renderThumb.src = webinar.thumbnail;
-    }
-    statDiv.className = "statDiv";
-    renderName.textContent = webinar.name;
-    renderName.className = "webinarName";
-    renderPrice.textContent = webinar.amount + " Pi";
-    renderPrice.className = "webinarPrice";
-    renderLike.textContent = "👍" + webinar.likes.length;
-    renderLike.className = "webinarLike";
-    renderCategory.textContent = webinar.category;
-    renderCategory.className = "webinarCategory";
-
-    renderDiv.appendChild(renderThumb);
-    renderDiv.appendChild(renderTitle);
-    statDiv.appendChild(renderName);
-    statDiv.appendChild(renderCategory);
-    statDiv.appendChild(renderPrice);
-    statDiv.appendChild(renderLike);
-    renderDiv.appendChild(statDiv);
-    postSection.appendChild(renderDiv);
-  }
-}
-
-function renderFeatured(uploadsObj) {
-  if (window.innerWidth > 619) {
-    var postSection = document.querySelector(".webinarsDesktopSection");
-  } else {
-    var postSection = document.querySelector(".webinarsSection");
-  }
-  const webinars = uploadsObj["data"]["list"];
-  for (const webinar of webinars.slice(0, 24)) {
-    const renderDiv = document.createElement("article");
-    const renderThumb = document.createElement("img");
-    const renderTitle = document.createElement("h3");
-    const statDiv = document.createElement("div");
-    const renderName = document.createElement("p1");
     const renderCategory = document.createElement("p2");
     const renderLike = document.createElement("p2");
     const renderPrice = document.createElement("p2");
@@ -480,7 +399,7 @@ async function renderMoreWebinars() {
         Authorization: `Bearer ${auth_token}`
       }
     });
-    renderAll(webinarUploads);
+    renderWebinars(webinarUploads);
     const webinars = sessionStorage.getObj("all");
     for (const webinar of webinarUploads.data.list) {
       webinars.data.list.push(webinar);
@@ -523,13 +442,13 @@ function renderCategoryWebinars() {
 async function renderFeaturedWebinars() {
   if (sessionStorage.getItem("all") == undefined) {
     const auth_token = localStorage.getItem("userSession");
-    const webinarUploads = await axios.get(`${urlApi}/post/featured`, {
+    const webinarUploads = await axios.get(`${urlApi}/post/all`, {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${auth_token}`
       }
     });
-    renderFeatured(webinarUploads);
+    renderWebinars(webinarUploads);
     let currentIndex = webinarUploads.data.list.length,
       randomIndex;
     while (currentIndex != 0) {
@@ -559,7 +478,7 @@ async function renderFeaturedWebinars() {
         webinarUploads.data.list[currentIndex]
       ];
     }
-    renderFeatured(webinarUploads);
+    renderWebinars(webinarUploads);
   }
 }
 

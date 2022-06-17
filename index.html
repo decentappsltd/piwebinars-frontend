@@ -65,7 +65,7 @@
 
     <div class="webinarsSection"></div>
   
-    <a class="back_button" style="border: none; margin-top: 10px;" onclick="renderMoreWebinars()">See more</a>
+    <div class="loader"></div>
     <br>
 
     <!--Modals-->
@@ -328,9 +328,11 @@
   <script>
     function loadMore() {
       if ((window.innerHeight + window.scrollY) >= document.body.scrollHeight) {
+        document.querySelector('.loader').style.display = 'block';
         renderMoreWebinars();
         const timeout = setTimeout(loadMore, 4000);
       } else {
+        document.querySelector('.loader').style.display = 'block';
         const timeout = setTimeout(loadMore, 1500);
       }
     }
@@ -342,6 +344,7 @@
       renderYourWebinars();
     } else {
       loadMore();
+      const timeout = setTimeout(loadMore, 4000);
     }
   </script>
   <style>

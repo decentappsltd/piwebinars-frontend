@@ -25,6 +25,53 @@ iframe {
   margin-right: auto;
   margin-top: 10px;
 }
+.editCommentModal{
+  position: relative;
+  bottom: 0;
+  z-index: 10000;
+  height: 100vh;
+  width: 100vw;
+  display: none;
+  justify-content: center;
+  align-items: center;
+}
+
+.editCommentModal .close_editModal p{
+  position: fixed;
+  top: 5%;
+  right: 5%;
+  transform: translate(-5%, -5%);
+  color: red;
+  font-weight: bolder;
+  font-size: 1.5rem;
+  background: white;
+  padding: .5rem;
+  cursor: pointer;
+  z-index: 100000;
+}
+
+.editCommentForm{
+  display: flex;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  flex-direction: column;
+  border-radius: .5rem;
+  padding: 3rem;
+  background-color: rgb(107, 106, 106);
+  box-shadow: 0 0 0 100vw rgba(0, 0, 0, 0.75);
+}
+
+.editCommentForm input {
+  margin-block: 2rem;
+  border: none;
+  padding: .5rem;
+  border-radius: .5rem;
+  background: rgb(0, 0, 0);
+  color: #ffffff;
+  font-weight: bold;
+}
 .profile {
   height: auto;
   width: 95%;

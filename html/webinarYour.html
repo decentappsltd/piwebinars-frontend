@@ -27,6 +27,16 @@
 </head>
 
 <body>
+  <div class="editCommentModal" id="editCommentModal">
+    <div class="close_editModal" id="editModalClose">
+      <p>Close</p>
+    </div>
+    <form class="editCommentForm" id="editCommentField">
+      <label for="editCommentInput">Edit Comment</label>
+      <input placeholder="Edit your comment" name="editComment" arial-label="Edit comment" id="editCommentInput">
+      <button id="editCommentBtn">Edit Comment</button>
+    </form>
+  </div>
   <div>
     <nav class="footer" style="z-index: 100">
       <div class="mobile">
@@ -91,7 +101,7 @@
       <div class="grid_5">
         <p2 style="border-top: solid 3px;">Comments:</p2><br><br>
         <form class="commentField" id="commentForm">
-          <input style="border: none;" id="text" type="number" placeholder="Write a comment.."></input>
+          <input style="border: none;" id="text" type="text" placeholder="Write a comment.."></input>
           <input style="text-align: center;" type="button" value="Comment" id="postComment"></input>
         </form>
         <div id="commentsContainer"></div>

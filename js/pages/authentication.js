@@ -616,6 +616,7 @@ if (logoutBtn !== null) {
           delete instance.defaults.headers.common["Authorization"];
           sessionStorage.removeItem("userSession");
           localStorage.removeItem("userSession");
+          localStorage.removeItem("currentUser");
           setTimeout(() => {
             window.location.href = "/";
           }, 2000);
@@ -825,8 +826,8 @@ if (followBtn !== null) {
 
 function renderComments(comments) {
   const commentsBox = document.querySelector("#commentsContainer");
+  const sess_user_id = sessionStorage.getItem("user");
   for (const comment of comments) {
-    const user_id = localStorage.getItem("user_id");
     const commentDiv = document.createElement("div");
     const interactiveDiv = document.createElement("div");
     const message = document.createElement("p");
@@ -870,9 +871,9 @@ function renderComments(comments) {
     commentDiv.appendChild(date);
     interactiveDiv.appendChild(likesCount);
     interactiveDiv.appendChild(likeComment);
-    if (comment.user === user_id) {
-      interactiveDiv.appendChild(deleteComment);
+    if (comment.user === sess_user_id) {
       interactiveDiv.appendChild(editComment);
+      interactiveDiv.appendChild(deleteComment);
     }
     commentsBox.appendChild(commentDiv);
     commentsBox.appendChild(message);

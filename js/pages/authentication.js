@@ -397,6 +397,36 @@ const userProfile = async () => {
       return errorMessage, error.response;
   }
 };
+
+const renderHomePage = async () => {
+  const profile = await instance.get(`/profile`);
+  if (profile.status === 200) {
+    const currentUserId = await profile.data.profile.user._id;
+    const profileId = "61eecd5342e7b51ab2291814";
+    localStorage.setItem("currentUser", currentUserId);
+    sessionStorage.setItem("currentUser", currentUserId);
+    const userNotFound = profile.data.profile.following.filter(
+      ({ user }) => user.toString() === profileId
+    );
+    if (userNotFound.length <= 0) {
+      const response = await instance.post(
+        `/profile/auth_follow_unfollow/${profileId}`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*",
+            Authorization: `Bearer ${authToken}`,
+          },
+          withCredentials: true,
+          credentials: "same-origin",
+        }
+      );
+      return "Success";
+    } else return null;
+  }
+};
+
+if (urlPath === "") renderHomePage();
 if (urlPath === "profile.html") myProfile();
 if (urlPath === "userProfile.html") userProfile();
 
@@ -826,8 +856,12 @@ if (followBtn !== null) {
 
 function renderComments(comments) {
   const commentsBox = document.querySelector("#commentsContainer");
-  const sess_user_id = sessionStorage.getItem("user");
-  for (const comment of comments) {
+  const sess_user_id = sessionStorage.getItem("currentUser");
+  const sortedComments = comments
+    .slice()
+    .sort((a, b) => new Date(b.dateAdded) - new Date(a.dateAdded));
+
+  for (const comment of sortedComments) {
     const commentDiv = document.createElement("div");
     const interactiveDiv = document.createElement("div");
     const message = document.createElement("p");
@@ -970,7 +1004,6 @@ function renderComments(comments) {
                   return "Success";
                 }
               } catch (error) {
-                console.log(error);
                 const errorMessage = error.response.data.message;
                 if (errorMessage && errorMessage.length > 0)
                   return errorMessage, error.response;

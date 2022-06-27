@@ -100,7 +100,6 @@ function renderWebinars(uploadsObj) {
   } else {
     var postSection = document.querySelector(".webinarsSection");
   }
-  console.log(uploadsObj);
   const webinars = uploadsObj["data"]["list"];
   for (const webinar of webinars) {
     const renderDiv = document.createElement("article");
@@ -234,7 +233,6 @@ function renderCreators(uploadsObj) {
 }
 
 function renderWishlist(webinars) {
-  console.log(webinars);
   const postSection = document.querySelector(".wishSection");
   for (const webinar of webinars) {
     const renderDiv = document.createElement("article");
@@ -392,51 +390,51 @@ Storage.prototype.getObj = function (key) {
 
 //getting webinars
 async function renderMoreWebinars() {
-    const auth_token = localStorage.getItem("userSession");
-    const webinarUploads = await axios.get(`${urlApi}/post/all`, {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${auth_token}`
-      }
-    });
-    renderWebinars(webinarUploads);
-    const webinars = sessionStorage.getObj("all");
-    for (const webinar of webinarUploads.data.list) {
-      webinars.data.list.push(webinar);
-    }
-    sessionStorage.setObj("all", webinars);
+  const auth_token = localStorage.getItem("userSession");
+  const webinarUploads = await axios.get(`${urlApi}/post/all`, {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${auth_token}`,
+    },
+  });
+  renderWebinars(webinarUploads);
+  const webinars = sessionStorage.getObj("all");
+  for (const webinar of webinarUploads.data.list) {
+    webinars.data.list.push(webinar);
+  }
+  sessionStorage.setObj("all", webinars);
 }
 
 async function renderMoreCategoryWebinars(category) {
-    const auth_token = localStorage.getItem("userSession");
-    const data = {
-      category,
-    }
-    const webinarUploads = await axios.get(`${urlApi}/post/category`, data);
-    renderCategory(webinarUploads);
-    const webinars = sessionStorage.getObj("all");
-    for (const webinar of webinarUploads.data.list) {
-      webinars.data.list.push(webinar);
-    }
-    sessionStorage.setObj("all", webinars);
+  const auth_token = localStorage.getItem("userSession");
+  const data = {
+    category,
+  };
+  const webinarUploads = await axios.get(`${urlApi}/post/category`, data);
+  renderCategory(webinarUploads);
+  const webinars = sessionStorage.getObj("all");
+  for (const webinar of webinarUploads.data.list) {
+    webinars.data.list.push(webinar);
+  }
+  sessionStorage.setObj("all", webinars);
 }
 
 function renderCategoryWebinars() {
-    const webinarUploads = sessionStorage.getObj("all");
-    let currentIndex = webinarUploads.data.list.length,
-      randomIndex;
-    while (currentIndex != 0) {
-      randomIndex = Math.floor(Math.random() * currentIndex);
-      currentIndex--;
-      [
-        webinarUploads.data.list[currentIndex],
-        webinarUploads.data.list[randomIndex]
-      ] = [
-        webinarUploads.data.list[randomIndex],
-        webinarUploads.data.list[currentIndex]
-      ];
-    }
-    renderCategories(webinarUploads);
+  const webinarUploads = sessionStorage.getObj("all");
+  let currentIndex = webinarUploads.data.list.length,
+    randomIndex;
+  while (currentIndex != 0) {
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex--;
+    [
+      webinarUploads.data.list[currentIndex],
+      webinarUploads.data.list[randomIndex],
+    ] = [
+      webinarUploads.data.list[randomIndex],
+      webinarUploads.data.list[currentIndex],
+    ];
+  }
+  renderCategories(webinarUploads);
 }
 
 async function renderFeaturedWebinars() {
@@ -445,8 +443,8 @@ async function renderFeaturedWebinars() {
     const webinarUploads = await axios.get(`${urlApi}/post/all`, {
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${auth_token}`
-      }
+        Authorization: `Bearer ${auth_token}`,
+      },
     });
     renderWebinars(webinarUploads);
     let currentIndex = webinarUploads.data.list.length,
@@ -456,10 +454,10 @@ async function renderFeaturedWebinars() {
       currentIndex--;
       [
         webinarUploads.data.list[currentIndex],
-        webinarUploads.data.list[randomIndex]
+        webinarUploads.data.list[randomIndex],
       ] = [
         webinarUploads.data.list[randomIndex],
-        webinarUploads.data.list[currentIndex]
+        webinarUploads.data.list[currentIndex],
       ];
     }
     sessionStorage.setObj("all", webinarUploads);
@@ -472,10 +470,10 @@ async function renderFeaturedWebinars() {
       currentIndex--;
       [
         webinarUploads.data.list[currentIndex],
-        webinarUploads.data.list[randomIndex]
+        webinarUploads.data.list[randomIndex],
       ] = [
         webinarUploads.data.list[randomIndex],
-        webinarUploads.data.list[currentIndex]
+        webinarUploads.data.list[currentIndex],
       ];
     }
     renderWebinars(webinarUploads);
@@ -483,15 +481,15 @@ async function renderFeaturedWebinars() {
 }
 
 async function renderYourWebinars() {
-    const auth_token = localStorage.getItem("userSession");
-    const webinarUploads = await axios.get(`${urlApi}/post`, {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${auth_token}`
-      }
-    });
-    sessionStorage.setObj("your", webinarUploads);
-    renderYour(webinarUploads);
+  const auth_token = localStorage.getItem("userSession");
+  const webinarUploads = await axios.get(`${urlApi}/post`, {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${auth_token}`,
+    },
+  });
+  sessionStorage.setObj("your", webinarUploads);
+  renderYour(webinarUploads);
 }
 
 async function renderCreatorsWebinars() {
@@ -500,8 +498,8 @@ async function renderCreatorsWebinars() {
   const webinarUploads = await axios.get(`${urlApi}/post/creator/${userId}`, {
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer ${auth_token}`
-    }
+      Authorization: `Bearer ${auth_token}`,
+    },
   });
   renderCreators(webinarUploads);
 }
@@ -511,22 +509,22 @@ async function renderPurchasedWebinars() {
   const webinarUploads = await axios.get(`${urlApi}/post/purchases`, {
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer ${auth_token}`
-    }
+      Authorization: `Bearer ${auth_token}`,
+    },
   });
   renderPurchases(webinarUploads);
 }
 
 async function renderWishlistWebinars() {
-    const auth_token = localStorage.getItem("userSession");
-    const webinarUploads = await axios.get(`${urlApi}/post/wishlist`, {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${auth_token}`
-      }
-    });
-    const webinars = webinarUploads.data.wishlist;
-    renderWishlist(webinars);
+  const auth_token = localStorage.getItem("userSession");
+  const webinarUploads = await axios.get(`${urlApi}/post/wishlist`, {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${auth_token}`,
+    },
+  });
+  const webinars = webinarUploads.data.wishlist;
+  renderWishlist(webinars);
 }
 
 async function addWishlist() {
@@ -549,19 +547,18 @@ async function addWishlist() {
     description: description,
     amount: amount,
     video_id: video_id,
-    name: name
+    name: name,
   };
   const config = {
-    post: post
+    post: post,
   };
   const auth_token = localStorage.getItem("userSession");
   const response = await axios.post(`${urlApi}/post/addWishlist`, config, {
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer ${auth_token}`
-    }
+      Authorization: `Bearer ${auth_token}`,
+    },
   });
-  console.log(response);
   if (response.status == 200) {
     alert(response.data.message);
     if (response.data.message === "Added to wishlist") {
@@ -585,8 +582,8 @@ async function comment() {
     {
       headers: {
         "Access-Control-Allow-Origin": "*",
-        Authorization: `Bearer ${authToken}`
-      }
+        Authorization: `Bearer ${authToken}`,
+      },
     }
   );
   if (response.status == 200) {
@@ -634,9 +631,8 @@ async function renderFollowing() {
   const profile = await axios.get(`${urlApi}/profile`, {
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer ${auth_token}`
-    }
+      Authorization: `Bearer ${auth_token}`,
+    },
   });
-  console.log(profile);
   render_following(profile);
 }

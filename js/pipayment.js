@@ -3,7 +3,7 @@ async function auth() {
   function onIncompletePaymentFound(payment) {
     var data = {
       paymentId: payment.identifier,
-      txid: payment.transaction.txid
+      txid: payment.transaction.txid,
     };
     axios.post(
       "https://piwebinars-server.onrender.com/payment/incomplete",
@@ -26,7 +26,7 @@ async function piLogin() {
     const config = {
       name: localStorage.piName,
       username: localStorage.piName,
-      uid: localStorage.uid
+      uid: localStorage.uid,
     };
     const response = await axios.post(
       `https://piwebinars-server.onrender.com/login/pi`,
@@ -52,7 +52,7 @@ async function piLogin() {
       alert("Welcome to Pi Webinars!");
     }
   } catch (error) {
-    console.log(error);
+    return error;
   }
 }
 
@@ -64,7 +64,7 @@ function buyWebinar() {
     window.open("pi://www.piwebinars.co.uk");
   }
   if (sessToken === null || authToken === null) {
-    location.href="/html/login.html";
+    location.href = "/html/login.html";
   }
   const userId = localStorage.getItem("user_id");
   const post_id = localStorage.getItem("post_id");
@@ -77,15 +77,18 @@ function buyWebinar() {
     {
       amount: price,
       memo: "Buy Webinar",
-      metadata: { paymentType: "webinar_purchase" }
+      metadata: { paymentType: "webinar_purchase" },
     },
     {
       onReadyForServerApproval: function (paymentId) {
         var data = {
           paymentId: paymentId,
-          txid: ""
+          txid: "",
         };
-        axios.post("https://piwebinars-server.onrender.com/payment/approve", data);
+        axios.post(
+          "https://piwebinars-server.onrender.com/payment/approve",
+          data
+        );
       },
       onReadyForServerCompletion: async function (paymentId, txid) {
         var data = {
@@ -96,7 +99,7 @@ function buyWebinar() {
           post_id: post_id,
           url: url,
           title: title,
-          price: price
+          price: price,
         };
         const authToken = localStorage.getItem("userSession");
         const response = await axios.post(
@@ -105,10 +108,10 @@ function buyWebinar() {
           {
             headers: {
               "Content-Type": "application/json",
-              Authorization: `Bearer ${authToken}`
+              Authorization: `Bearer ${authToken}`,
             },
             withCredentials: true,
-            credentials: "same-origin"
+            credentials: "same-origin",
           }
         );
         showWebinar(response);
@@ -116,7 +119,7 @@ function buyWebinar() {
       onCancel: function (paymentId, txid) {
         var data = {
           paymentId: paymentId,
-          txid: txid
+          txid: txid,
         };
         axios.post(
           "https://piwebinars-server.onrender.com/payment/incomplete",
@@ -126,13 +129,13 @@ function buyWebinar() {
       onError: function (paymentId, txid) {
         var data = {
           paymentId: paymentId,
-          txid: txid
+          txid: txid,
         };
         axios.post(
           "https://piwebinars-server.onrender.com/payment/incomplete",
           data
         );
-      }
+      },
     }
   );
 }

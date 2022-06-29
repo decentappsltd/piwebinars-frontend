@@ -860,7 +860,14 @@ function renderComments(comments) {
   const sortedComments = comments
     .slice()
     .sort((a, b) => new Date(b.dateAdded) - new Date(a.dateAdded));
+  const sortedCommentReplies = comments
+    .map(({ comment_reply }) => comment_reply)
+    .reverse()
+    .slice()
+    .sort((a, b) => new Date(b.dateAdded) - new Date(a.dateAdded));
 
+  // Comments
+  let index = 0;
   for (const comment of sortedComments) {
     const commentDiv = document.createElement("div");
     const interactiveDiv = document.createElement("div");
@@ -868,25 +875,54 @@ function renderComments(comments) {
     const name = document.createElement("p");
     const date = document.createElement("p");
     const avatar = document.createElement("img");
-    const likesCount = document.createElement("p");
-    const likeComment = document.createElement("button");
-    const editComment = document.createElement("button");
-    const deleteComment = document.createElement("button");
+    const counts = document.createElement("div");
+    const likesCount = document.createElement("span");
+    const repliesCount = document.createElement("span");
+    const commentSectionUl = document.createElement("ul");
+    const likeCommentLi = document.createElement("li");
+    const editCommentLi = document.createElement("li");
+    const replyCommentLi = document.createElement("li");
+    const deleteCommentLi = document.createElement("li");
+    const likeCommentI = document.createElement("i");
+    const editCommentI = document.createElement("i");
+    const replyCommentI = document.createElement("i");
+    const deleteCommentI = document.createElement("i");
     const numberOfLikes = comment.comment_likes.length;
+    const numberOfRepliesOnComment = comment.comment_reply.length;
 
     commentDiv.className = "commentDiv";
     likesCount.textContent = `${numberOfLikes} like${
       numberOfLikes <= 1 ? "" : "s"
     }`;
-    likeComment.setAttribute("class", "likeComment");
-    likeComment.textContent = "Like-unlike Comment";
-    likeComment.dataset.comment_id = comment._id;
-    editComment.setAttribute("class", "editComment");
-    editComment.textContent = "Edit Comment";
-    editComment.dataset.comment_id = comment._id;
-    deleteComment.setAttribute("class", "deleteComment");
-    deleteComment.textContent = "Delete Comment";
-    deleteComment.dataset.comment_id = comment._id;
+    repliesCount.textContent = `${numberOfRepliesOnComment} repl${
+      numberOfRepliesOnComment <= 1 ? "y" : "ies"
+    }`;
+    likeCommentI.setAttribute("class", "fa-solid fa-thumbs-up");
+    editCommentI.setAttribute("class", "fa-solid fa-pen-to-square");
+    replyCommentI.setAttribute("class", "fa-solid fa-comment-dots");
+    deleteCommentI.setAttribute("class", "fa-solid fa-trash-can");
+    likeCommentI.dataset.comment_id = comment._id;
+    editCommentI.dataset.comment_id = comment._id;
+    replyCommentI.dataset.comment_id = comment._id;
+    deleteCommentI.dataset.comment_id = comment._id;
+    likeCommentLi.setAttribute("class", "likeComment");
+    interactiveDiv.setAttribute("class", "interactiveDiv");
+    counts.setAttribute("class", "interactiveDivCounts");
+    likeCommentLi.dataset.comment_id = comment._id;
+    likeCommentLi.appendChild(likeCommentI);
+    likeCommentLi.insertAdjacentHTML("beforeend", ` Like`);
+    editCommentLi.setAttribute("class", "editComment");
+    editCommentLi.dataset.comment_id = comment._id;
+    editCommentLi.appendChild(editCommentI);
+    editCommentLi.insertAdjacentHTML("beforeend", ` Edit`);
+    replyCommentLi.setAttribute("class", "replyComment");
+    replyCommentLi.dataset.comment_id = comment._id;
+    replyCommentLi.appendChild(replyCommentI);
+    replyCommentLi.insertAdjacentHTML("beforeend", ` Reply`);
+    deleteCommentLi.setAttribute("class", "deleteComment");
+    deleteCommentLi.dataset.comment_id = comment._id;
+    deleteCommentLi.appendChild(deleteCommentI);
+    deleteCommentLi.insertAdjacentHTML("beforeend", ` Delete`);
     message.className = "commentText";
     name.className = "commentName";
     date.className = "commentDate";
@@ -903,19 +939,172 @@ function renderComments(comments) {
     commentDiv.appendChild(avatar);
     commentDiv.appendChild(name);
     commentDiv.appendChild(date);
-    interactiveDiv.appendChild(likesCount);
-    interactiveDiv.appendChild(likeComment);
+    counts.appendChild(likesCount);
+    counts.appendChild(repliesCount);
+    interactiveDiv.appendChild(counts);
+    commentSectionUl.appendChild(likeCommentLi);
+    commentSectionUl.appendChild(replyCommentLi);
     if (comment.user === sess_user_id) {
-      interactiveDiv.appendChild(editComment);
-      interactiveDiv.appendChild(deleteComment);
+      commentSectionUl.appendChild(editCommentLi);
+      commentSectionUl.appendChild(deleteCommentLi);
     }
+    interactiveDiv.appendChild(commentSectionUl);
     commentsBox.appendChild(commentDiv);
     commentsBox.appendChild(message);
     commentsBox.appendChild(interactiveDiv);
+    index++;
   }
+
+  // Comment Replies
+  // const commentReplyBox = document.createElement("div");
+  // for (const commentReplies of sortedCommentReplies[index]) {
+  //   const commentReplyDiv = document.createElement("div");
+  //   const interactiveReplyDiv = document.createElement("div");
+  //   const replyOnComment = document.createElement("p");
+  //   const replyName = document.createElement("p");
+  //   const replyDate = document.createElement("p");
+  //   const replyAvatar = document.createElement("img");
+  //   const replyLikesCount = document.createElement("p");
+  //   const replyCommentSectionUl = document.createElement("ul");
+  //   const likeCommentReplyLi = document.createElement("li");
+  //   const editCommentReplyLi = document.createElement("li");
+  //   const deleteCommentReplyLi = document.createElement("li");
+  //   const likeCommentReplyI = document.createElement("i");
+  //   const editCommentReplyI = document.createElement("i");
+  //   const deleteCommentReplyI = document.createElement("i");
+  //   const numberOfReplyLikes = commentReplies.comment_likes.length;
+
+  //   commentReplyDiv.className = "commentReplyDiv";
+  //   replyLikesCount.textContent = `${numberOfReplyLikes} like${
+  //     numberOfReplyLikes <= 1 ? "" : "s"
+  //   }`;
+  //   commentReplyBox.setAttribute("class", "commentReplyBox");
+  //   likeCommentReplyI.setAttribute("class", "fa-solid fa-thumbs-up");
+  //   editCommentReplyI.setAttribute("class", "fa-solid fa-pen-to-square");
+  //   deleteCommentReplyI.setAttribute("class", "fa-solid fa-trash-can");
+  //   likeCommentReplyI.dataset.comment_reply_id = commentReplies._id;
+  //   editCommentReplyI.dataset.comment_reply_id = commentReplies._id;
+  //   deleteCommentReplyI.dataset.comment_reply_id = commentReplies._id;
+  //   likeCommentReplyLi.setAttribute("class", "likeCommentReply");
+  //   interactiveReplyDiv.setAttribute("class", "interactiveReplyDiv");
+  //   likeCommentReplyLi.dataset.comment_reply_id = commentReplies._id;
+  //   likeCommentReplyLi.appendChild(likeCommentI);
+  //   likeCommentReplyLi.insertAdjacentHTML("beforeend", ` Like`);
+  //   editCommentReplyLi.setAttribute("class", "editCommentReply");
+  //   editCommentReplyLi.dataset.comment_reply_id = commentReplies._id;
+  //   editCommentReplyLi.appendChild(editCommentI);
+  //   editCommentReplyLi.insertAdjacentHTML("beforeend", ` Edit`);
+  //   deleteCommentReplyLi.setAttribute("class", "deleteCommentReply");
+  //   deleteCommentReplyLi.dataset.comment_reply_id = commentReplies._id;
+  //   deleteCommentReplyLi.appendChild(deleteCommentI);
+  //   deleteCommentReplyLi.insertAdjacentHTML("beforeend", ` Delete`);
+  //   replyOnComment.className = "commentText";
+  //   replyName.className = "commentName";
+  //   replyDate.className = "commentDate";
+  //   replyAvatar.className = "commentAvatar";
+  //   replyOnComment.textContent = commentReplies.text;
+  //   replyName.textContent = commentReplies.name;
+  //   replyDate.textContent = commentReplies.dateAdded.substring(0, 10);
+  //   if (commentReplies.avatar) {
+  //     replyAvatar.src = commentReplies.avatar;
+  //   } else {
+  //     replyAvatar.src = "/img/avatar.png";
+  //   }
+
+  //   commentReplyDiv.appendChild(replyAvatar);
+  //   commentReplyDiv.appendChild(replyName);
+  //   commentReplyDiv.appendChild(replyDate);
+  //   interactiveReplyDiv.appendChild(replyLikesCount);
+  //   replyCommentSectionUl.appendChild(likeCommentReplyLi);
+  //   replyCommentSectionUl.appendChild(replyCommentLi);
+  //   if (commentReplies.user === sess_user_id) {
+  //     replyCommentSectionUl.appendChild(editCommentReplyLi);
+  //     replyCommentSectionUl.appendChild(deleteCommentReplyLi);
+  //   }
+  //   interactiveReplyDiv.appendChild(replyCommentSectionUl);
+  //   commentReplyBox.appendChild(commentReplyDiv);
+  //   commentReplyBox.appendChild(replyOnComment);
+  //   commentReplyBox.appendChild(interactiveReplyDiv);
+  //   commentsBox.insertAdjacentHTML(commentReplyBox);
+  // }
+
+  // Comment Replies
+  // const commentReplyBox = document.createElement("div");
+  // for (const commentReplies of sortedCommentReplies) {
+  //   const commentReplyDiv = document.createElement("div");
+  //   const interactiveReplyDiv = document.createElement("div");
+  //   const replyOnComment = document.createElement("p");
+  //   const name = document.createElement("p");
+  //   const date = document.createElement("p");
+  //   const avatar = document.createElement("img");
+  //   const replyLikesCount = document.createElement("p");
+  //   const replyCommentSectionUl = document.createElement("ul");
+  //   const likeCommentReplyLi = document.createElement("li");
+  //   const editCommentReplyLi = document.createElement("li");
+  //   const deleteCommentReplyLi = document.createElement("li");
+  //   const likeCommentReplyI = document.createElement("i");
+  //   const editCommentReplyI = document.createElement("i");
+  //   const deleteCommentReplyI = document.createElement("i");
+  //   const numberOfReplyLikes = commentReplies.comment_likes.length;
+
+  //   commentReplyDiv.className = "commentReplyDiv";
+  //   replyLikesCount.textContent = `${numberOfReplyLikes} like${
+  //     numberOfReplyLikes <= 1 ? "" : "s"
+  //   }`;
+  //   commentReplyBox.setAttribute("class", "commentReplyBox");
+  //   likeCommentReplyI.setAttribute("class", "fa-solid fa-thumbs-up");
+  //   editCommentReplyI.setAttribute("class", "fa-solid fa-pen-to-square");
+  //   deleteCommentReplyI.setAttribute("class", "fa-solid fa-trash-can");
+  //   likeCommentReplyI.dataset.comment_reply_id = commentReplies._id;
+  //   editCommentReplyI.dataset.comment_reply_id = commentReplies._id;
+  //   deleteCommentReplyI.dataset.comment_reply_id = commentReplies._id;
+  //   likeCommentReplyLi.setAttribute("class", "likeCommentReply");
+  //   interactiveReplyDiv.setAttribute("class", "interactiveReplyDiv");
+  //   likeCommentReplyLi.dataset.comment_reply_id = commentReplies._id;
+  //   likeCommentReplyLi.appendChild(likeCommentI);
+  //   likeCommentReplyLi.insertAdjacentHTML("beforeend", ` Like`);
+  //   editCommentReplyLi.setAttribute("class", "editCommentReply");
+  //   editCommentReplyLi.dataset.comment_reply_id = commentReplies._id;
+  //   editCommentReplyLi.appendChild(editCommentI);
+  //   editCommentReplyLi.insertAdjacentHTML("beforeend", ` Edit`);
+  //   deleteCommentReplyLi.setAttribute("class", "deleteCommentReply");
+  //   deleteCommentReplyLi.dataset.comment_reply_id = commentReplies._id;
+  //   deleteCommentReplyLi.appendChild(deleteCommentI);
+  //   deleteCommentReplyLi.insertAdjacentHTML("beforeend", ` Delete`);
+  //   replyOnComment.className = "commentReplyText";
+  //   name.className = "commentReplyName";
+  //   date.className = "commentReplyDate";
+  //   avatar.className = "commentReplyAvatar";
+  //   replyOnComment.textContent = commentReplies.text;
+  //   name.textContent = commentReplies.name;
+  //   date.textContent = commentReplies.dateAdded.substring(0, 10);
+  //   if (commentReplies.avatar) {
+  //     avatar.src = commentReplies.avatar;
+  //   } else {
+  //     avatar.src = "/img/avatar.png";
+  //   }
+
+  //   commentReplyDiv.appendChild(avatar);
+  //   commentReplyDiv.appendChild(name);
+  //   commentReplyDiv.appendChild(date);
+  //   interactiveReplyDiv.appendChild(replyLikesCount);
+  //   replyCommentSectionUl.appendChild(likeCommentReplyLi);
+  //   replyCommentSectionUl.appendChild(replyCommentLi);
+  //   if (commentReplies.user === sess_user_id) {
+  //     replyCommentSectionUl.appendChild(editCommentReplyLi);
+  //     replyCommentSectionUl.appendChild(deleteCommentReplyLi);
+  //   }
+  //   interactiveReplyDiv.appendChild(replyCommentSectionUl);
+  //   commentReplyBox.appendChild(commentReplyDiv);
+  //   commentReplyBox.appendChild(replyOnComment);
+  //   commentReplyBox.appendChild(interactiveReplyDiv);
+  //   commentsBox.insertAdjacentHTML("beforeend", commentReplyBox);
+  // }
+
   const likeComments = document.querySelectorAll(".likeComment");
-  const deleteComments = document.querySelectorAll(".deleteComment");
   const editComments = document.querySelectorAll(".editComment");
+  const replyComments = document.querySelectorAll(".replyComment");
+  const deleteComments = document.querySelectorAll(".deleteComment");
 
   const manipulateComment = (comment, url_path, api) => {
     return comment.addEventListener("click", async (e) => {
@@ -947,6 +1136,60 @@ function renderComments(comments) {
     });
   };
 
+  const manipulateEdits = (comment, api) => {
+    const editCommentModal = document.querySelector("#editCommentModal");
+    const editCommentInputLabel = document.querySelector(
+      "#editCommentInputLabel"
+    );
+    return comment.addEventListener("click", async (e) => {
+      editCommentModal.style.display = "flex";
+      const user_id = localStorage.getItem("user_id");
+      const post_id = localStorage.getItem("post_id");
+      const comment_id = e.target.dataset.comment_id;
+      const editCommentBtn = document.querySelector("#editCommentBtn");
+      const editModalCloseBtn = document.querySelector("#editModalClose");
+      if (api === "post") {
+        editCommentInputLabel.textContent = "Reply on Comment";
+        editCommentBtn.textContent = "Reply";
+      }
+
+      if (editModalCloseBtn !== null) {
+        editModalCloseBtn.addEventListener("click", () => {
+          editCommentModal.style.display = "none";
+        });
+      }
+      if (editCommentBtn !== null) {
+        editCommentBtn.addEventListener("click", async (e) => {
+          e.preventDefault();
+          const editCommentInput =
+            document.querySelector("#editCommentInput").value;
+          if (editCommentInput.length <= 0) return;
+          else {
+            try {
+              const data = {
+                text: editCommentInput,
+              };
+              const response = await instance[api](
+                `/post/comment/${user_id}/${post_id}/${comment_id}`,
+                data
+              );
+              if (response.status === 200) {
+                // Edit comment
+                editCommentModal.style.display = "none";
+                window.location.reload();
+                return "Success";
+              }
+            } catch (error) {
+              const errorMessage = error.response.data.message;
+              if (errorMessage && errorMessage.length > 0)
+                return errorMessage, error.response;
+            }
+          }
+        });
+      }
+    });
+  };
+
   // Like or Unlike a comment
   if (likeComments !== null) {
     const url_path = "like_unlike_comment";
@@ -967,52 +1210,14 @@ function renderComments(comments) {
 
   // Edit a comment
   if (editComments !== null) {
-    editComments.forEach((comment) => {
-      const editCommentModal = document.querySelector("#editCommentModal");
-      comment.addEventListener("click", async (e) => {
-        editCommentModal.style.display = "flex";
-        const user_id = localStorage.getItem("user_id");
-        const post_id = localStorage.getItem("post_id");
-        const comment_id = e.target.dataset.comment_id;
-        const editCommentBtn = document.querySelector("#editCommentBtn");
-        const editModalCloseBtn = document.querySelector("#editModalClose");
+    const api = "put";
+    editComments.forEach((comment) => manipulateEdits(comment, api));
+  }
 
-        if (editModalCloseBtn !== null) {
-          editModalCloseBtn.addEventListener("click", () => {
-            editCommentModal.style.display = "none";
-          });
-        }
-        if (editCommentBtn !== null) {
-          editCommentBtn.addEventListener("click", async (e) => {
-            e.preventDefault();
-            const editCommentInput =
-              document.querySelector("#editCommentInput").value;
-            if (editCommentInput.length <= 0) return;
-            else {
-              try {
-                const data = {
-                  text: editCommentInput,
-                };
-                const response = await instance.put(
-                  `/post/comment/${user_id}/${post_id}/${comment_id}`,
-                  data
-                );
-                if (response.status === 200) {
-                  // Edit comment
-                  editCommentModal.style.display = "none";
-                  window.location.reload();
-                  return "Success";
-                }
-              } catch (error) {
-                const errorMessage = error.response.data.message;
-                if (errorMessage && errorMessage.length > 0)
-                  return errorMessage, error.response;
-              }
-            }
-          });
-        }
-      });
-    });
+  // Reply on a comment
+  if (replyComments !== null) {
+    const api = "post";
+    replyComments.forEach((comment) => manipulateEdits(comment, api));
   }
 }
 

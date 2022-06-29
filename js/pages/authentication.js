@@ -574,6 +574,7 @@ if (uploadBtn !== null) {
       return "Unable to process.";
     else {
       try {
+        document.getElementById("error_log").style.display = "block";
         let message = `Preparing your upload . . .`;
         pTag.textContent = message;
         errorFlash.appendChild(pTag);

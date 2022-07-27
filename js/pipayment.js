@@ -103,7 +103,7 @@ function buyWebinar() {
         };
         const authToken = localStorage.getItem("userSession");
         const response = await axios.post(
-          "https://piwebinars-server.herokuapp.com/payment/complete",
+          "https://piwebinars-server.onrender.com/payment/complete",
           data,
           {
             headers: {

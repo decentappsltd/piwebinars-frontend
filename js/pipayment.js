@@ -15,6 +15,7 @@ async function auth() {
     const uid = auth.user.uid;
     localStorage.uid = uid;
     localStorage.piName = userName;
+    localStorage.piAccessToken = auth.accessToken;
     if (!sessionStorage.userSession) {
       piLogin();
     }
@@ -27,6 +28,7 @@ async function piLogin() {
       name: localStorage.piName,
       username: localStorage.piName,
       uid: localStorage.uid,
+      piAccessToken: localStorage.piAccessToken,
     };
     const response = await axios.post(
       `https://piwebinars-server.onrender.com/login/pi`,

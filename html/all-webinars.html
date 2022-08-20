@@ -26,9 +26,6 @@
 </head>
 
 <body>
-
-  <h1>Pi Webinars</h1>
-
   <nav class="footer" style="z-index: 100">
     <div class="mobile">
       <ul class="ul">
@@ -61,6 +58,8 @@
       </div>
     </div>
   </nav>
+  
+  <h2>Explore webinars:</h2>
 
   <input style="width: 80vw;" type="text" placeholder="Search Webinars.." id="search" class="searchbar">
   <i style="margin-left: 5px;" class="fas fa-search" id="search" onclick="searchAllWebinars()"></i></br></br>
@@ -68,13 +67,7 @@
 
   <div class="postSection"></div>
 
-  <!-- <iframe data-aa='1980365' src='//acceptable.a-ads.com/1980365' style='border:0px; padding:0; width:100%; overflow:hidden; background-color: transparent;'></iframe> -->
-  <!-- <i>Ad</i> -->
-
-  <!--   <a class="prev" onclick="plusSlides(-1)">❮</a>
-  <a class="next" onclick="plusSlides(1)">❯</a> -->
-
-  <div style="text-align: center; color: #36454f;">
+  <div id="cat_selector">
     <i class="dot" onclick="currentSlide(1)">Crypto |</i>
     <i class="dot" onclick="currentSlide(2)">Pi |</i>
     <i class="dot" onclick="currentSlide(3)">Education |</i>
@@ -192,6 +185,7 @@
   <script src="https://kit.fontawesome.com/3aea44e36d.js" crossorigin="anonymous"></script>
   <script>
     renderCategoryWebinars();
+    
     let slideIndex = 1;
     showSlides(slideIndex);
     document.addEventListener("swiped-left", function(e) {

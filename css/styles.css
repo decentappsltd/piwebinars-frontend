@@ -8,7 +8,7 @@ body {
   font-family: "Ubuntu", sans-serif;
   background: #ffffff;
   /*   background-image: url("https://app.piwebinars.co.uk/img/background.png"); */
-  color: #b44afb;
+  color: #36454f;
   text-align: center;
 }
 h1 {
@@ -25,6 +25,88 @@ iframe {
   margin-right: auto;
   margin-top: 10px;
 }
+#commentsContainer{
+  width: 100%;
+  font-weight: bold;
+}
+#commentsContainer ul{
+  padding: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+#commentsContainer ul li{
+  list-style: none;
+  border-right: 2px solid #accfe6;
+  padding-inline: .35rem;
+  cursor: pointer;
+  transition: transform .2s ease-out; 
+}
+#commentsContainer ul li:hover{
+  transform: scale(1.03);
+}
+.editCommentModal{
+  position: relative;
+  bottom: 0;
+  z-index: 10000;
+  height: 100vh;
+  width: 100vw;
+  display: none;
+  justify-content: center;
+  align-items: center;
+}
+
+.editCommentModal .close_editModal p{
+  position: fixed;
+  top: 5%;
+  right: 5%;
+  transform: translate(-5%, -5%);
+  color: red;
+  font-weight: bolder;
+  font-size: 1.5rem;
+  background: white;
+  padding: .5rem;
+  cursor: pointer;
+  z-index: 100000;
+}
+
+.editCommentForm{
+  display: flex;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  flex-direction: column;
+  border-radius: .5rem;
+  padding: 3rem;
+  background-color: rgb(107, 106, 106);
+  box-shadow: 0 0 0 100vw rgba(0, 0, 0, 0.75);
+}
+
+.editCommentForm input {
+  margin-block: 2rem;
+  border: none;
+  padding: .5rem;
+  border-radius: .5rem;
+  background: rgb(0, 0, 0);
+  color: #ffffff;
+  font-weight: bold;
+}
+.interactiveDiv{
+  border-bottom: 1px solid #accfe6;
+  padding-bottom: -1rem;
+  margin-bottom: 1rem;
+}
+.interactiveDivCounts{
+  display:flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+.commentReplyBox{
+  height: 100%;
+  width: 100%;
+}
 .profile {
   height: auto;
   width: 95%;
@@ -35,8 +117,6 @@ iframe {
   flex-direction: column;
   margin: auto;
   margin-bottom: 1rem;
-/*   padding: 2rem 0.5rem; */
-  border-top: 1px solid #000;
   border-bottom: 1px solid #000;
 }
 .avatar {
@@ -46,11 +126,12 @@ iframe {
   justify-content: space-evenly;
 }
 .avatar img {
-  height: 100px;
-  width: 100px;
+  height: 70px;
+  width: 70px;
   display: flex;
   justify-content: space-evenly;
   margin-top: 20px;
+  padding-right: 10px;
 }
 #verified_icon {
   height: 20px;
@@ -63,19 +144,19 @@ iframe {
   justify-content: space-between;
 }
 .stats .followBtn {
-  margin-top: 2rem;
+  margin-top: 0rem;
 }
 .stats .followBtn button {
   all: unset;
-  padding: 1rem;
+  padding: 0.2rem;
   background: rgb(9, 94, 151);
   color: white;
   border-radius: 0.5rem;
-  width: 50%;
+  width: 40%;
   margin: 0.5rem auto;
   cursor: pointer;
   font-weight: 600;
-  font-size: 1.3rem;
+  font-size: 1rem;
 }
 .user_stats {
   width: 100%;
@@ -136,6 +217,9 @@ h2 {
   text-align: center;
   border-radius: 5px;
   margin-top: 0px;
+}
+h3 {
+  font-weight: normal;
 }
 span {
   display: block;
@@ -212,7 +296,7 @@ button:active {
 }
 .li:active,
 .li:hover {
-  background-color: #36454f;
+  color: #b44afb;
 }
 /* .li {
   border-right: 1px solid #36454f;
@@ -256,7 +340,7 @@ button:active {
   margin-bottom: 1px;
   text-decoration: none;
   text-align: center;
-  dlay: block;
+  display: block;
   border-radius: 5px;
 }
 label {
@@ -290,18 +374,17 @@ label {
 .logoutAll {
   color: red;
   margin-top: 10px;
-  background: #ffffff;
+  background: none;
   border-style: none;
   font-size: 10px;
   box-shadow: none;
 }
 #translate {
-  color: #4afbb4;
   margin-top: 10px;
   margin-bottom: 20px;
   background: #b44afb;
   border-style: none;
-  font-size: 10px;
+  font-size: 16px;
   box-shadow: none;
 }
 .register,
@@ -399,8 +482,6 @@ label {
 }
 .modal-header {
   background: var(--lightgray);
-}
-.modal-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -495,11 +576,19 @@ tr:nth-child(even) {
 }
 .title {
   border-bottom: solid 1px;
+  border-image: 
+    linear-gradient(
+      to right, 
+      #b44afb, 
+      #4afbb4
+    ) 1 0%;
   border-color: #4afbb4;
 /*   border-radius: 5px; */
   margin-top: 10px;
   padding-bottom: 10px;
   background: #ffffff;
+  color: #36454f;
+  font-weight: normal;
 }
 .title:first-child {
   border-top: solid 1px;
@@ -516,9 +605,15 @@ tr:nth-child(even) {
   height: 56.2vw;
 }
 .videoTitle {
-  border-bottom: solid;
+  border-bottom: solid 1px;
+  border-image: 
+    linear-gradient(
+      to right, 
+      #b44afb, 
+      #4afbb4
+    ) 1 0%;
   border-color: #4afbb4;
-  margin-top: 20px;
+  margin-top: 30px;
   background: #ffffff;
 }
 #stats {
@@ -586,12 +681,12 @@ tr:nth-child(even) {
 	box-shadow: 2px 2px 30px #000;
 }
 .fa {
-  marign: auto;
+  margin: auto;
   padding: 3px;
 }
 #piBrowser {
   display: block;
-  marign: auto;
+  margin: auto;
   padding: 3px;
 }
 #back-float {
@@ -626,6 +721,7 @@ tr:nth-child(even) {
   text-align:  left;
   padding: 15px;
   margin-top: -10px;
+  margin-bottom: -1%;
   color: #36454f;
 }
 .commentDate {
@@ -645,6 +741,39 @@ tr:nth-child(even) {
   flex-direction: row;
   margin: 10px;
 }
+#cat_selector {
+  color: #36454f;
+  text-align: center;
+}
+#displayUserHandle, .statStyle {
+  font-weight: normal;
+}
+.grid_3, #description {
+  color: #36454f;
+}
+
+.loader {
+  border: 6px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 6px solid #b44afb;
+  width: 25px;
+  height: 25px;
+  -webkit-animation: spin 2s linear infinite; /* Safari */
+  animation: spin 2s linear infinite;
+  margin: auto;
+  display: none;
+}
+
+/* Safari */
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
 
 /**************************************Desktop Styling***********nd:**************************/
 
@@ -661,7 +790,7 @@ tr:nth-child(even) {
     text-align: center;
     background: #ffffff;
     padding: 0;
-  margin: 0;
+    margin: 0;
   }
   h1 {
     color: #fbb44a;
@@ -717,7 +846,6 @@ tr:nth-child(even) {
     border-color: #36454f;
     border-radius: 5px;
     margin-top: 20px;
-    background: #ffffff;
   }
   button {
     background-color: #fbb44a;
@@ -751,7 +879,7 @@ tr:nth-child(even) {
   }
   .li:active,
   .li:hover {
-    background-color: #36454f;
+    color: #b44afb;
   }
 
   .li {
@@ -797,7 +925,7 @@ tr:nth-child(even) {
     margin-bottom: 1px;
     text-decoration: none;
     text-align: center;
-    dlay: block;
+    display: block;
     border-radius: 5px;
   }
   label {
@@ -878,8 +1006,6 @@ tr:nth-child(even) {
 
   .modal-header {
     background: var(--lightgray);
-  }
-  .modal-header {
     display: flex;
     align-items: center;
     justify-content: spae-between;
@@ -972,7 +1098,7 @@ tr:nth-child(even) {
   .mainWebinars {
     grid-column: 2;
     grid-row: 1/3;
-    height: 95vh;
+    height: 93vh;
     width: 60vw;
     margin-left: -5px;
     padding-left: 5px;
@@ -990,6 +1116,7 @@ tr:nth-child(even) {
     width: 20vw;
     border-bottom: solid 1px;
     overflow-y: scroll;
+    overflow-x: hidden;
     padding-right: 4vw;
     padding-left: 3vw;
   }
@@ -998,6 +1125,7 @@ tr:nth-child(even) {
     height: 50vh;
     width: 20vw;
     overflow-y: scroll;
+    overflow-x: hidden;
     padding-right: 4vw;
     padding-left: 3vw;
   }
@@ -1010,7 +1138,7 @@ tr:nth-child(even) {
     padding-left: 5px;
 /*     background: #f3f6fd; */
     border-right: solid 1px;
-    height: 90vh;
+    height: 93vh;
   }
   .tablet {
     display: none;
@@ -1105,7 +1233,9 @@ tr:nth-child(even) {
   }
   .grid_5 {
     grid-column: 3;
-    grid-row: 2;
+    grid-row: 1/3;
+    overflow-y: scroll;
+    padding-top: 15px;
   }
   #profileURL {
     margin-top: 200px;
@@ -1113,6 +1243,12 @@ tr:nth-child(even) {
   }
   #translate {
     color: #36454F;
+  }
+  .a_label {
+    text-decoration: none; 
+    color: #36454f; 
+    font-weight: normal; 
+    font-size: 15px;
   }
 }
 

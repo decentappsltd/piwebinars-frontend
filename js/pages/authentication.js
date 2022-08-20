@@ -36,13 +36,13 @@ const divDom = document.createElement("div");
 const authToken = localStorage.getItem("userSession");
 const sessToken = sessionStorage.getItem("userSession");
 const instance = axios.create({
-  baseURL: "https://piwebinars-server.herokuapp.com",
+  baseURL: "https://piwebinars-server.onrender.com",
   headers: {
     "Access-Control-Allow-Origin": "*",
-    Authorization: `Bearer ${authToken}`
+    Authorization: `Bearer ${authToken}`,
   },
   withCredentials: true,
-  credentials: "same-origin"
+  credentials: "same-origin",
 });
 
 if (sessToken !== null) {
@@ -102,7 +102,7 @@ if (loginBtn !== null) {
         const user = {
           username,
           password,
-          uid
+          uid,
         };
         const response = await instance.post(`/login`, user);
         if (response.status === 200) {
@@ -165,7 +165,7 @@ if (registerBtn !== null) {
           name: fullName,
           username,
           password,
-          referral
+          referral,
         };
         const response = await instance.post(`/register`, newUser);
         if (response.status === 201) {
@@ -210,13 +210,13 @@ if (handleBtn !== null) {
         flashMessage = message;
       } else {
         const userHandle = {
-          handle
+          handle,
         };
         const response = await instance.post(`/profile`, userHandle, {
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${authToken}`
-          }
+            Authorization: `Bearer ${authToken}`,
+          },
         });
         if (response.status === 200) {
           const message = "User Profile was successfully created !!!";
@@ -253,13 +253,13 @@ async function editProfile() {
     alert("Handle cannot be null");
   } else {
     const userHandle = {
-      handle
+      handle,
     };
     const response = await instance.post(`/profile`, userHandle, {
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${authToken}`
-      }
+        Authorization: `Bearer ${authToken}`,
+      },
     });
     if (response.status === 200) {
       alert("Profile update!");
@@ -290,8 +290,8 @@ const myProfile = async () => {
     const response = await instance.get(`/profile`, {
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${authToken}`
-      }
+        Authorization: `Bearer ${authToken}`,
+      },
     });
     if (response.status === 200) {
       const data = await response.data.profile;
@@ -303,9 +303,8 @@ const myProfile = async () => {
         credit: piCredit,
         following: userFollowing,
         verified: verified,
-        wishlist: userWishlist
+        wishlist: userWishlist,
       } = data;
-      console.log(response.data);
       sessionStorage.user = response.data.profile.user._id;
 
       followers.textContent = people_Who_Follow_Me;
@@ -346,14 +345,14 @@ const userProfile = async () => {
   try {
     const response = await instance.get(`/profile/user/${getUserFromStorage}`, {
       params: {
-        user_id: getUserFromStorage
-      }
+        user_id: getUserFromStorage,
+      },
     });
     const myProfile = await instance.get(`/profile`, {
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${authToken}`
-      }
+        Authorization: `Bearer ${authToken}`,
+      },
     });
     if ((response.status && myProfile.status) === 200) {
       const {
@@ -364,10 +363,10 @@ const userProfile = async () => {
         credit: piCredit,
         followers: userFollowers,
         following: userFollowing,
-        verified: verified
+        verified: verified,
       } = response.data.profile;
       const {
-        user: { _id: self_id }
+        user: { _id: self_id },
       } = myProfile.data.profile;
       const hashedId =
         "d1e8a70b5ccab1dc2f56bbf7e99f064a660c08e361a35751b9c483c88943d082";
@@ -398,6 +397,36 @@ const userProfile = async () => {
       return errorMessage, error.response;
   }
 };
+
+const renderHomePage = async () => {
+  const profile = await instance.get(`/profile`);
+  if (profile.status === 200) {
+    const currentUserId = await profile.data.profile.user._id;
+    const profileId = "61eecd5342e7b51ab2291814";
+    localStorage.setItem("currentUser", currentUserId);
+    sessionStorage.setItem("currentUser", currentUserId);
+    const userNotFound = profile.data.profile.following.filter(
+      ({ user }) => user.toString() === profileId
+    );
+    if (userNotFound.length <= 0) {
+      const response = await instance.post(
+        `/profile/auth_follow_unfollow/${profileId}`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*",
+            Authorization: `Bearer ${authToken}`,
+          },
+          withCredentials: true,
+          credentials: "same-origin",
+        }
+      );
+      return "Success";
+    } else return null;
+  }
+};
+
+if (urlPath === "") renderHomePage();
 if (urlPath === "profile.html") myProfile();
 if (urlPath === "userProfile.html") userProfile();
 
@@ -407,14 +436,12 @@ const webinarPost = async (getPostResponse) => {
   const likeUnlikePostBtn = document.querySelector("#likeUnlikePost");
   const dislikePostBtn = document.querySelector("#dislikePost");
   const postCommentBtn = document.querySelector("#postComment");
-  const commentValue = document.querySelector("#text");
+  let commentValue = document.querySelector("#text");
   const commentFormSection = document.querySelector("#commentForm");
 
   const userId = localStorage.getItem("user_id");
   const post_id = localStorage.getItem("post_id");
   const authToken = localStorage.getItem("userSession");
-
-  console.log("post ", getPostResponse);
 
   try {
     if (getPostResponse.status === 200) {
@@ -457,13 +484,13 @@ const webinarPost = async (getPostResponse) => {
           `/post/like_unlike_post/${userId}/${post_id}`,
           {
             params: {
-              userId
-            }
+              userId,
+            },
           }
         );
         if (response.status === 200) {
           // Like and Unlike comments
-          window.location.reload(true);
+          window.location.reload();
           return "success";
         }
       } catch (error) {
@@ -478,8 +505,8 @@ const webinarPost = async (getPostResponse) => {
           `/post/dislike_post/${userId}/${post_id}`,
           {
             params: {
-              userId
-            }
+              userId,
+            },
           }
         );
         if (response.status === 200) {
@@ -501,20 +528,17 @@ const webinarPost = async (getPostResponse) => {
         e.preventDefault();
         if (commentValue.length <= 0) return;
         const data = { text: commentValue.value };
-        console.log(data);
         const response = await instance.post(
           `/post/comment/${userId}/${post_id}`,
           data
         );
-        console.log("Response: ", response);
         if (response.status === 200) {
           // Make comment
-          window.location.reload(true);
-          // console.log(response.data);
+          window.location.reload();
+          return "Success";
         }
       });
     } catch (error) {
-      console.log("Error: ", error);
       const errorMessage = error.response.data.message;
       if (errorMessage && errorMessage.length > 0)
         return errorMessage, error.response;
@@ -550,6 +574,7 @@ if (uploadBtn !== null) {
       return "Unable to process.";
     else {
       try {
+        document.getElementById("error_log").style.display = "block";
         let message = `Preparing your upload . . .`;
         pTag.textContent = message;
         errorFlash.appendChild(pTag);
@@ -565,7 +590,7 @@ if (uploadBtn !== null) {
             pTag.textContent = message;
             errorFlash.appendChild(pTag);
             flashBool = true;
-          }
+          },
         };
         const response = await instance.post(
           `/upload/file_upload`,
@@ -576,10 +601,10 @@ if (uploadBtn !== null) {
               "Content-Type":
                 "multipart/form-data; boundary='--sampleBoundary'",
               "Access-Control-Allow-Origin": "*",
-              Authorization: `Bearer ${authToken}`
+              Authorization: `Bearer ${authToken}`,
             },
             withCredentials: true,
-            credentials: "same-origin"
+            credentials: "same-origin",
           }
         );
         if (response.status === 200) {
@@ -622,6 +647,7 @@ if (logoutBtn !== null) {
           delete instance.defaults.headers.common["Authorization"];
           sessionStorage.removeItem("userSession");
           localStorage.removeItem("userSession");
+          localStorage.removeItem("currentUser");
           setTimeout(() => {
             window.location.href = "/";
           }, 2000);
@@ -697,10 +723,10 @@ if (deleteAccountBtn !== null) {
           const response = await instance.delete(`/profile`, {
             headers: {
               "Access-Control-Allow-Origin": "*",
-              Authorization: `Bearer ${authToken}`
+              Authorization: `Bearer ${authToken}`,
             },
             withCredentials: true,
-            credentials: "same-origin"
+            credentials: "same-origin",
           });
           if (response.status === 200) {
             flashMessage = `You have successfully deleted your account!!!`;
@@ -745,14 +771,14 @@ if (searchBtn !== null) {
       } else {
         const response = await instance.get(`/profile/handle/${searchName}`, {
           params: {
-            handle: searchName
-          }
+            handle: searchName,
+          },
         });
         if (response.status === 200) {
           // localStorage.setItem("userProfileName", searchName);
           const {
             handle,
-            user: { name: user_name, _id: userId }
+            user: { name: user_name, _id: userId },
           } = response.data.profile;
           localStorage.setItem("user_id", userId);
 
@@ -810,10 +836,10 @@ if (followBtn !== null) {
           headers: {
             "Content-Type": "application/json",
             "Access-Control-Allow-Origin": "*",
-            Authorization: `Bearer ${authToken}`
+            Authorization: `Bearer ${authToken}`,
           },
           withCredentials: true,
-          credentials: "same-origin"
+          credentials: "same-origin",
         }
       );
       if (response.status === 200) {
@@ -831,16 +857,73 @@ if (followBtn !== null) {
 
 function renderComments(comments) {
   const commentsBox = document.querySelector("#commentsContainer");
-  console.log(comments);
-  for (const comment of comments) {
-    console.log(comment);
+  const sess_user_id = sessionStorage.getItem("currentUser");
+  const sortedComments = comments
+    .slice()
+    .sort((a, b) => new Date(b.dateAdded) - new Date(a.dateAdded));
+  const sortedCommentReplies = comments
+    .map(({ comment_reply }) => comment_reply)
+    .reverse()
+    .slice()
+    .sort((a, b) => new Date(b.dateAdded) - new Date(a.dateAdded));
+
+  // Comments
+  let index = 0;
+  for (const comment of sortedComments) {
     const commentDiv = document.createElement("div");
+    const interactiveDiv = document.createElement("div");
     const message = document.createElement("p");
     const name = document.createElement("p");
     const date = document.createElement("p");
     const avatar = document.createElement("img");
+    const counts = document.createElement("div");
+    const likesCount = document.createElement("span");
+    const repliesCount = document.createElement("span");
+    const commentSectionUl = document.createElement("ul");
+    const likeCommentLi = document.createElement("li");
+    const editCommentLi = document.createElement("li");
+    const replyCommentLi = document.createElement("li");
+    const deleteCommentLi = document.createElement("li");
+    const likeCommentI = document.createElement("i");
+    const editCommentI = document.createElement("i");
+    const replyCommentI = document.createElement("i");
+    const deleteCommentI = document.createElement("i");
+    const numberOfLikes = comment.comment_likes.length;
+    const numberOfRepliesOnComment = comment.comment_reply.length;
 
     commentDiv.className = "commentDiv";
+    likesCount.textContent = `${numberOfLikes} like${
+      numberOfLikes <= 1 ? "" : "s"
+    }`;
+    repliesCount.textContent = `${numberOfRepliesOnComment} repl${
+      numberOfRepliesOnComment <= 1 ? "y" : "ies"
+    }`;
+    likeCommentI.setAttribute("class", "fa-solid fa-thumbs-up");
+    editCommentI.setAttribute("class", "fa-solid fa-pen-to-square");
+    replyCommentI.setAttribute("class", "fa-solid fa-comment-dots");
+    deleteCommentI.setAttribute("class", "fa-solid fa-trash-can");
+    likeCommentI.dataset.comment_id = comment._id;
+    editCommentI.dataset.comment_id = comment._id;
+    replyCommentI.dataset.comment_id = comment._id;
+    deleteCommentI.dataset.comment_id = comment._id;
+    likeCommentLi.setAttribute("class", "likeComment");
+    interactiveDiv.setAttribute("class", "interactiveDiv");
+    counts.setAttribute("class", "interactiveDivCounts");
+    likeCommentLi.dataset.comment_id = comment._id;
+    likeCommentLi.appendChild(likeCommentI);
+    likeCommentLi.insertAdjacentHTML("beforeend", ` Like`);
+    editCommentLi.setAttribute("class", "editComment");
+    editCommentLi.dataset.comment_id = comment._id;
+    editCommentLi.appendChild(editCommentI);
+    editCommentLi.insertAdjacentHTML("beforeend", ` Edit`);
+    replyCommentLi.setAttribute("class", "replyComment");
+    replyCommentLi.dataset.comment_id = comment._id;
+    replyCommentLi.appendChild(replyCommentI);
+    replyCommentLi.insertAdjacentHTML("beforeend", ` Reply`);
+    deleteCommentLi.setAttribute("class", "deleteComment");
+    deleteCommentLi.dataset.comment_id = comment._id;
+    deleteCommentLi.appendChild(deleteCommentI);
+    deleteCommentLi.insertAdjacentHTML("beforeend", ` Delete`);
     message.className = "commentText";
     name.className = "commentName";
     date.className = "commentDate";
@@ -857,11 +940,289 @@ function renderComments(comments) {
     commentDiv.appendChild(avatar);
     commentDiv.appendChild(name);
     commentDiv.appendChild(date);
+    counts.appendChild(likesCount);
+    counts.appendChild(repliesCount);
+    interactiveDiv.appendChild(counts);
+    commentSectionUl.appendChild(likeCommentLi);
+    commentSectionUl.appendChild(replyCommentLi);
+    if (comment.user === sess_user_id) {
+      commentSectionUl.appendChild(editCommentLi);
+      commentSectionUl.appendChild(deleteCommentLi);
+    }
+    interactiveDiv.appendChild(commentSectionUl);
     commentsBox.appendChild(commentDiv);
     commentsBox.appendChild(message);
+    commentsBox.appendChild(interactiveDiv);
+    index++;
+  }
+
+  // Comment Replies
+  // const commentReplyBox = document.createElement("div");
+  // for (const commentReplies of sortedCommentReplies[index]) {
+  //   const commentReplyDiv = document.createElement("div");
+  //   const interactiveReplyDiv = document.createElement("div");
+  //   const replyOnComment = document.createElement("p");
+  //   const replyName = document.createElement("p");
+  //   const replyDate = document.createElement("p");
+  //   const replyAvatar = document.createElement("img");
+  //   const replyLikesCount = document.createElement("p");
+  //   const replyCommentSectionUl = document.createElement("ul");
+  //   const likeCommentReplyLi = document.createElement("li");
+  //   const editCommentReplyLi = document.createElement("li");
+  //   const deleteCommentReplyLi = document.createElement("li");
+  //   const likeCommentReplyI = document.createElement("i");
+  //   const editCommentReplyI = document.createElement("i");
+  //   const deleteCommentReplyI = document.createElement("i");
+  //   const numberOfReplyLikes = commentReplies.comment_likes.length;
+
+  //   commentReplyDiv.className = "commentReplyDiv";
+  //   replyLikesCount.textContent = `${numberOfReplyLikes} like${
+  //     numberOfReplyLikes <= 1 ? "" : "s"
+  //   }`;
+  //   commentReplyBox.setAttribute("class", "commentReplyBox");
+  //   likeCommentReplyI.setAttribute("class", "fa-solid fa-thumbs-up");
+  //   editCommentReplyI.setAttribute("class", "fa-solid fa-pen-to-square");
+  //   deleteCommentReplyI.setAttribute("class", "fa-solid fa-trash-can");
+  //   likeCommentReplyI.dataset.comment_reply_id = commentReplies._id;
+  //   editCommentReplyI.dataset.comment_reply_id = commentReplies._id;
+  //   deleteCommentReplyI.dataset.comment_reply_id = commentReplies._id;
+  //   likeCommentReplyLi.setAttribute("class", "likeCommentReply");
+  //   interactiveReplyDiv.setAttribute("class", "interactiveReplyDiv");
+  //   likeCommentReplyLi.dataset.comment_reply_id = commentReplies._id;
+  //   likeCommentReplyLi.appendChild(likeCommentI);
+  //   likeCommentReplyLi.insertAdjacentHTML("beforeend", ` Like`);
+  //   editCommentReplyLi.setAttribute("class", "editCommentReply");
+  //   editCommentReplyLi.dataset.comment_reply_id = commentReplies._id;
+  //   editCommentReplyLi.appendChild(editCommentI);
+  //   editCommentReplyLi.insertAdjacentHTML("beforeend", ` Edit`);
+  //   deleteCommentReplyLi.setAttribute("class", "deleteCommentReply");
+  //   deleteCommentReplyLi.dataset.comment_reply_id = commentReplies._id;
+  //   deleteCommentReplyLi.appendChild(deleteCommentI);
+  //   deleteCommentReplyLi.insertAdjacentHTML("beforeend", ` Delete`);
+  //   replyOnComment.className = "commentText";
+  //   replyName.className = "commentName";
+  //   replyDate.className = "commentDate";
+  //   replyAvatar.className = "commentAvatar";
+  //   replyOnComment.textContent = commentReplies.text;
+  //   replyName.textContent = commentReplies.name;
+  //   replyDate.textContent = commentReplies.dateAdded.substring(0, 10);
+  //   if (commentReplies.avatar) {
+  //     replyAvatar.src = commentReplies.avatar;
+  //   } else {
+  //     replyAvatar.src = "/img/avatar.png";
+  //   }
+
+  //   commentReplyDiv.appendChild(replyAvatar);
+  //   commentReplyDiv.appendChild(replyName);
+  //   commentReplyDiv.appendChild(replyDate);
+  //   interactiveReplyDiv.appendChild(replyLikesCount);
+  //   replyCommentSectionUl.appendChild(likeCommentReplyLi);
+  //   replyCommentSectionUl.appendChild(replyCommentLi);
+  //   if (commentReplies.user === sess_user_id) {
+  //     replyCommentSectionUl.appendChild(editCommentReplyLi);
+  //     replyCommentSectionUl.appendChild(deleteCommentReplyLi);
+  //   }
+  //   interactiveReplyDiv.appendChild(replyCommentSectionUl);
+  //   commentReplyBox.appendChild(commentReplyDiv);
+  //   commentReplyBox.appendChild(replyOnComment);
+  //   commentReplyBox.appendChild(interactiveReplyDiv);
+  //   commentsBox.insertAdjacentHTML(commentReplyBox);
+  // }
+
+  // Comment Replies
+  // const commentReplyBox = document.createElement("div");
+  // for (const commentReplies of sortedCommentReplies) {
+  //   const commentReplyDiv = document.createElement("div");
+  //   const interactiveReplyDiv = document.createElement("div");
+  //   const replyOnComment = document.createElement("p");
+  //   const name = document.createElement("p");
+  //   const date = document.createElement("p");
+  //   const avatar = document.createElement("img");
+  //   const replyLikesCount = document.createElement("p");
+  //   const replyCommentSectionUl = document.createElement("ul");
+  //   const likeCommentReplyLi = document.createElement("li");
+  //   const editCommentReplyLi = document.createElement("li");
+  //   const deleteCommentReplyLi = document.createElement("li");
+  //   const likeCommentReplyI = document.createElement("i");
+  //   const editCommentReplyI = document.createElement("i");
+  //   const deleteCommentReplyI = document.createElement("i");
+  //   const numberOfReplyLikes = commentReplies.comment_likes.length;
+
+  //   commentReplyDiv.className = "commentReplyDiv";
+  //   replyLikesCount.textContent = `${numberOfReplyLikes} like${
+  //     numberOfReplyLikes <= 1 ? "" : "s"
+  //   }`;
+  //   commentReplyBox.setAttribute("class", "commentReplyBox");
+  //   likeCommentReplyI.setAttribute("class", "fa-solid fa-thumbs-up");
+  //   editCommentReplyI.setAttribute("class", "fa-solid fa-pen-to-square");
+  //   deleteCommentReplyI.setAttribute("class", "fa-solid fa-trash-can");
+  //   likeCommentReplyI.dataset.comment_reply_id = commentReplies._id;
+  //   editCommentReplyI.dataset.comment_reply_id = commentReplies._id;
+  //   deleteCommentReplyI.dataset.comment_reply_id = commentReplies._id;
+  //   likeCommentReplyLi.setAttribute("class", "likeCommentReply");
+  //   interactiveReplyDiv.setAttribute("class", "interactiveReplyDiv");
+  //   likeCommentReplyLi.dataset.comment_reply_id = commentReplies._id;
+  //   likeCommentReplyLi.appendChild(likeCommentI);
+  //   likeCommentReplyLi.insertAdjacentHTML("beforeend", ` Like`);
+  //   editCommentReplyLi.setAttribute("class", "editCommentReply");
+  //   editCommentReplyLi.dataset.comment_reply_id = commentReplies._id;
+  //   editCommentReplyLi.appendChild(editCommentI);
+  //   editCommentReplyLi.insertAdjacentHTML("beforeend", ` Edit`);
+  //   deleteCommentReplyLi.setAttribute("class", "deleteCommentReply");
+  //   deleteCommentReplyLi.dataset.comment_reply_id = commentReplies._id;
+  //   deleteCommentReplyLi.appendChild(deleteCommentI);
+  //   deleteCommentReplyLi.insertAdjacentHTML("beforeend", ` Delete`);
+  //   replyOnComment.className = "commentReplyText";
+  //   name.className = "commentReplyName";
+  //   date.className = "commentReplyDate";
+  //   avatar.className = "commentReplyAvatar";
+  //   replyOnComment.textContent = commentReplies.text;
+  //   name.textContent = commentReplies.name;
+  //   date.textContent = commentReplies.dateAdded.substring(0, 10);
+  //   if (commentReplies.avatar) {
+  //     avatar.src = commentReplies.avatar;
+  //   } else {
+  //     avatar.src = "/img/avatar.png";
+  //   }
+
+  //   commentReplyDiv.appendChild(avatar);
+  //   commentReplyDiv.appendChild(name);
+  //   commentReplyDiv.appendChild(date);
+  //   interactiveReplyDiv.appendChild(replyLikesCount);
+  //   replyCommentSectionUl.appendChild(likeCommentReplyLi);
+  //   replyCommentSectionUl.appendChild(replyCommentLi);
+  //   if (commentReplies.user === sess_user_id) {
+  //     replyCommentSectionUl.appendChild(editCommentReplyLi);
+  //     replyCommentSectionUl.appendChild(deleteCommentReplyLi);
+  //   }
+  //   interactiveReplyDiv.appendChild(replyCommentSectionUl);
+  //   commentReplyBox.appendChild(commentReplyDiv);
+  //   commentReplyBox.appendChild(replyOnComment);
+  //   commentReplyBox.appendChild(interactiveReplyDiv);
+  //   commentsBox.insertAdjacentHTML("beforeend", commentReplyBox);
+  // }
+
+  const likeComments = document.querySelectorAll(".likeComment");
+  const editComments = document.querySelectorAll(".editComment");
+  const replyComments = document.querySelectorAll(".replyComment");
+  const deleteComments = document.querySelectorAll(".deleteComment");
+
+  const manipulateComment = (comment, url_path, api) => {
+    return comment.addEventListener("click", async (e) => {
+      const user_id = localStorage.getItem("user_id");
+      const post_id = localStorage.getItem("post_id");
+      const comment_id = e.target.dataset.comment_id;
+
+      try {
+        const response = await instance[api](
+          `/post/${url_path}/${user_id}/${post_id}/${comment_id}`,
+          {
+            headers: {
+              "Content-Type": "application/json",
+              "Access-Control-Allow-Origin": "*",
+              Authorization: `Bearer ${authToken}`,
+            },
+            withCredentials: true,
+            credentials: "same-origin",
+          }
+        );
+        if (response.status === 200) {
+          window.location.reload();
+          return "Success";
+        }
+      } catch (error) {
+        const errorMessage = error.response.data.message;
+        return errorMessage;
+      }
+    });
+  };
+
+  const manipulateEdits = (comment, api) => {
+    const editCommentModal = document.querySelector("#editCommentModal");
+    const editCommentInputLabel = document.querySelector(
+      "#editCommentInputLabel"
+    );
+    return comment.addEventListener("click", async (e) => {
+      editCommentModal.style.display = "flex";
+      const user_id = localStorage.getItem("user_id");
+      const post_id = localStorage.getItem("post_id");
+      const comment_id = e.target.dataset.comment_id;
+      const editCommentBtn = document.querySelector("#editCommentBtn");
+      const editModalCloseBtn = document.querySelector("#editModalClose");
+      if (api === "post") {
+        editCommentInputLabel.textContent = "Reply on Comment";
+        editCommentBtn.textContent = "Reply";
+      }
+
+      if (editModalCloseBtn !== null) {
+        editModalCloseBtn.addEventListener("click", () => {
+          editCommentModal.style.display = "none";
+        });
+      }
+      if (editCommentBtn !== null) {
+        editCommentBtn.addEventListener("click", async (e) => {
+          e.preventDefault();
+          const editCommentInput =
+            document.querySelector("#editCommentInput").value;
+          if (editCommentInput.length <= 0) return;
+          else {
+            try {
+              const data = {
+                text: editCommentInput,
+              };
+              const response = await instance[api](
+                `/post/comment/${user_id}/${post_id}/${comment_id}`,
+                data
+              );
+              if (response.status === 200) {
+                // Edit comment
+                editCommentModal.style.display = "none";
+                window.location.reload();
+                return "Success";
+              }
+            } catch (error) {
+              const errorMessage = error.response.data.message;
+              if (errorMessage && errorMessage.length > 0)
+                return errorMessage, error.response;
+            }
+          }
+        });
+      }
+    });
+  };
+
+  // Like or Unlike a comment
+  if (likeComments !== null) {
+    const url_path = "like_unlike_comment";
+    const api = "post";
+    likeComments.forEach((comment) =>
+      manipulateComment(comment, url_path, api)
+    );
+  }
+
+  // Delete a comment
+  if (deleteComments !== null) {
+    const url_path = "comment";
+    const api = "delete";
+    deleteComments.forEach((comment) =>
+      manipulateComment(comment, url_path, api)
+    );
+  }
+
+  // Edit a comment
+  if (editComments !== null) {
+    const api = "put";
+    editComments.forEach((comment) => manipulateEdits(comment, api));
+  }
+
+  // Reply on a comment
+  if (replyComments !== null) {
+    const api = "post";
+    replyComments.forEach((comment) => manipulateEdits(comment, api));
   }
 }
 
+//
 function buyCredits(creditAmount) {
   axios.post(`/profile/credit`, function (res, req) {
     res.send(creditAmount);

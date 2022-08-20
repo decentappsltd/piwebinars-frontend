@@ -63,18 +63,10 @@
       </ul>
     </nav>
 
+    <div class="webinarsSection"></div>
+  
+    <div class="loader"></div>
     <br>
-
-    <h2 class="rounded">Featured Webinars</h2>
-
-    <!--     ads -->
-    <iframe data-aa='1980365' src='//acceptable.a-ads.com/1980365' style='border:0px; padding:0; width:300px; max-height:250px; overflow:hidden; background-color: transparent;'></iframe>
-
-    <div class="featuredSection"></div>
-    <a class="b:ck_button" style="border: none; margin-top: 10px;" href="/html/all-webinars.html">See more</a>
-    <br>
-    <!--     ads -->
-    <iframe data-aa='1980365' src='//acceptable.a-ads.com/1980365' style='border:0px; padding:0; width:300px; max-height:250px; overflow:hidden; background-color: transparent;'></iframe>
 
     <!--Modals-->
     <div class="landing" id="landingPage">
@@ -96,8 +88,8 @@
       <div class="modal-dialog">
         <header style="color: #b44afb" class="modal-header">
           <h3>Welcome to Pi Webinars</h3>
-            <button class="close-modal" style="float: right;" onclick="closeInfo()">✕</button>
-          
+          <button class="close-modal" style="float: right;" onclick="closeInfo()">✕</button>
+
         </header>
         <section class="modal-content">
           <h4>What is Pi Webinars?</h4><br>
@@ -122,20 +114,21 @@
               Film your webinar, ensuring you make it high quality and interesting to others. It can be in any language, but must not have any obscene material.
             </li>
             <li>
-              Navigate to the 'Upload' tab in Pi Webinars and fill out all the fields. 
+              Navigate to the 'Upload' tab in Pi Webinars and fill out all the fields.
             </li>
             <li>
               Press upload and wait for it to be complete. A progress bar will be displayed- please don't leave the app until complete.
             </li>
             <li>
-              You can now find your webinar in the 'Your Webinars' page in your profile. Pi will automatically be added to your balance when one of your webinars is purchased. 
+              You can now find your webinar in the 'Your Webinars' page in your profile. Pi will automatically be added to your balance when one of your webinars is purchased.
             </li>
           </ol><br><br>
-          
+
           <h4>Our mission:</h4><br>
           <p3>Our world is in the middle of a new economic era propelled by Information Technology (IT) which touches everything in our lives. The learning process is not an exception, with a decentralized education (DeEd) revolution opening fresh possibilities, especially for people historically away to participate in the current obsolete educational model.
-<br><br>
-Just imagine millions of students from Africa, India, China and the developing world enjoying a learning process about any subject without the high cost and long development timelines inherent to our current education. This is possible thanks to new technologies such as the blockchain where P2P open-source platforms may enter to reach large audiences eager to learn and bring money to the economy. The future of learning is bright with DeEd platforms such as Pi Webinars.</p3>
+            <br><br>
+            Just imagine millions of students from Africa, India, China and the developing world enjoying a learning process about any subject without the high cost and long development timelines inherent to our current education. This is possible thanks to new technologies such as the blockchain where P2P open-source platforms may enter to reach large audiences eager to learn and bring money to the economy. The future of learning is bright with DeEd platforms such as Pi Webinars.
+          </p3>
 
         </section>
       </div>
@@ -146,7 +139,7 @@ Just imagine millions of students from Africa, India, China and the developing w
       <a style="font-size:24px" class="fa" onclick="openInfo()">&#xf05a;</a>
     </div>
 
-<!--     Translate tab -->
+    <!--     Translate tab -->
     <div id="google_translate_element"></div>
     <script>
       function googleTranslateElementInit() {
@@ -170,9 +163,9 @@ Just imagine millions of students from Africa, India, China and the developing w
       <a style="color: #fbb44a" href="/policies/privacy.html">Privacy |</a>
       <a style="color: #fbb44a" href="/policies/terms.html">Terms |</a>
       <a style="color: #fbb44a" href="mailto:contact@piwebinars.co.uk">Contact</a>
-
-      <h5 style="padding-bottom: 10px;">&copy; Decent Apps Ltd</h5>
-    </div>
+      <br><br>
+      <a style="padding-bottom: 10px;">&copy; Decent Apps Ltd</a><br><br>
+    </div><br>
 
     <script>
       if (sessionStorage.landing != 'true') {
@@ -212,16 +205,12 @@ Just imagine millions of students from Africa, India, China and the developing w
     <div class="row footer">
       <img height="60" style="position:relative;top:0;display: inline; float: left;" src="/img/logo-text.png" alt="logo"></img>
 
-      <input style="height: 40px; margin-top: 5px; width: 35vw;border-radius:7.5px;" type="text" placeholder="Search Webinars.." id="search" class="searchbar searchHeader">
+      <input style="height: 20px; margin-top: 15px; width: 35vw;border-radius:7.5px;" type="text" placeholder="Search Webinars.." id="search" class="searchbar searchHeader">
       <i style="margin-left: 5px;" class="searchHeader fas fa-search" id="search" onclick="search()"></i>
       <i class="searchHeader" onclick="location.href='/'" style="color: #fbb44a; font-size: 30px;">×</i>
       </input>
 
       <div style="float:right">
-        <li class="li"><a class="a" href="/index.html"><img src="https://www.piwebinars.co.uk/img/Home_Icon.png" width="40px;">Home</a></li>
-        <li class="li"><a class="a" href="/html/search.html"><img src="https://www.piwebinars.co.uk/img/Search_Icon.png" width="40px;">Search</a></li>
-        <li class="li"><a class="a authNav" id="uploaddesktopmodal" href="./html/upload.html"><img src="https://www.piwebinars.co.uk/img/Upload_Icon.png" width="40px;">Upload</a></li>
-        <li class="li"><a class="a authNav" href="/html/profile.html"><img src="https://www.piwebinars.co.uk/img/Profile_Icon.png" width="40px;">Profile</a></li>
         <li class="li"><a id="profile" class="a unAuthNav" href="/html/login.html"><img src="https://www.piwebinars.co.uk/img/Login_Icon.png" width="40px;">Login</a></li>
         <li class="li"><a id="profile" class="a unAuthNav" href="/html/register.html"><img src="https://www.piwebinars.co.uk/img/Register_Icon.png" width="40px;">Register</a></li>
       </div>
@@ -234,12 +223,22 @@ Just imagine millions of students from Africa, India, China and the developing w
           overflow: hidden;
         }
       }
+
+      .title:first-child {
+        border-top: none;
+      }
     </style>
     <!--     <br><br><br><br> -->
     <div class="grid">
 
       <div class="selection" style="text-align: left;">
-        <h4 style="color:#fbb44a">Webinars</h4>
+        <div id="userSelection"><br>
+          <li class="li" style="margin-bottom: 5px;"><a class="a_label" href="./html/upload.html"><i class="fas fa-plus"></i> Upload a Webinar</a></li><br>
+          <li class="li" style="margin-bottom: 5px;"><a class="a_label" href="/html/wishlist.html"><i class="fas fa-heart"></i> My Wishlist</a></li><br>
+          <li class="li" style="margin-bottom: 5px;"><a class="a_label" href="/html/profile.html"><i class="fas fa-user"></i> My Profile</a></li><br>
+        </div>
+
+        <h4 style="color:#fbb44a; margin-bottom: 2px;">Categories</h4>
 
         <a class="filter" onclick="location.href='/'">All</a><br>
         <a class="filter" onclick="localStorage.filter = 'cryptocurrency'; filter();">Cryptocurrency</a><br>
@@ -258,10 +257,7 @@ Just imagine millions of students from Africa, India, China and the developing w
         <a class="filter" onclick="localStorage.filter = 'sports'; filter();">Sports</a><br>
         <a class="filter" onclick="localStorage.filter = 'technology'; filter();">Technology</a><br>
 
-        <h4 style="color:#fbb44a;">Wishlist</h4>
-        <div class="wishlist"></div>
-
-        <h4 style="color:#fbb44a;">Following</h4>
+        <h4 style="color:#fbb44a; margin-bottom: 2px;">Following</h4>
         <div class="following"></div><br><br>
 
         <a style="font-size: 12px;" onclick="darkMode()">Dark Mode |</a>
@@ -305,32 +301,21 @@ Just imagine millions of students from Africa, India, China and the developing w
               <option class="list" value="politics">Politics</option><br />
               <option class="list" value="sports">Sports</option><br />
               <option class="list" value="technology">Technology</option><br />
-            </select><i style="margin-left: 5px;" class="fas fa-search" id="searchCat" onclick="searchCat()"></i><br />
+            </select><i style="margin-left: 5px;" class="fas fa-search" id="searchCat" onclick="searchCat()"></i>
           </div>
 
-          <!--     ads -->
-          <!--           <a target="_blank" href="https://shareasale.com/r.cfm?b=1888003&amp;u=3225499&amp;m=53993&amp;urllink=&amp;afftrack="><img src="https://static.shareasale.com/image/53993/banner_300_250.jpg" border="0" /></a>
-          <i>Ad- ^Want to make a $ earning website?^</i> -->
-
-          <div class="postSection"></div>
+          <div style="transform: translateY(10px); margin-top: -10px;" onscroll="scrollPos()" class="webinarsDesktopSection"></div>
         </div>
       </div>
 
       <div class="purchasedWebinars">
-        <!--Your Purchases Render Div-->
         <h2>Purchases</h2>
         <div class="purchaseSection"></div>
-        <!--     ads -->
-        <iframe data-aa='1980365' src='//acceptable.a-ads.com/1980365' style='border:0px; padding:0; width:100%; height:100%; overflow:hidden; background-color: transparent;'></iframe>
-
       </div>
 
-      <!--Your Webinars Render Div-->
       <div class="yourWebinars">
-        <h2>Uploads</h2>
+        <h2>Uploads</h2><br>
         <div class="yourSection"></div>
-        <!--     ads -->
-        <iframe data-aa='1980365' src='//acceptable.a-ads.com/1980365' style='border:0px; padding:0; width:100%; height:100%; overflow:hidden; background-color: transparent;'></iframe>
       </div>
 
     </div>
@@ -341,11 +326,26 @@ Just imagine millions of students from Africa, India, China and the developing w
   <script src="/js/pipayment.js"></script>
   <script src="https://kit.fontawesome.com/3aea44e36d.js" crossorigin="anonymous"></script>
   <script>
+    function loadMore() {
+      if ((window.innerHeight + window.scrollY) >= document.body.scrollHeight) {
+        document.querySelector('.loader').style.display = 'block';
+        renderMoreWebinars();
+        const timeout = setTimeout(loadMore, 4000);
+      } else {
+        document.querySelector('.loader').style.display = 'block';
+        const timeout = setTimeout(loadMore, 1500);
+      }
+    }
+    
     renderFeaturedWebinars();
-    renderAllWebinars();
-    renderPurchasedWebinars();
-    renderYourWebinars();
-    renderFollowing();
+    if (window.innerWidth > 619) {
+      renderFollowing();
+      renderPurchasedWebinars();
+      renderYourWebinars();
+    } else {
+      loadMore();
+      const timeout = setTimeout(loadMore, 4000);
+    }
   </script>
   <style>
     @media screen and (min-width: 900px) {

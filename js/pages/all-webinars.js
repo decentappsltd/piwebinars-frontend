@@ -1,4 +1,4 @@
-const urlApi = "https://piwebinars-server.herokuapp.com";
+const urlApi = "https://piwebinars-server.onrender.com";
 
 function filter() {
   const category = localStorage.filter;
@@ -25,7 +25,7 @@ function search() {
 
 function searchAllWebinars() {
   renderAllWebinars();
-  const postSection = document.querySelector(".postSection");
+  const postSection = document.querySelector(".webinarsSection");
   let input = document.getElementById("search").value;
   input = input.toLowerCase();
   let x = postSection.getElementsByClassName("title");
@@ -94,8 +94,12 @@ function renderPurchases(uploadsObj) {
   }
 }
 
-function renderAll(uploadsObj) {
-  const postSection = document.querySelector(".postSection");
+function renderWebinars(uploadsObj) {
+  if (window.innerWidth > 619) {
+    var postSection = document.querySelector(".webinarsDesktopSection");
+  } else {
+    var postSection = document.querySelector(".webinarsSection");
+  }
   const webinars = uploadsObj["data"]["list"];
   for (const webinar of webinars) {
     const renderDiv = document.createElement("article");
@@ -108,133 +112,56 @@ function renderAll(uploadsObj) {
     const renderPrice = document.createElement("p2");
     renderDiv.className = "title";
     renderName.onclick = function () {
-      localStorage.setItem("user_id", webinar[1].user);
+      localStorage.setItem("user_id", webinar.user);
       location.href = "/html/userProfile.html";
     };
     renderThumb.onclick = function () {
-      localStorage.setItem("post_id", webinar[1]._id);
-      localStorage.setItem("file_id", webinar[1].upload);
-      localStorage.setItem("user_id", webinar[1].user);
-      localStorage.setItem("video_id", webinar[1].video_id);
-      localStorage.setItem("webinarTitle", webinar[1].title);
-      localStorage.setItem("webinarDesc", webinar[1].description);
-      localStorage.setItem("webinarCat", webinar[1].category);
-      localStorage.setItem("webinarName", webinar[1].name);
-      localStorage.setItem("webinarLikes", webinar[1].likes.length);
-      localStorage.setItem("webinarDislikes", webinar[1].dislikes);
-      localStorage.setItem("webinarDate", webinar[1].dateAdded);
-      localStorage.setItem("webinarComments", webinar[1].comments);
-      localStorage.setItem("amount", webinar[1].amount);
+      localStorage.setItem("post_id", webinar._id);
+      localStorage.setItem("file_id", webinar.upload);
+      localStorage.setItem("user_id", webinar.user);
+      localStorage.setItem("video_id", webinar.video_id);
+      localStorage.setItem("webinarTitle", webinar.title);
+      localStorage.setItem("webinarDesc", webinar.description);
+      localStorage.setItem("webinarCat", webinar.category);
+      localStorage.setItem("webinarName", webinar.name);
+      localStorage.setItem("webinarLikes", webinar.likes.length);
+      localStorage.setItem("webinarDislikes", webinar.dislikes);
+      localStorage.setItem("webinarDate", webinar.dateAdded);
+      localStorage.setItem("webinarComments", webinar.comments);
+      localStorage.setItem("amount", webinar.amount);
       window.location.href = "/html/webinar.html";
     };
     renderTitle.onclick = function () {
-      localStorage.setItem("post_id", webinar[1]._id);
-      localStorage.setItem("file_id", webinar[1].upload);
-      localStorage.setItem("user_id", webinar[1].user);
-      localStorage.setItem("video_id", webinar[1].video_id);
-      localStorage.setItem("webinarTitle", webinar[1].title);
-      localStorage.setItem("webinarDesc", webinar[1].description);
-      localStorage.setItem("webinarCat", webinar[1].category);
-      localStorage.setItem("webinarName", webinar[1].name);
-      localStorage.setItem("webinarLikes", webinar[1].likes.length);
-      localStorage.setItem("webinarDislikes", webinar[1].dislikes);
-      localStorage.setItem("webinarDate", webinar[1].dateAdded);
-      localStorage.setItem("webinarComments", webinar[1].comments);
-      localStorage.setItem("amount", webinar[1].amount);
+      localStorage.setItem("post_id", webinar._id);
+      localStorage.setItem("file_id", webinar.upload);
+      localStorage.setItem("user_id", webinar.user);
+      localStorage.setItem("video_id", webinar.video_id);
+      localStorage.setItem("webinarTitle", webinar.title);
+      localStorage.setItem("webinarDesc", webinar.description);
+      localStorage.setItem("webinarCat", webinar.category);
+      localStorage.setItem("webinarName", webinar.name);
+      localStorage.setItem("webinarLikes", webinar.likes.length);
+      localStorage.setItem("webinarDislikes", webinar.dislikes);
+      localStorage.setItem("webinarDate", webinar.dateAdded);
+      localStorage.setItem("webinarComments", webinar.comments);
+      localStorage.setItem("amount", webinar.amount);
       window.location.href = "/html/webinar.html";
     };
-    renderTitle.textContent = webinar[1].title;
+    renderTitle.textContent = webinar.title;
     renderThumb.className = "thumbnail";
-    if (webinar[1].thumbnail == undefined) {
+    if (webinar.thumbnail == undefined) {
       renderThumb.src = "/img/empty.png";
     } else {
-      renderThumb.src = webinar[1].thumbnail;
+      renderThumb.src = webinar.thumbnail;
     }
     statDiv.className = "statDiv";
-    renderName.textContent = webinar[1].name;
+    renderName.textContent = webinar.name;
     renderName.className = "webinarName";
-    renderPrice.textContent = webinar[1].amount + " Pi";
+    renderPrice.textContent = webinar.amount + " Pi";
     renderPrice.className = "webinarPrice";
-    renderLike.textContent = "👍" + webinar[1].likes.length;
+    renderLike.textContent = "👍" + webinar.likes.length;
     renderLike.className = "webinarLike";
-    renderCategory.textContent = webinar[1].category;
-    renderCategory.className = "webinarCategory";
-
-    renderDiv.appendChild(renderThumb);
-    renderDiv.appendChild(renderTitle);
-    statDiv.appendChild(renderName);
-    statDiv.appendChild(renderCategory);
-    statDiv.appendChild(renderPrice);
-    statDiv.appendChild(renderLike);
-    renderDiv.appendChild(statDiv);
-    postSection.appendChild(renderDiv);
-  }
-}
-
-function renderFeatured(uploadsObj) {
-  const postSection = document.querySelector(".featuredSection");
-  const webinars = uploadsObj["data"]["list"];
-  for (const webinar of webinars.slice(0, 24)) {
-    const renderDiv = document.createElement("article");
-    const renderThumb = document.createElement("img");
-    const renderTitle = document.createElement("h3");
-    const statDiv = document.createElement("div");
-    const renderName = document.createElement("p1");
-    const renderCategory = document.createElement("p2");
-    const renderLike = document.createElement("p2");
-    const renderPrice = document.createElement("p2");
-    renderDiv.className = "title";
-    renderName.onclick = function () {
-      localStorage.setItem("user_id", webinar[1].user);
-      location.href = "/html/userProfile.html";
-    };
-    renderThumb.onclick = function () {
-      localStorage.setItem("post_id", webinar[1]._id);
-      localStorage.setItem("file_id", webinar[1].upload);
-      localStorage.setItem("user_id", webinar[1].user);
-      localStorage.setItem("video_id", webinar[1].video_id);
-      localStorage.setItem("webinarTitle", webinar[1].title);
-      localStorage.setItem("webinarDesc", webinar[1].description);
-      localStorage.setItem("webinarCat", webinar[1].category);
-      localStorage.setItem("webinarName", webinar[1].name);
-      localStorage.setItem("webinarLikes", webinar[1].likes.length);
-      localStorage.setItem("webinarDislikes", webinar[1].dislikes);
-      localStorage.setItem("webinarDate", webinar[1].dateAdded);
-      localStorage.setItem("webinarComments", webinar[1].comments);
-      localStorage.setItem("amount", webinar[1].amount);
-      window.location.href = "/html/webinar.html";
-    };
-    renderTitle.onclick = function () {
-      localStorage.setItem("post_id", webinar[1]._id);
-      localStorage.setItem("file_id", webinar[1].upload);
-      localStorage.setItem("user_id", webinar[1].user);
-      localStorage.setItem("video_id", webinar[1].video_id);
-      localStorage.setItem("webinarTitle", webinar[1].title);
-      localStorage.setItem("webinarDesc", webinar[1].description);
-      localStorage.setItem("webinarCat", webinar[1].category);
-      localStorage.setItem("webinarName", webinar[1].name);
-      localStorage.setItem("webinarLikes", webinar[1].likes.length);
-      localStorage.setItem("webinarDislikes", webinar[1].dislikes);
-      localStorage.setItem("webinarDate", webinar[1].dateAdded);
-      localStorage.setItem("webinarComments", webinar[1].comments);
-      localStorage.setItem("amount", webinar[1].amount);
-      window.location.href = "/html/webinar.html";
-    };
-    renderTitle.textContent = webinar[1].title;
-    renderThumb.className = "thumbnail";
-    if (webinar[1].thumbnail == undefined) {
-      renderThumb.src = "/img/empty.png";
-    } else {
-      renderThumb.src = webinar[1].thumbnail;
-    }
-    statDiv.className = "statDiv";
-    renderName.textContent = webinar[1].name;
-    renderName.className = "webinarName";
-    renderPrice.textContent = webinar[1].amount + " Pi";
-    renderPrice.className = "webinarPrice";
-    renderLike.textContent = "👍" + webinar[1].likes.length;
-    renderLike.className = "webinarLike";
-    renderCategory.textContent = webinar[1].category;
+    renderCategory.textContent = webinar.category;
     renderCategory.className = "webinarCategory";
 
     renderDiv.appendChild(renderThumb);
@@ -306,7 +233,6 @@ function renderCreators(uploadsObj) {
 }
 
 function renderWishlist(webinars) {
-  console.log(webinars);
   const postSection = document.querySelector(".wishSection");
   for (const webinar of webinars) {
     const renderDiv = document.createElement("article");
@@ -385,36 +311,36 @@ function renderCategories(uploadsObj) {
     const renderPrice = document.createElement("p2");
     renderDiv.className = "title";
     renderDiv.onclick = function () {
-      localStorage.setItem("post_id", webinar[1]._id);
-      localStorage.setItem("file_id", webinar[1].upload);
-      localStorage.setItem("user_id", webinar[1].user);
-      localStorage.setItem("video_id", webinar[1].video_id);
-      localStorage.setItem("webinarTitle", webinar[1].title);
-      localStorage.setItem("webinarDesc", webinar[1].description);
-      localStorage.setItem("webinarCat", webinar[1].category);
-      localStorage.setItem("webinarName", webinar[1].name);
-      localStorage.setItem("webinarLikes", webinar[1].likes.length);
-      localStorage.setItem("webinarDislikes", webinar[1].dislikes);
-      localStorage.setItem("webinarDate", webinar[1].dateAdded);
-      localStorage.setItem("webinarComments", webinar[1].comments);
-      localStorage.setItem("amount", webinar[1].amount);
+      localStorage.setItem("post_id", webinar._id);
+      localStorage.setItem("file_id", webinar.upload);
+      localStorage.setItem("user_id", webinar.user);
+      localStorage.setItem("video_id", webinar.video_id);
+      localStorage.setItem("webinarTitle", webinar.title);
+      localStorage.setItem("webinarDesc", webinar.description);
+      localStorage.setItem("webinarCat", webinar.category);
+      localStorage.setItem("webinarName", webinar.name);
+      localStorage.setItem("webinarLikes", webinar.likes.length);
+      localStorage.setItem("webinarDislikes", webinar.dislikes);
+      localStorage.setItem("webinarDate", webinar.dateAdded);
+      localStorage.setItem("webinarComments", webinar.comments);
+      localStorage.setItem("amount", webinar.amount);
       window.location.href = "/html/webinar.html";
     };
-    renderTitle.textContent = webinar[1].title;
+    renderTitle.textContent = webinar.title;
     renderThumb.className = "thumbnail";
-    if (webinar[1].thumbnail == undefined) {
+    if (webinar.thumbnail == undefined) {
       renderThumb.src = "/img/empty.png";
     } else {
-      renderThumb.src = webinar[1].thumbnail;
+      renderThumb.src = webinar.thumbnail;
     }
     statDiv.className = "statDiv";
-    renderName.textContent = webinar[1].name;
+    renderName.textContent = webinar.name;
     renderName.className = "webinarName";
-    renderPrice.textContent = webinar[1].amount + " Pi";
+    renderPrice.textContent = webinar.amount + " Pi";
     renderPrice.className = "webinarPrice";
-    renderLike.textContent = "👍" + webinar[1].likes.length;
+    renderLike.textContent = "👍" + webinar.likes.length;
     renderLike.className = "webinarLike";
-    renderCategory.textContent = webinar[1].category;
+    renderCategory.textContent = webinar.category;
     renderCategory.className = "webinarCategory";
     renderDiv.appendChild(renderThumb);
     renderDiv.appendChild(renderTitle);
@@ -423,29 +349,29 @@ function renderCategories(uploadsObj) {
     statDiv.appendChild(renderPrice);
     statDiv.appendChild(renderLike);
     renderDiv.appendChild(statDiv);
-    if (webinar[1].category == "Cryptocurrency") {
+    if (webinar.category == "Cryptocurrency") {
       cryptocurrency.appendChild(renderDiv);
-    } else if (webinar[1].category == "Technology") {
+    } else if (webinar.category == "Technology") {
       technology.appendChild(renderDiv);
-    } else if (webinar[1].category == "Fitness") {
+    } else if (webinar.category == "Fitness") {
       fitness.appendChild(renderDiv);
-    } else if (webinar[1].category == "Food") {
+    } else if (webinar.category == "Food") {
       food.appendChild(renderDiv);
-    } else if (webinar[1].category == "History") {
+    } else if (webinar.category == "History") {
       history.appendChild(renderDiv);
-    } else if (webinar[1].category == "Money") {
+    } else if (webinar.category == "Money") {
       money.appendChild(renderDiv);
-    } else if (webinar[1].category == "Nature") {
+    } else if (webinar.category == "Nature") {
       nature.appendChild(renderDiv);
-    } else if (webinar[1].category == "Pi Network") {
+    } else if (webinar.category == "Pi Network") {
       pinetwork.appendChild(renderDiv);
-    } else if (webinar[1].category == "Sports") {
+    } else if (webinar.category == "Sports") {
       sports.appendChild(renderDiv);
-    } else if (webinar[1].category == "Politics") {
+    } else if (webinar.category == "Politics") {
       politics.appendChild(renderDiv);
     } else if (
-      webinar[1].category == "Education" ||
-      webinar[1].category == "Eduction"
+      webinar.category == "Education" ||
+      webinar.category == "Eduction"
     ) {
       education.appendChild(renderDiv);
     } else {
@@ -463,101 +389,64 @@ Storage.prototype.getObj = function (key) {
 };
 
 //getting webinars
-async function renderAllWebinars() {
-  if (sessionStorage.getItem("all") == undefined) {
-    const auth_token = localStorage.getItem("userSession");
-    const webinarUploads = await axios.get(`${urlApi}/post/all`, {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${auth_token}`
-      }
-    });
-    let currentIndex = webinarUploads.data.list.length,
-      randomIndex;
-    while (currentIndex != 0) {
-      randomIndex = Math.floor(Math.random() * currentIndex);
-      currentIndex--;
-      [
-        webinarUploads.data.list[currentIndex],
-        webinarUploads.data.list[randomIndex]
-      ] = [
-        webinarUploads.data.list[randomIndex],
-        webinarUploads.data.list[currentIndex]
-      ];
-    }
-    sessionStorage.setObj("all", webinarUploads);
-    renderAll(webinarUploads);
-  } else {
-    const webinarUploads = sessionStorage.getObj("all");
-    let currentIndex = webinarUploads.data.list.length,
-      randomIndex;
-    while (currentIndex != 0) {
-      randomIndex = Math.floor(Math.random() * currentIndex);
-      currentIndex--;
-      [
-        webinarUploads.data.list[currentIndex],
-        webinarUploads.data.list[randomIndex]
-      ] = [
-        webinarUploads.data.list[randomIndex],
-        webinarUploads.data.list[currentIndex]
-      ];
-    }
-    renderAll(webinarUploads);
+async function renderMoreWebinars() {
+  const auth_token = localStorage.getItem("userSession");
+  const webinarUploads = await axios.get(`${urlApi}/post/all`, {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${auth_token}`,
+    },
+  });
+  renderWebinars(webinarUploads);
+  const webinars = sessionStorage.getObj("all");
+  for (const webinar of webinarUploads.data.list) {
+    webinars.data.list.push(webinar);
   }
+  sessionStorage.setObj("all", webinars);
 }
 
-async function renderCategoryWebinars() {
-  if (sessionStorage.getItem("all") == undefined) {
-    const auth_token = localStorage.getItem("userSession");
-    const webinarUploads = await axios.get(`${urlApi}/post/all`, {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${auth_token}`
-      }
-    });
-    let currentIndex = webinarUploads.data.list.length,
-      randomIndex;
-    while (currentIndex != 0) {
-      randomIndex = Math.floor(Math.random() * currentIndex);
-      currentIndex--;
-      [
-        webinarUploads.data.list[currentIndex],
-        webinarUploads.data.list[randomIndex]
-      ] = [
-        webinarUploads.data.list[randomIndex],
-        webinarUploads.data.list[currentIndex]
-      ];
-    }
-    sessionStorage.setObj("all", webinarUploads);
-    renderAll(webinarUploads);
-  } else {
-    const webinarUploads = sessionStorage.getObj("all");
-    let currentIndex = webinarUploads.data.list.length,
-      randomIndex;
-    while (currentIndex != 0) {
-      randomIndex = Math.floor(Math.random() * currentIndex);
-      currentIndex--;
-      [
-        webinarUploads.data.list[currentIndex],
-        webinarUploads.data.list[randomIndex]
-      ] = [
-        webinarUploads.data.list[randomIndex],
-        webinarUploads.data.list[currentIndex]
-      ];
-    }
-    renderCategories(webinarUploads);
+async function renderMoreCategoryWebinars(category) {
+  const auth_token = localStorage.getItem("userSession");
+  const data = {
+    category,
+  };
+  const webinarUploads = await axios.get(`${urlApi}/post/category`, data);
+  renderCategory(webinarUploads);
+  const webinars = sessionStorage.getObj("all");
+  for (const webinar of webinarUploads.data.list) {
+    webinars.data.list.push(webinar);
   }
+  sessionStorage.setObj("all", webinars);
+}
+
+function renderCategoryWebinars() {
+  const webinarUploads = sessionStorage.getObj("all");
+  let currentIndex = webinarUploads.data.list.length,
+    randomIndex;
+  while (currentIndex != 0) {
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex--;
+    [
+      webinarUploads.data.list[currentIndex],
+      webinarUploads.data.list[randomIndex],
+    ] = [
+      webinarUploads.data.list[randomIndex],
+      webinarUploads.data.list[currentIndex],
+    ];
+  }
+  renderCategories(webinarUploads);
 }
 
 async function renderFeaturedWebinars() {
-  if (sessionStorage.getItem("featured") == undefined) {
+  if (sessionStorage.getItem("all") == undefined) {
     const auth_token = localStorage.getItem("userSession");
     const webinarUploads = await axios.get(`${urlApi}/post/all`, {
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${auth_token}`
-      }
+        Authorization: `Bearer ${auth_token}`,
+      },
     });
+    renderWebinars(webinarUploads);
     let currentIndex = webinarUploads.data.list.length,
       randomIndex;
     while (currentIndex != 0) {
@@ -565,16 +454,15 @@ async function renderFeaturedWebinars() {
       currentIndex--;
       [
         webinarUploads.data.list[currentIndex],
-        webinarUploads.data.list[randomIndex]
+        webinarUploads.data.list[randomIndex],
       ] = [
         webinarUploads.data.list[randomIndex],
-        webinarUploads.data.list[currentIndex]
+        webinarUploads.data.list[currentIndex],
       ];
     }
-    sessionStorage.setObj("featured", webinarUploads);
-    renderFeatured(webinarUploads);
+    sessionStorage.setObj("all", webinarUploads);
   } else {
-    const webinarUploads = sessionStorage.getObj("featured");
+    const webinarUploads = sessionStorage.getObj("all");
     let currentIndex = webinarUploads.data.list.length,
       randomIndex;
     while (currentIndex != 0) {
@@ -582,26 +470,26 @@ async function renderFeaturedWebinars() {
       currentIndex--;
       [
         webinarUploads.data.list[currentIndex],
-        webinarUploads.data.list[randomIndex]
+        webinarUploads.data.list[randomIndex],
       ] = [
         webinarUploads.data.list[randomIndex],
-        webinarUploads.data.list[currentIndex]
+        webinarUploads.data.list[currentIndex],
       ];
     }
-    renderFeatured(webinarUploads);
+    renderWebinars(webinarUploads);
   }
 }
 
 async function renderYourWebinars() {
-    const auth_token = localStorage.getItem("userSession");
-    const webinarUploads = await axios.get(`${urlApi}/post`, {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${auth_token}`
-      }
-    });
-    sessionStorage.setObj("your", webinarUploads);
-    renderYour(webinarUploads);
+  const auth_token = localStorage.getItem("userSession");
+  const webinarUploads = await axios.get(`${urlApi}/post`, {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${auth_token}`,
+    },
+  });
+  sessionStorage.setObj("your", webinarUploads);
+  renderYour(webinarUploads);
 }
 
 async function renderCreatorsWebinars() {
@@ -610,8 +498,8 @@ async function renderCreatorsWebinars() {
   const webinarUploads = await axios.get(`${urlApi}/post/creator/${userId}`, {
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer ${auth_token}`
-    }
+      Authorization: `Bearer ${auth_token}`,
+    },
   });
   renderCreators(webinarUploads);
 }
@@ -621,22 +509,22 @@ async function renderPurchasedWebinars() {
   const webinarUploads = await axios.get(`${urlApi}/post/purchases`, {
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer ${auth_token}`
-    }
+      Authorization: `Bearer ${auth_token}`,
+    },
   });
   renderPurchases(webinarUploads);
 }
 
 async function renderWishlistWebinars() {
-    const auth_token = localStorage.getItem("userSession");
-    const webinarUploads = await axios.get(`${urlApi}/post/wishlist`, {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${auth_token}`
-      }
-    });
-    const webinars = webinarUploads.data.wishlist;
-    renderWishlist(webinars);
+  const auth_token = localStorage.getItem("userSession");
+  const webinarUploads = await axios.get(`${urlApi}/post/wishlist`, {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${auth_token}`,
+    },
+  });
+  const webinars = webinarUploads.data.wishlist;
+  renderWishlist(webinars);
 }
 
 async function addWishlist() {
@@ -659,19 +547,18 @@ async function addWishlist() {
     description: description,
     amount: amount,
     video_id: video_id,
-    name: name
+    name: name,
   };
   const config = {
-    post: post
+    post: post,
   };
   const auth_token = localStorage.getItem("userSession");
   const response = await axios.post(`${urlApi}/post/addWishlist`, config, {
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer ${auth_token}`
-    }
+      Authorization: `Bearer ${auth_token}`,
+    },
   });
-  console.log(response);
   if (response.status == 200) {
     alert(response.data.message);
     if (response.data.message === "Added to wishlist") {
@@ -695,8 +582,8 @@ async function comment() {
     {
       headers: {
         "Access-Control-Allow-Origin": "*",
-        Authorization: `Bearer ${authToken}`
-      }
+        Authorization: `Bearer ${authToken}`,
+      },
     }
   );
   if (response.status == 200) {
@@ -744,9 +631,8 @@ async function renderFollowing() {
   const profile = await axios.get(`${urlApi}/profile`, {
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer ${auth_token}`
-    }
+      Authorization: `Bearer ${auth_token}`,
+    },
   });
-  console.log(profile);
   render_following(profile);
 }

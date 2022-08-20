@@ -27,6 +27,16 @@
 </head>
 
 <body>
+  <div class="editCommentModal" id="editCommentModal">
+    <div class="close_editModal" id="editModalClose">
+      <p>Close</p>
+    </div>
+    <form class="editCommentForm" id="editCommentField">
+      <label for="editCommentInput">Edit Comment</label>
+      <input placeholder="Edit your comment" name="editComment" arial-label="Edit comment" id="editCommentInput">
+      <button id="editCommentBtn">Edit Comment</button>
+    </form>
+  </div>
   <div>
     <nav class="footer" style="z-index: 100">
       <div class="mobile">
@@ -85,13 +95,13 @@
       <i id="deleteButton" onclick="deleteWebinar()" class="fas fa-trash"></i>
 
       <div class="grid_4">
-        <iframe data-aa='1980365' src='//acceptable.a-ads.com/1980365' style='border:0px; padding:0; width:100%; height:100%; overflow:hidden; background-color: transparent;'></iframe>
+<!--         <iframe data-aa='1980365' src='//acceptable.a-ads.com/1980365' style='border:0px; padding:0; width:100%; height:100%; overflow:hidden; background-color: transparent;'></iframe> -->
       </div>
 
       <div class="grid_5">
         <p2 style="border-top: solid 3px;">Comments:</p2><br><br>
         <form class="commentField" id="commentForm">
-          <input style="border: none;" id="text" type="number" placeholder="Write a comment.."></input>
+          <input style="border: none;" id="text" type="text" placeholder="Write a comment.."></input>
           <input style="text-align: center;" type="button" value="Comment" id="postComment"></input>
         </form>
         <div id="commentsContainer"></div>
@@ -141,7 +151,7 @@
       const user = urlParams.get('u');
       const post = urlParams.get('w');
       if (post !== null && user !== null) {
-        const webinarFromUrl = await axios.get(`https://piwebinarsdev.herokuapp.com/post/${user}/${post}`);
+        const webinarFromUrl = await axios.get(`https://piwebinars-server.onrender.com/post/${user}/${post}`);
         const webinar = webinarFromUrl.data.Post;
         localStorage.user_id = webinar.user;
         localStorage.post_id = webinar._id;
@@ -171,7 +181,7 @@
       document.getElementById("date").textContent = localStorage.getItem("webinarDate").substring(0, 10);
       document.getElementById("price").textContent = "Price: " + localStorage.getItem("amount");
       // Get post from server
-      const webinarFromServer = await axios.get(`https://piwebinarsdev.herokuapp.com/post/${userId}/${post_id}`);
+      const webinarFromServer = await axios.get(`https://piwebinars-server.onrender.com/post/${userId}/${post_id}`);
       const webinar = webinarFromServer.data.Post;
       document.getElementById("title").textContent = webinar.title;
       document.getElementById("description").textContent = webinar.description;
@@ -220,7 +230,7 @@
       const userId = localStorage.getItem("user_id");
       const post_id = localStorage.getItem("post_id");
       const authTkn = localStorage.getItem("userSession");
-      const response = await axios.post(`https://piwebinars-server.herokuapp.com/post/share/${userId}/${post_id}`, {
+      const response = await axios.post(`https://piwebinars-server.onrender.com/post/share/${userId}/${post_id}`, {
         params: {
           userId,
         },
@@ -263,7 +273,7 @@
         amount: price,
         description: description,
       };
-      const response = await axios.put(`https://piwebinarsdev.herokuapp.com/post/${userId}/${post_id}`, data, {
+      const response = await axios.put(`https://piwebinars-server.onrender.com/post/${userId}/${post_id}`, data, {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${authTkn}`
@@ -283,7 +293,7 @@
       const authTkn = localStorage.getItem("userSession");
       const confirmation = confirm("Are you sure you want to permanently delete your webinar?");
       if (confirmation === true) {
-        const response = await axios.delete(`https://piwebinarsdev.herokuapp.com/post/${post_id}`, {
+        const response = await axios.delete(`https://piwebinars-server.onrender.com/post/${post_id}`, {
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${authTkn}`

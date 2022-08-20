@@ -1,5 +1,6 @@
-body, .title {
+body, .title, .videoTitle {
   background: #202020;
+  color: #ffffff;
 }
 input {
   background: #36454f;
@@ -7,12 +8,18 @@ input {
 #footer, .footer, .selection {
   background: #111;
 }
+.statDiv, #cat_selector, .fas, .grid_3, #description, #follow_btn, .commentText {
+  color: #ffffff;
+}
+.invert, .commentAvatar {
+  filter: invert(1);
+}
 @media screen and (min-width: 620px) {
   body {
     color: #4afbb4;
     background: #36454f;
   }
-  .followingStyle, #translate {
+  .followingStyle, #translate, .a_label {
     color: #4afbb4;
   }
   .purchasedWebinars::-webkit-scrollbar, .selection::-webkit-scrollbar, .yourWebinars::-webkit-scrollbar {

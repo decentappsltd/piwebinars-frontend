@@ -3,9 +3,6 @@
 
 <head>
   <!--Scripts-->
-  <!--     <script src="/js/pipayment.js"></script> -->
-  <script src="/js/pages/authentication.js"></script>
-  <!--     <script src="/js/pages/all-webinars.js"></script> -->
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   <script src="https://kit.fontawesome.com/3aea44e36d.js" crossorigin="anonymous"></script>
 
@@ -38,24 +35,23 @@
 
       <div style="float:right">
         <li class="li"><a class="a" href="/index.html"><img src="https://app.piwebinars.co.uk/img/Home_Icon.png" width="40px;">Home</a></li>
-        <li class="li"><a class="a authNav" href="./upload.html"><img src="https://app.piwebinars.co.uk/img/Upload_Icon.png" width="30px;">Upload</a></li>
         <li class="li"><a class="a" href="./search.html"><img src="https://app.piwebinars.co.uk/img/Search_Icon.png" width="40px;">Search</a></li>
+        <li class="li"><a class="a authNav" href="./upload.html"><img src="https://app.piwebinars.co.uk/img/Upload_Icon.png" width="40px;">Upload</a></li>
         <li class="li"><a class="a authNav" href="./profile.html"><img src="https://app.piwebinars.co.uk/img/Profile_Icon.png" width="40px;">Profile</a></li>
-        <li class="li"><a id="profile" class="a unAuthNav" href="./login.html"><img src="https://app.piwebinars.co.uk/img/Login_Icon.png" width="40px;">Login</a></li>
-        <li class="li"><a id="profile" class="a unAuthNav" href="./register.html"><img src="https://app.piwebinars.co.uk/img/Register_Icon.png" width="40px;">Register</a></li>
       </div>
     </div>
   </nav>
 
   <!--   Floating tab -->
   <div id="back-float">
-    <a class="fas fa-arrow-left" onclick="history.back()"></a>
+    <a class="fas fa-arrow-left" style="color: #36454f;"  onclick="history.back()"></a>
   </div>
 
   <h2>Following:</h2>
 
   <div class="yourSection"></div><br><br><br>
-
+  
+  <script src="/js/pages/authentication.js"></script>
   <script>
     function render_following(uploadsObj) {
       const postSection = document.querySelector(".yourSection");
@@ -81,7 +77,6 @@
           Authorization: `Bearer ${auth_token}`,
         },
       });
-      console.log(profile);
       render_following(profile);
     }
     renderFollowing();

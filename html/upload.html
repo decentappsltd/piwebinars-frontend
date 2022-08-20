@@ -15,8 +15,6 @@
 </head>
 
 <body>
-  <h1>Pi Webinars</h1>
-
   <nav class="footer" style="z-index: 100">
     <ul class="ul">
       <div class="mobile">
@@ -37,9 +35,11 @@
       </div>
     </div>
   </nav>
-
-  <h2 style="margin-bottom: -30px;">Upload a Webinar</h2><br><br>
-  <div class="error_log" id="error_log" style="max-width: 500px; margin: auto;"></div><br>
+  
+  <div class="desktop"><br><br><br><br><br></div>
+  
+  <h2 style="margin-bottom: -30px;">Upload a Webinar:</h2><br><br>
+  <div class="error_log" id="error_log" style="max-width: 500px; margin: auto; display: none;"></div><br>
 
   <form style="text-align: left; padding:5px; max-width: 500px; margin: auto;" action="/upload" method="POST" id="form">
     <label for="videoUpload">Video :</label>

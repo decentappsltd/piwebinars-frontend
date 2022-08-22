@@ -87,12 +87,13 @@ function buyWebinar() {
           paymentId: paymentId,
           txid: "",
         };
+        const tkn = localStorage.getItem("userSession");
         axios.post(
           "https://piwebinars-server.onrender.com/payment/approve",
           data, {
             headers: {
               "Content-Type": "application/json",
-              Authorization: `Bearer ${authToken}`
+              Authorization: `Bearer ${tkn}`
             },
             withCredentials: true,
             credentials: "same-origin"
@@ -110,14 +111,14 @@ function buyWebinar() {
           title: title,
           price: price,
         };
-        const authToken = localStorage.getItem("userSession");
+        const Tkn = localStorage.getItem("userSession");
         const response = await axios.post(
           "https://piwebinars-server.onrender.com/payment/complete",
           data,
           {
             headers: {
               "Content-Type": "application/json",
-              Authorization: `Bearer ${authToken}`,
+              Authorization: `Bearer ${Tkn}`,
             },
             withCredentials: true,
             credentials: "same-origin",

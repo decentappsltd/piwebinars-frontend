@@ -89,7 +89,14 @@ function buyWebinar() {
         };
         axios.post(
           "https://piwebinars-server.onrender.com/payment/approve",
-          data
+          data, {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${authToken}`
+            },
+            withCredentials: true,
+            credentials: "same-origin"
+          }
         );
       },
       onReadyForServerCompletion: async function (paymentId, txid) {

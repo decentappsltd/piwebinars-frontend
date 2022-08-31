@@ -28,7 +28,6 @@ async function auth() {
 
 async function piLogin() {
   alert(localStorage.uid);
-  // try {
     const config = {
       name: localStorage.piName,
       username: localStorage.piName,
@@ -47,15 +46,12 @@ async function piLogin() {
       localStorage.setItem("userSession", token);
       sessionStorage.setItem("username", localStorage.piName);
       localStorage.setItem("user", response.data.userId);
-      // show logged in
-      // TODO ****************
+      document.getElementById("login").style.display = "none";
+      document.getElementById("register").style.display = "none";
     }
     if (response.status === 201) {
       alert("Welcome to Pi Webinars!");
     }
-  // } catch (error) {
-  //   return error;
-  // }
 }
 
 auth();

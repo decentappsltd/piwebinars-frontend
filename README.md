@@ -1,70 +1,21 @@
-# Getting Started with Create React App
+# Pi Webinars
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Pi Webinars is one of the first dedicated DeEd (Decentralised Education) platforms and the winner of an Honourable Mention in the 2021 Pi Hackathon, where users can upload their videos and receive Pi everytime their content is viewed! Video topics are mostly educational, but users can introduce any topic, including blockchain and cryptocurrency!
 
-## Available Scripts
+Pi Webinars is a dedicated tool that will always make it easy for you to upload, manage, and deliver a seamless video, but we aim to go beyond being just a learning tool. While it promises to offer all the features you would expect from a platform of this kind, Pi Webinars has a lot more to offer — you can easily monetise your content to receive charge viewing fees!
 
-In the project directory, you can run:
+We at Pi Webinars listen to you. We will constantly improve the platform to deliver a great user experience.
 
-### `npm start`
+### How it works:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Pi Network Engaged Pioneers may access Pi Webinars through the Pi browser and upload their respective videos. They may choose from a wide variety of subjects including education, entrepreneurship, online marketing, personal development, technology and innovation, personal finance, blockchain and cryptocurrency, and food. All videos will be conspicuously posted for other users to browse and view at their leisure. Webinar hosts are encouraged to showcase mostly educational content lasting for at least ten minutes and at most one hour.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Viewers who choose to watch the videos will pay using Pi; the amount of which will be set by the hosts of the webinars themselves. The content creators will receive 80% of all Pi generated through their videos and can withdraw this balance to their wallets at any time.
 
-### `npm test`
+Pi Webinars is one of the first of the next generation of web apps designed by the Pi community for users around the world looking for new learning experiences through a video platform that sells and buys exclusive content and we hope to have you on board!
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
+#### https://www.piwebinars.co.uk
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Copyright © 2022 All Rights Reserved by Decent Apps Ltd.

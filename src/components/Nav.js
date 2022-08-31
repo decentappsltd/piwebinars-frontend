@@ -11,6 +11,7 @@ import {
 } from "recoil";
 import { renderFollowing, filter } from "../app/webinars.js";
 import { logout, logoutAll, deleteAccount } from "../app/authentication.js";
+import logo from '../assets/logo-text.png';
 
 function NavTab(props) {
   const [page, setPage] = useRecoilState(appPageState);
@@ -366,7 +367,7 @@ class Nav extends React.Component {
     return (
       <>
         <span id="nav">
-          <img id="logoText" src="/public/logo-text.png"></img>
+          <img id="logoText" src={logo}></img>
           <Navigation />
           <br />
           <Categories />

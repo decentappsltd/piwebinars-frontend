@@ -11,6 +11,7 @@ import {
   useRecoilValue
 } from "recoil";
 import { storedFollowing } from "../atoms/posts.js";
+import avatar from '../assets/avatar.png';
 
 function Post(props) {
   const [modalShown, toggleModal] = useState(false);
@@ -149,7 +150,7 @@ export default function User(props) {
         <div id="profile">
           { profile.avatar ?
             <img id="avatar" src={profile.avatar}></img>
-           : <img id="avatar" src='https://piwebinars.co.uk/img/avatar.png'></img>
+           : <img id="avatar" src={avatar}></img>
           }
           <span id="profileName">
             <p1>{profile.name}</p1>

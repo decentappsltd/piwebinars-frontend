@@ -4,6 +4,7 @@ import { buyWebinar } from "../app/payment.js";
 import { getPost, comment, likeWebinar, dislikeWebinar } from "../app/webinars.js";
 import { manipulateComment } from "../app/authentication.js";
 import Player from '@vimeo/player';
+import avatar from '../assets/avatar.png';
 
 function Comment(props) {
   const like = async () => {
@@ -160,16 +161,18 @@ export default function Cinema(props) {
     } else alert('Please login to dislike a webinar');
   };
 
-  useEffect(() => {
+  const setClickEvent = () => {
     function close(e) {
       if (!document.querySelector("#cinema").contains(e.target)) {
+        document.removeEventListener('click', close);
         props.close();
       }
     }
-    document.addEventListener("click", close);
-    return () => {
-      document.removeEventListener("click", close);
-    };
+    document.addEventListener('click', close);
+  }
+  
+  useEffect(() => {
+    setTimeout(setClickEvent, 500);
   }, []);
 
   useEffect(() => {
@@ -258,7 +261,7 @@ export default function Cinema(props) {
               ) : (
                 <img
                   id="avatar"
-                  src="https://piwebinars.co.uk/img/avatar.png"
+                  src={avatar}
                 ></img>
               )}
               <p id="name">{ props.post.name }</p>

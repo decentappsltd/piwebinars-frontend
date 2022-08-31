@@ -56,18 +56,19 @@ function Edit(props) {
   const [title, setTitle] = useState('');
   const [price, setPrice] = useState('');
   const [desc, setDesc] = useState('');
-  
-  useEffect(() => {
-    console.log(props, props.post.user, props.post._id);
+
+  const setClickEvent = () => {
     function close(e) {
       if (!document.querySelector("#cinema").contains(e.target)) {
+        document.removeEventListener('click', close);
         props.close();
       }
     }
     document.addEventListener('click', close);
-    return () => {
-      document.removeEventListener('click', close);
-    }
+  }
+  
+  useEffect(() => {
+    setTimeout(setClickEvent, 500);
   }, []);
     
   const handleSubmit = async () => {
@@ -76,7 +77,7 @@ function Edit(props) {
   
   return (
     <>
-      <div id="cinema">
+      <div id="cinema" style={{ padding: "10px" }}>
         <form>
           <i>Leave fields blank to remain unchanged</i><br /><br />
           <input className="input" placeholder="Update title" onChange={(e) => setTitle(e.target.value)} /><br /><br />

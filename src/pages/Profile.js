@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Uploads from '../components/Uploads.js';
 import { myProfile, editProfile } from '../app/authentication.js';
+import avatar from '../assets/avatar.png';
 
 export default function Profile() {
   const [profile, setProfile] = useState({
@@ -50,7 +51,7 @@ export default function Profile() {
         <div  id="profile">
           { profile.avatar ?
             <img id="avatar" src={profile.avatar}></img>
-           : <img id="avatar" src='https://piwebinars.co.uk/img/avatar.png'></img>
+           : <img id="avatar" src={avatar}></img>
           }
           <span id="profileName">
             <p1>{profile.name}</p1>

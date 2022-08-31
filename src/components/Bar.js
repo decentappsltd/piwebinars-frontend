@@ -89,17 +89,19 @@ function AuthPopup(props) {
       props.toggle();
     }
   }
-  
-  useEffect(() => {
+
+  const setClickEvent = () => {
     function close(e) {
       if (!document.querySelector(".popup").contains(e.target)) {
+        document.removeEventListener('click', close);
         props.close();
       }
     }
     document.addEventListener('click', close);
-    return () => {
-      document.removeEventListener('click', close);
-    }
+  }
+  
+  useEffect(() => {
+    setTimeout(setClickEvent, 500);
   }, []);
 
   return(
@@ -117,6 +119,10 @@ function AuthPopup(props) {
 
 function User(props) {
   const [modalShown, toggleModal] = useState(false);
+
+  useEffect(() => {
+    console.log(modalShown);
+  }, [modalShown]);
   
   return (
     <div>
@@ -126,7 +132,7 @@ function User(props) {
         <i className={props.class}></i>
         <a className="userLogin">{props.label}</a>
       </div>
-      {modalShown ? 
+      {modalShown && 
         <AuthPopup
           header={props.label} 
           type={props.type}
@@ -137,7 +143,6 @@ function User(props) {
           toggleModal(!modalShown);
         }}
         />
-        : null
       }
     </div> 
   );

@@ -9,21 +9,23 @@ import {
 } from 'recoil';
 import { storedPurchases } from '../atoms/posts.js';
 import Loader from './Loader.js';
-import Vimeo from '@vimeo/player';
+import Player from '@vimeo/player';
 
 const urlApi = 'https://piwebinars-server.onrender.com';
 
 function Modal(props) {
-  useEffect(() => {
+  const setClickEvent = () => {
     function close(e) {
       if (!document.querySelector("#_cinema").contains(e.target)) {
+        document.removeEventListener('click', close);
         props.close();
       }
     }
     document.addEventListener('click', close);
-    return () => {
-      document.removeEventListener('click', close);
-    }
+  }
+  
+  useEffect(() => {
+    setTimeout(setClickEvent, 500);
   }, []);
   
   useEffect(() => {
@@ -32,20 +34,20 @@ function Modal(props) {
       const width = Number(window.innerWidth);
       const size = width*0.85;
       options = {
-        url: props.url,
+        url: props.post.url,
         controls: true,
         width: size,
         height: 250
       };
     } else {
       options = {
-        url: props.url,
+        url: props.post.url,
         controls: true,
         width: 500,
         height: 290
       };
     }
-    var videoPlayer = new Vimeo.Player('_cinema', options);
+    new Player('_cinema', options);
   }, []);
   
   return (
@@ -65,7 +67,7 @@ function Post(props) {
   return (
     <>
       <div onClick={open} className="post">
-        <iframe className="postThumbnail" src={props.url} frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+        <iframe className="postThumbnail" src={props.url} frameBorder="0" webkitallowfullscreen="true" mozallowfullscreen="true" allowFullScreen></iframe>
         <h3 className="postTitle">{props.title}</h3>
       </div>
       
@@ -78,8 +80,6 @@ function Post(props) {
     </>
   );
 }
-
-let posts = [];
 
 function Purchases() { 
   const [webinars, setPosts] = useRecoilState(storedPurchases);

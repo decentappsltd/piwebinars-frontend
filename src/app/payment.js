@@ -36,7 +36,7 @@ async function piLogin() {
       piAccessToken: localStorage.piAccessToken,
     };
     const response = await axios.post(
-      `https://piwebinars-server.onrender.com/login/pi`,
+      `https://piwebinarsdev.herokuapp.com/login/pi`,
       config
     );
     if (response.status === 200 || response.status === 201) {

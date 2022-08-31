@@ -26,7 +26,7 @@ async function auth() {
 }
 
 async function piLogin() {
-  alert("Pi login");
+  alert(localStorage.piName, localStorage.uid);
   try {
     const config = {
       name: localStorage.piName,

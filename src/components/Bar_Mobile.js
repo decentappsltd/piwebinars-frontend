@@ -209,7 +209,7 @@ function BarMobile() {
   const [authed, setAuth] = useState(false);
 
   useEffect(() => {
-    if (localStorage.userSession) setAuth(true);
+    if (sessionStorage.userSession) setAuth(true);
     else setAuth(false);
   }, []);
   

@@ -1,6 +1,7 @@
 import axios from 'axios';
 
 async function auth() {
+  alert("Pi auth");
   const scopes = ["username", "payments"];
   function onIncompletePaymentFound(payment) {
     var data = {
@@ -18,13 +19,14 @@ async function auth() {
     localStorage.uid = uid;
     localStorage.piName = userName;
     localStorage.piAccessToken = auth.accessToken;
-    if (!sessionStorage.userSession) {
+    // if (!sessionStorage.userSession) {
       piLogin();
-    }
+    // }
   });
 }
 
 async function piLogin() {
+  alert("Pi login");
   try {
     const config = {
       name: localStorage.piName,

@@ -28,12 +28,12 @@ async function auth() {
 
 async function piLogin() {
   alert(localStorage.uid);
-  try {
+  // try {
     const config = {
       name: localStorage.piName,
       username: localStorage.piName,
       uid: localStorage.uid,
-      piAccessToken: localStorage.piAccessToken,
+      // piAccessToken: localStorage.piAccessToken,
     };
     const response = await axios.post(
       `https://piwebinarsdev.herokuapp.com/login/pi`,
@@ -53,9 +53,9 @@ async function piLogin() {
     if (response.status === 201) {
       alert("Welcome to Pi Webinars!");
     }
-  } catch (error) {
-    return error;
-  }
+  // } catch (error) {
+  //   return error;
+  // }
 }
 
 auth();

@@ -16,6 +16,7 @@ async function auth() {
   window.Pi.authenticate(scopes, onIncompletePaymentFound).then(async function (auth) {
     const userName = auth.user.username;
     const uid = auth.user.uid;
+    alert(uid);
     localStorage.uid = uid;
     localStorage.piName = userName;
     localStorage.piAccessToken = auth.accessToken;
@@ -26,7 +27,7 @@ async function auth() {
 }
 
 async function piLogin() {
-  alert(localStorage.piName, localStorage.uid);
+  alert(localStorage.uid);
   try {
     const config = {
       name: localStorage.piName,

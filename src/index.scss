@@ -533,12 +533,36 @@ button#followBtn {
   background: linear-gradient(to right, #efc056, #e27954);
 }
 
+#navOptions {
+  padding: 10px;
+  text-align: left;
+
+  .navOption {
+    margin-bottom: 10px;
+    color: $light_yellow;
+    text-decoration: none;
+    font-size: 14px;
+    padding: 10px;
+    color: white;
+
+    i {
+      margin-right: 5px;
+      color: $light_yellow;
+      font-size: 18px;
+      width: 28px;
+    }
+  }
+}
+
 #legal {
   position: absolute;
   bottom: 10px;
-  
-  a {
-    
+  left: 0px;
+  padding: 10px;
+
+  i {
+    white-space: normal;
+    width: 230px;
   }
 }
 

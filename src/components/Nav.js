@@ -249,30 +249,32 @@ function Menu() {
   return (
     <>
       <span className="popupNavContent">
-        <a
-          id="translate"
+        <div id="google_translate"></div><br />
+        <div id="navOptions">
+        <a 
+          className="navOption" 
           onClick={translate}
-          style={{ fontSize: "12px", background: "none" }}
         >
+          <i className="fas fa-language"></i>
           Translate
         </a>
-        <br />
-        <br />
-        <div id="google_translate"></div>
+        <br /><br />
         
         { localStorage.userSession ? 
           <>
-            <button id="logoutBtn" onClick={logout}>Logout</button>
-            <button id="logoutAllBtn" onClick={logoutAll}>Logout all</button>
-            <button id="deleteAccountBtn" onClick={deleteAccount}>DeleteAccount</button>
+            <a className="navOption" id="logoutBtn" onClick={logout}><i className="fas fa-user-lock"></i> Logout</a><br /><br />
+            <a className="navOption" id="logoutAllBtn" onClick={logoutAll}><i className="fas fa-user-shield"></i> Logout all</a><br /><br />
+            <a className="navOption" id="deleteAccountBtn" onClick={deleteAccount}><i className="fas fa-trash"></i> Delete account</a><br /><br />
           </>
           : null }
 
+        <a className="navOption" href="https://decentapps.co.uk/privicy.html"><i className="fas fa-eye-slash"></i> Privacy</a><br /><br />
+        <a className="navOption" href="https://decentapps.co.uk/terms.html"><i className="fas fa-file"></i> Terms</a><br /><br />
+        <a className="navOption" href="https://decentapps.co.uk/contact.html"><i className="fa-regular fa-message"></i> Contact</a><br /><br />
+
+        </div>
+
         <div id="legal">
-          <a href="https://decentapps.co.uk/privicy.html">Privacy |</a>
-          <a href="https://decentapps.co.uk/terms.html">Terms |</a>
-          <a href="https://decentapps.co.uk/contact.html">Contact</a>
-          <br />
           <i>Copyright © 2022 All Rights Reserved by Decent Apps Ltd.</i>
         </div> 
       </span>

@@ -121,16 +121,18 @@ function AuthPopup(props) {
     }
   };
 
-  useEffect(() => {
+  const setClickEvent = () => {
     function close(e) {
       if (!document.querySelector(".popup").contains(e.target)) {
+        document.removeEventListener('click', close);
         props.close();
       }
     }
-    document.addEventListener("click", close);
-    return () => {
-      document.removeEventListener("click", close);
-    };
+    document.addEventListener('click', close);
+  }
+  
+  useEffect(() => {
+    setTimeout(setClickEvent, 500);
   }, []);
 
   return (

@@ -1,9 +1,0 @@
-import React from 'https://cdn.skypack.dev/react';
-
-class NoPage extends React.Component {
-  render(){
-    return <h2>404</h2>;
-  }
-}
-
-export default NoPage;

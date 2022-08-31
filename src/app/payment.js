@@ -1,7 +1,6 @@
 import axios from 'axios';
 
 async function auth() {
-  alert("Pi auth");
   const scopes = ["username", "payments"];
   function onIncompletePaymentFound(payment) {
     var data = {
@@ -16,42 +15,40 @@ async function auth() {
   window.Pi.authenticate(scopes, onIncompletePaymentFound).then(async function (auth) {
     const userName = auth.user.username;
     const uid = auth.user.uid;
-    alert(uid);
     localStorage.uid = uid;
     localStorage.piName = userName;
     localStorage.piAccessToken = auth.accessToken;
     // if (!sessionStorage.userSession) {
-      piLogin();
+    piLogin();
     // }
   });
 }
 
 async function piLogin() {
-  alert(localStorage.uid);
-    const config = {
-      name: localStorage.piName,
-      username: localStorage.piName,
-      uid: localStorage.uid,
-      // piAccessToken: localStorage.piAccessToken,
-    };
-    const response = await axios.post(
-      `https://piwebinarsdev.herokuapp.com/login/pi`,
-      config
-    );
-    if (response.status === 200 || response.status === 201) {
-      const token = response.data.token;
-      sessionStorage.removeItem("userSession");
-      localStorage.removeItem("userSession");
-      sessionStorage.setItem("userSession", token);
-      localStorage.setItem("userSession", token);
-      sessionStorage.setItem("username", localStorage.piName);
-      localStorage.setItem("user", response.data.userId);
-      document.getElementById("login").style.display = "none";
-      document.getElementById("register").style.display = "none";
-    }
-    if (response.status === 201) {
-      alert("Welcome to Pi Webinars!");
-    }
+  const config = {
+    name: localStorage.piName,
+    username: localStorage.piName,
+    uid: localStorage.uid,
+    // piAccessToken: localStorage.piAccessToken,
+  };
+  const response = await axios.post(
+    `https://piwebinarsdev.herokuapp.com/login/pi`,
+    config
+  );
+  if (response.status === 200 || response.status === 201) {
+    const token = response.data.token;
+    sessionStorage.removeItem("userSession");
+    localStorage.removeItem("userSession");
+    sessionStorage.setItem("userSession", token);
+    localStorage.setItem("userSession", token);
+    sessionStorage.setItem("username", localStorage.piName);
+    localStorage.setItem("user", response.data.userId);
+    document.getElementById("login").style.display = "none";
+    document.getElementById("register").style.display = "none";
+  }
+  if (response.status === 201) {
+    alert("Welcome to Pi Webinars!");
+  }
 }
 
 auth();

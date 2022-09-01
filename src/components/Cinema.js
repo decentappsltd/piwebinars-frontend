@@ -113,6 +113,7 @@ export default function Cinema(props) {
   const [text, setText] = useState("");
   const [isWebinarLiked, setWebinarLiked] = useState(false);
   const [isWebinarDisliked, setWebinarDisliked] = useState(false);
+  const [purchased, setPurchased] = useState(false);
 
   const handleComment = async () => {
     console.log(props.post.user_id, props.post.post_id, text);
@@ -197,10 +198,10 @@ export default function Cinema(props) {
     setInterval(function () {
       videoPlayer.on("timeupdate", function (getAll) {
         let currentPos = getAll.seconds;
-        if (currentPos >= 30) {
+        if (currentPos >= 30 && purchased === false) {
           videoPlayer.pause();
           videoPlayer.setCurrentTime(0);
-          // const payTimeout = setTimeout(endPreview, 1000);
+          setTimeout(buyWebinar(props.post), 3000);
         }
       });
     }, 1000);
@@ -227,6 +228,14 @@ export default function Cinema(props) {
     getThePost();
   }, []);
 
+  const handlePurchase = async () => {
+    const response = await buyWebinar(props.post);
+    if (response.data.success === true) {
+      alert('Thank you for purchasing a webinar, you may now watch it here or in your purchases page. Enjoy!');
+      setPurchased(true);
+    }
+  }
+
   return (
     <>
       <div id="cinema">
@@ -252,7 +261,7 @@ export default function Cinema(props) {
             {(props.post.date !== undefined && window.innerWidth >= 850) && (
               <p id="date">{props.post.date.substring(0, 10)}</p>
             )}
-            <button id="pay" onClick={() => buyWebinar(props.post)}>
+            <button id="pay" onClick={handlePurchase}>
               Buy webinar
             </button>
             <Link to={`/user/${props.post.user_id}`} id="creatorProfile">
@@ -301,7 +310,7 @@ export default function Cinema(props) {
           <div id="commentsContainer">
             {comments.map((comment) => {
               return (
-                <article>
+                <article key={comment._id}>
                   <Comment
                     id={comment._id}
                     user={comment.user}

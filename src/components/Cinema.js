@@ -201,7 +201,6 @@ export default function Cinema(props) {
         if (currentPos >= 30 && purchased === false) {
           videoPlayer.pause();
           videoPlayer.setCurrentTime(0);
-          setTimeout(buyWebinar(props.post), 3000);
         }
       });
     }, 1000);
@@ -230,6 +229,7 @@ export default function Cinema(props) {
 
   const handlePurchase = async () => {
     const response = await buyWebinar(props.post);
+    alert(response.data.success);
     if (response.data.success === true) {
       alert('Thank you for purchasing a webinar, you may now watch it here or in your purchases page. Enjoy!');
       setPurchased(true);

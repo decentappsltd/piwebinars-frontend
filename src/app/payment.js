@@ -1,4 +1,5 @@
 import axios from 'axios';
+import Player from '@vimeo/player';
 
 const serverURL = 'https://piwebinarsdev.herokuapp.com';
 
@@ -84,13 +85,13 @@ function buyWebinar(post) {
         axios.post(
           `${serverURL}/payment/approve`,
           data, {
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${Tkn}`
-            },
-            withCredentials: true,
-            credentials: "same-origin"
-          }
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${Tkn}`
+          },
+          withCredentials: true,
+          credentials: "same-origin"
+        }
         );
       },
       onReadyForServerCompletion: async function (paymentId, txid) {
@@ -116,8 +117,28 @@ function buyWebinar(post) {
             credentials: "same-origin",
           }
         );
-        if (response.data.success == true) alert('Thank you for purchasing a webinar, you may now watch it here or in your purchases page. Enjoy!');
-        else alert('Payment failed, please contact customer service at support@piwebinars.app');
+        if (response.data.success == true) {
+          alert('Thank you for purchasing a webinar, you may now watch it here or in your purchases page. Enjoy!');
+          let options;
+          if (window.innerWidth < 850) {
+            const width = Number(window.innerWidth);
+            const size = width * 0.85;
+            options = {
+              url: url,
+              controls: true,
+              width: size,
+              height: 250
+            };
+          } else {
+            options = {
+              url: url,
+              controls: true,
+              width: 500,
+              height: 290
+            };
+          }
+          new Player('Video', options);
+        } else alert('Payment failed, please contact customer service at support@piwebinars.app');
         return response;
       },
       onCancel: function (paymentId, txid) {

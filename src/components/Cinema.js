@@ -113,7 +113,6 @@ export default function Cinema(props) {
   const [text, setText] = useState("");
   const [isWebinarLiked, setWebinarLiked] = useState(false);
   const [isWebinarDisliked, setWebinarDisliked] = useState(false);
-  const [purchased, setPurchased] = useState(false);
 
   const handleComment = async () => {
     console.log(props.post.user_id, props.post.post_id, text);
@@ -176,7 +175,7 @@ export default function Cinema(props) {
     setTimeout(setClickEvent, 500);
   }, []);
 
-  const setPlayer = () => {
+  useEffect(() => {
     const url = "https://player.vimeo.com/video/" + props.post.video_id;
     let options;
     if (window.innerWidth < 850) {
@@ -198,17 +197,13 @@ export default function Cinema(props) {
     setInterval(function () {
       videoPlayer.on("timeupdate", function (getAll) {
         let currentPos = getAll.seconds;
-        if (currentPos >= 30 && purchased == false) {
+        if (currentPos >= 30) {
           videoPlayer.pause();
           videoPlayer.setCurrentTime(0);
         }
       });
     }, 1000);
-  }
-
-  useEffect(() => {
-    setPlayer();
-  }, [purchased]);
+  }, []);
 
   const getThePost = async () => {
     const post = await getPost(props.post.user_id, props.post.post_id);
@@ -231,13 +226,6 @@ export default function Cinema(props) {
     getThePost();
   }, []);
 
-  const handlePurchase = async () => {
-    const response = await buyWebinar(props.post);
-    if (response.data.success === true) {
-      setPurchased(true);
-    }
-  }
-
   return (
     <>
       <div id="cinema">
@@ -245,7 +233,7 @@ export default function Cinema(props) {
 
         <div id="info">
           <span>
-            <h3 id="title" onClick={() => { setPurchased(true); console.log(purchased) }}>{props.post.title}</h3>
+            <h3 id="title">{props.post.title}</h3>
             <p5 id="description">{props.post.description}</p5>
             {props.post.likes !== undefined && (
               <p id="likes" onClick={handleLike} className={`${isWebinarLiked ? 'colourYellow' : 'colourBlack'}`}>
@@ -263,7 +251,7 @@ export default function Cinema(props) {
             {(props.post.date !== undefined && window.innerWidth >= 850) && (
               <p id="date">{props.post.date.substring(0, 10)}</p>
             )}
-            <button id="pay" onClick={handlePurchase}>
+            <button id="pay" onClick={() => { buyWebinar(props.post) }}>
               Buy webinar
             </button>
             <Link to={`/user/${props.post.user_id}`} id="creatorProfile">

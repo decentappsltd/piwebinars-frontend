@@ -176,7 +176,7 @@ export default function Cinema(props) {
     setTimeout(setClickEvent, 500);
   }, []);
 
-  useEffect(() => {
+  const setPlayer = () => {
     const url = "https://player.vimeo.com/video/" + props.post.video_id;
     let options;
     if (window.innerWidth < 850) {
@@ -198,12 +198,16 @@ export default function Cinema(props) {
     setInterval(function () {
       videoPlayer.on("timeupdate", function (getAll) {
         let currentPos = getAll.seconds;
-        if (currentPos >= 30 && purchased !== true) {
+        if (currentPos >= 30 && purchased == false) {
           videoPlayer.pause();
           videoPlayer.setCurrentTime(0);
         }
       });
     }, 1000);
+  }
+
+  useEffect(() => {
+    setPlayer();
   }, [purchased]);
 
   const getThePost = async () => {
@@ -228,11 +232,8 @@ export default function Cinema(props) {
   }, []);
 
   const handlePurchase = async () => {
-    const response = await buyWebinar(props.post, setPurchased);
-    setPurchased(true);
-    alert(response.data);
+    const response = await buyWebinar(props.post);
     if (response.data.success === true) {
-      alert('Thank you for purchasing a webinar, you may now watch it here or in your purchases page. Enjoy!');
       setPurchased(true);
     }
   }
@@ -244,7 +245,7 @@ export default function Cinema(props) {
 
         <div id="info">
           <span>
-            <h3 id="title" onClick={() => { setPurchased(true) }}>{props.post.title}</h3>
+            <h3 id="title" onClick={() => { setPurchased(true); console.log(purchased) }}>{props.post.title}</h3>
             <p5 id="description">{props.post.description}</p5>
             {props.post.likes !== undefined && (
               <p id="likes" onClick={handleLike} className={`${isWebinarLiked ? 'colourYellow' : 'colourBlack'}`}>

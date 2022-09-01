@@ -52,7 +52,7 @@ async function piLogin() {
 
 auth();
 
-function buyWebinar(post, setPurchased) {
+function buyWebinar(post) {
   const { user_id, post_id, video_id, amount, title } = post;
   const price = amount;
   const userId = user_id;
@@ -116,9 +116,8 @@ function buyWebinar(post, setPurchased) {
             credentials: "same-origin",
           }
         );
-        alert("done!");
-        alert(response.data.success);
-        setPurchased(true);
+        if (response.data.success == true) alert('Thank you for purchasing a webinar, you may now watch it here or in your purchases page. Enjoy!');
+        else alert('Payment failed, please contact customer service at support@piwebinars.app');
         return response;
       },
       onCancel: function (paymentId, txid) {

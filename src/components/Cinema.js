@@ -113,7 +113,7 @@ export default function Cinema(props) {
   const [text, setText] = useState("");
   const [isWebinarLiked, setWebinarLiked] = useState(false);
   const [isWebinarDisliked, setWebinarDisliked] = useState(false);
-  const [purchased, setPurchased] = useState(false);
+  const [purchased, setPurchased] = useState(true);
 
   const handleComment = async () => {
     console.log(props.post.user_id, props.post.post_id, text);
@@ -198,7 +198,7 @@ export default function Cinema(props) {
     setInterval(function () {
       videoPlayer.on("timeupdate", function (getAll) {
         let currentPos = getAll.seconds;
-        if (currentPos >= 30 && purchased === false) {
+        if (currentPos >= 30 && purchased !== true) {
           videoPlayer.pause();
           videoPlayer.setCurrentTime(0);
         }

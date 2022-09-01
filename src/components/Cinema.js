@@ -228,7 +228,7 @@ export default function Cinema(props) {
   }, []);
 
   const handlePurchase = async () => {
-    const response = await buyWebinar(props.post);
+    const response = await buyWebinar(props.post, setPurchased);
     setPurchased(true);
     alert(response.data);
     if (response.data.success === true) {
@@ -244,7 +244,7 @@ export default function Cinema(props) {
 
         <div id="info">
           <span>
-            <h3 id="title">{props.post.title}</h3>
+            <h3 id="title" onClick={() => { setPurchased(true) }}>{props.post.title}</h3>
             <p5 id="description">{props.post.description}</p5>
             {props.post.likes !== undefined && (
               <p id="likes" onClick={handleLike} className={`${isWebinarLiked ? 'colourYellow' : 'colourBlack'}`}>

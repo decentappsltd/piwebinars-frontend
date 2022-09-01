@@ -52,7 +52,7 @@ async function piLogin() {
 
 auth();
 
-function buyWebinar(post) {
+function buyWebinar(post, setPurchased) {
   const { user_id, post_id, video_id, amount, title } = post;
   const price = amount;
   const userId = user_id;
@@ -116,6 +116,9 @@ function buyWebinar(post) {
             credentials: "same-origin",
           }
         );
+        alert("done!");
+        alert(response.data.success);
+        setPurchased(true);
         return response;
       },
       onCancel: function (paymentId, txid) {

@@ -204,7 +204,7 @@ export default function Cinema(props) {
         }
       });
     }, 1000);
-  }, []);
+  }, [purchased]);
 
   const getThePost = async () => {
     const post = await getPost(props.post.user_id, props.post.post_id);
@@ -229,7 +229,8 @@ export default function Cinema(props) {
 
   const handlePurchase = async () => {
     const response = await buyWebinar(props.post);
-    alert(response.data.success);
+    setPurchased(true);
+    alert(response.data);
     if (response.data.success === true) {
       alert('Thank you for purchasing a webinar, you may now watch it here or in your purchases page. Enjoy!');
       setPurchased(true);

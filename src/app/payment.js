@@ -1,5 +1,7 @@
 import axios from 'axios';
 
+const serverURL = 'https://piwebinarsdev.herokuapp.com';
+
 async function auth() {
   const scopes = ["username", "payments"];
   function onIncompletePaymentFound(payment) {
@@ -8,7 +10,7 @@ async function auth() {
       txid: payment.transaction.txid,
     };
     axios.post(
-      "https://piwebinars-server.onrender.com/payment/incomplete",
+      `${serverURL}/payment/incomplete`,
       data
     );
   }
@@ -18,9 +20,7 @@ async function auth() {
     localStorage.uid = uid;
     localStorage.piName = userName;
     localStorage.piAccessToken = auth.accessToken;
-    // if (!sessionStorage.userSession) {
     piLogin();
-    // }
   });
 }
 
@@ -29,10 +29,9 @@ async function piLogin() {
     name: localStorage.piName,
     username: localStorage.piName,
     uid: localStorage.uid,
-    // piAccessToken: localStorage.piAccessToken,
   };
   const response = await axios.post(
-    `https://piwebinarsdev.herokuapp.com/login/pi`,
+    `${serverURL}/login/pi`,
     config
   );
   if (response.status === 200 || response.status === 201) {
@@ -82,7 +81,7 @@ function buyWebinar(post) {
           txid: "",
         };
         axios.post(
-          "https://piwebinars-server.onrender.com/payment/approve",
+          `${serverURL}/payment/approve`,
           data
         );
       },
@@ -99,7 +98,7 @@ function buyWebinar(post) {
         };
         const authToken = localStorage.getItem("userSession");
         const response = await axios.post(
-          "https://piwebinars-server.onrender.com/payment/complete",
+          `${serverURL}/payment/complete`,
           data,
           {
             headers: {
@@ -118,7 +117,7 @@ function buyWebinar(post) {
           txid: txid,
         };
         axios.post(
-          "https://piwebinars-server.onrender.com/payment/incomplete",
+          `${serverURL}/payment/incomplete`,
           data
         );
       },
@@ -128,7 +127,7 @@ function buyWebinar(post) {
           txid: txid,
         };
         axios.post(
-          "https://piwebinars-server.onrender.com/payment/incomplete",
+          `${serverURL}/payment/incomplete`,
           data
         );
       },

@@ -13,8 +13,6 @@ import { postsScrollState } from '../atoms/states.js';
 import Cinema from './Cinema.js';
 import Loader from './Loader.js';
 
-const urlApi = 'https://piwebinars-server.onrender.com';
-
 export function Post(props) {
   const [modalShown, toggleModal] = useState(false);
   const [isWishlist, setWishlist] = useState(false);

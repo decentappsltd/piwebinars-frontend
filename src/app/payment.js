@@ -1,7 +1,6 @@
 import axios from 'axios';
-import Player from '@vimeo/player';
 
-const serverURL = 'https://piwebinarsdev.herokuapp.com';
+const serverURL = 'https://piwebinars-server.onrender.com';
 
 async function auth() {
   const scopes = ["username", "payments"];

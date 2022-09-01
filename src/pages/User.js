@@ -61,14 +61,18 @@ function Post(props) {
 function Uploads(props) { 
   const [webinars, setPosts] = useState([]);
   const [loading, setLoading] = useState(false);
-  
-  useEffect(async () => {
+
+  const getUploads = async () => {
     if (webinars.length == 0) {
       setLoading(true);
       const list = await renderCreator(props.userId);
       setPosts(list.data.posts);
       setLoading(false);
     }
+  }
+  
+  useEffect(() => {
+    getUploads();
   }, []);
   
   return (
@@ -97,9 +101,8 @@ export default function User(props) {
     verified: false,
   });
   const [follow, setFollow] = useState('Follow');
-  // const [following, setFollowing] = useRecoilState(storedFollowing);
-  
-  useEffect(async () => {
+
+  const findFollowing = async () => {
     const userId = props.userId;
     const data = await getProfile(userId);
     setProfile({
@@ -111,18 +114,9 @@ export default function User(props) {
       verified: data.verified,
     });
     const creatorFollowing = data.following;
-    // if (following.length == 0) {
-      const list = await renderFollowing();
-      const following = list.data.profile.following;
-      console.log(following);
-      // for (const item of following) {
-      //   console.log(following);
-      //   setFollowing((oldItems) => [
-      //     ...oldItems, 
-      //     item,
-      //   ]);
-      // };
-    // }
+    const list = await renderFollowing();
+    const following = list.data.profile.following;
+    console.log(following);
     if (props.userId == localStorage.user) {
       document.getElementById("followBtn").style.display = "none";
     } else {
@@ -137,6 +131,10 @@ export default function User(props) {
       else if (amFollowing >= 0)  setFollow('Unfollow');
       else setFollow('Follow');
     }
+  }
+  
+  useEffect(() => {
+    findFollowing();
   }, []);
   
   const handleFollow = async () => {

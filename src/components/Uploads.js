@@ -12,8 +12,6 @@ import Loader from './Loader.js';
 import Vimeo from '@vimeo/player';
 import { Link } from 'react-router-dom';
 
-const urlApi = 'https://piwebinars-server.onrender.com';
-
 function Modal(props) {
   useEffect(() => {
     function close(e) {
@@ -34,7 +32,7 @@ function Modal(props) {
       width: 500,
       height: 500,
     };
-    var videoPlayer = new Vimeo.Player('uploaded_video', options);
+    new Vimeo.Player('uploaded_video', options);
   }, []);
   
   return (

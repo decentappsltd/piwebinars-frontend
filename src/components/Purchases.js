@@ -11,8 +11,6 @@ import { storedPurchases } from '../atoms/posts.js';
 import Loader from './Loader.js';
 import Player from '@vimeo/player';
 
-const urlApi = 'https://piwebinars-server.onrender.com';
-
 function Modal(props) {
   const setClickEvent = () => {
     function close(e) {

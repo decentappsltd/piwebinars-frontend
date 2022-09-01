@@ -118,26 +118,7 @@ function buyWebinar(post) {
           }
         );
         if (response.data.success == true) {
-          alert('Thank you for purchasing a webinar, you may now watch it here or in your purchases page. Enjoy!');
-          let options;
-          if (window.innerWidth < 850) {
-            const width = Number(window.innerWidth);
-            const size = width * 0.85;
-            options = {
-              url: url,
-              controls: true,
-              width: size,
-              height: 250
-            };
-          } else {
-            options = {
-              url: url,
-              controls: true,
-              width: 500,
-              height: 290
-            };
-          }
-          new Player('Video', options);
+          alert('Thank you for purchasing a webinar, you may now watch it in your purchases page. Enjoy!');
         } else alert('Payment failed, please contact customer service at support@piwebinars.app');
         return response;
       },

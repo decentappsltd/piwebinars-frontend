@@ -285,43 +285,43 @@ function Menu() {
 function Categories() {
   const [Active, setActive] = useState({
     stateA: "true",
-    arrowA: "⯅",
+    arrowA: "▲",
     stateB: "false",
-    arrowB: "⯆",
+    arrowB: "▼",
     stateC: "false",
-    arrowC: "⯆"
+    arrowC: "▼"
   });
 
   const updateStateA = () => {
     setActive({
       stateA: "true",
-      arrowA: "⯅",
+      arrowA: "▲",
       stateB: "false",
-      arrowB: "⯆",
+      arrowB: "▼",
       stateC: "false",
-      arrowC: "⯆"
+      arrowC: "▼"
     });
   };
 
   const updateStateB = () => {
     setActive({
       stateA: "false",
-      arrowA: "⯆",
+      arrowA: "▼",
       stateB: "true",
-      arrowB: "⯅",
+      arrowB: "▲",
       stateC: "false",
-      arrowC: "⯆"
+      arrowC: "▼"
     });
   };
 
   const updateStateC = () => {
     setActive({
       stateA: "false",
-      arrowA: "⯆",
+      arrowA: "▼",
       stateB: "false",
-      arrowB: "⯆",
+      arrowB: "▼",
       stateC: "true",
-      arrowC: "⯅"
+      arrowC: "▲"
     });
   };
 

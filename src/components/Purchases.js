@@ -25,18 +25,17 @@ function Modal(props) {
   }
   
   useEffect(() => {
-    setTimeout(setClickEvent, 500);
+    setTimeout(setClickEvent, 1000);
   }, []);
   
   useEffect(() => {
     let options;
     if (window.innerWidth < 850) {
       const width = Number(window.innerWidth);
-      const size = width*0.85;
       options = {
         url: props.post.url,
         controls: true,
-        width: size,
+        width: width,
         height: 250
       };
     } else {
@@ -52,7 +51,7 @@ function Modal(props) {
   
   return (
     <>
-      <div id="_cinema"></div>
+      <div id="_cinema" style={{ height: "250px", position: "absolute", left: "0px", top: "calc(50vh - 125px)" }}></div>
     </>
   )
 }
@@ -61,7 +60,8 @@ function Post(props) {
   const [modalShown, toggleModal] = useState(false);
   
   const open = () => {
-    toggleModal(!modalShown);
+    toggleModal(true);
+    document.getElementById("tint").style.display = "block";
   };
   
   return (
@@ -71,11 +71,11 @@ function Post(props) {
         <h3 className="postTitle">{props.title}</h3>
       </div>
       
-      {modalShown ? 
+      {modalShown && 
         <Modal close={() => {
-            toggleModal(!modalShown);
+            toggleModal(false);
+            document.getElementById("tint").style.display = "none";
           }} post={props} />
-        : null
       }
     </>
   );

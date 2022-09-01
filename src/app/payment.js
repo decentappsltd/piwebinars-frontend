@@ -56,6 +56,7 @@ function buyWebinar(post) {
   const { user_id, post_id, video_id, amount, title } = post;
   const price = amount;
   const userId = user_id;
+  const Tkn = localStorage.getItem("userSession");
   console.log(userId, post_id, video_id, price, title);
   if (navigator.userAgent.toLowerCase().indexOf("pibrowser") < 0) {
     alert("Please go to the Pi Browser to make a crypto payment");
@@ -82,7 +83,14 @@ function buyWebinar(post) {
         };
         axios.post(
           `${serverURL}/payment/approve`,
-          data
+          data, {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${Tkn}`
+            },
+            withCredentials: true,
+            credentials: "same-origin"
+          }
         );
       },
       onReadyForServerCompletion: async function (paymentId, txid) {
@@ -96,14 +104,13 @@ function buyWebinar(post) {
           title: title,
           price: price,
         };
-        const authToken = localStorage.getItem("userSession");
         const response = await axios.post(
           `${serverURL}/payment/complete`,
           data,
           {
             headers: {
               "Content-Type": "application/json",
-              Authorization: `Bearer ${authToken}`,
+              Authorization: `Bearer ${Tkn}`,
             },
             withCredentials: true,
             credentials: "same-origin",

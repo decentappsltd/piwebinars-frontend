@@ -75,7 +75,7 @@ function Comment(props) {
         ) : (
           <img
             className="commentAvatar"
-            src="https://piwebinars.co.uk/img/avatar.png"
+            src={avatar}
           ></img>
         )}
         <h4 className="commentName">{props.name}</h4>

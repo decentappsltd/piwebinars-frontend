@@ -71,6 +71,11 @@ function UploadForm() {
     const btn = document.getElementById("submitBtn");
     btn.disabled = !btn.disabled;
   }
+
+  useEffect(() => {
+    const btn = document.getElementById("submitBtn");
+    btn.disabled = !btn.disabled;
+  }, []);
   
   return (
     <>
@@ -131,7 +136,7 @@ function UploadForm() {
           <label for="certify"> I certify that I own this content</label><br />
         </div><br />
         
-        { sessionStorage.userSession ? <input type="button" id="submitBtn" value="Upload" onClick={(e) => handleSubmit(e)} disabled></input> : <p>Please login to upload!</p> }
+        { sessionStorage.userSession ? <input type="button" id="submitBtn" value="Upload" onClick={(e) => handleSubmit(e)}></input> : <p>Please login to upload!</p> }
         <p id="upload_log"></p>
       </form>
     </>

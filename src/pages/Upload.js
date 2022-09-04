@@ -138,7 +138,7 @@ function UploadForm() {
           <label for="certify"> I certify that I own this content</label><br />
         </div><br />
         
-        { localStorage.userSession ? <input type="button" id="submitBtn" value="Upload" onClick={(e) => handleSubmit(e)} disabled="false"></input> : <p>Please login to upload!</p> }
+        { localStorage.userSession ? <input type="button" id="submitBtn" value="Upload" onClick={(e) => handleSubmit(e)}></input> : <p>Please login to upload!</p> }
         <p id="upload_log"></p>
       </form>
     </>

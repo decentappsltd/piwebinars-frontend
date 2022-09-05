@@ -97,6 +97,7 @@ function Posts(props) {
 
   useEffect(() => {
     getWebinars();
+    (window.adsbygoogle || []).push({});
   }, []);
 
   return (
@@ -105,7 +106,7 @@ function Posts(props) {
       {loading ? null :
         <>
           <ins className="adsbygoogle"
-            style={{ display: "block" }}
+            style={{ display: "block", minWidth: '251px', minHeight: '50px' }}
             data-ad-format="fluid"
             data-ad-layout-key="-6f+d5-2h+50+bf"
             data-ad-client="ca-pub-7095325310319034"

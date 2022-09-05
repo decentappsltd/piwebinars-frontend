@@ -103,12 +103,14 @@ function Posts(props) {
     <>
       {loading ? <Loader /> : null}
       {loading ? null :
-        <ins
-          className="adsbygoogle"
-          style={{ display: "inline-block", width: "250px", height: "250px", margin: "40px" }}
-          data-ad-client="ca-pub-7095325310319034"
-          data-ad-slot="7095325310319034"
-        ></ins>
+        <>
+          <ins className="adsbygoogle"
+            style={{ display: "block" }}
+            data-ad-format="fluid"
+            data-ad-layout-key="-6f+d5-2h+50+bf"
+            data-ad-client="ca-pub-7095325310319034"
+            data-ad-slot="1627309222"></ins>
+        </>
       }
       {posts.map(post => {
         return (

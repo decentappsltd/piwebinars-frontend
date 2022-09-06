@@ -563,6 +563,11 @@ button#followBtn {
   }
 }
 
+.adsbygoogle {
+  margin: 40px;
+  height: 270px;
+}
+
 // Mobile Styling
 @media only screen and (max-width: 850px) {
   #nav {
@@ -651,5 +656,12 @@ button#followBtn {
 
   .postThumbnail {
     width: 85vw;
+  }
+
+  .adsbygoogle {
+    margin: 0px;
+    width: 85vw;
+    height: 80px;
+    margin: 10px 0px;
   }
 }

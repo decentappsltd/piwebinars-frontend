@@ -97,7 +97,6 @@ function Posts(props) {
 
   useEffect(() => {
     getWebinars();
-    setTimeout((window.adsbygoogle = window.adsbygoogle || []).push({}), 3000);
   }, []);
 
   return (

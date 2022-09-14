@@ -306,7 +306,7 @@ export default function Cinema(props) {
           </form>
           <br />
           <div id="commentsContainer">
-            <ins className="adsbygoogle"
+            <ins className="adsbygoogle commentGoogleAd"
               style={{ display: "block", minWidth: '251px', minHeight: '50px' }}
               data-ad-format="fluid"
               data-ad-layout-key="-6f+d5-2h+50+bf"

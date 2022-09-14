@@ -74,6 +74,14 @@ function Uploads(props) {
   useEffect(() => {
     getUploads();
   }, []);
+
+  useEffect(() => {
+    function pushAds() {
+      let adsbygoogle;
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    }
+    setTimeout(pushAds, 5000);
+  }, []);
   
   return (
     <>
@@ -86,6 +94,16 @@ function Uploads(props) {
         })
       }
       {loading ? <Loader /> : null}
+      {loading ? null :
+        <>
+          <ins className="adsbygoogle"
+            style={{ display: "block", minWidth: '251px', minHeight: '50px' }}
+            data-ad-format="fluid"
+            data-ad-layout-key="-6f+d5-2h+50+bf"
+            data-ad-client="ca-pub-7095325310319034"
+            data-ad-slot="1627309222"></ins>
+        </>
+      }
       {(webinars.length == 0 && !loading) && <h2>Loading webinars...</h2>}
     </>
   );

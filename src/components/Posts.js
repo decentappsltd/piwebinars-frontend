@@ -104,7 +104,7 @@ function Posts(props) {
       let adsbygoogle;
       (adsbygoogle = window.adsbygoogle || []).push({});
     }
-    setTimeout(pushAds, 5000);
+    setTimeout(pushAds, 2500);
   }, []);
 
   return (

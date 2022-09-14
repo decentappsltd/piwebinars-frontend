@@ -24,7 +24,7 @@ function Modal(props) {
       document.removeEventListener('click', close);
     }
   }, []);
-  
+
   useEffect(() => {
     var options = {
       url: props.post.url,
@@ -34,14 +34,14 @@ function Modal(props) {
     };
     new Vimeo.Player('uploaded_video', options);
   }, []);
-  
+
   return (
     <>
       <div id="_cinema">
         <div id="uploaded_video"></div>
         <h3 className="postTitle">{props.title}</h3>
         <div className="statDiv">
-          <Link to={`/user/${props.user_id}`} className="statName">{ props.name }</Link>
+          <Link to={`/user/${props.user_id}`} className="statName">{props.name}</Link>
           <p2 className="statCategory">{props.category}</p2>
           <p2 className="statLikes">{props.likes} likes</p2>
         </div>
@@ -64,15 +64,15 @@ function Edit(props) {
     }
     document.addEventListener('click', close);
   }
-  
+
   useEffect(() => {
     setTimeout(setClickEvent, 500);
   }, []);
-    
+
   const handleSubmit = async () => {
     await editWebinar(props.post.user, props.post._id, title, price, desc);
   }
-  
+
   return (
     <>
       <div id="cinema" style={{ padding: "10px" }}>
@@ -91,20 +91,20 @@ function Edit(props) {
 function Post(props) {
   const [modalShown, toggleModal] = useState(false);
   const [editShown, toggleEdit] = useState(false);
-  
+
   const open = () => {
     toggleModal(!modalShown);
   };
-  
+
   const edit = () => {
     toggleEdit(!editShown);
   };
-  
+
   const deleteVid = async () => {
     const response = await deleteWebinar(props.post.user, props.post._id);
     if (response == "deleted") props.remove(props.post.title);
   }
-  
+
   return (
     <>
       <div className="post">
@@ -115,16 +115,16 @@ function Post(props) {
           <a id="delete" onClick={deleteVid} className="fas fa-trash"></a>
         </div>
       </div>
-      {modalShown ? 
+      {modalShown ?
         <Modal close={() => {
-            toggleModal(!modalShown);
-          }} post={props} />
+          toggleModal(!modalShown);
+        }} post={props} />
         : null
       }
-      {editShown ? 
+      {editShown ?
         <Edit close={() => {
-            toggleEdit(!editShown);
-          }} post={props.post} />
+          toggleEdit(!editShown);
+        }} post={props.post} />
         : null
       }
     </>
@@ -143,11 +143,19 @@ function Uploads() {
       setLoading(false);
     }
   }
-  
+
   useEffect(() => {
     getUploads();
   }, []);
-  
+
+  useEffect(() => {
+    function pushAds() {
+      let adsbygoogle;
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    }
+    setTimeout(pushAds, 5000);
+  }, []);
+
   const remove = (title) => {
     let list = [];
     for (const post of webinars) {
@@ -155,16 +163,26 @@ function Uploads() {
     }
     setPosts(list);
   }
-  
+
   return (
     <>
-      {webinars.map(post => { 
-        return(
+      {loading ? null :
+        <>
+          <ins className="adsbygoogle"
+            style={{ display: "block", minWidth: '251px', minHeight: '50px' }}
+            data-ad-format="fluid"
+            data-ad-layout-key="-6f+d5-2h+50+bf"
+            data-ad-client="ca-pub-7095325310319034"
+            data-ad-slot="1627309222"></ins>
+        </>
+      }
+      {webinars.map(post => {
+        return (
           <article key={post._id}>
             <Post title={post.title} remove={remove} url={`https://player.vimeo.com/video/${post.video_id}`} post={post} />
           </article>
-          );
-        })
+        );
+      })
       }
       {loading ? <Loader /> : null}
       {(webinars.length == 0 && !loading) && <h2>Your uploads will appear here...</h2>}

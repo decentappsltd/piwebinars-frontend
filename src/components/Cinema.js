@@ -170,7 +170,7 @@ export default function Cinema(props) {
     }
     document.addEventListener('click', close);
   }
-  
+
   useEffect(() => {
     setTimeout(setClickEvent, 500);
   }, []);
@@ -226,6 +226,14 @@ export default function Cinema(props) {
     getThePost();
   }, []);
 
+  useEffect(() => {
+    function pushAds() {
+      let adsbygoogle;
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    }
+    setTimeout(pushAds, 1000);
+  }, []);
+
   return (
     <>
       <div id="cinema">
@@ -263,7 +271,7 @@ export default function Cinema(props) {
                   src={avatar}
                 ></img>
               )}
-              <p id="name">{ props.post.name }</p>
+              <p id="name">{props.post.name}</p>
             </Link>
           </span>
         </div>
@@ -298,6 +306,12 @@ export default function Cinema(props) {
           </form>
           <br />
           <div id="commentsContainer">
+            <ins className="adsbygoogle"
+              style={{ display: "block", minWidth: '251px', minHeight: '50px' }}
+              data-ad-format="fluid"
+              data-ad-layout-key="-6f+d5-2h+50+bf"
+              data-ad-client="ca-pub-7095325310319034"
+              data-ad-slot="1627309222"></ins>
             {comments.map((comment) => {
               return (
                 <article key={comment._id}>

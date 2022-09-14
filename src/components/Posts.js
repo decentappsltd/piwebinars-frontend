@@ -99,6 +99,14 @@ function Posts(props) {
     getWebinars();
   }, []);
 
+  useEffect(() => {
+    function pushAds() {
+      let adsbygoogle;
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    }
+    pushAds();
+  }, []);
+
   return (
     <>
       {loading ? <Loader /> : null}

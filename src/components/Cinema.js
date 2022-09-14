@@ -231,7 +231,7 @@ export default function Cinema(props) {
       let adsbygoogle;
       (adsbygoogle = window.adsbygoogle || []).push({});
     }
-    setTimeout(pushAds, 1000);
+    setTimeout(pushAds, 2000);
   }, []);
 
   return (

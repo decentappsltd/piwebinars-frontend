@@ -17,10 +17,18 @@ $charcoal: #36454f;
   color: $grey;
   box-shadow: 0px 15px 15px #888888;
 
-  #avatar {
+  #avatar-span {
     position: absolute;
     top: 5px;
     left: 5px;
+    writing-mode: vertical-rl; 
+    font-size: 0.8em;
+    text-align: center;
+  }
+
+  #avatar {
+    border-radius: 100px;
+    cursor: pointer;
   }
 
   #profileName {
@@ -81,6 +89,7 @@ $charcoal: #36454f;
       position: absolute;
       top: 5px;
       left: 5px;
+      border-radius: 100px;
     }
 
     #profileName {

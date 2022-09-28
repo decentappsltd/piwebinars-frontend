@@ -139,7 +139,7 @@ async function comment(userId, post_id, text) {
   const authToken = localStorage.userSession;
   const response = await axios.post(
     `${urlApi}/post/comment/${userId}/${post_id}`,
-    text,
+    {text},
     {
       headers: {
         "Access-Control-Allow-Origin": "*",

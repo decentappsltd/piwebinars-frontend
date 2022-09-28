@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Uploads from '../components/Uploads.js';
-import { myProfile, editProfile } from '../app/authentication.js';
+import { myProfile, editProfile, addAvatar } from '../app/authentication.js';
 import avatar from '../assets/avatar.png';
 
 export default function Profile() {
@@ -26,11 +26,11 @@ export default function Profile() {
       verified: data.verified,
     });
   }
-  
+
   useEffect(() => {
     getMyProfile();
   }, []);
-  
+
   const handleEdit = async () => {
     const response = await editProfile(profile.username);
     const data = await myProfile();
@@ -44,22 +44,27 @@ export default function Profile() {
       verified: data.verified,
     });
   }
-  
+
   return (
     <>
       <span id="page">
-        <div  id="profile">
-          { profile.avatar ?
-            <img id="avatar" src={profile.avatar}></img>
-           : <img id="avatar" src={avatar}></img>
+        <div id="profile">
+          {profile.avatar ?
+            <img onClick={addAvatar} id="avatar" src={profile.avatar}></img>
+            : <>
+              <span id='avatar-span'>
+                <img onClick={addAvatar} id="avatar" src={avatar}></img>
+                <figcaption onClick={addAvatar} id="avatar-text">Add Avatar</figcaption>
+              </span>
+            </>
           }
           <span id="profileName">
             <p1>{profile.name}</p1>
             <a className="fas fa-edit" onClick={handleEdit}></a>
           </span>
           <span id="profileHandle">
-            <p2>@{profile.username}</p2> 
-            { profile.verified === true ? <img id="verified" src="https://www.piwebinars.co.uk/img/Verified_Icon.png"></img> : null }
+            <p2>@{profile.username}</p2>
+            {profile.verified === true ? <img id="verified" src="https://www.piwebinars.co.uk/img/Verified_Icon.png"></img> : null}
           </span>
           <span id="profileStats">
             <p>Followers: {profile.followers}</p>

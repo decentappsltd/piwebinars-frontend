@@ -362,6 +362,20 @@ async function followUnfollow(user_id) {
   }
 }
 
+async function addAvatar() {
+  const authTkn = localStorage.userSession;
+  const email = prompt("Please enter your email to find your Gravatar (we do not store or share your email address)");
+  if (email) {
+    const response = await instance.post("/profile/avatar", { email }, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${authTkn}`
+      }
+    }).catch(err => console.error(err));
+    alert(response.data.message);
+  }
+}
+
 const manipulateComment = async (url_path, api, user_id, post_id, comment_id, body) => {
   const authTkn = localStorage.userSession;
   const response = await instance[api](
@@ -396,5 +410,6 @@ export {
   logoutAll,
   deleteAccount,
   followUnfollow,
+  addAvatar,
   manipulateComment
 };

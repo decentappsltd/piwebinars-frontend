@@ -40,7 +40,6 @@ body {
   position: absolute;
   right: 0px;
   top: 60px;
-  background-color: #fffff;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -97,6 +96,7 @@ body {
   background-color: #f3ec78;
   background-image: linear-gradient(to right, #efc056, #e27954);
   background-size: 100%;
+  background-clip: text;
   -webkit-background-clip: text;
   -moz-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -145,6 +145,7 @@ body {
   h3 {
     cursor: pointer;
   }
+
   span {
     display: block;
     min-height: calc(100vh - 395px);
@@ -155,6 +156,7 @@ body {
   width: 5px;
   background-color: none;
 }
+
 .popupNav::-webkit-scrollbar-thumb {
   border-radius: 5px;
   background-color: #e9e9e9;
@@ -395,15 +397,19 @@ body {
   0% {
     transform: rotate(0deg);
   }
+
   100% {
     transform: rotate(360deg);
   }
 }
+
 .loading-spinner {
   width: 50px;
   height: 50px;
-  border: 10px solid #f3f3f3; /* Light grey */
-  border-top: 10px solid #383636; /* Black */
+  border: 10px solid #f3f3f3;
+  /* Light grey */
+  border-top: 10px solid #383636;
+  /* Black */
   border-radius: 50%;
   animation: spinner 1.5s linear infinite;
 }
@@ -466,6 +472,7 @@ body {
 #html-spinner {
   -webkit-transition-property: -webkit-transform;
   -webkit-transition-duration: 1.2s;
+  transition-duration: 1.2s;
   -webkit-animation-name: rotate;
   -webkit-animation-iteration-count: infinite;
   -webkit-animation-timing-function: linear;
@@ -487,6 +494,7 @@ body {
   from {
     -webkit-transform: rotate(0deg);
   }
+
   to {
     -webkit-transform: rotate(360deg);
   }
@@ -496,6 +504,7 @@ body {
   from {
     -moz-transform: rotate(0deg);
   }
+
   to {
     -moz-transform: rotate(360deg);
   }
@@ -505,6 +514,7 @@ body {
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
@@ -519,7 +529,24 @@ body {
   height: calc(100vh - 80px);
   background: $light_yellow;
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
+  overflow-y: scroll;
+  border-radius: 0px 0px 10px 10px;
+
+  #closeSearchBtn {
+    display: none;
+  }
+}
+
+#results::-webkit-scrollbar {
+  width: 5px;
+  background-color: none;
+}
+
+#results::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  background-color: $yellow;
 }
 
 button#followBtn {
@@ -668,5 +695,35 @@ button#followBtn {
     width: 85vw;
     height: 80px;
     margin: 10px 0px;
+  }
+
+  #results {
+    position: absolute;
+    z-index: 30;
+    left: 0px;
+    top: 50px;
+    width: 100%;
+    height: calc(100vh - 50px);
+    background: #ffffff;
+    border-radius: 0px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+
+    #closeSearchBtn {
+      display: block;
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      text-align: center;
+      padding: 12px;
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      box-sizing: border-box;
+      width: 50px;
+      height: 50px;
+      font-size: 25px;
+      border-radius: 100px;
+      background-color: $light_yellow;
+    }
   }
 }

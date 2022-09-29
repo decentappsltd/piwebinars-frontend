@@ -12,22 +12,23 @@ Storage.prototype.getObj = function (key) {
 
 const search = async (input) => {
   if (input) {
-    console.log("searching for ", input);
-    const response = await axios.get(`${urlApi}/posts/search?q=${input}`, {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${sessionStorage.userSession}`
+    console.log("searching for ", search);
+    const response = await axios.get(`${urlApi}/post/search`, {
+      params: {
+        input: input,
       }
     });
-    return response.data.posts;
+    console.log(response);
+    return response.data.list;
   }
 };
 
 const filter = (input) => {
+  console.log(input);
   let value = input.toLowerCase();
   let x = document.querySelectorAll(".post");
 
-  for (let i = 0; i < x.length; i++) {
+  for (let i = 0; i <= x.length; i++) {
     if (!x[i].innerHTML.toLowerCase().includes(value)) {
       x[i].style.display = "none";
     } else x[i].style.display = "block";
@@ -53,9 +54,10 @@ const renderWebinars = async () => {
 };
 
 // Get more webinars for infinite scrolling
-async function renderMore() {
+async function renderMore(category) {
+  if (category == '') category = 'all';
   const auth_token = localStorage.getItem("userSession");
-  const webinarUploads = await axios.get(`${urlApi}/post/more`, {
+  const webinarUploads = await axios.get(`${urlApi}/post/more/${category}`, {
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${auth_token}`
@@ -139,7 +141,7 @@ async function comment(userId, post_id, text) {
   const authToken = localStorage.userSession;
   const response = await axios.post(
     `${urlApi}/post/comment/${userId}/${post_id}`,
-    {text},
+    { text },
     {
       headers: {
         "Access-Control-Allow-Origin": "*",

@@ -1,104 +1,16 @@
-import React, { useEffect, useState } from "react";
-import { searchValue } from "../atoms/forms.js";
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { searchValue } from '../atoms/forms.js';
 import {
   RecoilRoot,
   atom,
   selector,
   useRecoilState,
-  useRecoilValue
-} from "recoil";
-import { search, filter } from "../app/webinars.js";
-import { login, register } from "../app/authentication.js";
-import Post from "./Posts.js";
-import Loader from "./Loader.js";
-
-const urlAPI = "https://piwebinars-server.onrender.com";
-
-function SearchResults(props) {
-  useEffect(() => {
-    function close(e) {
-      if (!document.querySelector("#results").contains(e.target)) {
-        props.close();
-      }
-    }
-    document.addEventListener("click", close);
-    return () => {
-      document.removeEventListener("click", close);
-    };
-  }, []);
-
-  return (
-    <>
-      <div id="results">
-        {props.loading ? <Loader /> : null}
-        {props.posts.map((post) => {
-          return (
-            <article>
-              <Post
-                key={post.upload}
-                post_id={post._id}
-                file_id={post.upload}
-                user_id={post.user}
-                video_id={post.video_id}
-                title={post.title}
-                name={post.name}
-                description={post.description}
-                category={post.category}
-                likes={post.likes.length}
-                date={post.dateAdded}
-                amount={post.amount}
-                wishlisted={post.wishlisted}
-              />
-            </article>
-          );
-        })}
-      </div>
-    </>
-  );
-}
-
-function Search(props) {
-  const [input, setInput] = useRecoilState(searchValue);
-  const [results, setResults] = useState([]);
-  const [searchActive, setSearchActive] = useState(false);
-  const [loading, setLoading] = useState(false);
-
-  const handleChange = (e) => {
-    setInput(e.target.value);
-    filter(input);
-  };
-
-  const handleSearch = async () => {
-    // setSearchActive(true);
-    // setLoading(true);
-    // const posts = await search(input);
-    // setResults(posts);
-    // setLoading(false);
-  };
-
-  return (
-    <>
-      <form id="searchBar">
-        <input
-          id="searchInput"
-          className={props.class}
-          placeholder="Search topics..."
-          onChange={(e) => handleChange(e)}
-        ></input>
-        <a className="fas fa-search" onClick={handleSearch}></a>
-      </form>
-      {searchActive ? (
-        <SearchResults
-          posts={results}
-          loading={loading}
-          close={() => {
-            setSearchActive(false);
-          }}
-        />
-      ) : null}
-    </>
-  );
-}
+  useRecoilValue,
+} from 'recoil';
+import { search, filter, addWishlist } from '../app/webinars.js';
+import { login, register } from '../app/authentication.js';
+import { Search } from './Bar.js';
 
 function AuthPopup(props) {
   const [username, setUsername] = useState("");
@@ -230,20 +142,6 @@ function BarMobile() {
     document.querySelector("#tint").style.display = "block";
     const myTimeout = setTimeout(listener, 600);
   }
-  
-//   useEffect(() => {
-//     if (document.querySelector("#nav").style.width > 0) {
-//     function close(e) {
-//       if (!document.querySelector("#nav").contains(e.target)) {
-//         document.querySelector("#nav").style.width = "0px";
-//       }
-//     }
-//     document.addEventListener("click", close);
-//     return () => {
-//       document.removeEventListener("click", close);
-//     };
-//     }
-//   });
 
   return (
     <>

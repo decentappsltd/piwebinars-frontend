@@ -43,13 +43,19 @@ function App() {
     window
     .matchMedia("(max-width: 850px)")
     .addEventListener('change', e => setMatches( e.matches ));
+    sessionStorage.category = '';
+    window.addEventListener('storage', () => {
+      console.log('storage changed');
+      if (localStorage.category !== '') applyFilter();
+    });
   }, []);
   
   const handleScroll = async (e) => {
     const bottom = e.target.scrollHeight - (e.target.scrollTop + 75) <= e.target.clientHeight;
     if (bottom && loading == false) {
       setLoading(true);
-      const response = await renderMore();
+      const category = localStorage.category;
+      const response = await renderMore(category);
       const morePosts = response.data.list;
       let list = [];
       for (const post of morePosts) {
@@ -58,6 +64,19 @@ function App() {
       setPosts(list);
       setLoading(false);
     }
+  }
+
+  const applyFilter = async () => {
+    setLoading(true);
+    const category = localStorage.category;
+    const response = await renderMore(category);
+    const morePosts = response.data.list;
+    let list = [];
+    for (const post of morePosts) {
+      list.push(post);
+    }
+    if (localStorage.category === category) setPosts(list);
+    setLoading(false);
   }
     
   return (

@@ -116,11 +116,19 @@ export default function Cinema(props) {
 
   const handleComment = async () => {
     console.log(props.post.user_id, props.post.post_id, text);
+    if (!localStorage.userSession) alert("You must be logged in to comment");
+    document.getElementById('postComment').disabled = 'true';
+    document.getElementById('postComment').style.color = '#D3D3D3';
+    document.getElementById('postComment').style.borderColor = '#D3D3D3';
     const response = await comment(
       props.post.user_id,
       props.post.post_id,
       text
     );
+    document.getElementById('postComment').disabled = '';
+    document.getElementById('text').value = '';
+    document.getElementById('postComment').style.color = '#FBB44A';
+    document.getElementById('postComment').style.borderColor = '#FBB44A';
   };
 
   const handleLike = async () => {

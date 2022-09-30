@@ -54,6 +54,33 @@ body {
 #uploadPage {
   @extend #app;
   height: 100vh;
+  top: 0px;
+}
+
+#authPage {
+  @extend #page;
+  color: $charcoal;
+}
+
+#usernameInput,
+#passwordInput,
+#nameInput,
+#confirmPassword {
+  width: 300px;
+  border-radius: 5px;
+  border: solid 1px $charcoal;
+  padding: 12px;
+}
+
+#submitBtn {
+  width: 100px;
+  margin: auto;
+  border-radius: 5px;
+  border: none;
+  background-color: $light_yellow;
+  font-weight: bold;
+  padding: 5px;
+  cursor: pointer;
 }
 
 @media only screen and (min-width: 851px) {
@@ -365,6 +392,7 @@ body {
   display: block;
   font-size: 15px;
   margin-top: 10px;
+  cursor: pointer;
 }
 
 #categoriesSelection {
@@ -426,13 +454,16 @@ body {
 
 #form {
   margin: auto;
-  display: flex;
+  display: block;
   flex-direction: column;
   justify-content: space between;
-  height: 80vh;
-  margin: 0px;
+  height: 700px;
+  width: 400px;
+  margin: auto;
   padding: 0px;
   color: $grey;
+  text-align: center;
+  color: $charcoal;
 
   input,
   select {
@@ -441,10 +472,10 @@ body {
   }
 
   .in {
-    padding: 5px 10px;
-    border: solid 1px $grey;
-    color: $grey;
-    border-radius: 2px;
+    width: 300px;
+    border-radius: 5px;
+    border: solid 1px $charcoal;
+    padding: 12px;
   }
 
   textArea {
@@ -454,6 +485,11 @@ body {
 
   #fileType {
     width: 60px;
+  }
+
+  i {
+    float: right;
+    margin-right: 20px;
   }
 }
 
@@ -571,6 +607,7 @@ button#followBtn {
     font-size: 14px;
     padding: 10px;
     color: white;
+    cursor: pointer;
 
     i {
       margin-right: 5px;
@@ -656,21 +693,17 @@ button#followBtn {
   }
 
   #searchBar {
-    width: 150px;
+    width: calc(100% - 100px);
     min-width: 0px;
     margin: 10px;
-    margin-left: 60px;
+    margin-left: 55px;
     margin-top: 7px;
   }
 
   #searchInput {
-    width: 150px;
+    width: calc(100% - 5px);
     min-width: 0px;
     padding: 10px;
-  }
-
-  #expandedSearch {
-    width: calc(100vw - 70px);
   }
 
   #openNav {

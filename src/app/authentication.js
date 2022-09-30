@@ -83,7 +83,7 @@ async function login(username, password) {
       const response = await instance.post(`/login`, user);
       if (response.status === 200) {
         console.log(response);
-        alert("User successfully logged in !!!");
+        alert(`Welcome back, ${username}!`);
         token = response.data.token;
         instance.defaults.headers.common["Authorization"] = token;
         sessionStorage.removeItem("userSession");
@@ -93,6 +93,8 @@ async function login(username, password) {
         sessionStorage.setItem("username", username);
         localStorage.setItem("username", username);
         localStorage.setItem("user", response.data.userId);
+        window.dispatchEvent(new Event("storage"));
+        window.location.pathname = '/';
         return username;
       }
     }
@@ -266,13 +268,17 @@ async function logout() {
     if (authToken === null) {
       alert("No user is authenticated, please login!!!");
     } else {
-      const response = await instance.post(`/logout`);
+      const response = await instance.post(`/logout`).catch((error) => {
+        console.log(error);
+        localStorage.clear();
+        sessionStorage.clear();
+        window.location.pathname = "/";
+      });
       if (response.status === 200) {
         delete instance.defaults.headers.common["Authorization"];
-        sessionStorage.removeItem("userSession");
-        localStorage.removeItem("userSession");
-        localStorage.removeItem("currentUser");
-        alert("Successfully logged out!");
+        sessionStorage.clear();
+        localStorage.clear();
+        window.location.pathname = "/";
       }
     }
   } catch (error) {

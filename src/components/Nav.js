@@ -15,7 +15,7 @@ import logo from '../assets/logo-text.png';
 
 function NavTab(props) {
   const [page, setPage] = useRecoilState(appPageState);
-  console.log(page);
+
   let classes = "navTab";
   let iClass = props.class;
   if (page == props.type) {
@@ -25,17 +25,22 @@ function NavTab(props) {
     classes = "navTab tabInactive";
     iClass = `${props.class} iconInactive`;
   }
+
   const highlight = () => {
     setPage(`${props.type}`);
   };
-  
+
+  useEffect(() => {
+    // get base route from url part
+    const route = window.location.href.split("/")[3];
+    if (route !== '') setPage(route);
+  }, []);
+
+
   const handleClick = () => {
-    if (localStorage.userSession && window.innerWidth < 850) {
+    if (window.innerWidth < 850) {
       document.querySelector("#nav").style.width = "0px";
       document.querySelector("#tint").style.display = "none";
-    } else if (!localStorage.userSession) {
-      alert("Please login or register");
-      window.location.href = "/";
     }
   }
 
@@ -57,27 +62,51 @@ function NavTab(props) {
 }
 
 function Navigation() {
+  const [userSession, setSession] = useState(localStorage.userSession);
+
+  useEffect(() => {
+    window.addEventListener("storage", () => {
+      setSession(localStorage.userSession);
+    });
+  });
+
   return (
     <RecoilRoot>
       <NavTab text="Dashboard" href="/" class="fas fa-home" type="home" />
-      <NavTab
-        text="Upload a Webinar"
-        href="upload"
-        class="fas fa-upload"
-        type="upload"
-      />
-      <NavTab
-        text="My Wishlist"
-        href="wishlist"
-        class="fas fa-heart"
-        type="wishlist"
-      />
-      <NavTab
-        text="My Profile"
-        href="profile"
-        class="fas fa-user"
-        type="profile"
-      />
+      {userSession ? <>
+        <NavTab
+          text="Upload a Webinar"
+          href="upload"
+          class="fas fa-upload"
+          type="upload"
+        />
+        <NavTab
+          text="My Wishlist"
+          href="wishlist"
+          class="fas fa-heart"
+          type="wishlist"
+        />
+        <NavTab
+          text="My Profile"
+          href="profile"
+          class="fas fa-user"
+          type="profile"
+        />
+      </> : <>
+        <NavTab
+          text="Login"
+          href="login"
+          class="fas fa-sign-in-alt"
+          type="login"
+        />
+        <NavTab
+          text="Register"
+          href="register"
+          class="fas fa-user-plus"
+          type="register"
+        />
+        <br /><br />
+      </>}
     </RecoilRoot>
   );
 }
@@ -236,6 +265,14 @@ function Following() {
 }
 
 function Menu() {
+  const [userSession, setSession] = useState(localStorage.userSession);
+
+  useEffect(() => {
+    window.addEventListener("storage", () => {
+      setSession(localStorage.userSession);
+    });
+  });
+
   const translate = () => {
     function googleTranslateElementInit() {
       new window.google.translate.TranslateElement(
@@ -253,32 +290,32 @@ function Menu() {
       <span className="popupNavContent">
         <div id="google_translate"></div><br />
         <div id="navOptions">
-        <a 
-          className="navOption" 
-          onClick={translate}
-        >
-          <i className="fas fa-language"></i>
-          Translate
-        </a>
-        <br /><br />
-        
-        { localStorage.userSession ? 
-          <>
-            <a className="navOption" id="logoutBtn" onClick={logout}><i className="fas fa-user-lock"></i> Logout</a><br /><br />
-            <a className="navOption" id="logoutAllBtn" onClick={logoutAll}><i className="fas fa-user-shield"></i> Logout all</a><br /><br />
-            <a className="navOption" id="deleteAccountBtn" onClick={deleteAccount}><i className="fas fa-trash"></i> Delete account</a><br /><br />
-          </>
-          : null }
+          <a
+            className="navOption"
+            onClick={translate}
+          >
+            <i className="fas fa-language"></i>
+            Translate
+          </a>
+          <br /><br />
 
-        <a className="navOption" href="https://decentapps.co.uk/privicy.html"><i className="fas fa-eye-slash"></i> Privacy</a><br /><br />
-        <a className="navOption" href="https://decentapps.co.uk/terms.html"><i className="fas fa-file"></i> Terms</a><br /><br />
-        <a className="navOption" href="https://decentapps.co.uk/contact.html"><i className="fa-regular fa-message"></i> Contact</a><br /><br />
+          {userSession ?
+            <>
+              <a className="navOption" id="logoutBtn" onClick={logout}><i className="fas fa-user-lock"></i> Logout</a><br /><br />
+              <a className="navOption" id="logoutAllBtn" onClick={logoutAll}><i className="fas fa-user-shield"></i> Logout all</a><br /><br />
+              <a className="navOption" id="deleteAccountBtn" onClick={deleteAccount}><i className="fas fa-trash"></i> Delete account</a><br /><br />
+            </>
+            : null}
+
+          <a className="navOption" href="https://decentapps.co.uk/privicy.html"><i className="fas fa-eye-slash"></i> Privacy</a><br /><br />
+          <a className="navOption" href="https://decentapps.co.uk/terms.html"><i className="fas fa-file"></i> Terms</a><br /><br />
+          <a className="navOption" href="https://decentapps.co.uk/contact.html"><i className="fa-regular fa-message"></i> Contact</a><br /><br />
 
         </div>
 
         <div id="legal">
           <i>Copyright © 2022 All Rights Reserved by Decent Apps Ltd.</i>
-        </div> 
+        </div>
       </span>
     </>
   );
@@ -306,6 +343,7 @@ function Categories() {
   };
 
   const updateStateB = () => {
+    if (!sessionStorage.userSession) window.location.href = '/login';
     setActive({
       stateA: "false",
       arrowA: "▼",

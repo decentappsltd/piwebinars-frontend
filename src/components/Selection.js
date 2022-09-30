@@ -30,6 +30,7 @@ function Selection() {
   };
   
   const updateStateB = () => {
+    if (!sessionStorage.userSession) window.location.href = '/login';
     setActive({
       stateA: 'selectionTabInactive',
       stateB: 'selectionTabActive',
@@ -41,6 +42,7 @@ function Selection() {
   };
   
   const updateStateC = () => {
+    if (!sessionStorage.userSession) window.location.href = '/login';
     setActive({
       stateA: 'selectionTabInactive',
       stateB: 'selectionTabInactive',

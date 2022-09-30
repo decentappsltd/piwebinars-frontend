@@ -10,6 +10,7 @@ import Wishlist from "./pages/Wishlist.js";
 import Profile from "./pages/Profile.js";
 import User from "./pages/User.js";
 import Login from "./pages/Login.js";
+import Register from './pages/Register.js';
 import NoPage from "./pages/NoPage.js"; 
 // CSS:
 import './index.scss';
@@ -35,6 +36,7 @@ export default function App() {
           <Route exact path="/profile" element={<Profile />} />
           <Route exact path="/user/:user_id" element={<UserProfile />} />
           <Route exact path="/login" element={<Login />} />
+          <Route exact path="/register" element={<Register />} />
           <Route exact path="/*" element={<NoPage />} />
         </Route>
       </Routes>

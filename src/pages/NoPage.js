@@ -2,7 +2,13 @@ import React from 'react';
 
 class NoPage extends React.Component {
   render(){
-    return <h2>404</h2>;
+    return (
+      <>
+        <span id="uploadPage">
+          <h2>404 - We couldn't find this page :(</h2>
+        </span>
+      </>
+    );
   }
 }
 

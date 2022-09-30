@@ -137,6 +137,7 @@ function AuthPopup(props) {
   const [confirmPassword, setConfirmPassword] = useState("");
 
   const authenticate = async () => {
+    document.getElementById('submitBtn').innerHTML = "Loading...";
     if (props.type == 'login') {
       await login(username, password);
       props.toggle();
@@ -162,13 +163,15 @@ function AuthPopup(props) {
 
   return (
     <div className="popup">
-      <h2>{props.header}</h2>
-      <a onClick={props.close}>x</a>
-      <input id="usernameInput" placeholder="Enter username" onChange={(e) => setUsername(e.target.value)}></input><br />
-      {props.type == "register" && <><input id="nameInput" placeholder="Add your name" onChange={(e) => setName(e.target.value)}></input><br /></>}
-      <input id="passwordInput" placeholder="Enter password" onChange={(e) => setPassword(e.target.value)}></input><br />
-      {props.type == "register" && <><input id="confirmPassword" placeholder="Confirm password" onChange={(e) => setConfirmPassword(e.target.value)}></input><br /></>}
-      <p onClick={authenticate}>submit</p>
+      <form style={{ display: 'block', height: '400px', width: '400px', margin: 'auto', textAlign: 'center' }} onSubmit={(e) => e.preventDefault()}>
+        <h2>{props.header}</h2>
+        <a onClick={props.close} style={{ fontSize: '18px', padding: '5px' }} className='fas fa-close'></a><br />
+        <input id="usernameInput" type='text' placeholder="Enter username" onChange={(e) => setUsername(e.target.value)}></input><br /><br />
+        {props.type == "register" && <><input id="nameInput" type='text' placeholder="Add your name" onChange={(e) => setName(e.target.value)}></input><br /><br /></>}
+        <input id="passwordInput" type='password' placeholder="Enter password" onChange={(e) => setPassword(e.target.value)}></input><br /><br />
+        {props.type == "register" && <><input id="confirmPassword" type='password' placeholder="Confirm password" onChange={(e) => setConfirmPassword(e.target.value)}></input><br /><br /></>}
+        <button onClick={authenticate} id="submitBtn">Submit</button>
+      </form>
     </div>
   );
 }

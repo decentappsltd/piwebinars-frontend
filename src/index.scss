@@ -637,6 +637,39 @@ button#followBtn {
   height: 80px;
 }
 
+.consent {
+  position: fixed;
+  z-index: 100;
+  bottom: 0;
+  left: 0;
+  width: 100vw;
+  background: $charcoal;
+  text-align: left;
+  color: white;
+  font-size: 14px;
+  padding: 10px;
+
+  a {
+    color: $light_yellow;
+  }
+}
+
+#acceptCookies, #declineCookies {
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  margin-left: 25px;
+  border-radius: 100px;
+}
+
+#acceptCookies {
+  background: green;
+}
+
+#declineCookies {
+  background: red;
+}
+
 // Mobile Styling
 @media only screen and (max-width: 850px) {
   #nav {

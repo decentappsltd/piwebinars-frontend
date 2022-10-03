@@ -6,8 +6,32 @@ import { manipulateComment } from "../app/authentication.js";
 import Player from '@vimeo/player';
 import avatar from '../assets/avatar.png';
 
+function CommentReply(props) {
+  return (
+    <div className="comment-reply" style={{ borderTop: 'solid 1px #efc056' }}>
+      <h5>{props.name}</h5>
+      <p>{props.text}</p>
+    </div>
+  );
+}
+
 function Comment(props) {
+  const [owner, setOwner] = useState(false);
+  const [text, setText] = useState(props.text);
+  const [likeText, setLike] = useState('like');
+  const [replyText, setReply] = useState('reply');
+  const [editText, setEdit] = useState('edit');
+  const [deleteText, setDelete] = useState('delete');
+
+  useEffect(() => {
+    if (props.user === localStorage.user) {
+      console.log(props);
+      setOwner(true);
+    }
+  }, []);
+
   const like = async () => {
+    setLike('loading...');
     const url_path = "like_unlike_comment";
     const api = "post";
     const response = await manipulateComment(
@@ -17,9 +41,11 @@ function Comment(props) {
       props.post_id,
       props.id
     );
+    setLike('unlike');
   };
 
   const reply = async () => {
+    setReply('loading...');
     const url_path = "comment";
     const api = "post";
     const text = prompt("Write reply:", "");
@@ -34,9 +60,11 @@ function Comment(props) {
       props.id,
       body
     );
+    setReply('reply');
   };
 
   const deleteComment = async () => {
+    setDelete('loading...');
     const url_path = "comment";
     const api = "delete";
     const response = await manipulateComment(
@@ -47,9 +75,11 @@ function Comment(props) {
       props.id
     );
     console.log(response);
+    setText('');
   };
 
   const editComment = async () => {
+    setEdit('loading...');
     const url_path = "comment";
     const api = "put";
     const text = prompt("Update text:", `${props.text}`);
@@ -64,6 +94,8 @@ function Comment(props) {
       props.id,
       body
     );
+    setText(text);
+    setEdit('edit');
     console.log(response);
   };
 
@@ -81,7 +113,7 @@ function Comment(props) {
         <h4 className="commentName">{props.name}</h4>
         <h6 className="commentDate">{props.date}</h6>
       </div>
-      <p className="commentText">{props.text}</p>
+      <p className="commentText">{text}</p>
       <div className="interactiveDiv">
         <span className="interactiveDivCounts">
           {props.likes == 1 ? (
@@ -97,12 +129,34 @@ function Comment(props) {
         </span>
         <ul>
           <li className="likeComment" onClick={like}>
-            <i className="fas fa-thumbs-up"></i> like
+            <i className="fas fa-thumbs-up"></i> {likeText}
           </li>
           <li className="replyComment" onClick={reply}>
-            <i className="fas fa-comment"></i> reply
+            <i className="fas fa-comment"></i> {replyText}
           </li>
         </ul>
+        {owner && <>
+          <ul>
+            <li className="likeComment" onClick={editComment}>
+              <i className="fas fa-edit"></i> {editText}
+            </li>
+            <li className="replyComment" onClick={deleteComment}>
+              <i className="fas fa-trash"></i> {deleteText}
+            </li>
+          </ul>
+          <div id="commentReplies">
+            {props.commentReplies.map((comment) => {
+              return (
+                <article key={comment._id}>
+                  <CommentReply
+                    name={comment.name}
+                    text={comment.text}
+                  />
+                </article>
+              );
+            })}
+          </div>
+        </>}
       </div>
     </>
   );
@@ -332,6 +386,7 @@ export default function Cinema(props) {
                     text={comment.text}
                     likes={comment.comment_likes.length}
                     replies={comment.comment_reply.length}
+                    commentReplies={comment.comment_reply}
                     post_id={props.post.post_id}
                     user_id={props.post.user_id}
                   />

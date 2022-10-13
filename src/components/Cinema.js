@@ -15,7 +15,7 @@ function CommentReply(props) {
   );
 }
 
-function Comment(props) {
+export function Comment(props) {
   const [owner, setOwner] = useState(false);
   const [text, setText] = useState(props.text);
   const [likeText, setLike] = useState('like');
@@ -259,7 +259,7 @@ export default function Cinema(props) {
     setInterval(function () {
       videoPlayer.on("timeupdate", function (getAll) {
         let currentPos = getAll.seconds;
-        if (currentPos >= 30) {
+        if (currentPos >= 15) {
           videoPlayer.pause();
           videoPlayer.setCurrentTime(0);
         }
@@ -335,6 +335,13 @@ export default function Cinema(props) {
               )}
               <p id="name">{props.post.name}</p>
             </Link>
+
+            { window.innerWidth <= 850 && <ins id='cinemaAdvert' className="adsbygoogle commentGoogleAd"
+              style={{ display: "block", minWidth: '251px', minHeight: '50px' }}
+              data-ad-format="fluid"
+              data-ad-layout-key="-6f+d5-2h+50+bf"
+              data-ad-client="ca-pub-7095325310319034"
+              data-ad-slot="1627309222"></ins> }
           </span>
         </div>
 
@@ -368,12 +375,12 @@ export default function Cinema(props) {
           </form>
           <br />
           <div id="commentsContainer">
-            <ins className="adsbygoogle commentGoogleAd"
+            { window.innerWidth > 850 && <ins className="adsbygoogle commentGoogleAd"
               style={{ display: "block", minWidth: '251px', minHeight: '50px' }}
               data-ad-format="fluid"
               data-ad-layout-key="-6f+d5-2h+50+bf"
               data-ad-client="ca-pub-7095325310319034"
-              data-ad-slot="1627309222"></ins>
+              data-ad-slot="1627309222"></ins> }
             {comments.map((comment) => {
               return (
                 <article key={comment._id}>

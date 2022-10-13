@@ -135,6 +135,172 @@ $charcoal: #36454f;
   }
 }
 
+#webinarPage {
+  width: calc(100vw - 250px);
+  height: 100vh;
+  position: absolute;
+  top: 0px;
+  left: 250px;
+  overflow: hidden;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+
+  #Video {
+    position: relative;
+    height: calc(100vh - 200px);
+    width: calc(100vw - 250px);
+    top: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #151515;
+  }
+
+  #comments {
+    position: absolute;
+    padding: 5px;
+    top: calc(100vh - 200px);
+    right: 0px;
+    width: 400px;
+    height: 100vh;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    // mix-blend-mode: difference;
+    color: $charcoal;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    background-color: white;
+
+    .commentText, .commentDiv, .interactiveDivCounts, ul, p {
+      // mix-blend-mode: difference;
+      // color: white;
+      color: $charcoal;
+    }
+
+  }
+
+  #info {
+    position: absolute;
+    top: calc(100vh - 200px);
+    left: 0px;
+    width: 1000px;
+    height: 200px;
+
+    span {
+      position: relative;
+      width: 100%;
+      height: 100%;
+
+      #creatorProfile {
+        position: absolute;
+        left: 10px;
+        top: 110px;
+        display: flex;
+        justify-content: left;
+        width: 270px;
+        max-height: 70px;
+        cursor: pointer;
+
+        img {
+          height: 40px;
+          width: 40px;
+          padding: 10px;
+          border-radius: 100px;
+        }
+      }
+      #title {
+        position: absolute;
+        top: -5px;
+        left: 5px;
+        width: calc(100vw - 820px);
+        max-height: 25px;
+        overflow-y: auto;
+      }
+      #description {
+        position: absolute;
+        top: 40px;
+        left: 5px;
+        width: calc(100vw - 820px);
+        max-height: 40px;
+        overflow-y: scroll;
+      }
+      #date {
+        position: absolute;
+        left: 5px;
+        top: 100px;
+        width: 90px;
+      }
+      #category {
+        position: absolute;
+        left: 300px;
+        top: 115px;
+        width: 100px;
+      }
+      #likes {
+        position: absolute;
+        left: calc(100vw - 800px);
+        top: 5px;
+        width: 60px;
+        height: 15px;
+      }
+      #dislikes {
+        position: absolute;
+        left: calc(100vw - 730px);
+        top: 5px;
+        width: 60px;
+        height: 15px;
+      }
+      #pay {
+        position: absolute;
+        left: calc(100vw - 810px);
+        top: 60px;
+        width: 130px;
+        height: 40px;
+        background: $yellow;
+        background-image: linear-gradient(to right, #efc056, #e27954);
+        color: white;
+        border: none;
+        font-weight: bold;
+        border-radius: 2px;
+        cursor: pointer;
+      }
+    }
+  }
+
+  .input {
+    width: 400px;
+    padding: 10px 5px;
+    border: solid black 1px;
+    font-family: "Ubuntu", sans-serif;
+  }
+  textArea {
+    width: 400px;
+    height: 200px;
+    padding: 10px 5px;
+    border: solid black 1px;
+    font-family: "Ubuntu", sans-serif;
+  }
+  form {
+    margin: auto;
+  }
+  #postBackBtn {
+    position: fixed;
+    bottom: 10px;
+    left: 10px;
+    padding: 15px;
+    border-radius: 100px;
+    background: #e9e9e9;
+    color: $charcoal;
+    font-size: 20px;
+    z-index: 100;
+  }
+}
+
 // Responsiveness for desktop cinema
 @media only screen and (max-width: 1080px) {
   #cinema {
@@ -267,6 +433,66 @@ $charcoal: #36454f;
   color: $grey;
 }
 
+@media screen and (min-width: 851px) and (max-width: 1079px) {
+  #webinarPage {
+    height: 100vh;
+    overflow-y: auto;
+
+    #info {
+      width: 100vw;
+
+      span {  
+        #creatorProfile {
+          left: 10px;
+          top: 170px;
+        }
+        #title {
+          top: 5px;
+          left: 15px;
+          width: calc(100vw - 30px);
+          max-height: 25px;
+          overflow-y: auto;
+        }
+        #description {
+          top: 40px;
+          left: 15px;
+          width: calc(100vw - 30px);
+          max-height: 40px;
+          overflow-y: auto;
+        }
+        #date {
+          display: none;
+        }
+        #category {
+          display: none;
+        }
+        #likes {
+          left: 210px;
+          top: 110px;
+        }
+        #dislikes {
+          left: 290px;
+          top: 110px;
+        }
+        #pay {
+          left: 15px;
+          top: 120px;
+          width: 150px;
+          height: 30px;
+          font-size: 15px;
+        }
+      }
+    }
+
+    #comments {
+      top: 1000px;
+      width: calc(100vw - 250px);
+      left: 0px;
+      height: auto;
+    }
+  }
+}
+
 @media only screen and (max-width: 850px) {
   #cinema {
     width: 100vw;
@@ -276,12 +502,6 @@ $charcoal: #36454f;
     right: 0px;
     overflow-y: scroll;
     overflow-x: hidden;
-
-    #comments {
-      top: 500px;
-      left: 0px;
-      width: 100vw;
-    }
     
     #info {
       top: 250px;
@@ -313,7 +533,114 @@ $charcoal: #36454f;
           left: 150px;
           top: 130px;
         }
+        #cinemaAdvert {
+          position: absolute;
+          top: 225px;
+        }
       }
+    }
+
+    #comments {
+      position: absolute;
+      padding: 5px;
+      top: 580px;
+      width: 100vw;
+      height: auto; 
+    }
+  }
+
+  #webinarPage {
+    width: 100vw;
+    left: 0px;
+    overflow-y: auto;
+  
+    #Video {
+      width: 100vw;
+      height: calc(100vw * 0.5625);
+    }
+  
+    #comments {
+      position: absolute;
+      padding: 5px;
+      top: calc(100vw * 0.5625 + 270px);
+      width: 100vw;
+      height: auto; 
+    }
+  
+    #info {
+      top: calc(100vw * 0.5625 + 20px);
+      right: 0px;
+      width: 100vw;
+      height: 300px;
+  
+      span {  
+        #creatorProfile {
+          left: 10px;
+          top: 170px;
+        }
+        #title {
+          top: 5px;
+          left: 5px;
+          width: calc(100vw - 10px);
+          max-height: 25px;
+          overflow-y: auto;
+        }
+        #description {
+          top: 40px;
+          left: 5px;
+          width: calc(100vw - 10px);
+          max-height: 40px;
+          overflow-y: auto;
+        }
+        #date {
+          display: none;
+        }
+        #category {
+          display: none;
+        }
+        #likes {
+          left: 200px;
+          top: 110px;
+        }
+        #dislikes {
+          left: 280px;
+          top: 110px;
+        }
+        #pay {
+          left: 5px;
+          top: 120px;
+          width: 150px;
+          height: 30px;
+          font-size: 15px;
+        }
+      }
+    }
+  
+    .input {
+      width: 400px;
+      padding: 10px 5px;
+      border: solid black 1px;
+      font-family: "Ubuntu", sans-serif;
+    }
+    textArea {
+      width: 400px;
+      height: 200px;
+      padding: 10px 5px;
+      border: solid black 1px;
+      font-family: "Ubuntu", sans-serif;
+    }
+    form {
+      margin: auto;
+    }
+    #postBackBtn {
+      position: fixed;
+      bottom: 10px;
+      left: 10px;
+      padding: 15px;
+      border-radius: 100px;
+      background: #e9e9e9;
+      color: $charcoal;
+      font-size: 20px;
     }
   }
 }

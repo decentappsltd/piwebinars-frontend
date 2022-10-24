@@ -11,6 +11,7 @@ function Register(props) {
   const authenticate = async () => {
     document.getElementById("submitBtn").innerHTML = "Loading...";
     await register(username, name, password, confirmPassword);
+    document.getElementById("submitBtn").innerHTML = "Submit";
   }
   
   return (

@@ -2,11 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { searchValue } from '../atoms/forms.js';
 import {
-  RecoilRoot,
-  atom,
-  selector,
   useRecoilState,
-  useRecoilValue,
 } from 'recoil';
 import { search, filter, addWishlist } from '../app/webinars.js';
 import { login, register } from '../app/authentication.js';

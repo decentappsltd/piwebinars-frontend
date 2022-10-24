@@ -1,16 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { renderUploads, editWebinar, deleteWebinar } from '../app/webinars.js';
 import {
-  RecoilRoot,
-  atom,
-  selector,
   useRecoilState,
-  useRecoilValue,
 } from 'recoil';
 import { storedUploads } from '../atoms/posts.js';
 import Loader from './Loader.js';
 import Vimeo from '@vimeo/player';
 import { Link } from 'react-router-dom';
+import { Preview } from './Courses.js';
 
 function Modal(props) {
   useEffect(() => {
@@ -91,6 +88,7 @@ function Edit(props) {
 function Post(props) {
   const [modalShown, toggleModal] = useState(false);
   const [editShown, toggleEdit] = useState(false);
+  const [course, setCourse] = useState(false);
 
   const open = () => {
     toggleModal(!modalShown);
@@ -105,15 +103,33 @@ function Post(props) {
     if (response == "deleted") props.remove(props.post.title);
   }
 
+  const handleAddToCourse = (e) => {
+    props.course(props.post);
+    if (!course) {
+      e.target.style.background = '#fbb44a';
+      e.target.classList.remove('fa-plus');
+      e.target.classList.add('fa-check');
+    } else {
+      e.target.style.background = '#fbecab';
+      e.target.classList.remove('fa-check');
+      e.target.classList.add('fa-plus');
+    }
+    setCourse(!course);
+  }
+
   return (
     <>
       <div className="post">
         <iframe className="postThumbnail" src={props.url} frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
         <h3 className="postTitle">{props.title}</h3><br />
-        <div style={{ display: "flex", justifyContent: "space-around" }}>
-          <a onClick={edit} className="fas fa-edit"></a>
-          <a id="delete" onClick={deleteVid} className="fas fa-trash"></a>
-        </div>
+        {props.course ? <a className='fas fa-plus addToCourse' onClick={(e) => { handleAddToCourse(e) }}></a> :
+          <>
+            <div style={{ display: "flex", justifyContent: "space-around" }}>
+              <a onClick={edit} className="fas fa-edit"></a>
+              <a id="delete" onClick={deleteVid} className="fas fa-trash"></a>
+            </div>
+          </>
+        }
       </div>
       {modalShown ?
         <Modal close={() => {
@@ -131,9 +147,31 @@ function Post(props) {
   );
 }
 
-function Uploads() {
+function Uploads(props) {
   const [webinars, setPosts] = useRecoilState(storedUploads);
+  const [courses, setCourses] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [display, setDisplay] = useState('posts');
+  const [Active, setActive] = useState({
+    stateA: 'selectionTabActive',
+    stateB: 'selectionTabInactive'
+  });
+
+  const updateStateA = () => {
+    setActive({
+      stateA: 'selectionTabActive',
+      stateB: 'selectionTabInactive'
+    });
+    setDisplay("posts");
+  };
+
+  const updateStateB = () => {
+    setActive({
+      stateA: 'selectionTabInactive',
+      stateB: 'selectionTabActive'
+    });
+    setDisplay("courses");
+  };
 
   const getUploads = async () => {
     if (webinars.length == 0) {
@@ -145,7 +183,10 @@ function Uploads() {
   }
 
   useEffect(() => {
-    getUploads();
+    getUploads().catch((err) => {
+      setLoading(false);
+      console.log(err);
+    });
   }, []);
 
   useEffect(() => {
@@ -176,16 +217,38 @@ function Uploads() {
             data-ad-slot="1627309222"></ins>
         </>
       }
-      {webinars.map(post => {
+
+      {!props.course && <>
+        <div id='displayToggle'>
+          <span className={Active.stateA} onClick={updateStateA}>Posts</span>
+          <span className={Active.stateB} onClick={updateStateB}>Courses</span>
+        </div>
+      </>}
+
+      {display == 'courses' && <>{courses.map(course => {
         return (
-          <article key={post._id}>
-            <Post title={post.title} remove={remove} url={`https://player.vimeo.com/video/${post.video_id}`} post={post} />
+          <article>
+            <Preview course_id={course._id} course={course} title={course.title} description={course.description} length={course.posts.length} avatar={course.avatar} username={course.username} posts={course.posts} />
           </article>
         );
       })
+      }</>}
+
+      {display == 'posts' &&
+        <> {
+          webinars.map(post => {
+            return (
+              <article key={post._id}>
+                <Post title={post.title} remove={remove} url={`https://player.vimeo.com/video/${post.video_id}`} post={post} course={props.course} />
+              </article>
+            );
+          })
+        }</>
       }
+
       {loading ? <Loader /> : null}
-      {(webinars.length == 0 && !loading) && <h2>Your uploads will appear here...</h2>}
+      {(webinars.length == 0 && !loading && display == 'posts') && <h2 style={{ position: 'fixed', top: 'calc(50vh - 10px)', width: '100%', textAlign: 'center' }}>Your uploads will appear here...</h2>}
+      {(courses.length == 0 && !loading && display == 'courses') && <h2 style={{ position: 'fixed', top: 'calc(50vh - 10px)', width: '100%', textAlign: 'center' }}>Your courses will appear here...</h2>}
     </>
   );
 }

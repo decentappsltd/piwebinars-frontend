@@ -1,10 +1,6 @@
 import React, { useState } from 'react';
 import {
-  RecoilRoot,
-  atom,
-  selector,
   useRecoilState,
-  useRecoilValue,
 } from 'recoil';
 import { appSelectionState } from '../atoms/states.js';
 
@@ -26,11 +22,11 @@ function Selection() {
       stateD: 'selectionTabInactive',
       stateE: 'selectionTabInactive',
     });
+    sessionStorage.setItem('home', 'posts');
     setSelectionState("explore");
   };
   
   const updateStateB = () => {
-    if (!sessionStorage.userSession) window.location.href = '/login';
     setActive({
       stateA: 'selectionTabInactive',
       stateB: 'selectionTabActive',
@@ -38,11 +34,11 @@ function Selection() {
       stateD: 'selectionTabInactive',
       stateE: 'selectionTabInactive',
     });
-    setSelectionState("purchases");
+    sessionStorage.setItem('home', 'courses');
+    setSelectionState("courses");
   };
   
   const updateStateC = () => {
-    if (!sessionStorage.userSession) window.location.href = '/login';
     setActive({
       stateA: 'selectionTabInactive',
       stateB: 'selectionTabInactive',
@@ -50,10 +46,12 @@ function Selection() {
       stateD: 'selectionTabInactive',
       stateE: 'selectionTabInactive',
     });
-    setSelectionState("uploads");
+    sessionStorage.setItem('home', 'collections');
+    setSelectionState("collections");
   };
   
   const updateStateD = () => {
+    if (!sessionStorage.userSession) window.location.href = '/login';
     setActive({
       stateA: 'selectionTabInactive',
       stateB: 'selectionTabInactive',
@@ -61,10 +59,12 @@ function Selection() {
       stateD: 'selectionTabActive',
       stateE: 'selectionTabInactive',
     });
-    setSelectionState("courses");
+    sessionStorage.setItem('home', 'purchases');
+    setSelectionState("purchases");
   };
   
   const updateStateE = () => {
+    if (!sessionStorage.userSession) window.location.href = '/login';
     setActive({
       stateA: 'selectionTabInactive',
       stateB: 'selectionTabInactive',
@@ -72,17 +72,18 @@ function Selection() {
       stateD: 'selectionTabInactive',
       stateE: 'selectionTabActive',
     });
-    setSelectionState("collections");
+    sessionStorage.setItem('home', 'uploads');
+    setSelectionState("uploads");
   };
   
   return (
     <>
       <div id="selectionTabs">
         <a className={Active.stateA} onClick={updateStateA}>Explore</a>
-        <a className={Active.stateB} onClick={updateStateB}>Purchases</a>
-        <a className={Active.stateC} onClick={updateStateC}>Uploads</a>
-        <a className={Active.stateD} onClick={updateStateD}>Courses</a>
-        <a className={Active.stateE} onClick={updateStateE}>Collections</a>
+        <a className={Active.stateB} onClick={updateStateB}>Courses</a>
+        <a className={Active.stateC} onClick={updateStateC}>Collections</a>
+        <a className={Active.stateD} onClick={updateStateD}>Purchases</a>
+        <a className={Active.stateE} onClick={updateStateE}>Uploads</a>
       </div>
     </>
   );

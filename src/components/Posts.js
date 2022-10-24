@@ -2,14 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { renderWebinars, addWishlist } from '../app/webinars.js';
 import {
-  RecoilRoot,
-  atom,
-  selector,
   useRecoilState,
-  useRecoilValue,
 } from 'recoil';
 import { storedPosts } from '../atoms/posts.js';
-import { postsScrollState } from '../atoms/states.js';
 import Cinema from './Cinema.js';
 import Loader from './Loader.js';
 
@@ -24,13 +19,21 @@ export function Post(props) {
   }, []);
 
   const open = () => {
-    toggleModal(!modalShown);
-    document.getElementById("tint").style.display = "block";
+    // toggleModal(!modalShown);
+    // document.getElementById("tint").style.display = "block";
+    // window.history.pushState(null, null, `/post/${props.user_id}/${props.post_id}`);
+    Storage.prototype.setObj = function (key, obj) {
+      return this.setItem(key, JSON.stringify(obj));
+    };
+    sessionStorage.setObj('post', props.post);
+    console.log('post 1', sessionStorage.getObj('post'));
+    window.location.href = `/post/${props.user_id}/${props.post_id}`;
   };
 
   const handleClose = () => {
     toggleModal(!modalShown);
     document.getElementById("tint").style.display = "none";
+    window.history.pushState(null, null, `/`);
   }
 
   const add = async () => {
@@ -49,9 +52,11 @@ export function Post(props) {
           <p2 className="statCategory">{props.category}</p2>
           <p2 className="statLikes">{props.amount} <i>Pi</i></p2>
         </div>
-        {isWishlist == false ?
-          <i onClick={add} className="fas fa-plus addWishlist"></i>
-          : <i onClick={add} className="fas fa-minus addWishlist"></i>
+        {props.remove ? <i onClick={props.remove} className="fas fa-minus addWishlist"></i> : <>
+          {isWishlist == false ?
+            <i onClick={add} className="fas fa-plus addWishlist"></i>
+            : <i onClick={add} className="fas fa-minus addWishlist"></i>
+          } </>
         }
       </div>
 
@@ -68,6 +73,7 @@ export function Post(props) {
 function Posts(props) {
   const [posts, setPosts] = useRecoilState(storedPosts);
   const [loading, setLoading] = useState(false);
+  const [modalShown, toggleModal] = useState(false);
 
   useEffect(() => {
     for (const post of props.posts) {
@@ -96,6 +102,10 @@ function Posts(props) {
   }
 
   useEffect(() => {
+    if (props.postId) {
+      window.history.pushState(null, null, `/post/${props.userId}/${props.postId}`);
+      toggleModal(true);
+    }
     getWebinars();
   }, []);
 
@@ -123,10 +133,17 @@ function Posts(props) {
       {posts.map(post => {
         return (
           <article key={post.upload}>
-            <Post key={post.upload} post_id={post._id} file_id={post.upload} user_id={post.user} video_id={post.video_id} title={post.title} name={post.name} description={post.description} category={post.category} likes={post.likes} dislike={post.dislike} date={post.dateAdded} amount={post.amount} wishlisted={post.wishlisted} />
+            <Post key={post.upload} post={post} post_id={post._id} file_id={post.upload} user_id={post.user} video_id={post.video_id} title={post.title} name={post.name} description={post.description} category={post.category} likes={post.likes} dislike={post.dislike} date={post.dateAdded} amount={post.amount} wishlisted={post.wishlisted} />
           </article>
         );
       })
+      }
+      {modalShown ?
+        <Cinema close={() => {
+          toggleModal(false);
+          window.history.pushState(null, null, `/`);
+        }} postId={props.postId} userId={props.userId} />
+        : null
       }
     </>
   );

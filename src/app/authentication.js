@@ -37,7 +37,7 @@ const divDom = document.createElement("div");
 const authToken = localStorage.getItem("userSession");
 const sessToken = sessionStorage.getItem("userSession");
 const instance = axios.create({
-  baseURL: "https://piwebinars-server.onrender.com",
+  baseURL: "http://localhost:5000",
   headers: {
     "Access-Control-Allow-Origin": "*",
     Authorization: `Bearer ${authToken}`
@@ -68,6 +68,11 @@ function darkMode() {
   }
 }
 
+// saving arrays to session storage
+Storage.prototype.setObj = function (key, obj) {
+  return this.setItem(key, JSON.stringify(obj));
+};
+
 // Login a user
 async function login(username, password) {
   let uid = localStorage.uid;
@@ -93,6 +98,7 @@ async function login(username, password) {
         sessionStorage.setItem("username", username);
         localStorage.setItem("username", username);
         localStorage.setItem("user", response.data.userId);
+        sessionStorage.setObj("profile", response.data.user);
         window.dispatchEvent(new Event("storage"));
         window.location.pathname = '/';
         return username;
@@ -129,11 +135,12 @@ async function register(
       const response = await instance.post(`/register`, newUser);
       if (response.status === 201) {
         alert(`Welcome to Pi Webinars ${fullName}. Now please login.`);
+        window.location.href = "/login";
       }
     }
   } catch (error) {
     const errorMessage = error.response.data.message;
-    if (errorMessage.length > 0) flashMessage = errorMessage;
+    if (errorMessage.length > 0) alert(errorMessage);
   }
 }
 

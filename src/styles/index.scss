@@ -371,6 +371,7 @@ body {
   border-radius: 100px;
   margin: 10px;
   font-weight: bold;
+  cursor: pointer;
 }
 
 .selectionTabInactive {
@@ -381,6 +382,7 @@ body {
   border-radius: 100px;
   margin: 10px;
   font-weight: bold;
+  cursor: pointer;
 }
 
 .selectionTabInactive:hover {
@@ -654,7 +656,8 @@ button#followBtn {
   }
 }
 
-#acceptCookies, #declineCookies {
+#acceptCookies,
+#declineCookies {
   border: none;
   color: white;
   padding: 10px 20px;
@@ -678,6 +681,7 @@ button#followBtn {
     overflow: hidden;
     transition: 0.5s;
     white-space: nowrap;
+    z-index: 10;
   }
 
   #bar {

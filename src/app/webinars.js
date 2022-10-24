@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const urlApi = "http://localhost:5000";
+const urlApi = "https://piwebinars-server.onrender.com";
 
 //saving arrays to session storage
 Storage.prototype.setObj = function (key, obj) {

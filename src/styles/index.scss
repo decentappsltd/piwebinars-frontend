@@ -163,7 +163,7 @@ body {
   width: 250px;
   color: white;
   text-align: center;
-  border-top: solid white 1px;
+  border-top: solid #555555 1px;
   font-size: 13px;
   overflow-y: scroll;
   overflow-x: hidden;
@@ -371,6 +371,7 @@ body {
   border-radius: 100px;
   margin: 10px;
   font-weight: bold;
+  cursor: pointer;
 }
 
 .selectionTabInactive {
@@ -381,6 +382,7 @@ body {
   border-radius: 100px;
   margin: 10px;
   font-weight: bold;
+  cursor: pointer;
 }
 
 .selectionTabInactive:hover {
@@ -654,7 +656,8 @@ button#followBtn {
   }
 }
 
-#acceptCookies, #declineCookies {
+#acceptCookies,
+#declineCookies {
   border: none;
   color: white;
   padding: 10px 20px;
@@ -678,6 +681,7 @@ button#followBtn {
     overflow: hidden;
     transition: 0.5s;
     white-space: nowrap;
+    z-index: 10;
   }
 
   #bar {

@@ -21,6 +21,7 @@ $charcoal: #36454f;
     position: absolute;
     top: 5px;
     left: 5px;
+    padding-top: 10px;
     writing-mode: vertical-rl; 
     font-size: 0.8em;
     text-align: center;
@@ -28,6 +29,7 @@ $charcoal: #36454f;
 
   #avatar {
     border-radius: 100px;
+    padding-left: 10px;
     cursor: pointer;
   }
 
@@ -76,6 +78,22 @@ $charcoal: #36454f;
   width: 15px;
   height: 13px;
   padding-left: 5px;
+}
+
+#displayToggle {
+  position: fixed;
+  bottom: 10px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  z-index: 2;
+
+  span {
+    width: 80px;
+    text-align: center;
+    box-shadow: 2px 5px 15px $charcoal;
+  }
 }
 
 @media only screen and (max-width: 850px) {

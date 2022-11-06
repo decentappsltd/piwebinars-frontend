@@ -1,11 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { renderPurchases } from '../app/webinars.js';
 import {
-  RecoilRoot,
-  atom,
-  selector,
   useRecoilState,
-  useRecoilValue,
 } from 'recoil';
 import { storedPurchases } from '../atoms/posts.js';
 import Loader from './Loader.js';

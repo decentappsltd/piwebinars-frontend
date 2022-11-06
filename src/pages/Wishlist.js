@@ -3,10 +3,7 @@ import { renderWishlist, addWishlist } from '../app/webinars.js';
 import { buyWebinar } from '../app/payment.js';
 import {
   RecoilRoot,
-  atom,
-  selector,
   useRecoilState,
-  useRecoilValue,
 } from 'recoil';
 import { storedWishlist } from '../atoms/posts.js';
 import Cinema from '../components/Cinema.js';

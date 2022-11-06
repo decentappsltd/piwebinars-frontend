@@ -1,6 +1,7 @@
 import axios from 'axios';
 
 const urlApi = "https://piwebinars-server.onrender.com";
+// const urlApi = "http://127.0.0.1:5000";
 
 //saving arrays to session storage
 Storage.prototype.setObj = function (key, obj) {
@@ -55,7 +56,6 @@ const renderWebinars = async () => {
 
 // Get more webinars for infinite scrolling
 async function renderMore(category) {
-  if (category == '') category = 'all';
   const auth_token = localStorage.getItem("userSession");
   const webinarUploads = await axios.get(`${urlApi}/post/more/${category}`, {
     headers: {
@@ -187,7 +187,7 @@ async function editWebinar(userId, post_id, title, price, description) {
     }
   );
   if (response.status === 200) {
-    alert("Updated successfully!");
+    console.log("success");
   } else {
     alert("Update failed, please try again later");
   }
@@ -275,6 +275,91 @@ async function dislikeWebinar(userId, post_id) {
   }
 }
 
+// Courses
+async function getCourses(page) {
+  const response = await axios.get(`${urlApi}/post/course?page=${page}`);
+  console.log(response.data.courses);
+  return response.data.courses;
+}
+
+async function getCourse(userId, courseId) {
+  const response = await axios.get(`${urlApi}/post/course/${userId}/${courseId}`);
+  console.log(response.data.course);
+  return response.data.course;
+}
+
+async function createCourse(title, description, posts) {
+  if (title === "" || description === "") return alert("Please fill in all fields");
+  const authToken = localStorage.userSession;
+  const instance = axios.create({
+    baseURL: urlApi,
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${authToken}`
+    }
+  });
+  const data = {
+    title,
+    description,
+    posts
+  };
+  const response = await instance.post(`/post/course/create`, data);
+  console.log(response);
+  return response.data;
+}
+
+async function addPostToCourse(course_id, post) {
+  const authToken = localStorage.userSession;
+  const instance = axios.create({
+    baseURL: urlApi,
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${authToken}`
+    }
+  });
+  const data = {
+    course_id,
+    post
+  };
+  const response = await instance.post(`/post/course/add`, data);
+  return response.data;
+}
+
+async function removePostFromCourse(course_id, post) {
+  const authToken = localStorage.userSession;
+  const instance = axios.create({
+    baseURL: urlApi,
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${authToken}`
+    }
+  });
+  const data = {
+    course_id,
+    post
+  };
+  const response = await instance.post(`/post/course/remove`, data);
+  return response.data;
+}
+
+async function editCourse(type, update, userId, courseId) {
+  const authToken = localStorage.userSession;
+  const instance = axios.create({
+    baseURL: urlApi,
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${authToken}`
+    }
+  });
+  const data = {
+    type,
+    update
+  };
+  console.log(userId, courseId);
+  const response = await instance.put(`/post/course/${userId}/${courseId}`, data);  
+  return response.data;
+}
+
 export {
   search,
   filter,
@@ -291,5 +376,11 @@ export {
   editWebinar,
   deleteWebinar,
   likeWebinar,
-  dislikeWebinar
+  dislikeWebinar,
+  getCourses,
+  getCourse,
+  createCourse,
+  addPostToCourse,
+  removePostFromCourse,
+  editCourse
 };

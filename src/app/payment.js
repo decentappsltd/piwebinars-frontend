@@ -24,6 +24,11 @@ async function auth() {
   });
 }
 
+// saving arrays to session storage
+Storage.prototype.setObj = function (key, obj) {
+  return this.setItem(key, JSON.stringify(obj));
+};
+
 async function piLogin() {
   const config = {
     name: localStorage.piName,
@@ -42,6 +47,7 @@ async function piLogin() {
     localStorage.setItem("userSession", token);
     sessionStorage.setItem("username", localStorage.piName);
     localStorage.setItem("user", response.data.userId);
+    sessionStorage.setObj('profile', response.data.user);
     document.getElementById("login").style.display = "none";
     document.getElementById("register").style.display = "none";
   }

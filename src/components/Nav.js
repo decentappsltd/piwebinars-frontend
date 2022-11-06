@@ -1,13 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { Outlet, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { appPageState } from "../atoms/states.js";
 import { storedFollowing } from "../atoms/posts.js";
 import {
   RecoilRoot,
-  atom,
-  selector,
   useRecoilState,
-  useRecoilValue
 } from "recoil";
 import { renderFollowing, filter } from "../app/webinars.js";
 import { logout, logoutAll, deleteAccount } from "../app/authentication.js";
@@ -34,6 +31,7 @@ function NavTab(props) {
     // get base route from url part
     const route = window.location.href.split("/")[3];
     if (route !== '') setPage(route);
+    if (route === 'post' || route === 'user' || route === 'course') setPage('home');
   }, []);
 
 

@@ -3,15 +3,8 @@ import { getProfile, followUnfollow } from '../app/authentication.js';
 import { renderCreator, renderFollowing, addWishlist } from '../app/webinars.js';
 import Cinema from '../components/Cinema.js';
 import Loader from '../components/Loader.js';
-import {
-  RecoilRoot,
-  atom,
-  selector,
-  useRecoilState,
-  useRecoilValue
-} from "recoil";
-import { storedFollowing } from "../atoms/posts.js";
 import avatar from '../assets/avatar.png';
+import { Preview } from '../components/Courses.js';
 
 function Post(props) {
   const [modalShown, toggleModal] = useState(false);
@@ -60,13 +53,36 @@ function Post(props) {
 
 function Uploads(props) { 
   const [webinars, setPosts] = useState([]);
+  const [courses, setCourses] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [display, setDisplay] = useState('posts');
+  const [Active, setActive] = useState({
+    stateA: 'selectionTabActive',
+    stateB: 'selectionTabInactive'
+  });
+  
+  const updateStateA = () => {
+    setActive({
+      stateA: 'selectionTabActive',
+      stateB: 'selectionTabInactive'
+    });
+    setDisplay("posts");
+  };
+  
+  const updateStateB = () => {
+    setActive({
+      stateA: 'selectionTabInactive',
+      stateB: 'selectionTabActive'
+    });
+    setDisplay("courses");
+  };
 
   const getUploads = async () => {
     if (webinars.length == 0) {
       setLoading(true);
       const list = await renderCreator(props.userId);
       setPosts(list.data.posts);
+      setCourses(list.data.courses);
       setLoading(false);
     }
   }
@@ -85,14 +101,29 @@ function Uploads(props) {
   
   return (
     <>
-      {webinars.map(post => { 
+      <div id='displayToggle'>
+        <span className={Active.stateA} onClick={updateStateA}>Posts</span>
+        <span className={Active.stateB} onClick={updateStateB}>Courses</span>
+      </div>
+
+      { display == 'posts' && <>{webinars.map(post => { 
         return(
           <article>
-            <Post key={post.upload} post_id={post._id} file_id={post.upload} user_id={post.user} video_id={post.video_id} title={post.title} name={post.name} description={post.description} category={post.category} likes={post.likes.length} date={post.dateAdded} amount={post.amount} wishlisted={post.wishlisted} />
+            <Post key={post.upload} post={post} post_id={post._id} file_id={post.upload} user_id={post.user} video_id={post.video_id} title={post.title} name={post.name} description={post.description} category={post.category} likes={post.likes.length} date={post.dateAdded} amount={post.amount} wishlisted={post.wishlisted} />
           </article>
           );
         })
-      }
+      }</> }
+
+      { display == 'courses' && <>{courses.map(course => {
+        return(
+          <article>
+            <Preview course_id={course._id} course={course} title={course.title} description={course.description} length={course.posts.length} avatar={course.avatar} username={course.username} posts={course.posts} />
+          </article>
+          );
+        })
+      }</> }
+
       {loading ? <Loader /> : null}
       {loading ? null :
         <>
@@ -104,7 +135,8 @@ function Uploads(props) {
             data-ad-slot="1627309222"></ins>
         </>
       }
-      {(webinars.length == 0 && !loading) && <h2>Loading webinars...</h2>}
+      {(webinars.length == 0 && !loading && display == 'posts') && <h2 style={{ position: 'fixed', top: 'calc(50vh - 10px)', width: '100%', textAlign: 'center' }}>There are no webinars here, yet</h2>}
+      {(courses.length == 0 && !loading && display == 'courses') && <h2 style={{ position: 'fixed', top: 'calc(50vh - 10px)', width: '100%', textAlign: 'center' }}>There are no courses here, yet</h2>}
     </>
   );
 }
@@ -162,7 +194,7 @@ export default function User(props) {
   
   return (
     <>
-      <span id="page">
+      <span id="page" style={{ paddingBottom: '50px', height: 'calc(100vh - 50px)'}}>
         <div id="profile">
           { profile.avatar ?
             <img id="avatar" src={profile.avatar}></img>

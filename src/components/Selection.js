@@ -81,7 +81,7 @@ function Selection() {
       <div id="selectionTabs">
         <a className={Active.stateA} onClick={updateStateA}>Explore</a>
         <a className={Active.stateB} onClick={updateStateB}>Courses</a>
-        <a className={Active.stateC} onClick={updateStateC}>Collections</a>
+        {/* <a className={Active.stateC} onClick={updateStateC}>Collections</a> */}
         <a className={Active.stateD} onClick={updateStateD}>Purchases</a>
         <a className={Active.stateE} onClick={updateStateE}>Uploads</a>
       </div>

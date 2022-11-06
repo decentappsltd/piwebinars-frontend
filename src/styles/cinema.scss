@@ -116,20 +116,82 @@ $charcoal: #36454f;
       }
     }
   }
+}
+
+#editWebinar {
+  @extend #cinema;
+  background-color: white;
+  border-radius: 10px;
+  color: $charcoal;
+  width: 95vw;
+  padding: 10px;
+  box-sizing: border-box;
+  width: 95vw;
+  max-width: 400px;
+  height: 550px;
+  max-height: 550px;
+  right: calc(50vw - 325px);
+
+  h2 {
+    width: calc(100% - 10px);
+    text-align: center;
+    margin-top: 15px;
+  }
+
+  .fa-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 25px;
+    width: 40px;
+    height: 40px;
+    border-radius: 100px;
+    text-align: center;
+    padding-top: 7px;
+    box-sizing: border-box;
+    cursor: pointer;
+  }
+
+  .fa-close:hover {
+    background-color: #e9e9e9;
+  }
 
   .input {
-    width: 400px;
-    padding: 10px 5px;
-    border: solid black 1px;
-    font-family: "Ubuntu", sans-serif;
+    width: calc(100% - 30px);
+    padding: 10px 15px;
+    border: none;
+    border-radius: 100px;
+    background-color: #e9e9e9;
+    font-family: "Roboto", sans-serif;
+    font-weight: bold;
   }
+
   textArea {
-    width: 400px;
     height: 200px;
-    padding: 10px 5px;
-    border: solid black 1px;
-    font-family: "Ubuntu", sans-serif;
+    width: calc(100% - 30px);
+    padding: 10px 15px;
+    border: none;
+    border-radius: 18px;
+    background-color: #e9e9e9;
+    font-family: "Roboto", sans-serif;
+    font-weight: bold;
   }
+
+  #update {
+    background-color: $light_yellow;
+    border-radius: 100px;
+    border: none;
+    color: $charcoal;
+    font-weight: bold;
+    font-size: 15px;
+    padding: 5px 25px;
+    cursor: pointer;
+  }
+
+  #update:hover {
+    background-color: $yellow;
+  }
+
   form {
     margin: auto;
   }
@@ -322,6 +384,12 @@ $charcoal: #36454f;
   #cinema::-webkit-scrollbar-thumb {
     border-radius: 5px;
     background-color: $yellow;
+  }
+
+  #editWebinar {
+    width: 95vw;
+    max-width: 400px;
+    right: calc(50vw - 325px);
   }
 }
 @media only screen and (min-width: 1081px) {
@@ -548,6 +616,14 @@ $charcoal: #36454f;
       height: auto; 
     }
   }
+
+  #editWebinar {
+    width: 95vw;
+    max-width: 95vw;
+    right: 2.5vw;
+    height: 550px;
+    top: calc(50vh - 275px);
+  };
 
   #webinarPage {
     width: 100vw;

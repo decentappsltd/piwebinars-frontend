@@ -52,7 +52,8 @@ function App(props) {
     if (bottom && loading == false) {
       setLoading(true);
       if (sessionStorage.home = 'posts' || !sessionStorage.home) {
-        const category = localStorage.category;
+        let category = localStorage.category;
+        if (category === '' || category === undefined) category = 'all';
         const response = await renderMore(category);
         const morePosts = response.data.list;
         let list = [];

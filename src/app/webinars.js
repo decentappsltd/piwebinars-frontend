@@ -1,6 +1,7 @@
 import axios from 'axios';
 
 const urlApi = "https://piwebinars-server.onrender.com";
+// const urlApi = "http://127.0.0.1:5000";
 
 //saving arrays to session storage
 Storage.prototype.setObj = function (key, obj) {
@@ -55,7 +56,6 @@ const renderWebinars = async () => {
 
 // Get more webinars for infinite scrolling
 async function renderMore(category) {
-  if (category == '') category = 'all';
   const auth_token = localStorage.getItem("userSession");
   const webinarUploads = await axios.get(`${urlApi}/post/more/${category}`, {
     headers: {
@@ -187,7 +187,7 @@ async function editWebinar(userId, post_id, title, price, description) {
     }
   );
   if (response.status === 200) {
-    alert("Updated successfully!");
+    console.log("success");
   } else {
     alert("Update failed, please try again later");
   }

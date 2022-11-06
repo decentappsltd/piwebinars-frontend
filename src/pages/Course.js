@@ -9,7 +9,7 @@ import Loader from '../components/Loader.js';
 import { Post } from '../components/Posts.js';
 
 function Uploads(props) {
-    const [uploads, setUploads] = useRecoilState(storedUploads);
+    const [uploads, setUploads] = useState([]);
     const [loading, setLoading] = useState(true);
 
     const getUploads = async () => {
@@ -43,8 +43,8 @@ function Uploads(props) {
                             <div key={upload._id} className='courseOwnPost'>
                                 <img src={upload.thumbnail} />
                                 <h4>{upload.title}</h4>
-                                {owner === false ? <button onClick={() => { document.getElementById('course').style.cursor = 'wait'; props.addPost(upload).then(() => {owner = true}); document.getElementById('course').style.cursor = 'initial'; }} className='fas fa-plus'></button> :
-                                    <button onClick={() => { document.getElementById('course').style.cursor = 'wait'; props.removePost(upload).then(() => {owner = false}); document.getElementById('course').style.cursor = 'initial'; }} className='fas fa-minus'></button>}
+                                {owner === false ? <button onClick={() => { document.getElementById('course').style.cursor = 'wait'; props.addPost(upload).then(() => { owner = true }); document.getElementById('course').style.cursor = 'initial'; }} className='fas fa-plus'></button> :
+                                    <button onClick={() => { document.getElementById('course').style.cursor = 'wait'; props.removePost(upload).then(() => { owner = false }); document.getElementById('course').style.cursor = 'initial'; }} className='fas fa-minus'></button>}
                             </div>
                         );
                     })}
@@ -84,16 +84,19 @@ function Course(props) {
     }
 
     const removePost = async (post) => {
-        const response = await removePostFromCourse(props.courseId, post);
-        console.log(response);
-        if (response.success == true) {
-            const postIndex = course.posts.indexOf(post);
-            console.log(postIndex);
-            let newPosts = course.posts;
-            console.log(newPosts);
-            newPosts.splice(postIndex, 1);
-            console.log(newPosts);
-            setCourse(prev => ({ ...prev, posts: newPosts }));
+        if (course.posts.length <= 1) alert('There must be at least one post in a course.');
+        else {
+            const response = await removePostFromCourse(props.courseId, post);
+            console.log(response);
+            if (response.success == true) {
+                const postIndex = course.posts.indexOf(post);
+                console.log(postIndex);
+                let newPosts = course.posts;
+                console.log(newPosts);
+                newPosts.splice(postIndex, 1);
+                console.log(newPosts);
+                setCourse(prev => ({ ...prev, posts: newPosts }));
+            }
         }
     }
 

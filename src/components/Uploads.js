@@ -51,6 +51,7 @@ function Edit(props) {
   const [title, setTitle] = useState('');
   const [price, setPrice] = useState('');
   const [desc, setDesc] = useState('');
+  const [progress, setProgress] = useState('Update');
 
   const setClickEvent = () => {
     function close(e) {
@@ -67,18 +68,22 @@ function Edit(props) {
   }, []);
 
   const handleSubmit = async () => {
+    setProgress('Updating...');
     await editWebinar(props.post.user, props.post._id, title, price, desc);
+    setProgress('Done!');
   }
 
   return (
     <>
-      <div id="cinema" style={{ padding: "10px" }}>
+      <div id="editWebinar" style={{ padding: "10px" }}>
         <form>
+          <h2>Edit</h2>
+          <a className='fas fa-close' onClick={props.close}></a>
           <i>Leave fields blank to remain unchanged</i><br /><br />
           <input className="input" placeholder="Update title" onChange={(e) => setTitle(e.target.value)} /><br /><br />
           <textArea placeholder="Update description" onChange={(e) => setDesc(e.target.value)} /><br /><br />
           <input className="input" placeholder="Update price" onChange={(e) => setPrice(e.target.value)} /><br /><br />
-          <a id="update" onClick={handleSubmit}>Update</a><br />
+          <a id="update" onClick={handleSubmit}>{progress}</a><br />
         </form>
       </div>
     </>
@@ -124,9 +129,9 @@ function Post(props) {
         <h3 className="postTitle">{props.title}</h3><br />
         {props.course ? <a className='fas fa-plus addToCourse' onClick={(e) => { handleAddToCourse(e) }}></a> :
           <>
-            <div style={{ display: "flex", justifyContent: "space-around" }}>
-              <a onClick={edit} className="fas fa-edit"></a>
-              <a id="delete" onClick={deleteVid} className="fas fa-trash"></a>
+            <div style={{ display: "flex", justifyContent: "space-around", position: "absolute", bottom: "-10px", left: "-10px", width: "75px", padding: "10px", borderRadius: "100px", background: "#fbb44a" }}>
+              <a onClick={edit} className="fas fa-edit" style={{ cursor: "pointer" }}></a>
+              <a id="delete" onClick={deleteVid} className="fas fa-trash" style={{ cursor: "pointer" }}></a>
             </div>
           </>
         }
@@ -178,6 +183,7 @@ function Uploads(props) {
       setLoading(true);
       const list = await renderUploads();
       setPosts(list.data.post);
+      setCourses(list.data.course);
       setLoading(false);
     }
   }
@@ -225,14 +231,16 @@ function Uploads(props) {
         </div>
       </>}
 
-      {display == 'courses' && <>{courses.map(course => {
-        return (
-          <article>
-            <Preview course_id={course._id} course={course} title={course.title} description={course.description} length={course.posts.length} avatar={course.avatar} username={course.username} posts={course.posts} />
-          </article>
-        );
-      })
-      }</>}
+      {display == 'courses' && <>{
+        courses.map(course => {
+          return (
+            <article>
+              <Preview course_id={course._id} course={course} title={course.title} description={course.description} length={course.posts.length} avatar={course.avatar} username={course.username} posts={course.posts} />
+            </article>
+          );
+        })
+      }</>
+      }
 
       {display == 'posts' &&
         <> {

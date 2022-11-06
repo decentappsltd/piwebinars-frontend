@@ -43,7 +43,7 @@ function Webinar(props) {
             window.location.href = "/login";
             return;
         }
-        const response = await likeWebinar(post.user_id, post.post_id);
+        const response = await likeWebinar(props.userId, props.postId);
         if (response == 'success' && isWebinarLiked == false) {
             setWebinarDisliked(false);
             setWebinarLiked(true);
@@ -66,7 +66,7 @@ function Webinar(props) {
             window.location.href = "/login";
             return;
         }
-        const response = await dislikeWebinar(props.post.user_id, props.post.post_id);
+        const response = await dislikeWebinar(props.userId, props.postId);
         if (response == 'success' && isWebinarDisliked == false) {
             setWebinarLiked(false);
             setWebinarDisliked(true);
@@ -85,14 +85,11 @@ function Webinar(props) {
     };
 
     const getThePost = async () => {
-        Storage.prototype.getObj = function (key) {
-            return JSON.parse(this.getItem(key));
-        };
-        const sessionPost = sessionStorage.getObj('post');
-        console.log(sessionPost);
+        let user;
+        if (sessionStorage.profile && sessionStorage.profile !== 'undefined') user = JSON.parse(sessionStorage.profile);
+        const sessionPost = JSON.parse(sessionStorage.post);
         let videoPlayer;
         if (sessionPost) {
-            console.log('here');
             setPost(prev => ({ ...prev, ...sessionPost }));
             setLoading(false);
             const url = "https://player.vimeo.com/video/" + sessionPost.video_id;
@@ -116,7 +113,6 @@ function Webinar(props) {
             }
             videoPlayer = new Player("Video", options);
             // getting arrays from session storage
-            const user = sessionStorage.getObj('profile');
             if (user) {
                 for (const item of user.purchased) {
                     if (item.post_id == props.postId) {
@@ -180,7 +176,6 @@ function Webinar(props) {
         }
         if (!videoPlayer) videoPlayer = new Player("Video", options);
         // getting arrays from session storage
-        const user = sessionStorage.getObj('profile');
         if (user) {
             for (const item of user.purchased) {
                 if (item.post_id == props.postId) {
@@ -270,7 +265,7 @@ function Webinar(props) {
                                 <button id="pay" onClick={() => { handlePurchase(post) }}>
                                     Buy webinar
                                 </button>
-                                <Link to={`/user/${post.user_id}`} id="creatorProfile">
+                                <Link to={`/user/${props.userId}`} id="creatorProfile">
                                     {post.avatar ? (
                                         <img id="avatar" src={post.avatar}></img>
                                     ) : (

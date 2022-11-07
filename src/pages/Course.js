@@ -1,12 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import {
-    useRecoilState,
-} from 'recoil';
-import { storedUploads } from '../atoms/posts.js';
 import { Link } from 'react-router-dom';
 import { addPostToCourse, getCourse, removePostFromCourse, editCourse, renderUploads } from '../app/webinars.js';
 import Loader from '../components/Loader.js';
 import { Post } from '../components/Posts.js';
+import avatar from '../assets/avatar.png';
 
 function Uploads(props) {
     const [uploads, setUploads] = useState([]);
@@ -134,7 +131,7 @@ function Course(props) {
                     <p>{course.description} {owner && <a onClick={editDescription} className='fas fa-edit'></a>}</p>
                     {course.posts.length > 1 ? <p id='courseLength'>Length: {course.posts.length} webinars</p> : <p id='courseLength'>Length: {course.posts.length} webinar</p>} <br />
                     <Link to={`/user/${props.userId}`} id='courseCreator'>
-                        <img src={course.avatar} />
+                        {course.avatar ? <img src={course.avatar} /> : <img src={avatar} />}
                         <p>{course.username}</p>
                     </Link>
                 </div>
@@ -151,7 +148,10 @@ function Course(props) {
                             course.posts.map(post => {
                                 return (
                                     <article key={post.upload}>
-                                        <Post remove={() => { removePost(post) }} post={post} key={post.upload} post_id={post._id} file_id={post.upload} user_id={post.user} video_id={post.video_id} title={post.title} name={post.name} description={post.description} category={post.category} date={post.dateAdded} amount={post.amount} />
+                                        {owner ?
+                                            <Post remove={() => { removePost(post) }} post={post} key={post.upload} post_id={post._id} file_id={post.upload} user_id={post.user} video_id={post.video_id} title={post.title} name={post.name} description={post.description} category={post.category} date={post.dateAdded} amount={post.amount} />
+                                            : <Post post={post} key={post.upload} post_id={post._id} file_id={post.upload} user_id={post.user} video_id={post.video_id} title={post.title} name={post.name} description={post.description} category={post.category} date={post.dateAdded} amount={post.amount} />
+                                        }
                                     </article>
                                 );
                             })

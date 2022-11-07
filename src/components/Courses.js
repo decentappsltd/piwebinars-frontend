@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { getCourses, createCourse } from '../app/webinars.js';
 import Loader from './Loader.js';
 import Uploads from './Uploads.js';
+import avatar from '../assets/avatar.png';
 
 function CreateCourse(props) {
   const [title, setTitle] = useState('');
@@ -100,7 +101,7 @@ export function Preview(props) {
         {props.posts[0] &&
           <Link to={`/user/${props.posts[0].user}`} className='courseCreator'>
             <span>
-              <img src={props.avatar} />
+              { props.avatar ? <img src={props.avatar} /> : <img src={avatar} /> }
               <p>{props.username}</p>
             </span>
           </Link>

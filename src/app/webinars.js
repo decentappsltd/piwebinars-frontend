@@ -290,6 +290,7 @@ async function getCourse(userId, courseId) {
 
 async function createCourse(title, description, posts) {
   if (title === "" || description === "") return alert("Please fill in all fields");
+  else if (posts.length === 0) return alert("Please add at least one webinar to your course");
   const authToken = localStorage.userSession;
   const instance = axios.create({
     baseURL: urlApi,

@@ -14,6 +14,11 @@ const urlApi = 'https://piwebinars-server.onrender.com';
 function Post(props) {
   const [modalShown, toggleModal] = useState(false);
   const [webinars, setPosts] = useRecoilState(storedWishlist);
+  const [img, setImg] = useState('https://assets.codepen.io/6636213/empty.png');
+
+  useEffect(() => {
+    if (props.post.videoImg) setImg(props.post.videoImg);
+  }, []);
 
   const open = () => {
     toggleModal(!modalShown);
@@ -33,10 +38,18 @@ function Post(props) {
     const response = await addWishlist(props);
   };
 
+  const handleMouseEnter = () => {
+    if (props.post.videoGif) setImg(props.post.videoGif);
+  }
+
+  const handleMouseLeave = () => {
+    if (props.post.videoImg) setImg(props.post.videoImg);
+  }
+
   return (
     <>
       <div className="post">
-        <img onClick={open} className="postThumbnail" src={`https://vumbnail.com/${props.video_id}.jpg`}></img>
+        <img onClick={open} className="postThumbnail" src={img} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}></img>
         <h3 className="postTitle">{props.title}</h3>
         <div className="statDiv">
           <p2 className="statName">{props.name}</p2>

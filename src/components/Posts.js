@@ -11,11 +11,11 @@ import Loader from './Loader.js';
 export function Post(props) {
   const [modalShown, toggleModal] = useState(false);
   const [isWishlist, setWishlist] = useState(false);
+  const [img, setImg] = useState('https://assets.codepen.io/6636213/empty.png');
 
   useEffect(() => {
-    if (props.wishlisted == true) {
-      setWishlist(true);
-    }
+    if (props.wishlisted == true) setWishlist(true);
+    if (props.post.videoImg) setImg(props.post.videoImg);
   }, []);
 
   const open = () => {
@@ -41,11 +41,19 @@ export function Post(props) {
     const response = await addWishlist(props);
   };
 
+  const handleMouseEnter = () => {
+    if (props.post.videoGif) setImg(props.post.videoGif);
+  }
+
+  const handleMouseLeave = () => {
+    if (props.post.videoImg) setImg(props.post.videoImg);
+  }
+
 
   return (
     <>
       <div className="post">
-        <img onClick={open} className="postThumbnail" src={`https://vumbnail.com/${props.video_id}.jpg`}></img>
+        <img onClick={open} className="postThumbnail" src={img} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}></img>
         <h3 className="postTitle">{props.title}</h3>
         <div className="statDiv">
           <Link to={`/user/${props.user_id}`} className="statName">{props.name}</Link>

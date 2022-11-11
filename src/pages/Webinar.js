@@ -7,6 +7,8 @@ import Player from '@vimeo/player';
 import avatar from '../assets/avatar.png';
 import { Comment } from '../components/Cinema.js';
 import Loader from "../components/Loader.js";
+import VideoJS from "../components/Video.js";
+import videojs from "video.js";
 
 function Webinar(props) {
     const [post, setPost] = useState({ title: '', description: '', price: '', video_url: '', user_id: '', post_id: '', likes: 0, dislike: 0, comments: [], commentReplies: [] });
@@ -17,6 +19,21 @@ function Webinar(props) {
     const [isWebinarLiked, setWebinarLiked] = useState(false);
     const [isWebinarDisliked, setWebinarDisliked] = useState(false);
     const [isPurchased, setPurchased] = useState(false);
+
+    const playerRef = React.useRef(null);
+    let width = window.innerWidth - 260;
+    if (window.innerWidth < 850) width = window.innerWidth;
+    else if (window.innerWidth > 1000) width = 730;
+    const height = width * 0.5625;
+    const [videoJsOptions, setVideoJsOptions] = useState({
+        autoplay: false,
+        controls: true,
+        responsive: true,
+        fluid: false,
+        preload: 'none',
+        width,
+        height
+    });
 
     const handleComment = async () => {
         console.log(post.user_id, post.post_id, text);
@@ -84,52 +101,34 @@ function Webinar(props) {
         } else alert('Please login to dislike a webinar');
     };
 
+    const handlePlayerReady = (player) => {
+        playerRef.current = player;
+
+        player.on('timeupdate', () => {
+            if (player.currentTime() >= 15 && isPurchased == false) {
+                player.pause();
+                player.currentTime(0);
+                // TODO: create payment
+            }
+        });
+    };
+
     const getThePost = async () => {
-        let user;
+        let user, sessionPost;
         if (sessionStorage.profile && sessionStorage.profile !== 'undefined') user = JSON.parse(sessionStorage.profile);
-        const sessionPost = JSON.parse(sessionStorage.post);
-        let videoPlayer;
+        if (sessionStorage.post && sessionStorage.post !== 'undefined') sessionPost = JSON.parse(sessionStorage.post);
+        let playing = false;
+
         if (sessionPost) {
             setPost(prev => ({ ...prev, ...sessionPost }));
             setLoading(false);
-            const url = "https://player.vimeo.com/video/" + sessionPost.video_id;
-            let options;
-            const playerHeight = (window.innerHeight - 200);
-            const playerWidth = playerHeight * 1.777777777777778;
-            if (window.innerWidth < 1200) {
-                options = {
-                    url: url,
-                    controls: true,
-                    width: window.innerWidth,
-                    height: 250
-                };
-            } else {
-                options = {
-                    url: url,
-                    controls: true,
-                    width: playerWidth,
-                    height: playerHeight
-                };
-            }
-            videoPlayer = new Player("Video", options);
-            // getting arrays from session storage
-            if (user) {
-                for (const item of user.purchased) {
-                    if (item.post_id == props.postId) {
-                        setPurchased(true);
-                        console.log('purchased');
-                    }
-                }
-            }
-            setInterval(function () {
-                videoPlayer.on("timeupdate", function (getAll) {
-                    let currentPos = getAll.seconds;
-                    if (currentPos >= 15 && isPurchased === false) {
-                        videoPlayer.pause();
-                        videoPlayer.setCurrentTime(0);
-                    }
-                });
-            }, 1000);
+            setVideoJsOptions(prev => ({
+                ...prev,
+                sources: [{
+                    src: `https://api.dyntube.com/v1/live/videos/${sessionPost.videoId}.m3u8`,
+                    type: 'application/x-mpegURL'
+                }]
+            }));
         }
         const foundPost = await getPost(props.userId, props.postId);
         setPost(prev => ({
@@ -155,26 +154,15 @@ function Webinar(props) {
         });
         if (liked.length) setWebinarLiked(true);
         if (disLiked.length) setWebinarDisliked(true);
-        const url = "https://player.vimeo.com/video/" + foundPost.video_id;
-        let options;
-        const playerHeight = (window.innerHeight - 200);
-        const playerWidth = playerHeight * 1.777777777777778;
-        if (window.innerWidth < 1200) {
-            options = {
-                url: url,
-                controls: true,
-                width: window.innerWidth,
-                height: 250
-            };
-        } else {
-            options = {
-                url: url,
-                controls: true,
-                width: playerWidth,
-                height: playerHeight
-            };
+        if (playing == false) {
+            setVideoJsOptions(prev => ({
+                ...prev,
+                sources: [{
+                    src: `https://api.dyntube.com/v1/live/videos/${foundPost.videoId}.m3u8`,
+                    type: 'application/x-mpegURL'
+                }]
+            }));
         }
-        if (!videoPlayer) videoPlayer = new Player("Video", options);
         // getting arrays from session storage
         if (user) {
             for (const item of user.purchased) {
@@ -184,15 +172,6 @@ function Webinar(props) {
                 }
             }
         }
-        setInterval(function () {
-            videoPlayer.on("timeupdate", function (getAll) {
-                let currentPos = getAll.seconds;
-                if (currentPos >= 15 && isPurchased !== true) {
-                    videoPlayer.pause();
-                    videoPlayer.setCurrentTime(0);
-                }
-            });
-        }, 1000);
     }
 
     const handleCommentsScroll = () => {
@@ -238,7 +217,9 @@ function Webinar(props) {
         <>
             <div id="webinarPage">
 
-                <div id="Video"></div>
+                <div id="Video">
+                    <VideoJS options={videoJsOptions} onReady={handlePlayerReady} />
+                </div>
 
                 {loading ? <Loader /> :
                     <>
@@ -276,7 +257,7 @@ function Webinar(props) {
                                     )}
                                     <p id="name">{post.name}</p>
                                 </Link>
-                                { window.innerWidth < 850 && <a className="fas fa-arrow-left" id='postBackBtn' onClick={() => {window.history.back()}}></a> }
+                                {window.innerWidth < 850 && <a className="fas fa-arrow-left" id='postBackBtn' onClick={() => { window.history.back() }}></a>}
                             </span>
                         </div>
 

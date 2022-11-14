@@ -191,7 +191,8 @@ function Webinar(props) {
     }, []);
 
     const handlePlayerReady = (player) => {
-        let user, purchased;
+        let user;
+        let purchased = false;
         if (sessionStorage.profile && sessionStorage.profile !== 'undefined') user = JSON.parse(sessionStorage.profile);
         if (user) {
             for (const item of user.purchases) {
@@ -203,7 +204,7 @@ function Webinar(props) {
         playerRef.current = player;
 
         player.on('timeupdate', () => {
-            if (player.currentTime() >= 15 && purchased !== true) {
+            if (player.currentTime() >= 15 && purchased == false) {
                 player.pause();
                 player.currentTime(0);
                 handlePurchase(post);

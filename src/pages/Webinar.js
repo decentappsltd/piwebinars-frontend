@@ -206,7 +206,7 @@ function Webinar(props) {
             if (player.currentTime() >= 15 && purchased !== true) {
                 player.pause();
                 player.currentTime(0);
-                // TODO: create payment
+                handlePurchase(post);
             }
         });
     };

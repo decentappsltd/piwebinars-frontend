@@ -77,7 +77,7 @@ function buyWebinar(post) {
   const payment = window.Pi.createPayment(
     {
       amount: price,
-      memo: "Buy Webinar",
+      memo: "Purchase Full Webinar",
       metadata: { paymentType: "webinar_purchase" },
     },
     {

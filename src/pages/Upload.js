@@ -52,6 +52,7 @@ function UploadForm() {
   const [price, setPrice] = useState("");
   const [category, setCategory] = useState("None");
   const [certified, setCertify] = useState(false);
+  const [button, setButton] = useState("Upload");
 
   const handleFileTypeChange = (event) => {
     setFileType(event.target.value);
@@ -63,8 +64,14 @@ function UploadForm() {
 
   const handleSubmit = async () => {
     console.log(fileType, title, description, price, category);
-    const response = await upload(fileType, title, description, price, category);
-    console.log(response);
+    if (title.length > 30 ) alert('Title length must not exceed 30 characters');
+    else if (title.includes("/")) alert('Title must not contain "/"');
+    else { 
+      setButton("Uploading...");
+      const response = await upload(fileType, title, description, price, category);
+      console.log(response);
+      setButton("Upload");
+    }
   }
 
   const handleCertified = async () => {
@@ -91,6 +98,7 @@ function UploadForm() {
             <option value="MOV">MOV</option>
           </select>
         </label><br />
+        <i style={{ fontSize: '12px' }}>minimum 2 mins in length</i>
 
         <label style={{ display: 'none' }}>Thumbnail:
           <input type="file" name="thumbnailUpload" id="videoThumbnail" />
@@ -140,7 +148,7 @@ function UploadForm() {
           <label for="certify"> I certify that I own this content</label><br />
         </div><br />
 
-        {localStorage.userSession ? <input type="button" id="submitBtn" value="Upload" onClick={handleSubmit}></input> : <p>Please login to upload!</p>}
+        {localStorage.userSession ? <input type="button" id="submitBtn" value={button} onClick={handleSubmit}></input> : <p>Please login to upload!</p>}
         <p id="upload_log"></p>
       </form>
     </>

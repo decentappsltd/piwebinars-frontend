@@ -18,7 +18,6 @@ function Webinar(props) {
     const [text, setText] = useState("");
     const [isWebinarLiked, setWebinarLiked] = useState(false);
     const [isWebinarDisliked, setWebinarDisliked] = useState(false);
-    const [isPurchased, setPurchased] = useState(false);
 
     const playerRef = React.useRef(null);
     let width = window.innerWidth - 260;
@@ -101,21 +100,8 @@ function Webinar(props) {
         } else alert('Please login to dislike a webinar');
     };
 
-    const handlePlayerReady = (player) => {
-        playerRef.current = player;
-
-        player.on('timeupdate', () => {
-            if (player.currentTime() >= 15 && isPurchased == false) {
-                player.pause();
-                player.currentTime(0);
-                // TODO: create payment
-            }
-        });
-    };
-
     const getThePost = async () => {
-        let user, sessionPost;
-        if (sessionStorage.profile && sessionStorage.profile !== 'undefined') user = JSON.parse(sessionStorage.profile);
+        let sessionPost;
         if (sessionStorage.post && sessionStorage.post !== 'undefined') sessionPost = JSON.parse(sessionStorage.post);
         let playing = false;
 
@@ -163,15 +149,6 @@ function Webinar(props) {
                 }]
             }));
         }
-        // getting arrays from session storage
-        if (user) {
-            for (const item of user.purchased) {
-                if (item.post_id == props.postId) {
-                    setPurchased(true);
-                    console.log('purchased');
-                }
-            }
-        }
     }
 
     const handleCommentsScroll = () => {
@@ -196,8 +173,8 @@ function Webinar(props) {
         }
         const response = await buyWebinar(post);
         if (response.data.success == 'true') {
-            setPurchased(true);
             alert('Purchase successful. You can now watch the webinar here, or in your purchases page.');
+            window.location.href = `/post/${props.userId}/${props.postId}`;
         }
     }
 
@@ -213,6 +190,27 @@ function Webinar(props) {
         setTimeout(pushAds, 2000);
     }, []);
 
+    const handlePlayerReady = (player) => {
+        let user, purchased;
+        if (sessionStorage.profile && sessionStorage.profile !== 'undefined') user = JSON.parse(sessionStorage.profile);
+        if (user) {
+            for (const item of user.purchases) {
+                if (item.webinar == props.postId) {
+                    purchased = true;
+                }
+            }
+        }
+        playerRef.current = player;
+
+        player.on('timeupdate', () => {
+            if (player.currentTime() >= 15 && purchased !== true) {
+                player.pause();
+                player.currentTime(0);
+                // TODO: create payment
+            }
+        });
+    };
+
     return (
         <>
             <div id="webinarPage">
@@ -225,7 +223,7 @@ function Webinar(props) {
                     <>
                         <div id="info">
                             <span>
-                                <h3 id="title">{post.title}</h3>
+                                <h3 id="title" onClick={() => window.location.href = `/post/${props.userId}/${props.postId}`}>{post.title}</h3>
                                 <p id="description">{post.description}</p>
                                 {post.likes !== undefined && (
                                     <p id="likes" onClick={handleLike} className={`${isWebinarLiked ? 'colourYellow' : 'colourBlack'}`}>

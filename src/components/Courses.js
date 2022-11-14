@@ -42,7 +42,7 @@ function CreateCourse(props) {
         name: post.name,
         thumbnail: post.thumbnail,
         title: post.title,
-        user: post.user,  
+        user: post.user,
         upload: post.upload,
         video_id: post.video_id,
         _id: post._id
@@ -71,7 +71,7 @@ function CreateCourse(props) {
 
       <a style={{ float: 'right' }} onClick={props.close} className='fas fa-arrow-left'></a>
 
-      { created && <>
+      {created && <>
         <div id="courseSuccessModal">
           <h3>Course created successfully!</h3>
           <p><Link to={`/course/${completedUserId}/${completedCourseId}`}>View your new course</Link> or <a style={{ textDecoration: 'underlined', color: '#fbb44a' }} onClick={props.close}>return home</a>.</p>
@@ -94,14 +94,14 @@ export function Preview(props) {
   return (
     <>
       <div onClick={handleOpen} className="course">
-        { props.posts[0] && <img src={`https://vumbnail.com/${props.posts[0].video_id}.jpg`} /> }
+        {props.posts[0] && <img src={`https://vumbnail.com/${props.posts[0].video_id}.jpg`} />}
         <h3>{props.title}</h3>
         <p className='courseDescription'>{props.description}</p>
         <p className='courseLength'>Length: {props.length} webinars</p>
         {props.posts[0] &&
           <Link to={`/user/${props.posts[0].user}`} className='courseCreator'>
             <span>
-              { props.avatar ? <img src={props.avatar} /> : <img src={avatar} /> }
+              {props.avatar ? <img src={props.avatar} /> : <img src={avatar} />}
               <p>{props.username}</p>
             </span>
           </Link>
@@ -142,17 +142,38 @@ function Courses(props) {
     getCoursesFromDB();
   }, [newCourse]);
 
+  useEffect(() => {
+    function pushAds() {
+      let adsbygoogle;
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    }
+    setTimeout(pushAds, 2500);
+  }, [props]);
+
   return (
     <>
       {loading === true ? <><div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column', height: '200px', padding: '10px ' }}><h2>Explore courses to learn a new skill...</h2><Loader /></div></> :
         <>
           {courses.length == 0 && <h2>There are no courses yet, check again later...</h2>}
           {
-            courses.map(course => {
+            courses.map((course, index) => {
+              let ad = false;
+              if (index % 3 == 0) ad = true;
               return (
-                <article key={course._id}>
-                  <Preview course_id={course._id} course={course} title={course.title} description={course.description} length={course.posts.length} avatar={course.avatar} username={course.username} posts={course.posts} />
-                </article>
+                <>
+                  <article key={course._id}>
+                    <Preview course_id={course._id} course={course} title={course.title} description={course.description} length={course.posts.length} avatar={course.avatar} username={course.username} posts={course.posts} />
+                  </article>
+                  {ad === true && <>
+                    <ins className="adsbygoogle"
+                      style={{ display: "block", minWidth: '251px', minHeight: '50px' }}
+                      data-ad-format="fluid"
+                      data-ad-layout-key="-6f+d5-2h+50+bf"
+                      data-ad-client="ca-pub-7095325310319034"
+                      data-ad-slot="1627309222"></ins>
+                  </>
+                  }
+                </>
               );
             })
           }

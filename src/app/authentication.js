@@ -38,6 +38,7 @@ const authToken = localStorage.getItem("userSession");
 const sessToken = sessionStorage.getItem("userSession");
 const instance = axios.create({
   baseURL: "https://piwebinars-server.onrender.com",
+  // baseURL: "http://localhost:5000",
   headers: {
     "Access-Control-Allow-Origin": "*",
     Authorization: `Bearer ${authToken}`
@@ -88,7 +89,7 @@ async function login(username, password) {
       const response = await instance.post(`/login`, user);
       if (response.status === 200) {
         console.log(response);
-        alert(`Welcome back, ${username}!`);
+        // alert(`Welcome back, ${username}!`);
         token = response.data.token;
         instance.defaults.headers.common["Authorization"] = token;
         sessionStorage.removeItem("userSession");
@@ -98,7 +99,7 @@ async function login(username, password) {
         sessionStorage.setItem("username", username);
         localStorage.setItem("username", username);
         localStorage.setItem("user", response.data.userId);
-        sessionStorage.setObj("profile", response.data.user);
+        sessionStorage.setObj("profile", response.data.profile);
         window.dispatchEvent(new Event("storage"));
         window.location.pathname = '/';
         return username;
@@ -201,7 +202,7 @@ async function upload(fileType, title, description, price, category) {
   const thumbnail = document.querySelector("#thumbnailUpload");
   let certify_btn = document.querySelector("#certify");
   if (certify_btn.checked == true) {
-    document.getElementById("submitBtn").style.display = "none";
+    // document.getElementById("submitBtn").style.display = "none";
     const authToken = localStorage.getItem("userSession");
     const formData = new FormData(formSection);
     console.log(formData);

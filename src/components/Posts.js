@@ -123,7 +123,7 @@ function Posts(props) {
       (adsbygoogle = window.adsbygoogle || []).push({});
     }
     setTimeout(pushAds, 2500);
-  }, []);
+  }, [props]);
 
   return (
     <>
@@ -138,11 +138,25 @@ function Posts(props) {
             data-ad-slot="1627309222"></ins>
         </>
       }
-      {posts.map(post => {
+      {posts.map((post, index) => {
+        let ad = false;
+        if (index % 4 == 0 && index > 3) ad = true;
+        console.log(ad);
         return (
-          <article key={post.upload}>
-            <Post key={post.upload} post={post} post_id={post._id} file_id={post.upload} user_id={post.user} video_id={post.video_id} title={post.title} name={post.name} description={post.description} category={post.category} likes={post.likes} dislike={post.dislike} date={post.dateAdded} amount={post.amount} wishlisted={post.wishlisted} />
-          </article>
+          <>
+            <article style={{ display: 'flex' }} key={post.upload}>
+              <Post key={post.upload} post={post} post_id={post._id} file_id={post.upload} user_id={post.user} video_id={post.video_id} title={post.title} name={post.name} description={post.description} category={post.category} likes={post.likes} dislike={post.dislike} date={post.dateAdded} amount={post.amount} wishlisted={post.wishlisted} />
+            </article>
+            {ad === true && <>
+              <ins className="adsbygoogle"
+                style={{ display: "block", minWidth: '251px', minHeight: '50px' }}
+                data-ad-format="fluid"
+                data-ad-layout-key="-6f+d5-2h+50+bf"
+                data-ad-client="ca-pub-7095325310319034"
+                data-ad-slot="1627309222"></ins>
+            </>
+            }
+          </>
         );
       })
       }

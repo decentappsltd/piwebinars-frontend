@@ -101,21 +101,24 @@ function RenderedList() {
     <>
       <span id="page">
         {(loading && localStorage.userSession) ? <Loader /> : null}
-        {loading ? null :
-          <>
-            <ins className="adsbygoogle"
-              style={{ display: "block", minWidth: '251px', minHeight: '50px' }}
-              data-ad-format="fluid"
-              data-ad-layout-key="-6f+d5-2h+50+bf"
-              data-ad-client="ca-pub-7095325310319034"
-              data-ad-slot="1627309222"></ins>
-          </>
-        }
-        {webinars.map(post => {
+        {webinars.map((post, index) => {
+          let ad = false;
+          if (index % 4 == 0) ad = true;
           return (
-            <article key={post.upload}>
-              <Post key={post.upload} post_id={post.post_id} file_id={post.upload} user_id={post.user_id} video_id={post.video_id} title={post.title} name={post.name} description={post.description} category={post.category} date={post.dateAdded} amount={post.amount} post={post} />
-            </article>
+            <>
+              <article key={post.upload}>
+                <Post key={post.upload} post_id={post.post_id} file_id={post.upload} user_id={post.user_id} video_id={post.video_id} title={post.title} name={post.name} description={post.description} category={post.category} date={post.dateAdded} amount={post.amount} post={post} />
+              </article>
+              {ad === true && <>
+                <ins className="adsbygoogle"
+                  style={{ display: "block", minWidth: '251px', minHeight: '50px' }}
+                  data-ad-format="fluid"
+                  data-ad-layout-key="-6f+d5-2h+50+bf"
+                  data-ad-client="ca-pub-7095325310319034"
+                  data-ad-slot="1627309222"></ins>
+              </>
+              }
+            </>
           );
         })
         }

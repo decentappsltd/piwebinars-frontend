@@ -141,7 +141,6 @@ function Posts(props) {
       {posts.map((post, index) => {
         let ad = false;
         if (index % 4 == 0 && index > 3) ad = true;
-        console.log(ad);
         function pushAds() {
           let adsbygoogle;
           (adsbygoogle = window.adsbygoogle || []).push({});

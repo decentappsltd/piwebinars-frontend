@@ -159,6 +159,11 @@ function Courses(props) {
             courses.map((course, index) => {
               let ad = false;
               if (index % 3 == 0) ad = true;
+              function pushAds() {
+                let adsbygoogle;
+                (adsbygoogle = window.adsbygoogle || []).push({});
+              }
+              if (ad === true) setTimeout(pushAds, 2500);
               return (
                 <>
                   <article key={course._id}>

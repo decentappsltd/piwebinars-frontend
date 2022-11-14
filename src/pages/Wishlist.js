@@ -104,6 +104,11 @@ function RenderedList() {
         {webinars.map((post, index) => {
           let ad = false;
           if (index % 4 == 0) ad = true;
+          function pushAds() {
+            let adsbygoogle;
+            (adsbygoogle = window.adsbygoogle || []).push({});
+          }
+          if (ad === true) setTimeout(pushAds, 2500);
           return (
             <>
               <article key={post.upload}>

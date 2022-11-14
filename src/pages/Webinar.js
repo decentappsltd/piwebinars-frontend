@@ -191,16 +191,16 @@ function Webinar(props) {
     }, []);
 
     const handlePlayerReady = (player) => {
-        let user;
-        let purchased = false;
-        if (sessionStorage.profile && sessionStorage.profile !== 'undefined') user = JSON.parse(sessionStorage.profile);
-        if (user) {
-            for (const item of user.purchases) {
-                if (item.webinar == props.postId) {
-                    purchased = true;
-                }
-            }
-        }
+        // let user;
+        // let purchased = false;
+        // if (sessionStorage.profile && sessionStorage.profile !== 'undefined') user = JSON.parse(sessionStorage.profile);
+        // if (user) {
+        //     for (const item of user.purchases) {
+        //         if (item.webinar == props.postId) {
+        //             purchased = true;
+        //         }
+        //     }
+        // }
         playerRef.current = player;
 
         player.on('timeupdate', () => {

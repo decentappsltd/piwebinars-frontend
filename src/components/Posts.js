@@ -142,6 +142,11 @@ function Posts(props) {
         let ad = false;
         if (index % 4 == 0 && index > 3) ad = true;
         console.log(ad);
+        function pushAds() {
+          let adsbygoogle;
+          (adsbygoogle = window.adsbygoogle || []).push({});
+        }
+        if (ad === true) setTimeout(pushAds, 2500);
         return (
           <>
             <article style={{ display: 'flex' }} key={post.upload}>

@@ -204,7 +204,7 @@ function Webinar(props) {
         playerRef.current = player;
 
         player.on('timeupdate', () => {
-            if (player.currentTime() >= 15 && purchased == false) {
+            if (player.currentTime() >= 15/* && purchased == false*/) {
                 player.pause();
                 player.currentTime(0);
                 handlePurchase(post);

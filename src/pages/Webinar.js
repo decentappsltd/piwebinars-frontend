@@ -173,10 +173,7 @@ function Webinar(props) {
             return;
         }
         const response = await buyWebinar(post);
-        if (response.data.success == 'true') {
-            alert('Purchase successful. You can now watch the webinar here, or in your purchases page.');
-            window.location.href = `/post/${props.userId}/${props.postId}`;
-        }
+        window.location.href = `/post/${props.userId}/${props.postId}`;
     }
 
     useEffect(() => {

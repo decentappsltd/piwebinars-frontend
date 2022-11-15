@@ -193,16 +193,12 @@ function Webinar(props) {
     const handlePlayerReady = async (player) => {
         let user;
         let purchased = false;
-        try {
-            if (sessionStorage.profile && sessionStorage.profile !== 'undefined') user = JSON.parse(sessionStorage.profile);
-        } catch (error) {
-            alert('Please ingore this message. App is in testing...');
-        }
+        alert(sessionStorage.profile);
+        // if (sessionStorage.profile && sessionStorage.profile !== 'undefined') user = JSON.parse(sessionStorage.profile);
         if (user) {
             for (const item of user.purchases) {
                 if (item.webinar == props.postId) {
                     purchased = true;
-                    alert('You have already purchased this webinar');
                 }
             }
         }

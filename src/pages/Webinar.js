@@ -191,16 +191,17 @@ function Webinar(props) {
     }, []);
 
     const handlePlayerReady = async (player) => {
-        // let user;
+        let user;
         let purchased = false;
         // if (sessionStorage.profile && sessionStorage.profile !== 'undefined') user = JSON.parse(sessionStorage.profile);
-        // if (user) {
-        //     for (const item of user.purchases) {
-        //         if (item.webinar == props.postId) {
-        //             purchased = true;
-        //         }
-        //     }
-        // }
+        if (user) {
+            for (const item of user.purchases) {
+                if (item.webinar == props.postId) {
+                    purchased = true;
+                    alert('You have already purchased this webinar');
+                }
+            }
+        }
         playerRef.current = player;
 
         player.on('timeupdate', async () => {
@@ -259,6 +260,14 @@ function Webinar(props) {
                                 {window.innerWidth < 850 && <a className="fas fa-arrow-left" id='postBackBtn' onClick={() => { window.history.back() }}></a>}
                             </span>
                         </div>
+                        {window.innerWidth <= 850 &&
+                            <ins className="adsbygoogle commentGoogleAd"
+                                style={{ display: "block", minWidth: '251px', minHeight: '50px' }}
+                                data-ad-format="fluid"
+                                data-ad-layout-key="-6f+d5-2h+50+bf"
+                                data-ad-client="ca-pub-7095325310319034"
+                                data-ad-slot="1627309222"></ins>
+                        }
 
                         <div id="comments" onScroll={handleCommentsScroll}>
                             <p style={{ borderTop: "solid 3px #36454f", color: '#36454f' }}>Comments:</p>
@@ -288,12 +297,14 @@ function Webinar(props) {
                             </form>
                             <br />
                             <div id="commentsContainer">
-                                <ins className="adsbygoogle commentGoogleAd"
-                                    style={{ display: "block", minWidth: '251px', minHeight: '50px' }}
-                                    data-ad-format="fluid"
-                                    data-ad-layout-key="-6f+d5-2h+50+bf"
-                                    data-ad-client="ca-pub-7095325310319034"
-                                    data-ad-slot="1627309222"></ins>
+                                {window.innerWidth > 850 &&
+                                    <ins className="adsbygoogle commentGoogleAd"
+                                        style={{ display: "block", minWidth: '251px', minHeight: '50px' }}
+                                        data-ad-format="fluid"
+                                        data-ad-layout-key="-6f+d5-2h+50+bf"
+                                        data-ad-client="ca-pub-7095325310319034"
+                                        data-ad-slot="1627309222"></ins>
+                                }
                                 {comments.map((comment) => {
                                     return (
                                         <article key={comment._id}>

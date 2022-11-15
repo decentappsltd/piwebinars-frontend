@@ -173,7 +173,7 @@ function Webinar(props) {
             return;
         }
         const response = await buyWebinar(post);
-        window.location.href = `/post/${props.userId}/${props.postId}`;
+        // window.location.href = `/post/${props.userId}/${props.postId}`;
     }
 
     useEffect(() => {

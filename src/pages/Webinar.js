@@ -11,14 +11,13 @@ import VideoJS from "../components/Video.js";
 import videojs from "video.js";
 
 function Webinar(props) {
-    const [post, setPost] = useState({ title: '', description: '', price: '', video_url: '', videoURL: '', user_id: '', post_id: '', likes: 0, dislike: 0, comments: [], commentReplies: [] });
+    const [post, setPost] = useState({ title: '', description: '', price: '', video_url: '', user_id: '', post_id: '', likes: 0, dislike: 0, comments: [], commentReplies: [] });
     const [loading, setLoading] = useState(true);
     const [comments, setComments] = useState([]);
     const [commentsScroll, setCommentsScroll] = useState(0);
     const [text, setText] = useState("");
     const [isWebinarLiked, setWebinarLiked] = useState(false);
     const [isWebinarDisliked, setWebinarDisliked] = useState(false);
-    const [purchased, setPurchased] = useState(false);
 
     const playerRef = React.useRef(null);
     let width = window.innerWidth - 260;
@@ -102,31 +101,21 @@ function Webinar(props) {
     };
 
     const getThePost = async () => {
-        let sessionPost, user;
+        let sessionPost;
         if (sessionStorage.post && sessionStorage.post !== 'undefined') sessionPost = JSON.parse(sessionStorage.post);
-        // if (sessionStorage.profile && sessionStorage.profile !== 'undefined') user = JSON.parse(sessionStorage.profile.toString());
-        if (user) {
-            for (const item of user.purchases) {
-                if (item.webinar == props.postId) {
-                    setPurchased(true);
-                }
-            }
-        }
         let playing = false;
 
         if (sessionPost) {
             setPost(prev => ({ ...prev, ...sessionPost }));
             setLoading(false);
-            if (purchased === false) {
-                setVideoJsOptions(prev => ({
-                    ...prev,
-                    sources: [{
-                        src: `https://api.dyntube.com/v1/live/videos/${sessionPost.videoId}.m3u8`,
-                        type: 'application/x-mpegURL'
-                    }]
-                }));
-                playing = true;
-            }
+            setVideoJsOptions(prev => ({
+                ...prev,
+                sources: [{
+                    src: `https://api.dyntube.com/v1/live/videos/${sessionPost.videoId}.m3u8`,
+                    type: 'application/x-mpegURL'
+                }]
+            }));
+            playing = true;
         }
         const foundPost = await getPost(props.userId, props.postId);
         setPost(prev => ({
@@ -152,7 +141,7 @@ function Webinar(props) {
         });
         if (liked.length) setWebinarLiked(true);
         if (disLiked.length) setWebinarDisliked(true);
-        if (playing == false && purchased === false) {
+        if (playing == false) {
             setVideoJsOptions(prev => ({
                 ...prev,
                 sources: [{
@@ -203,10 +192,20 @@ function Webinar(props) {
     }, []);
 
     const handlePlayerReady = async (player) => {
+        let user;
+        let purchased = false;
+        if (sessionStorage.profile && sessionStorage.profile !== 'undefined') user = JSON.parse(sessionStorage.profile);
+        if (user) {
+            for (const item of user.purchases) {
+                if (item.webinar == props.postId) {
+                    purchased = true;
+                }
+            }
+        }
         playerRef.current = player;
 
         player.on('timeupdate', async () => {
-            if (player.currentTime() >= 15) {
+            if (player.currentTime() >= 15 && purchased == false) {
                 player.currentTime(0);
                 player.pause();
                 const foundPost = await getPost(props.userId, props.postId);
@@ -227,10 +226,7 @@ function Webinar(props) {
             <div id="webinarPage">
 
                 <div id="Video">
-                    {purchased === false ?
-                        <VideoJS options={videoJsOptions} onReady={handlePlayerReady} />
-                        : <iframe id="dyntube_Player" src={post.videoURL} frameBorder="0" webkitallowfullscreen="true" mozallowfullscreen="true" allowFullScreen></iframe>
-                    }
+                    <VideoJS options={videoJsOptions} onReady={handlePlayerReady} />
                 </div>
 
                 {loading ? <Loader /> :

@@ -47,7 +47,7 @@ async function piLogin() {
     localStorage.setItem("userSession", token);
     sessionStorage.setItem("username", localStorage.piName);
     localStorage.setItem("user", response.data.userId);
-    sessionStorage.setObj('profile', response.data.user);
+    sessionStorage.setObj('profile', response.data.profile);
     document.getElementById("login").style.display = "none";
     document.getElementById("register").style.display = "none";
   }

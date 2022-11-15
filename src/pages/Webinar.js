@@ -103,7 +103,6 @@ function Webinar(props) {
     const getThePost = async () => {
         let sessionPost;
         if (sessionStorage.post && sessionStorage.post !== 'undefined') sessionPost = JSON.parse(sessionStorage.post);
-        let playing = false;
 
         if (sessionPost) {
             setPost(prev => ({ ...prev, ...sessionPost }));
@@ -115,7 +114,6 @@ function Webinar(props) {
                     type: 'application/x-mpegURL'
                 }]
             }));
-            playing = true;
         }
         const foundPost = await getPost(props.userId, props.postId);
         setPost(prev => ({
@@ -141,15 +139,13 @@ function Webinar(props) {
         });
         if (liked.length) setWebinarLiked(true);
         if (disLiked.length) setWebinarDisliked(true);
-        if (playing == false) {
-            setVideoJsOptions(prev => ({
-                ...prev,
-                sources: [{
-                    src: `https://api.dyntube.com/v1/live/videos/${foundPost.videoId}.m3u8`,
-                    type: 'application/x-mpegURL'
-                }]
-            }));
-        }
+        setVideoJsOptions(prev => ({
+            ...prev,
+            sources: [{
+                src: `https://api.dyntube.com/v1/live/videos/${foundPost.videoId}.m3u8`,
+                type: 'application/x-mpegURL'
+            }]
+        }));
     }
 
     const handleCommentsScroll = () => {
@@ -208,7 +204,7 @@ function Webinar(props) {
                 const foundPost = await getPost(props.userId, props.postId);
                 const paymentPost = {
                     user: props.userId,
-                    upload: props.postId,
+                    _id: props.postId,
                     videoId: foundPost.videoId,
                     amount: foundPost.amount,
                     title: foundPost.title,

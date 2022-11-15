@@ -59,9 +59,9 @@ async function piLogin() {
 auth();
 
 function buyWebinar(post) {
-  const { user, upload, videoId, amount, title } = post;
+  const { user, _id, videoId, amount, title } = post;
   const price = amount;
-  const post_id = upload;
+  const post_id = _id;
   const userId = user;
   const Tkn = localStorage.getItem("userSession");
   console.log(userId, post_id, videoId, price, title);

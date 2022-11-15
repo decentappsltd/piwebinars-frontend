@@ -193,7 +193,7 @@ function Webinar(props) {
     const handlePlayerReady = async (player) => {
         let user;
         let purchased = false;
-        // if (sessionStorage.profile && sessionStorage.profile !== 'undefined') user = JSON.parse(sessionStorage.profile);
+        // if (sessionStorage.profile && sessionStorage.profile !== 'undefined') user = JSON.parse(sessionStorage.profile.toString());
         if (user) {
             for (const item of user.purchases) {
                 if (item.webinar == props.postId) {
@@ -205,9 +205,17 @@ function Webinar(props) {
 
         player.on('timeupdate', async () => {
             if (player.currentTime() >= 15 && purchased == false) {
-                player.pause();
                 player.currentTime(0);
-                await handlePurchase(post);
+                player.pause();
+                const foundPost = await getPost(props.userId, props.postId);
+                const paymentPost = {
+                    user_id: props.userId,
+                    post_id: props.postId,
+                    videoId: foundPost.videoId,
+                    amount: foundPost.amount,
+                    title: foundPost.title,
+                }
+                await handlePurchase(paymentPost);
             }
         });
     };

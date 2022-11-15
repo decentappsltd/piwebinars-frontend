@@ -190,9 +190,9 @@ function Webinar(props) {
         setTimeout(pushAds, 2000);
     }, []);
 
-    const handlePlayerReady = (player) => {
+    const handlePlayerReady = async (player) => {
         // let user;
-        // let purchased = false;
+        let purchased = false;
         // if (sessionStorage.profile && sessionStorage.profile !== 'undefined') user = JSON.parse(sessionStorage.profile);
         // if (user) {
         //     for (const item of user.purchases) {
@@ -203,11 +203,11 @@ function Webinar(props) {
         // }
         playerRef.current = player;
 
-        player.on('timeupdate', () => {
-            if (player.currentTime() >= 15/* && purchased == false*/) {
+        player.on('timeupdate', async () => {
+            if (player.currentTime() >= 15 && purchased == false) {
                 player.pause();
                 player.currentTime(0);
-                handlePurchase(post);
+                await handlePurchase(post);
             }
         });
     };

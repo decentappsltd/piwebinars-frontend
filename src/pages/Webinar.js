@@ -193,7 +193,6 @@ function Webinar(props) {
     const handlePlayerReady = async (player) => {
         let user;
         let purchased = false;
-        alert(sessionStorage.profile);
         // if (sessionStorage.profile && sessionStorage.profile !== 'undefined') user = JSON.parse(sessionStorage.profile);
         if (user) {
             for (const item of user.purchases) {

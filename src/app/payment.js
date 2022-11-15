@@ -59,9 +59,10 @@ async function piLogin() {
 auth();
 
 function buyWebinar(post) {
-  const { user_id, post_id, videoId, amount, title } = post;
+  const { user, upload, videoId, amount, title } = post;
   const price = amount;
-  const userId = user_id;
+  const post_id = upload;
+  const userId = user;
   const Tkn = localStorage.getItem("userSession");
   console.log(userId, post_id, videoId, price, title);
   if (navigator.userAgent.toLowerCase().indexOf("pibrowser") < 0) {
@@ -126,7 +127,6 @@ function buyWebinar(post) {
         });
         if (response.data.success == true) {
           alert('Thank you for purchasing a webinar, you may now watch it in your purchases page. Enjoy!');
-          // window.location.reload();
         } else alert('Payment failed, please contact customer service at support@piwebinars.app');
         return response;
       },

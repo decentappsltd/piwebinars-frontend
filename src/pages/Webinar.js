@@ -195,7 +195,8 @@ function Webinar(props) {
             for (const item of user.purchases) {
                 if (item.webinar == props.postId) {
                     purchased = true;
-                }
+                    console.log('purchased');
+                } else console.log(props.postId, item.webinar);
             }
         }
         playerRef.current = player;
@@ -206,12 +207,13 @@ function Webinar(props) {
                 player.pause();
                 const foundPost = await getPost(props.userId, props.postId);
                 const paymentPost = {
-                    user_id: props.userId,
-                    post_id: props.postId,
+                    user: props.userId,
+                    upload: props.postId,
                     videoId: foundPost.videoId,
                     amount: foundPost.amount,
                     title: foundPost.title,
                 }
+                console.log(paymentPost);
                 await handlePurchase(paymentPost);
             }
         });

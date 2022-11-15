@@ -86,12 +86,12 @@ function Post(props) {
         <h3 className="postTitle">{props.title}</h3>
       </div>
       
-      {modalShown && 
+      {/* {modalShown && 
         <Modal close={() => {
             toggleModal(false);
             document.getElementById("tint").style.display = "none";
           }} post={props} />
-      }
+      } */}
     </>
   );
 }

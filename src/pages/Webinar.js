@@ -104,7 +104,7 @@ function Webinar(props) {
     const getThePost = async () => {
         let sessionPost, user;
         if (sessionStorage.post && sessionStorage.post !== 'undefined') sessionPost = JSON.parse(sessionStorage.post);
-        if (sessionStorage.profile && sessionStorage.profile !== 'undefined') user = JSON.parse(sessionStorage.profile.toString());
+        // if (sessionStorage.profile && sessionStorage.profile !== 'undefined') user = JSON.parse(sessionStorage.profile.toString());
         if (user) {
             for (const item of user.purchases) {
                 if (item.webinar == props.postId) {

@@ -124,7 +124,7 @@ function buyWebinar(post) {
           alert('Payment failed, please contact customer service at support@piwebinars.app');
         });
         if (response.data.success == true) {
-          alert('Thank you for purchasing a webinar, you may now watch it in your purchases page. Enjoy!');
+          alert('Thank you for purchasing a webinar, you may now watch it here or in your purchases page. Enjoy!');
           await piLogin();
           window.location.reload();
         } else alert('Payment failed, please contact customer service at support@piwebinars.app');

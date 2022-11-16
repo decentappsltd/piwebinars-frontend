@@ -50,6 +50,7 @@ async function piLogin() {
     sessionStorage.setObj('profile', response.data.profile);
     document.getElementById("login").style.display = "none";
     document.getElementById("register").style.display = "none";
+    alert('Welcome back!');
   }
   if (response.status === 201) {
     alert("Welcome to Pi Webinars!");
@@ -127,7 +128,7 @@ function buyWebinar(post) {
         });
         if (response.data.success == true) {
           alert('Thank you for purchasing a webinar, you may now watch it in your purchases page. Enjoy!');
-          piLogin();
+          await piLogin();
           window.location.reload();
         } else alert('Payment failed, please contact customer service at support@piwebinars.app');
         return response;

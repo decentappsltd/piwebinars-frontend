@@ -191,8 +191,8 @@ function Webinar(props) {
             for (const item of user.purchases) {
                 if (item.webinar == props.postId) {
                     purchased = true;
-                    console.log('purchased');
-                } else console.log(props.postId, item.webinar);
+                    document.getElementById('pay').style.display = 'none';
+                }
             }
         }
         playerRef.current = player;
@@ -319,8 +319,8 @@ function Webinar(props) {
                                                 likes={comment.comment_likes.length}
                                                 replies={comment.comment_reply.length}
                                                 commentReplies={comment.comment_reply}
-                                                post_id={post.post_id}
-                                                user_id={post.user_id}
+                                                post_id={props.postId}
+                                                user_id={props.userId}
                                             />
                                         </article>
                                     );

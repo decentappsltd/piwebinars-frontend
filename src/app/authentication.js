@@ -408,7 +408,6 @@ const manipulateComment = async (url_path, api, user_id, post_id, comment_id, bo
     alert("Please login or register");
   });
   if (response.status === 200) {
-    alert("Success!");
     return "Success";
   }
 };

@@ -33,6 +33,7 @@ export function Comment(props) {
   }, []);
 
   const like = async () => {
+    console.log(props);
     setLike('loading...');
     const url_path = "like_unlike_comment";
     const api = "post";

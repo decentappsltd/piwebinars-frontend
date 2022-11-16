@@ -48,9 +48,6 @@ async function piLogin() {
     sessionStorage.setItem("username", localStorage.piName);
     localStorage.setItem("user", response.data.userId);
     sessionStorage.setObj('profile', response.data.profile);
-    // document.getElementById("login").style.display = "none";
-    // document.getElementById("register").style.display = "none";
-    alert('Welcome back!');
   }
   if (response.status === 201) {
     alert("Welcome to Pi Webinars!");

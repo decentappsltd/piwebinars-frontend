@@ -209,7 +209,6 @@ function Webinar(props) {
                     amount: foundPost.amount,
                     title: foundPost.title,
                 }
-                console.log(paymentPost);
                 await handlePurchase(paymentPost);
             }
         });

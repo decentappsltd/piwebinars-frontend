@@ -12,11 +12,13 @@ import Cinema from './Cinema.js';
 function Post(props) {
   const [modalShown, toggleModal] = useState(false);
   const [isWishlist, setWishlist] = useState(false);
+  const [img, setImg] = useState('https://assets.codepen.io/6636213/empty.png');
 
   useEffect(() => {
     if (props.wishlisted == true) {
       setWishlist(true);
     }
+    if (props.post.videoImg) setImg(props.post.videoImg);
   }, []);
 
   const open = () => {
@@ -34,11 +36,18 @@ function Post(props) {
     const response = await addWishlist(props);
   };
 
+  const handleMouseEnter = () => {
+    if (props.post.videoGif) setImg(props.post.videoGif);
+  }
+
+  const handleMouseLeave = () => {
+    if (props.post.videoImg) setImg(props.post.videoImg);
+  }
 
   return (
     <>
       <div className="post">
-        <img onClick={open} className="postThumbnail" src={`https://vumbnail.com/${props.video_id}.jpg`}></img>
+        <img onClick={open} onHover className="postThumbnail" src={img} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} /> 
         <h3 className="postTitle">{props.title}</h3>
         <div className="statDiv">
           <Link to={`/user/${props.user_id}`} className="statName">{props.name}</Link>
@@ -83,7 +92,7 @@ function SearchResults(props) {
         {props.posts.map(post => {
           return (
             <article key={post.upload}>
-              <Post key={post.upload} post_id={post._id} file_id={post.upload} user_id={post.user} video_id={post.video_id} title={post.title} name={post.name} description={post.description} category={post.category} likes={post.likes} dislike={post.dislike} date={post.dateAdded} amount={post.amount} wishlisted={post.wishlisted} />
+              <Post key={post.upload} post={post} post_id={post._id} file_id={post.upload} user_id={post.user} video_id={post.video_id} title={post.title} name={post.name} description={post.description} category={post.category} likes={post.likes} dislike={post.dislike} date={post.dateAdded} amount={post.amount} wishlisted={post.wishlisted} />
             </article>
           );
         })

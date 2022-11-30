@@ -47,9 +47,7 @@ async function piLogin() {
     localStorage.setItem("userSession", token);
     sessionStorage.setItem("username", localStorage.piName);
     localStorage.setItem("user", response.data.userId);
-    sessionStorage.setObj('profile', response.data.user);
-    document.getElementById("login").style.display = "none";
-    document.getElementById("register").style.display = "none";
+    sessionStorage.setObj('profile', response.data.profile);
   }
   if (response.status === 201) {
     alert("Welcome to Pi Webinars!");
@@ -59,11 +57,12 @@ async function piLogin() {
 auth();
 
 function buyWebinar(post) {
-  const { user_id, post_id, video_id, amount, title } = post;
+  const { user, _id, videoId, amount, title } = post;
   const price = amount;
-  const userId = user_id;
+  const post_id = _id;
+  const userId = user;
   const Tkn = localStorage.getItem("userSession");
-  console.log(userId, post_id, video_id, price, title);
+  console.log(userId, post_id, videoId, price, title);
   if (navigator.userAgent.toLowerCase().indexOf("pibrowser") < 0) {
     alert("Please go to the Pi Browser to make a crypto payment");
     window.open("pi://www.piwebinars.co.uk");
@@ -73,12 +72,11 @@ function buyWebinar(post) {
     return null;
   }
   const username = sessionStorage.username;
-  const url = "https://player.vimeo.com/video/" + video_id;
 
   const payment = window.Pi.createPayment(
     {
       amount: price,
-      memo: "Buy Webinar",
+      memo: "Purchase Full Webinar",
       metadata: { paymentType: "webinar_purchase" },
     },
     {
@@ -106,7 +104,7 @@ function buyWebinar(post) {
           username: username,
           userId: userId,
           post_id: post_id,
-          url: url,
+          videoId: videoId,
           title: title,
           price: price,
         };
@@ -121,9 +119,14 @@ function buyWebinar(post) {
             withCredentials: true,
             credentials: "same-origin",
           }
-        );
+        ).catch((err) => {
+          console.log(err);
+          alert('Payment failed, please contact customer service at support@piwebinars.app');
+        });
         if (response.data.success == true) {
-          alert('Thank you for purchasing a webinar, you may now watch it in your purchases page. Enjoy!');
+          alert('Thank you for purchasing a webinar, you may now watch it here or in your purchases page. Enjoy!');
+          await piLogin();
+          window.location.reload();
         } else alert('Payment failed, please contact customer service at support@piwebinars.app');
         return response;
       },

@@ -9,49 +9,57 @@ import { Preview } from '../components/Courses.js';
 function Post(props) {
   const [modalShown, toggleModal] = useState(false);
   const [isWishlist, setWishlist] = useState(false);
-  
+  const [img, setImg] = useState('https://assets.codepen.io/6636213/empty.png');
+
   useEffect(() => {
     document.getElementById("tint").style.display = "none";
-    if (props.wishlisted == true) {
-      setWishlist(true);
-    }
+    if (props.wishlisted == true) setWishlist(true);
+    if (props.post.videoImg) setImg(props.post.videoImg);
   }, []);
-  
+
   const open = () => {
     toggleModal(!modalShown);
   };
-  
+
   const add = async () => {
     setWishlist(!isWishlist);
     const response = await addWishlist(props);
   };
-  
+
+  const handleMouseEnter = () => {
+    if (props.post.videoGif) setImg(props.post.videoGif);
+  }
+
+  const handleMouseLeave = () => {
+    if (props.post.videoImg) setImg(props.post.videoImg);
+  }
+
   return (
     <>
       <div className="post">
-        <img onClick={open} className="postThumbnail" src={`https://vumbnail.com/${props.video_id}.jpg`}></img>
+        <img onClick={open} className="postThumbnail" src={img} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}></img>
         <h3 className="postTitle">{props.title}</h3>
         <div className="statDiv">
           <p2 className="statCategory">{props.category}</p2>
           <p2 className="statLikes">{props.likes} likes</p2>
         </div>
-        { isWishlist == false ? 
-           <i onClick={add} className="fas fa-plus addWishlist"></i>
+        {isWishlist == false ?
+          <i onClick={add} className="fas fa-plus addWishlist"></i>
           : <i onClick={add} className="fas fa-minus addWishlist"></i>
         }
       </div>
-      
-      {modalShown ? 
+
+      {modalShown ?
         <Cinema close={() => {
-            toggleModal(!modalShown);
-          }} post={props} />
+          toggleModal(!modalShown);
+        }} post={props} />
         : null
       }
     </>
   );
 }
 
-function Uploads(props) { 
+function Uploads(props) {
   const [webinars, setPosts] = useState([]);
   const [courses, setCourses] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -60,7 +68,7 @@ function Uploads(props) {
     stateA: 'selectionTabActive',
     stateB: 'selectionTabInactive'
   });
-  
+
   const updateStateA = () => {
     setActive({
       stateA: 'selectionTabActive',
@@ -68,7 +76,7 @@ function Uploads(props) {
     });
     setDisplay("posts");
   };
-  
+
   const updateStateB = () => {
     setActive({
       stateA: 'selectionTabInactive',
@@ -86,7 +94,7 @@ function Uploads(props) {
       setLoading(false);
     }
   }
-  
+
   useEffect(() => {
     getUploads();
   }, []);
@@ -98,7 +106,7 @@ function Uploads(props) {
     }
     setTimeout(pushAds, 5000);
   }, []);
-  
+
   return (
     <>
       <div id='displayToggle'>
@@ -106,35 +114,61 @@ function Uploads(props) {
         <span className={Active.stateB} onClick={updateStateB}>Courses</span>
       </div>
 
-      { display == 'posts' && <>{webinars.map(post => { 
-        return(
-          <article>
-            <Post key={post.upload} post={post} post_id={post._id} file_id={post.upload} user_id={post.user} video_id={post.video_id} title={post.title} name={post.name} description={post.description} category={post.category} likes={post.likes.length} date={post.dateAdded} amount={post.amount} wishlisted={post.wishlisted} />
-          </article>
-          );
-        })
-      }</> }
+      {display == 'posts' && <>{webinars.map((post, index) => {
+        let ad = false;
+        if (index % 4 == 0) ad = true;
+        function pushAds() {
+          let adsbygoogle;
+          (adsbygoogle = window.adsbygoogle || []).push({});
+        }
+        if (ad === true) setTimeout(pushAds, 2500);
+        return (
+          <>
+            <article>
+              <Post key={post.upload} post={post} post_id={post._id} file_id={post.upload} user_id={post.user} video_id={post.video_id} title={post.title} name={post.name} description={post.description} category={post.category} likes={post.likes.length} date={post.dateAdded} amount={post.amount} wishlisted={post.wishlisted} />
+            </article>
+            {ad === true && <>
+              <ins className="adsbygoogle"
+                style={{ display: "block", minWidth: '251px', minHeight: '50px' }}
+                data-ad-format="fluid"
+                data-ad-layout-key="-6f+d5-2h+50+bf"
+                data-ad-client="ca-pub-7095325310319034"
+                data-ad-slot="1627309222"></ins>
+            </>
+            }
+          </>
+        );
+      })
+      }</>}
 
-      { display == 'courses' && <>{courses.map(course => {
-        return(
-          <article>
-            <Preview course_id={course._id} course={course} title={course.title} description={course.description} length={course.posts.length} avatar={course.avatar} username={course.username} posts={course.posts} />
-          </article>
-          );
-        })
-      }</> }
+      {display == 'courses' && <>{courses.map((course, index) => {
+        let ad = false;
+        if (index % 3 == 0) ad = true;
+        function pushAds() {
+          let adsbygoogle;
+          (adsbygoogle = window.adsbygoogle || []).push({});
+        }
+        if (ad === true) setTimeout(pushAds, 2500);
+        return (
+          <>
+            <article>
+              <Preview course_id={course._id} course={course} title={course.title} description={course.description} length={course.posts.length} avatar={course.avatar} username={course.username} posts={course.posts} />
+            </article>
+            {ad === true && <>
+              <ins className="adsbygoogle"
+                style={{ display: "block", minWidth: '251px', minHeight: '50px' }}
+                data-ad-format="fluid"
+                data-ad-layout-key="-6f+d5-2h+50+bf"
+                data-ad-client="ca-pub-7095325310319034"
+                data-ad-slot="1627309222"></ins>
+            </>
+            }
+          </>
+        );
+      })
+      }</>}
 
       {loading ? <Loader /> : null}
-      {loading ? null :
-        <>
-          <ins className="adsbygoogle"
-            style={{ display: "block", minWidth: '251px', minHeight: '50px' }}
-            data-ad-format="fluid"
-            data-ad-layout-key="-6f+d5-2h+50+bf"
-            data-ad-client="ca-pub-7095325310319034"
-            data-ad-slot="1627309222"></ins>
-        </>
-      }
       {(webinars.length == 0 && !loading && display == 'posts') && <h2 style={{ position: 'fixed', top: 'calc(50vh - 10px)', width: '100%', textAlign: 'center' }}>There are no webinars here, yet</h2>}
       {(courses.length == 0 && !loading && display == 'courses') && <h2 style={{ position: 'fixed', top: 'calc(50vh - 10px)', width: '100%', textAlign: 'center' }}>There are no courses here, yet</h2>}
     </>
@@ -178,34 +212,34 @@ export default function User(props) {
       const amFollowing = following.map(x => x.user).indexOf(userId);
       console.log(amFollowed, amFollowing);
       if (amFollowed >= 0 && amFollowing < 0) setFollow("Follow Back");
-      else if (amFollowing >= 0)  setFollow('Unfollow');
+      else if (amFollowing >= 0) setFollow('Unfollow');
       else setFollow('Follow');
     }
   }
-  
+
   useEffect(() => {
     findFollowing();
   }, []);
-  
+
   const handleFollow = async () => {
     const response = await followUnfollow(props.userId);
     setFollow(response);
   }
-  
+
   return (
     <>
-      <span id="page" style={{ paddingBottom: '50px', height: 'calc(100vh - 50px)'}}>
+      <span id="page" style={{ paddingBottom: '50px', height: 'calc(100vh - 50px)' }}>
         <div id="profile">
-          { profile.avatar ?
+          {profile.avatar ?
             <img id="avatar" src={profile.avatar}></img>
-           : <img id="avatar" src={avatar}></img>
+            : <img id="avatar" src={avatar}></img>
           }
           <span id="profileName">
             <p1>{profile.name}</p1>
           </span>
           <span id="profileHandle">
-            <p2>@{profile.username}</p2> 
-            { profile.verified === true ? <img id="verified" src="https://www.piwebinars.co.uk/img/Verified_Icon.png"></img> : null }
+            <p2>@{profile.username}</p2>
+            {profile.verified === true ? <img id="verified" src="https://www.piwebinars.co.uk/img/Verified_Icon.png"></img> : null}
           </span>
           <span id="profileStats">
             <p>Followers: {profile.followers}</p>

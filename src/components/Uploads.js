@@ -125,7 +125,7 @@ function Post(props) {
   return (
     <>
       <div className="post">
-        <iframe className="postThumbnail" src={props.url} frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+        <iframe className="postThumbnail" src={props.post.videoURL} frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
         <h3 className="postTitle">{props.title}</h3><br />
         {props.course ? <a className='fas fa-plus addToCourse' onClick={(e) => { handleAddToCourse(e) }}></a> :
           <>

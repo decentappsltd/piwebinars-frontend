@@ -11,11 +11,11 @@ import Loader from './Loader.js';
 export function Post(props) {
   const [modalShown, toggleModal] = useState(false);
   const [isWishlist, setWishlist] = useState(false);
+  const [img, setImg] = useState('https://assets.codepen.io/6636213/empty.png');
 
   useEffect(() => {
-    if (props.wishlisted == true) {
-      setWishlist(true);
-    }
+    if (props.wishlisted == true) setWishlist(true);
+    if (props.post.videoImg) setImg(props.post.videoImg);
   }, []);
 
   const open = () => {
@@ -41,11 +41,19 @@ export function Post(props) {
     const response = await addWishlist(props);
   };
 
+  const handleMouseEnter = () => {
+    if (props.post.videoGif) setImg(props.post.videoGif);
+  }
+
+  const handleMouseLeave = () => {
+    if (props.post.videoImg) setImg(props.post.videoImg);
+  }
+
 
   return (
     <>
       <div className="post">
-        <img onClick={open} className="postThumbnail" src={`https://vumbnail.com/${props.video_id}.jpg`}></img>
+        <img onClick={open} className="postThumbnail" src={img} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}></img>
         <h3 className="postTitle">{props.title}</h3>
         <div className="statDiv">
           <Link to={`/user/${props.user_id}`} className="statName">{props.name}</Link>
@@ -115,26 +123,34 @@ function Posts(props) {
       (adsbygoogle = window.adsbygoogle || []).push({});
     }
     setTimeout(pushAds, 2500);
-  }, []);
+  }, [props]);
 
   return (
     <>
       {loading ? <Loader /> : null}
-      {loading ? null :
-        <>
-          <ins className="adsbygoogle"
-            style={{ display: "block", minWidth: '251px', minHeight: '50px' }}
-            data-ad-format="fluid"
-            data-ad-layout-key="-6f+d5-2h+50+bf"
-            data-ad-client="ca-pub-7095325310319034"
-            data-ad-slot="1627309222"></ins>
-        </>
-      }
-      {posts.map(post => {
+      {posts.map((post, index) => {
+        let ad = false;
+        if (index % 4 == 0 ) ad = true;
+        function pushAds() {
+          let adsbygoogle;
+          (adsbygoogle = window.adsbygoogle || []).push({});
+        }
+        if (ad === true) setTimeout(pushAds, 2500);
         return (
-          <article key={post.upload}>
-            <Post key={post.upload} post={post} post_id={post._id} file_id={post.upload} user_id={post.user} video_id={post.video_id} title={post.title} name={post.name} description={post.description} category={post.category} likes={post.likes} dislike={post.dislike} date={post.dateAdded} amount={post.amount} wishlisted={post.wishlisted} />
-          </article>
+          <>
+            <article style={{ display: 'flex' }} key={post.upload}>
+              <Post key={post.upload} post={post} post_id={post._id} file_id={post.upload} user_id={post.user} video_id={post.video_id} title={post.title} name={post.name} description={post.description} category={post.category} likes={post.likes} dislike={post.dislike} date={post.dateAdded} amount={post.amount} wishlisted={post.wishlisted} />
+            </article>
+            {ad === true && <>
+              <ins className="adsbygoogle"
+                style={{ display: "block", minWidth: '251px', minHeight: '50px' }}
+                data-ad-format="fluid"
+                data-ad-layout-key="-6f+d5-2h+50+bf"
+                data-ad-client="ca-pub-7095325310319034"
+                data-ad-slot="1627309222"></ins>
+            </>
+            }
+          </>
         );
       })
       }

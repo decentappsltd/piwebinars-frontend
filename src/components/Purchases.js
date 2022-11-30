@@ -6,6 +6,7 @@ import {
 import { storedPurchases } from '../atoms/posts.js';
 import Loader from './Loader.js';
 import Player from '@vimeo/player';
+import VideoJS from './Video.js';
 
 function Modal(props) {
   const setClickEvent = () => {
@@ -52,6 +53,25 @@ function Modal(props) {
 
 function Post(props) {
   const [modalShown, toggleModal] = useState(false);
+  const playerRef = React.useRef(null);
+
+  const videoJsOptions = {
+    autoplay: false,
+    controls: true,
+    responsive: true,
+    fluid: false,
+    preload: 'none',
+    width: 250,
+    height: 140.63,
+    sources: [{
+      src: `https://api.dyntube.com/v1/live/videos/${props.videoId}.m3u8`,
+      type: 'application/x-mpegURL'
+    }]
+  };
+
+  const handlePlayerReady = (player) => {
+    playerRef.current = player;
+  };
   
   const open = () => {
     toggleModal(true);
@@ -61,16 +81,17 @@ function Post(props) {
   return (
     <>
       <div onClick={open} className="post">
-        <iframe className="postThumbnail" src={props.url} frameBorder="0" webkitallowfullscreen="true" mozallowfullscreen="true" allowFullScreen></iframe>
+        { props.url && <iframe className="postThumbnail" src={props.url} frameBorder="0" webkitallowfullscreen="true" mozallowfullscreen="true" allowFullScreen></iframe> }
+        { props.videoId && <VideoJS options={videoJsOptions} onReady={handlePlayerReady} /> }
         <h3 className="postTitle">{props.title}</h3>
       </div>
       
-      {modalShown && 
+      {/* {modalShown && 
         <Modal close={() => {
             toggleModal(false);
             document.getElementById("tint").style.display = "none";
           }} post={props} />
-      }
+      } */}
     </>
   );
 }
@@ -98,7 +119,7 @@ function Purchases() {
       { webinars.map(post => { 
         return(
           <article key={post._id}>
-            <Post title={post.title} url={post.url} />
+            <Post title={post.title} url={post.url} videoId={post.videoId} />
           </article>
           );
         })

@@ -7,6 +7,8 @@ import Player from '@vimeo/player';
 import avatar from '../assets/avatar.png';
 import { Comment } from '../components/Cinema.js';
 import Loader from "../components/Loader.js";
+import VideoJS from "../components/Video.js";
+import videojs from "video.js";
 
 function Webinar(props) {
     const [post, setPost] = useState({ title: '', description: '', price: '', video_url: '', user_id: '', post_id: '', likes: 0, dislike: 0, comments: [], commentReplies: [] });
@@ -16,7 +18,21 @@ function Webinar(props) {
     const [text, setText] = useState("");
     const [isWebinarLiked, setWebinarLiked] = useState(false);
     const [isWebinarDisliked, setWebinarDisliked] = useState(false);
-    const [isPurchased, setPurchased] = useState(false);
+
+    const playerRef = React.useRef(null);
+    let width = window.innerWidth - 260;
+    if (window.innerWidth < 850) width = window.innerWidth;
+    else if (window.innerWidth > 1000) width = 730;
+    const height = width * 0.5625;
+    const [videoJsOptions, setVideoJsOptions] = useState({
+        autoplay: false,
+        controls: true,
+        responsive: true,
+        fluid: false,
+        preload: 'none',
+        width,
+        height
+    });
 
     const handleComment = async () => {
         console.log(post.user_id, post.post_id, text);
@@ -85,51 +101,19 @@ function Webinar(props) {
     };
 
     const getThePost = async () => {
-        let user;
-        if (sessionStorage.profile && sessionStorage.profile !== 'undefined') user = JSON.parse(sessionStorage.profile);
-        const sessionPost = JSON.parse(sessionStorage.post);
-        let videoPlayer;
+        let sessionPost;
+        if (sessionStorage.post && sessionStorage.post !== 'undefined') sessionPost = JSON.parse(sessionStorage.post);
+
         if (sessionPost) {
             setPost(prev => ({ ...prev, ...sessionPost }));
             setLoading(false);
-            const url = "https://player.vimeo.com/video/" + sessionPost.video_id;
-            let options;
-            const playerHeight = (window.innerHeight - 200);
-            const playerWidth = playerHeight * 1.777777777777778;
-            if (window.innerWidth < 1200) {
-                options = {
-                    url: url,
-                    controls: true,
-                    width: window.innerWidth,
-                    height: 250
-                };
-            } else {
-                options = {
-                    url: url,
-                    controls: true,
-                    width: playerWidth,
-                    height: playerHeight
-                };
-            }
-            videoPlayer = new Player("Video", options);
-            // getting arrays from session storage
-            if (user) {
-                for (const item of user.purchased) {
-                    if (item.post_id == props.postId) {
-                        setPurchased(true);
-                        console.log('purchased');
-                    }
-                }
-            }
-            setInterval(function () {
-                videoPlayer.on("timeupdate", function (getAll) {
-                    let currentPos = getAll.seconds;
-                    if (currentPos >= 15 && isPurchased === false) {
-                        videoPlayer.pause();
-                        videoPlayer.setCurrentTime(0);
-                    }
-                });
-            }, 1000);
+            setVideoJsOptions(prev => ({
+                ...prev,
+                sources: [{
+                    src: `https://api.dyntube.com/v1/live/videos/${sessionPost.videoId}.m3u8`,
+                    type: 'application/x-mpegURL'
+                }]
+            }));
         }
         const foundPost = await getPost(props.userId, props.postId);
         setPost(prev => ({
@@ -155,44 +139,13 @@ function Webinar(props) {
         });
         if (liked.length) setWebinarLiked(true);
         if (disLiked.length) setWebinarDisliked(true);
-        const url = "https://player.vimeo.com/video/" + foundPost.video_id;
-        let options;
-        const playerHeight = (window.innerHeight - 200);
-        const playerWidth = playerHeight * 1.777777777777778;
-        if (window.innerWidth < 1200) {
-            options = {
-                url: url,
-                controls: true,
-                width: window.innerWidth,
-                height: 250
-            };
-        } else {
-            options = {
-                url: url,
-                controls: true,
-                width: playerWidth,
-                height: playerHeight
-            };
-        }
-        if (!videoPlayer) videoPlayer = new Player("Video", options);
-        // getting arrays from session storage
-        if (user) {
-            for (const item of user.purchased) {
-                if (item.post_id == props.postId) {
-                    setPurchased(true);
-                    console.log('purchased');
-                }
-            }
-        }
-        setInterval(function () {
-            videoPlayer.on("timeupdate", function (getAll) {
-                let currentPos = getAll.seconds;
-                if (currentPos >= 15 && isPurchased !== true) {
-                    videoPlayer.pause();
-                    videoPlayer.setCurrentTime(0);
-                }
-            });
-        }, 1000);
+        setVideoJsOptions(prev => ({
+            ...prev,
+            sources: [{
+                src: `https://api.dyntube.com/v1/live/videos/${foundPost.videoId}.m3u8`,
+                type: 'application/x-mpegURL'
+            }]
+        }));
     }
 
     const handleCommentsScroll = () => {
@@ -216,10 +169,6 @@ function Webinar(props) {
             return;
         }
         const response = await buyWebinar(post);
-        if (response.data.success == 'true') {
-            setPurchased(true);
-            alert('Purchase successful. You can now watch the webinar here, or in your purchases page.');
-        }
     }
 
     useEffect(() => {
@@ -234,17 +183,50 @@ function Webinar(props) {
         setTimeout(pushAds, 2000);
     }, []);
 
+    const handlePlayerReady = async (player) => {
+        let user;
+        let purchased = false;
+        if (sessionStorage.profile && sessionStorage.profile !== 'undefined') user = JSON.parse(sessionStorage.profile);
+        if (user) {
+            for (const item of user.purchases) {
+                if (item.webinar == props.postId) {
+                    purchased = true;
+                    document.getElementById('pay').style.display = 'none';
+                }
+            }
+        }
+        playerRef.current = player;
+
+        player.on('timeupdate', async () => {
+            if (player.currentTime() >= 15 && purchased == false) {
+                player.currentTime(0);
+                player.pause();
+                const foundPost = await getPost(props.userId, props.postId);
+                const paymentPost = {
+                    user: props.userId,
+                    _id: props.postId,
+                    videoId: foundPost.videoId,
+                    amount: foundPost.amount,
+                    title: foundPost.title,
+                }
+                await handlePurchase(paymentPost);
+            }
+        });
+    };
+
     return (
         <>
             <div id="webinarPage">
 
-                <div id="Video"></div>
+                <div id="Video">
+                    <VideoJS options={videoJsOptions} onReady={handlePlayerReady} />
+                </div>
 
                 {loading ? <Loader /> :
                     <>
                         <div id="info">
                             <span>
-                                <h3 id="title">{post.title}</h3>
+                                <h3 id="title" onClick={() => window.location.href = `/post/${props.userId}/${props.postId}`}>{post.title}</h3>
                                 <p id="description">{post.description}</p>
                                 {post.likes !== undefined && (
                                     <p id="likes" onClick={handleLike} className={`${isWebinarLiked ? 'colourYellow' : 'colourBlack'}`}>
@@ -276,9 +258,17 @@ function Webinar(props) {
                                     )}
                                     <p id="name">{post.name}</p>
                                 </Link>
-                                { window.innerWidth < 850 && <a className="fas fa-arrow-left" id='postBackBtn' onClick={() => {window.history.back()}}></a> }
+                                {window.innerWidth < 850 && <a className="fas fa-arrow-left" id='postBackBtn' onClick={() => { window.history.back() }}></a>}
                             </span>
                         </div>
+                        {window.innerWidth <= 850 &&
+                            <ins className="adsbygoogle commentGoogleAd"
+                                style={{ display: "block", minWidth: '251px', minHeight: '50px' }}
+                                data-ad-format="fluid"
+                                data-ad-layout-key="-6f+d5-2h+50+bf"
+                                data-ad-client="ca-pub-7095325310319034"
+                                data-ad-slot="1627309222"></ins>
+                        }
 
                         <div id="comments" onScroll={handleCommentsScroll}>
                             <p style={{ borderTop: "solid 3px #36454f", color: '#36454f' }}>Comments:</p>
@@ -308,12 +298,14 @@ function Webinar(props) {
                             </form>
                             <br />
                             <div id="commentsContainer">
-                                <ins className="adsbygoogle commentGoogleAd"
-                                    style={{ display: "block", minWidth: '251px', minHeight: '50px' }}
-                                    data-ad-format="fluid"
-                                    data-ad-layout-key="-6f+d5-2h+50+bf"
-                                    data-ad-client="ca-pub-7095325310319034"
-                                    data-ad-slot="1627309222"></ins>
+                                {window.innerWidth > 850 &&
+                                    <ins className="adsbygoogle commentGoogleAd"
+                                        style={{ display: "block", minWidth: '251px', minHeight: '50px' }}
+                                        data-ad-format="fluid"
+                                        data-ad-layout-key="-6f+d5-2h+50+bf"
+                                        data-ad-client="ca-pub-7095325310319034"
+                                        data-ad-slot="1627309222"></ins>
+                                }
                                 {comments.map((comment) => {
                                     return (
                                         <article key={comment._id}>
@@ -327,8 +319,8 @@ function Webinar(props) {
                                                 likes={comment.comment_likes.length}
                                                 replies={comment.comment_reply.length}
                                                 commentReplies={comment.comment_reply}
-                                                post_id={post.post_id}
-                                                user_id={post.user_id}
+                                                post_id={props.postId}
+                                                user_id={props.userId}
                                             />
                                         </article>
                                     );

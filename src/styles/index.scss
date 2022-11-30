@@ -210,6 +210,8 @@ body {
 
 .postThumbnail {
   width: 250px;
+  height: 140.63px;
+  object-fit: cover;
   border-radius: 10px 10px 0px 0px;
   border-style: none;
 }
@@ -763,7 +765,7 @@ button#followBtn {
   .adsbygoogle {
     margin: 0px;
     width: 85vw;
-    height: 80px;
+    height: 150px;
     margin: 10px 0px;
   }
 

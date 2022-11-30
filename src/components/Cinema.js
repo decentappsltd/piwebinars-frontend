@@ -5,6 +5,8 @@ import { getPost, comment, likeWebinar, dislikeWebinar } from "../app/webinars.j
 import { manipulateComment } from "../app/authentication.js";
 import Player from '@vimeo/player';
 import avatar from '../assets/avatar.png';
+import videojs from "video.js";
+import VideoJS from './Video.js';
 
 function CommentReply(props) {
   return (
@@ -31,6 +33,7 @@ export function Comment(props) {
   }, []);
 
   const like = async () => {
+    console.log(props);
     setLike('loading...');
     const url_path = "like_unlike_comment";
     const api = "post";
@@ -167,6 +170,9 @@ export default function Cinema(props) {
   const [text, setText] = useState("");
   const [isWebinarLiked, setWebinarLiked] = useState(false);
   const [isWebinarDisliked, setWebinarDisliked] = useState(false);
+  const playerRef = React.useRef(null);
+
+  console.log(props.post);
 
   const handleComment = async () => {
     console.log(props.post.user_id, props.post.post_id, text);
@@ -237,35 +243,35 @@ export default function Cinema(props) {
     setTimeout(setClickEvent, 500);
   }, []);
 
-  useEffect(() => {
-    const url = "https://player.vimeo.com/video/" + props.post.video_id;
-    let options;
-    if (window.innerWidth < 850) {
-      options = {
-        url: url,
-        controls: true,
-        width: window.innerWidth,
-        height: 250
-      };
-    } else {
-      options = {
-        url: url,
-        controls: true,
-        width: 500,
-        height: 290
-      };
-    }
-    var videoPlayer = new Player("Video", options);
-    setInterval(function () {
-      videoPlayer.on("timeupdate", function (getAll) {
-        let currentPos = getAll.seconds;
-        if (currentPos >= 15) {
-          videoPlayer.pause();
-          videoPlayer.setCurrentTime(0);
-        }
-      });
-    }, 1000);
-  }, []);
+  let width = 500;
+  if (window.innerWidth < 500) width = window.innerWidth;
+  const height = width * 0.5625;
+
+  const videoJsOptions = {
+    autoplay: false,
+    controls: true,
+    responsive: true,
+    fluid: false,
+    preload: 'none',
+    width,
+    height,
+    sources: [{
+      src: `https://api.dyntube.com/v1/live/videos/${props.post.post.videoId}.m3u8`,
+      type: 'application/x-mpegURL'
+    }]
+  };
+
+  const handlePlayerReady = (player) => {
+    playerRef.current = player;
+
+    player.on('timeupdate', () => {
+      if (player.currentTime() >= 15) {
+        player.pause();
+        player.currentTime(0);
+        // TODO: create payment
+      }
+    });
+  };
 
   const getThePost = async () => {
     const post = await getPost(props.post.user_id, props.post.post_id);
@@ -299,7 +305,9 @@ export default function Cinema(props) {
   return (
     <>
       <div id="cinema">
-        <div id="Video"></div>
+        <div id="Video">
+          <VideoJS options={videoJsOptions} onReady={handlePlayerReady} />
+        </div>
 
         <div id="info">
           <span>

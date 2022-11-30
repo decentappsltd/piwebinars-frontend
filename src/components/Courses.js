@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useTranslation } from "react-i18next";
 import { Link } from 'react-router-dom';
 import { getCourses, createCourse } from '../app/webinars.js';
 import Loader from './Loader.js';
@@ -6,6 +7,7 @@ import Uploads from './Uploads.js';
 import avatar from '../assets/avatar.png';
 
 function CreateCourse(props) {
+  const { t } = useTranslation();
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [posts, setPosts] = useState([]);
@@ -58,23 +60,23 @@ function CreateCourse(props) {
   return (
     <div id="createCourse">
       <div className="createCourse">
-        <h3 onClick={() => { console.log(posts) }}>Create a new course</h3>
+        <h3 onClick={() => { console.log(posts) }}>{t('Create_a_new_course')}</h3>
         <br />
-        <input type="text" placeholder="Give your course a title" onChange={e => setTitle(e.target.value)} /> <br /> <br />
-        <textarea placeholder="Describe your course" onChange={e => setDescription(e.target.value)} /> <br /> <br />
-        <p>Choose your webinars to add:</p> <br />
+        <input type="text" placeholder={t('Give_your_course_a_title')} onChange={e => setTitle(e.target.value)} /> <br /> <br />
+        <textarea placeholder={t('Describe_your_course')} onChange={e => setDescription(e.target.value)} /> <br /> <br />
+        <p>{t('Choose_your_webinars_to_add')}:</p> <br />
         <div id='courseUploads'>
           <Uploads course={(post) => { addToCourse(post) }} />
         </div> <br />
-        <button id='createCourseButton' onClick={createNewCourse}>Create</button>
+        <button id='createCourseButton' onClick={createNewCourse}>{t('Create')}</button>
       </div>
 
       <a style={{ float: 'right' }} onClick={props.close} className='fas fa-arrow-left'></a>
 
       { created && <>
         <div id="courseSuccessModal">
-          <h3>Course created successfully!</h3>
-          <p><Link to={`/course/${completedUserId}/${completedCourseId}`}>View your new course</Link> or <a style={{ textDecoration: 'underlined', color: '#fbb44a' }} onClick={props.close}>return home</a>.</p>
+          <h3>{t('Course_created_successfully')}</h3>
+          <p><Link to={`/course/${completedUserId}/${completedCourseId}`}>{t('View_your_new_course')}</Link> {t('or')} <a style={{ textDecoration: 'underlined', color: '#fbb44a' }} onClick={props.close}>{t('return_home')}</a>.</p>
         </div>
       </>}
     </div>
@@ -82,6 +84,7 @@ function CreateCourse(props) {
 }
 
 export function Preview(props) {
+  const { t } = useTranslation();
   const handleOpen = () => {
     Storage.prototype.setObj = function (key, obj) {
       return this.setItem(key, JSON.stringify(obj));
@@ -97,7 +100,7 @@ export function Preview(props) {
         { props.posts[0] && <img src={`https://vumbnail.com/${props.posts[0].video_id}.jpg`} /> }
         <h3>{props.title}</h3>
         <p className='courseDescription'>{props.description}</p>
-        <p className='courseLength'>Length: {props.length} webinars</p>
+        {props.length > 1 ? <p className='courseLength'>{t('Length_webinars', {length: props.length})}</p> : <p className='courseLength'>{t('Length_webinar', {length: props.length})}</p>}
         {props.posts[0] &&
           <Link to={`/user/${props.posts[0].user}`} className='courseCreator'>
             <span>
@@ -112,6 +115,7 @@ export function Preview(props) {
 }
 
 function Courses(props) {
+  const { t } = useTranslation();
   const [loading, setLoading] = useState(true);
   const [courses, setCourses] = useState([]);
   const [newCourse, setNewCourse] = useState(false);
@@ -144,7 +148,7 @@ function Courses(props) {
 
   return (
     <>
-      {loading === true ? <><div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column', height: '200px', padding: '10px ' }}><h2>Explore courses to learn a new skill...</h2><Loader /></div></> :
+      {loading === true ? <><div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column', height: '200px', padding: '10px ' }}><h2>{t('Explore_courses_to_learn_a_new_skill')}</h2><Loader /></div></> :
         <>
           {courses.length == 0 && <h2>There are no courses yet, check again later...</h2>}
           {
@@ -162,7 +166,7 @@ function Courses(props) {
       {
         newCourse ? <CreateCourse close={() => { setNewCourse(false) }} /> :
           <a onClick={() => { setNewCourse(true) }} id='newCourseBtn'>
-            <p>Create a course</p>
+            <p>{t('Create_a_course')}</p>
             <i className='fas fa-plus'></i>
           </a>
       }

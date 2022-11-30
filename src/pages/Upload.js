@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react';
+import { useTranslation } from "react-i18next";
 import { upload } from '../app/authentication.js';
 
 function PricesPopup(props) {
+  const { t } = useTranslation();
+
   const setClickEvent = () => {
     function close(e) {
       if (!document.querySelector(".popup").contains(e.target)) {
@@ -20,8 +23,8 @@ function PricesPopup(props) {
     <div className="popup">
       <table>
         <tr>
-          <th>Webinar Length</th>
-          <th>Recommended Price</th>
+          <th>{t('Webinar_Length')}</th>
+          <th>{t('Recommended_Price')}</th>
         </tr>
         <tr>
           <th>5-10mins</th>
@@ -45,6 +48,7 @@ function PricesPopup(props) {
 }
 
 function UploadForm() {
+  const { t } = useTranslation();
   const [modalShown, toggleModal] = React.useState(false);
   const [fileType, setFileType] = useState("MP4");
   const [title, setTitle] = useState("");
@@ -83,31 +87,35 @@ function UploadForm() {
   return (
     <>
       <form action="/upload" method="POST" id="form" onSubmit={(e) => e.preventDefault()}>
-        <h1>Share your knowledge</h1><br />
-        <label>Video :
+        <h1>{t('Share_your_knowledge')}</h1><br />
+        <label>{t('Video')} :
           <input name="videoUpload" type="file" id="videoUpload" />
           <select style={{ display: 'none' }} id="fileType" value={fileType} onChange={handleFileTypeChange}>
             <option value="MP4">MP4</option>
             <option value="MOV">MOV</option>
           </select>
         </label><br />
+<<<<<<< Updated upstream
+=======
+        <i style={{ fontSize: '12px' }}>{t('minimum_2_mins_in_length')}</i>
+>>>>>>> Stashed changes
 
         <label style={{ display: 'none' }}>Thumbnail:
           <input type="file" name="thumbnailUpload" id="videoThumbnail" />
         </label><br /><br />
 
-        <input class="in" name="title" placeholder="Title" type="text" onChange={(e) => setTitle(e.target.value)} required />
+        <input class="in" name="title" placeholder={t('Title')} type="text" onChange={(e) => setTitle(e.target.value)} required />
         <br /><br />
 
-        <textArea class="in" name="description" placeholder="Description" type="text" onChange={(e) => setDescription(e.target.value)} />
+        <textArea class="in" name="description" placeholder={t('Description')} type="text" onChange={(e) => setDescription(e.target.value)} />
         <br /><br />
 
-        <input class="in" name="amount" placeholder="Set a price" type="number" onChange={(e) => setPrice(e.target.value)} /><br />
+        <input class="in" name="amount" placeholder={t('Set_a_price')} type="number" onChange={(e) => setPrice(e.target.value)} /><br />
 
         <i onClick={() => {
           toggleModal(!modalShown);
         }}
-        >See Price Guide</i>
+        >{t('See_Price_Guide')}</i>
         <br /><br />
         {modalShown ?
           <PricesPopup
@@ -118,29 +126,33 @@ function UploadForm() {
           : null
         }
 
-        <label>Select category:
+        <label>{t('Select_a_category')}:
           <select value={category} onChange={handleCategoryChange}>
-            <option name="category" value="none">None</option><br />
-            <option name="category" value="cryptocurrency">Cryptocurrency</option><br />
-            <option name="category" value="education">Education</option><br />
-            <option name="category" value="fitness">Fitness</option><br />
-            <option name="category" value="food">Food</option><br />
-            <option name="category" value="history">History</option><br />
-            <option name="category" value="money">Money</option><br />
-            <option name="category" value="nature">Nature</option><br />
-            <option name="category" value="pi-network">Pi Network</option><br />
-            <option name="category" value="politics">Politics</option><br />
-            <option name="category" value="sports">Sports</option><br />
-            <option name="category" value="technology">Technology</option><br />
+            <option name="category" value="none">{t('None')}</option><br />
+            <option name="category" value="cryptocurrency">{t('Cryptocurrency')}</option><br />
+            <option name="category" value="education">{t('Education')}</option><br />
+            <option name="category" value="fitness">{t('Fitness')}</option><br />
+            <option name="category" value="food">{t('Food')}</option><br />
+            <option name="category" value="history">{t('History')}</option><br />
+            <option name="category" value="money">{t('Money')}</option><br />
+            <option name="category" value="nature">{t('Nature')}</option><br />
+            <option name="category" value="pi-network">{t('Pi Network')}</option><br />
+            <option name="category" value="politics">{t('Politics')}</option><br />
+            <option name="category" value="sports">{t('Sports')}</option><br />
+            <option name="category" value="technology">{t('Technology')}</option><br />
           </select>
         </label><br /><br />
 
         <div>
           <input type="checkbox" onChange={handleCertified} id="certify" required></input>
-          <label for="certify"> I certify that I own this content</label><br />
+          <label for="certify"> {t('I_certify_that_I_own_this_content')}</label><br />
         </div><br />
 
+<<<<<<< Updated upstream
         {localStorage.userSession ? <input type="button" id="submitBtn" value="Upload" onClick={handleSubmit}></input> : <p>Please login to upload!</p>}
+=======
+        {localStorage.userSession ? <input type="button" id="submitBtn" value={button} onClick={handleSubmit}></input> : <p>{t('Please_login_to_upload!')}</p>}
+>>>>>>> Stashed changes
         <p id="upload_log"></p>
       </form>
     </>

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { createPath, Link } from 'react-router-dom';
+import { useTranslation } from "react-i18next";
 import { buyWebinar } from "../app/payment.js";
 import { getPost, comment, likeWebinar, dislikeWebinar } from "../app/webinars.js";
 import { manipulateComment } from "../app/authentication.js";
@@ -9,6 +10,7 @@ import { Comment } from '../components/Cinema.js';
 import Loader from "../components/Loader.js";
 
 function Webinar(props) {
+    const { t } = useTranslation();
     const [post, setPost] = useState({ title: '', description: '', price: '', video_url: '', user_id: '', post_id: '', likes: 0, dislike: 0, comments: [], commentReplies: [] });
     const [loading, setLoading] = useState(true);
     const [comments, setComments] = useState([]);
@@ -263,7 +265,7 @@ function Webinar(props) {
                                     <p id="date">{post.date.substring(0, 10)}</p>
                                 )}
                                 <button id="pay" onClick={() => { handlePurchase(post) }}>
-                                    Buy webinar
+                                    {t('Buy_webinar')}
                                 </button>
                                 <Link to={`/user/${props.userId}`} id="creatorProfile">
                                     {post.avatar ? (
@@ -281,14 +283,14 @@ function Webinar(props) {
                         </div>
 
                         <div id="comments" onScroll={handleCommentsScroll}>
-                            <p style={{ borderTop: "solid 3px #36454f", color: '#36454f' }}>Comments:</p>
+                            <p style={{ borderTop: "solid 3px #36454f", color: '#36454f' }}>{t('Comments')}:</p>
                             <form className="commentField" id="commentForm">
                                 <input
                                     style={{ border: "none", padding: "5px", color: '#36454f' }}
                                     onChange={(e) => setText(e.target.value)}
                                     id="text"
                                     type="text"
-                                    placeholder="Write a comment.."
+                                    placeholder={t('Write_a_comment')}
                                 />
                                 <input
                                     style={{
@@ -302,7 +304,7 @@ function Webinar(props) {
                                     }}
                                     onClick={handleComment}
                                     type="button"
-                                    value="Comment"
+                                    value={t('Comment')}
                                     id="postComment"
                                 />
                             </form>

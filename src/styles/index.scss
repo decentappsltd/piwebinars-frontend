@@ -684,6 +684,34 @@ button#followBtn {
     z-index: 10;
   }
 
+  #mobileTab {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    position: absolute;
+    bottom: 100px;
+    width: 40px;
+    height: 40px;
+    border-radius: 0 5px 5px 0;
+    color: white;
+    background-color: $grey;
+    z-index: 10;
+    transition: 0.5s;
+
+    i {
+      margin-left: 3px;
+    }
+  }
+
+  .mobileTabOpen {
+    left: 250px;
+  }
+
+  .mobileTabClosed {
+    left: 0px;
+  }
+
   #bar {
     width: 100vw;
     height: 50px;
@@ -694,6 +722,38 @@ button#followBtn {
     height: calc(100vh - 50px);
     top: 50px;
     overflow-x: hidden;
+  }
+
+  #translate {
+    position: absolute;
+    top: 80px;
+    right: 20px;
+    background: white;
+    color: $charcoal;
+    border: solid 1px $charcoal;
+    border-radius: 5px;
+    padding: 15px;
+    font-size: 18px;
+    z-index: 10;
+
+    a {
+      display: flex;
+      align-items: center;
+      padding: 10px;
+      cursor: pointer;
+    }
+
+    a:hover {
+      background-color: #e9e9e9;
+      border-radius: 100px;
+    }
+
+    img {
+      width: 30px;
+      height: 22.5px;
+      box-shadow: 0px 0px 5px 0px $charcoal;
+      margin-right: 10px;
+    }
   }
 
   #page,
@@ -733,8 +793,15 @@ button#followBtn {
     width: calc(100% - 100px);
     min-width: 0px;
     margin: 10px;
-    margin-left: 55px;
+    margin-left: 15px;
     margin-top: 7px;
+  }
+
+  #openTranslate {
+    position: absolute;
+    top: 17.5px;
+    right: 15px;
+    color: $charcoal;
   }
 
   #searchInput {

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from 'react-router-dom';
+import { useTranslation } from "react-i18next";
 import { buyWebinar } from "../app/payment.js";
 import { getPost, comment, likeWebinar, dislikeWebinar } from "../app/webinars.js";
 import { manipulateComment } from "../app/authentication.js";
@@ -16,6 +17,7 @@ function CommentReply(props) {
 }
 
 export function Comment(props) {
+  const { t } = useTranslation();
   const [owner, setOwner] = useState(false);
   const [text, setText] = useState(props.text);
   const [likeText, setLike] = useState('like');
@@ -117,14 +119,14 @@ export function Comment(props) {
       <div className="interactiveDiv">
         <span className="interactiveDivCounts">
           {props.likes == 1 ? (
-            <p className="commentLikes">{props.likes} like</p>
+            <p className="commentLikes">{props.likes} {t('like')}</p>
           ) : (
-            <p className="commentLikes">{props.likes} likes</p>
+            <p className="commentLikes">{props.likes} {t('likes')}</p>
           )}
           {props.replies == 1 ? (
-            <p className="commentLikes">{props.replies} reply</p>
+            <p className="commentLikes">{props.replies} {t('reply')}</p>
           ) : (
-            <p className="commentLikes">{props.replies} replies</p>
+            <p className="commentLikes">{props.replies} {t('replies')}</p>
           )}
         </span>
         <ul>
@@ -163,6 +165,7 @@ export function Comment(props) {
 }
 
 export default function Cinema(props) {
+  const { t } = useTranslation();
   const [comments, setComments] = useState([]);
   const [text, setText] = useState("");
   const [isWebinarLiked, setWebinarLiked] = useState(false);
@@ -322,7 +325,7 @@ export default function Cinema(props) {
               <p id="date">{props.post.date.substring(0, 10)}</p>
             )}
             <button id="pay" onClick={() => { buyWebinar(props.post) }}>
-              Buy webinar
+              {t('Buy_webinar')}
             </button>
             <Link to={`/user/${props.post.user_id}`} id="creatorProfile">
               {props.post.avatar ? (
@@ -346,7 +349,7 @@ export default function Cinema(props) {
         </div>
 
         <div id="comments">
-          <p2 style={{ borderTop: "solid 3px #fbb44a" }}>Comments:</p2>
+          <p2 style={{ borderTop: "solid 3px #fbb44a" }}>{t('Comments')}:</p2>
           <br />
           <br />
           <form className="commentField" id="commentForm">
@@ -355,7 +358,7 @@ export default function Cinema(props) {
               onChange={(e) => setText(e.target.value)}
               id="text"
               type="text"
-              placeholder="Write a comment.."
+              placeholder={t('Write_a_comment')}
             />
             <input
               style={{
@@ -369,7 +372,7 @@ export default function Cinema(props) {
               }}
               onClick={handleComment}
               type="button"
-              value="Comment"
+              value={t('Comment')}
               id="postComment"
             />
           </form>

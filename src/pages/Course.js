@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { useTranslation } from "react-i18next";
 import { addPostToCourse, getCourse, removePostFromCourse, editCourse, renderUploads } from '../app/webinars.js';
 import Loader from '../components/Loader.js';
 import { Post } from '../components/Posts.js';
@@ -52,6 +53,7 @@ function Uploads(props) {
 }
 
 function Course(props) {
+    const { t } = useTranslation();
     const [course, setCourse] = useState({ title: 'Loading...', description: '', username: '', avatar: '', posts: [] });
     const [owner, setOwner] = useState(false);
     const [addingPosts, setAddingPosts] = useState(false);
@@ -127,9 +129,9 @@ function Course(props) {
             <div id="course">
                 <h2>{course.title} {owner && <a onClick={editTitle} className='fas fa-edit'></a>}</h2>
                 <div id="courseHeader">
-                    <h4>About this course:</h4>
+                    <h4>{t('About_this_course')}:</h4>
                     <p>{course.description} {owner && <a onClick={editDescription} className='fas fa-edit'></a>}</p>
-                    {course.posts.length > 1 ? <p id='courseLength'>Length: {course.posts.length} webinars</p> : <p id='courseLength'>Length: {course.posts.length} webinar</p>} <br />
+                    {course.posts.length > 1 ? <p id='courseLength'>{t('Length_webinars', {length: course.posts.length})}</p> : <p id='courseLength'>{t('Length_webinar', {length: course.posts.length})}</p>} <br />
                     <Link to={`/user/${props.userId}`} id='courseCreator'>
                         {course.avatar ? <img src={course.avatar} /> : <img src={avatar} />}
                         <p>{course.username}</p>

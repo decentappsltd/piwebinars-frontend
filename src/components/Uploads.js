@@ -3,6 +3,7 @@ import { renderUploads, editWebinar, deleteWebinar } from '../app/webinars.js';
 import {
   useRecoilState,
 } from 'recoil';
+import { useTranslation } from "react-i18next";
 import { storedUploads } from '../atoms/posts.js';
 import Loader from './Loader.js';
 import Vimeo from '@vimeo/player';
@@ -48,6 +49,7 @@ function Modal(props) {
 }
 
 function Edit(props) {
+  const { t } = useTranslation();
   const [title, setTitle] = useState('');
   const [price, setPrice] = useState('');
   const [desc, setDesc] = useState('');
@@ -77,12 +79,12 @@ function Edit(props) {
     <>
       <div id="editWebinar" style={{ padding: "10px" }}>
         <form>
-          <h2>Edit</h2>
+          <h2>{t('Edit')}</h2>
           <a className='fas fa-close' onClick={props.close}></a>
-          <i>Leave fields blank to remain unchanged</i><br /><br />
-          <input className="input" placeholder="Update title" onChange={(e) => setTitle(e.target.value)} /><br /><br />
-          <textArea placeholder="Update description" onChange={(e) => setDesc(e.target.value)} /><br /><br />
-          <input className="input" placeholder="Update price" onChange={(e) => setPrice(e.target.value)} /><br /><br />
+          <i>{t('Leave_fields_blank_to_remain_unchanged')}</i><br /><br />
+          <input className="input" placeholder={t('Update_title')} onChange={(e) => setTitle(e.target.value)} /><br /><br />
+          <textArea placeholder={t('Update_description')} onChange={(e) => setDesc(e.target.value)} /><br /><br />
+          <input className="input" placeholder={t('Update_price')} onChange={(e) => setPrice(e.target.value)} /><br /><br />
           <a id="update" onClick={handleSubmit}>{progress}</a><br />
         </form>
       </div>
@@ -153,6 +155,7 @@ function Post(props) {
 }
 
 function Uploads(props) {
+  const { t } = useTranslation();
   const [webinars, setPosts] = useRecoilState(storedUploads);
   const [courses, setCourses] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -226,8 +229,8 @@ function Uploads(props) {
 
       {!props.course && <>
         <div id='displayToggle'>
-          <span className={Active.stateA} onClick={updateStateA}>Posts</span>
-          <span className={Active.stateB} onClick={updateStateB}>Courses</span>
+          <span className={Active.stateA} onClick={updateStateA}>{t('Posts')}</span>
+          <span className={Active.stateB} onClick={updateStateB}>{t('Courses')}</span>
         </div>
       </>}
 
@@ -255,8 +258,8 @@ function Uploads(props) {
       }
 
       {loading ? <Loader /> : null}
-      {(webinars.length == 0 && !loading && display == 'posts') && <h2 style={{ position: 'fixed', top: 'calc(50vh - 10px)', width: '100%', textAlign: 'center' }}>Your uploads will appear here...</h2>}
-      {(courses.length == 0 && !loading && display == 'courses') && <h2 style={{ position: 'fixed', top: 'calc(50vh - 10px)', width: '100%', textAlign: 'center' }}>Your courses will appear here...</h2>}
+      {(webinars.length == 0 && !loading && display == 'posts') && <h2 style={{ position: 'fixed', top: 'calc(50vh - 10px)', width: '100%', textAlign: 'center' }}>{t('Your_uploads_will_appear_here')}</h2>}
+      {(courses.length == 0 && !loading && display == 'courses') && <h2 style={{ position: 'fixed', top: 'calc(50vh - 10px)', width: '100%', textAlign: 'center' }}>{t('Your_courses_will_appear_here')}</h2>}
     </>
   );
 }

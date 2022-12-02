@@ -3,6 +3,7 @@ function close(e) {
     document.querySelector("#nav").style.width = "0px";
     document.querySelector("#tint").style.display = "none";
     document.removeEventListener("click", close);
+    window.dispatchEvent(new Event("nav"));
   }
 }
 
@@ -10,13 +11,16 @@ if (window.innerWidth < 850) {
   document.addEventListener("swiped-left", function (e) {
     document.getElementById("nav").style.width = "0px";
     document.querySelector("#tint").style.display = "none";
+    window.dispatchEvent(new Event("nav"));
   });
   document.addEventListener("swiped-right", function () {
     document.getElementById("nav").style.width = "250px";
     document.querySelector("#tint").style.display = "block";
     document.addEventListener("click", close);
+    window.dispatchEvent(new Event("nav"));
   });
 }
+
 
 (function (window, document) {
   "use strict";

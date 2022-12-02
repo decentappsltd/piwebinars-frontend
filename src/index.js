@@ -2,6 +2,10 @@ import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { BrowserRouter, Routes, Route, useParams } from 'react-router-dom';
 import { RecoilRoot } from 'recoil';
+import i18n from "i18next";
+import { initReactI18next } from "react-i18next";
+import HttpApi from 'i18next-http-backend';
+import LanguageDetector from "i18next-browser-languagedetector";
 import Layout from "./pages/Layout.js";
 import Home from "./pages/Home.js";
 import Upload from "./pages/Upload.js";
@@ -21,6 +25,23 @@ import './styles/courses.scss';
 // Scripts
 import './app/nav.js';
 import './app/payment.js';
+
+i18n
+  .use(HttpApi)
+  .use(initReactI18next)
+  .use(LanguageDetector)
+  .init({
+    supportedLngs: ['en', 'es', 'kr', 'hi', 'zh'],
+    fallbackLng: "en",
+    detection: {
+      order: ['localStorage', 'navigator', 'htmlTag'],
+      caches: ['localStorage']
+    },
+    backend: {
+      loadPath: '/assets/locales/{{lng}}.json'
+    },
+    react: { useSuspense: false }
+  });
 
 function UserProfile() {
   let { user_id } = useParams();

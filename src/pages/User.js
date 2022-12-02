@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useTranslation } from "react-i18next";
 import { getProfile, followUnfollow } from '../app/authentication.js';
 import { renderCreator, renderFollowing, addWishlist } from '../app/webinars.js';
 import Cinema from '../components/Cinema.js';
@@ -7,6 +8,7 @@ import avatar from '../assets/avatar.png';
 import { Preview } from '../components/Courses.js';
 
 function Post(props) {
+  const { t } = useTranslation();
   const [modalShown, toggleModal] = useState(false);
   const [isWishlist, setWishlist] = useState(false);
   const [img, setImg] = useState('https://assets.codepen.io/6636213/empty.png');
@@ -41,7 +43,7 @@ function Post(props) {
         <h3 className="postTitle">{props.title}</h3>
         <div className="statDiv">
           <p2 className="statCategory">{props.category}</p2>
-          <p2 className="statLikes">{props.likes} likes</p2>
+          <p2 className="statLikes">{props.likes} {t('likes')}</p2>
         </div>
         {isWishlist == false ?
           <i onClick={add} className="fas fa-plus addWishlist"></i>
@@ -60,6 +62,7 @@ function Post(props) {
 }
 
 function Uploads(props) {
+  const { t } = useTranslation();
   const [webinars, setPosts] = useState([]);
   const [courses, setCourses] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -110,8 +113,8 @@ function Uploads(props) {
   return (
     <>
       <div id='displayToggle'>
-        <span className={Active.stateA} onClick={updateStateA}>Posts</span>
-        <span className={Active.stateB} onClick={updateStateB}>Courses</span>
+        <span className={Active.stateA} onClick={updateStateA}>{t('Posts')}</span>
+        <span className={Active.stateB} onClick={updateStateB}>{t('Courses')}</span>
       </div>
 
       {display == 'posts' && <>{webinars.map((post, index) => {
@@ -169,13 +172,14 @@ function Uploads(props) {
       }</>}
 
       {loading ? <Loader /> : null}
-      {(webinars.length == 0 && !loading && display == 'posts') && <h2 style={{ position: 'fixed', top: 'calc(50vh - 10px)', width: '100%', textAlign: 'center' }}>There are no webinars here, yet</h2>}
-      {(courses.length == 0 && !loading && display == 'courses') && <h2 style={{ position: 'fixed', top: 'calc(50vh - 10px)', width: '100%', textAlign: 'center' }}>There are no courses here, yet</h2>}
+      {(webinars.length == 0 && !loading && display == 'posts') && <h2 style={{ position: 'fixed', top: 'calc(50vh - 10px)', width: '100%', textAlign: 'center' }}>{t('no_webinars')}</h2>}
+      {(courses.length == 0 && !loading && display == 'courses') && <h2 style={{ position: 'fixed', top: 'calc(50vh - 10px)', width: '100%', textAlign: 'center' }}>{t('no_courses')}</h2>}
     </>
   );
 }
 
 export default function User(props) {
+  const { t } = useTranslation();
   const [profile, setProfile] = useState({
     name: "loading..",
     username: "loading..",
@@ -242,8 +246,8 @@ export default function User(props) {
             {profile.verified === true ? <img id="verified" src="https://www.piwebinars.co.uk/img/Verified_Icon.png"></img> : null}
           </span>
           <span id="profileStats">
-            <p>Followers: {profile.followers}</p>
-            <p>Following: {profile.following}</p>
+            <p>{t('Followers')}: {profile.followers}</p>
+            <p>{t('Following')}: {profile.following}</p>
           </span>
           <button id="followBtn" onClick={handleFollow}>{follow}</button>
         </div>

@@ -4,6 +4,7 @@ import { searchValue } from '../atoms/forms.js';
 import {
   useRecoilState,
 } from 'recoil';
+import { useTranslation } from "react-i18next";
 import { search, filter, addWishlist } from '../app/webinars.js';
 import { login, register } from '../app/authentication.js';
 import Loader from './Loader.js';
@@ -104,6 +105,7 @@ function SearchResults(props) {
 }
 
 export function Search() {
+  const { t } = useTranslation();
   const [input, setInput] = useRecoilState(searchValue);
   const [results, setResults] = useState();
   const [searchActive, setSearchActive] = useState(false);
@@ -127,7 +129,7 @@ export function Search() {
   return (
     <>
       <form id="searchBar">
-        <input id="searchInput" placeholder="Search topics..." onChange={(e) => handleChange(e)}></input>
+        <input id="searchInput" placeholder={t('Search_topics')} onChange={(e) => handleChange(e)}></input>
         <a className="fas fa-search" onClick={handleSearch}></a>
       </form>
       {searchActive ? <SearchResults posts={results} loading={loading} close={() => { setSearchActive(false) }} /> : null}
@@ -136,6 +138,7 @@ export function Search() {
 }
 
 function AuthPopup(props) {
+  const { t } = useTranslation();
   const [username, setUsername] = useState("");
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
@@ -171,11 +174,11 @@ function AuthPopup(props) {
       <form style={{ display: 'block', height: '400px', width: '400px', margin: 'auto', textAlign: 'center' }} onSubmit={(e) => e.preventDefault()}>
         <h2>{props.header}</h2>
         <a onClick={props.close} style={{ fontSize: '18px', padding: '5px' }} className='fas fa-close'></a><br />
-        <input id="usernameInput" type='text' placeholder="Enter username" onChange={(e) => setUsername(e.target.value)}></input><br /><br />
-        {props.type == "register" && <><input id="nameInput" type='text' placeholder="Add your name" onChange={(e) => setName(e.target.value)}></input><br /><br /></>}
-        <input id="passwordInput" type='password' placeholder="Enter password" onChange={(e) => setPassword(e.target.value)}></input><br /><br />
-        {props.type == "register" && <><input id="confirmPassword" type='password' placeholder="Confirm password" onChange={(e) => setConfirmPassword(e.target.value)}></input><br /><br /></>}
-        <button onClick={authenticate} id="submitBtn">Submit</button>
+        <input id="usernameInput" type='text' placeholder={t('Enter_username')} onChange={(e) => setUsername(e.target.value)}></input><br /><br />
+        {props.type == "register" && <><input id="nameInput" type='text' placeholder={t('Add_your_name')} onChange={(e) => setName(e.target.value)}></input><br /><br /></>}
+        <input id="passwordInput" type='password' placeholder={t('Enter_password')} onChange={(e) => setPassword(e.target.value)}></input><br /><br />
+        {props.type == "register" && <><input id="confirmPassword" type='password' placeholder={t('Confirm_password')} onChange={(e) => setConfirmPassword(e.target.value)}></input><br /><br /></>}
+        <button onClick={authenticate} id="submitBtn">{t('Submit')}</button>
       </form>
     </div>
   );
@@ -213,6 +216,7 @@ function User(props) {
 }
 
 function Bar() {
+  const { t } = useTranslation();
   const [authed, setAuth] = useState(false);
 
   useEffect(() => {
@@ -226,10 +230,10 @@ function Bar() {
         <Search />
         {
           authed === true ?
-            <p2 id="welcomeMessage">Welcome, {localStorage.username}</p2> :
+          <p2 id="welcomeMessage">{t('Welcome', {username: localStorage.username})}</p2> :
             <>
-              <User toggle={() => { setAuth(true) }} type="register" class="fas fa-user-plus userLoginIcon" label="Register" />
-              <User toggle={() => { setAuth(true) }} type="login" class="fas fa-user userLoginIcon" label="Login" />
+              <User toggle={() => { setAuth(true) }} type="register" class="fas fa-user-plus userLoginIcon" label={t('Register')} />
+              <User toggle={() => { setAuth(true) }} type="login" class="fas fa-user userLoginIcon" label={t('Login')} />
             </>
         }
       </span>

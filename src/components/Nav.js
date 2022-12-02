@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { appPageState } from "../atoms/states.js";
 import { storedFollowing } from "../atoms/posts.js";
 import {
@@ -39,6 +40,7 @@ function NavTab(props) {
     if (window.innerWidth < 850) {
       document.querySelector("#nav").style.width = "0px";
       document.querySelector("#tint").style.display = "none";
+      window.dispatchEvent(new Event("nav"));
     }
   }
 
@@ -60,6 +62,7 @@ function NavTab(props) {
 }
 
 function Navigation() {
+  const { t } = useTranslation();
   const [userSession, setSession] = useState(localStorage.userSession);
 
   useEffect(() => {
@@ -70,35 +73,35 @@ function Navigation() {
 
   return (
     <RecoilRoot>
-      <NavTab text="Dashboard" href="/" class="fas fa-home" type="home" />
+      <NavTab text={t('Dashboard')} href="/" class="fas fa-home" type="home" />
       {userSession ? <>
         <NavTab
-          text="Upload a Webinar"
+          text={t('Upload_a_Webinar')}
           href="upload"
           class="fas fa-upload"
           type="upload"
         />
         <NavTab
-          text="My Wishlist"
+          text={t('My_Wishlist')}
           href="wishlist"
           class="fas fa-heart"
           type="wishlist"
         />
         <NavTab
-          text="My Profile"
+          text={t('My_Profile')}
           href="profile"
           class="fas fa-user"
           type="profile"
         />
       </> : <>
         <NavTab
-          text="Login"
+          text={t('Login')}
           href="login"
           class="fas fa-sign-in-alt"
           type="login"
         />
         <NavTab
-          text="Register"
+          text={t('Register')}
           href="register"
           class="fas fa-user-plus"
           type="register"
@@ -110,6 +113,7 @@ function Navigation() {
 }
 
 function CategorySelection() {
+  const { t } = useTranslation();
   const [category, setCategory] = useState();
 
   const handleClick = (input) => {
@@ -132,7 +136,7 @@ function CategorySelection() {
             }}
             className="filter categoryActive"
           >
-            All
+            {t('All')}
           </a>
           <a
             onClick={() => {
@@ -140,7 +144,7 @@ function CategorySelection() {
             }}
             className="filter categoryInactive"
           >
-            Cryptocurrency
+            {t('Cryptocurrency')}
           </a>
           <a
             onClick={() => {
@@ -148,7 +152,7 @@ function CategorySelection() {
             }}
             className="filter categoryInactive"
           >
-            Pi Network
+            {t('Pi Network')}
           </a>
           <a
             onClick={() => {
@@ -156,7 +160,7 @@ function CategorySelection() {
             }}
             className="filter categoryInactive"
           >
-            Education
+            {t('Education')}
           </a>
           <a
             onClick={() => {
@@ -164,7 +168,7 @@ function CategorySelection() {
             }}
             className="filter categoryInactive"
           >
-            Finance
+            {t('Finance')}
           </a>
           <a
             onClick={() => {
@@ -172,7 +176,7 @@ function CategorySelection() {
             }}
             className="filter categoryInactive"
           >
-            Fitness
+            {t('Fitness')}
           </a>
           <a
             onClick={() => {
@@ -180,7 +184,7 @@ function CategorySelection() {
             }}
             className="filter categoryInactive"
           >
-            Food
+            {t('Food')}
           </a>
           <a
             onClick={() => {
@@ -188,7 +192,7 @@ function CategorySelection() {
             }}
             className="filter categoryInactive"
           >
-            History
+            {t('History')}
           </a>
           <a
             onClick={() => {
@@ -196,7 +200,7 @@ function CategorySelection() {
             }}
             className="filter categoryInactive"
           >
-            Music
+            {t('Music')}
           </a>
           <a
             onClick={() => {
@@ -204,7 +208,7 @@ function CategorySelection() {
             }}
             className="filter categoryInactive"
           >
-            Pets
+            {t('Pets')}
           </a>
           <a
             onClick={() => {
@@ -212,7 +216,7 @@ function CategorySelection() {
             }}
             className="filter categoryInactive"
           >
-            Sports
+            {t('Sports')}
           </a>
           <a
             onClick={() => {
@@ -220,7 +224,7 @@ function CategorySelection() {
             }}
             className="filter categoryInactive"
           >
-            Technology
+            {t('Technology')}
           </a>
         </div>
       </span>
@@ -263,6 +267,7 @@ function Following() {
 }
 
 function Menu() {
+  const { t } = useTranslation();
   const [userSession, setSession] = useState(localStorage.userSession);
 
   useEffect(() => {
@@ -293,26 +298,26 @@ function Menu() {
             onClick={translate}
           >
             <i className="fas fa-language"></i>
-            Translate
+            {t('Translate')}
           </a>
           <br /><br />
 
           {userSession ?
             <>
-              <a className="navOption" id="logoutBtn" onClick={logout}><i className="fas fa-user-lock"></i> Logout</a><br /><br />
-              <a className="navOption" id="logoutAllBtn" onClick={logoutAll}><i className="fas fa-user-shield"></i> Logout all</a><br /><br />
-              <a className="navOption" id="deleteAccountBtn" onClick={deleteAccount}><i className="fas fa-trash"></i> Delete account</a><br /><br />
+              <a className="navOption" id="logoutBtn" onClick={logout}><i className="fas fa-user-lock"></i> {t('Logout')}</a><br /><br />
+              <a className="navOption" id="logoutAllBtn" onClick={logoutAll}><i className="fas fa-user-shield"></i> {t('Logout_all')}</a><br /><br />
+              <a className="navOption" id="deleteAccountBtn" onClick={deleteAccount}><i className="fas fa-trash"></i> {t('Delete_account')}</a><br /><br />
             </>
             : null}
 
-          <a className="navOption" href="https://decentapps.co.uk/privicy.html"><i className="fas fa-eye-slash"></i> Privacy</a><br /><br />
-          <a className="navOption" href="https://decentapps.co.uk/terms.html"><i className="fas fa-file"></i> Terms</a><br /><br />
-          <a className="navOption" href="https://decentapps.co.uk/contact.html"><i className="fa-regular fa-message"></i> Contact</a><br /><br />
+          <a className="navOption" href="https://decentapps.co.uk/privicy.html"><i className="fas fa-eye-slash"></i> {t('Privacy')}</a><br /><br />
+          <a className="navOption" href="https://decentapps.co.uk/terms.html"><i className="fas fa-file"></i> {t('Terms')}</a><br /><br />
+          <a className="navOption" href="https://decentapps.co.uk/contact.html"><i className="fa-regular fa-message"></i> {t('Contact')}</a><br /><br />
 
         </div>
 
         <div id="legal">
-          <i>Copyright © 2022 All Rights Reserved by Decent Apps Ltd.</i>
+          <i>{t('Copyright')}</i>
         </div>
       </span>
     </>
@@ -320,6 +325,7 @@ function Menu() {
 }
 
 function Categories() {
+  const { t } = useTranslation();
   const [Active, setActive] = useState({
     stateA: "true",
     arrowA: "▲",
@@ -367,7 +373,7 @@ function Categories() {
     <>
       <div className="popupNav">
         <h3 onClick={updateStateA}>
-          Categories{" "}
+          {t('Categories')}{" "}
           <a
             style={{ float: "right", paddingRight: "15px", cursor: "pointer" }}
           >
@@ -378,7 +384,7 @@ function Categories() {
       </div>
       <div className="popupNav">
         <h3 onClick={updateStateB}>
-          Following{" "}
+          {t('Following')}{" "}
           <a
             style={{ float: "right", paddingRight: "15px", cursor: "pointer" }}
           >
@@ -389,7 +395,7 @@ function Categories() {
       </div>
       <div className="popupNav">
         <h3 onClick={updateStateC}>
-          Menu{" "}
+          {t('Menu')}{" "}
           <a
             style={{ float: "right", paddingRight: "15px", cursor: "pointer" }}
           >
@@ -397,6 +403,40 @@ function Categories() {
           </a>
         </h3>
         {Active.stateC == "true" && <Menu />}
+      </div>
+    </>
+  );
+}
+
+function MobileTab() {
+  const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    window.addEventListener("nav", () => {
+      if (document.getElementById('nav').style.width == "250px") setOpen(true);
+      else setOpen(false);
+    });
+  }, []);
+
+  const toggleOpen = () => {
+    if (open === false) {
+      document.getElementById("nav").style.width = "250px";
+      document.querySelector("#tint").style.display = "block";
+      setOpen(true);
+    } else {
+      document.getElementById("nav").style.width = "0";
+      document.querySelector("#tint").style.display = "none";
+      setOpen(false);
+    }
+  };
+
+  return (
+    <>
+      <div id="mobileTab" onClick={toggleOpen}  className={ open ? 'mobileTabOpen' : 'mobileTabClosed' }>
+        <a className='fas fa-bars'>
+          {open ? <i className="fas fa-caret-left"></i>
+            : <i className="fas fa-caret-right"></i>}
+        </a>
       </div>
     </>
   );
@@ -412,6 +452,7 @@ class Nav extends React.Component {
           <br />
           <Categories />
         </span>
+        {window.innerWidth < 650 && <MobileTab />}
         <div id="tint"></div>
       </>
     );

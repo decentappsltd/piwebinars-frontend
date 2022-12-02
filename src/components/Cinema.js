@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from 'react-router-dom';
+import { useTranslation } from "react-i18next";
 import { buyWebinar } from "../app/payment.js";
 import { getPost, comment, likeWebinar, dislikeWebinar } from "../app/webinars.js";
 import { manipulateComment } from "../app/authentication.js";
@@ -18,6 +19,7 @@ function CommentReply(props) {
 }
 
 export function Comment(props) {
+  const { t } = useTranslation();
   const [owner, setOwner] = useState(false);
   const [text, setText] = useState(props.text);
   const [likeText, setLike] = useState('like');
@@ -120,14 +122,14 @@ export function Comment(props) {
       <div className="interactiveDiv">
         <span className="interactiveDivCounts">
           {props.likes == 1 ? (
-            <p className="commentLikes">{props.likes} like</p>
+            <p className="commentLikes">{props.likes} {t('like')}</p>
           ) : (
-            <p className="commentLikes">{props.likes} likes</p>
+            <p className="commentLikes">{props.likes} {t('likes')}</p>
           )}
           {props.replies == 1 ? (
-            <p className="commentLikes">{props.replies} reply</p>
+            <p className="commentLikes">{props.replies} {t('reply')}</p>
           ) : (
-            <p className="commentLikes">{props.replies} replies</p>
+            <p className="commentLikes">{props.replies} {t('replies')}</p>
           )}
         </span>
         <ul>
@@ -166,67 +168,69 @@ export function Comment(props) {
 }
 
 export default function Cinema(props) {
+  const { t } = useTranslation();
   const [comments, setComments] = useState([]);
   const [text, setText] = useState("");
   const [isWebinarLiked, setWebinarLiked] = useState(false);
   const [isWebinarDisliked, setWebinarDisliked] = useState(false);
   const playerRef = React.useRef(null);
 
-  console.log(props.post);
-
   const handleComment = async () => {
-    console.log(props.post.user_id, props.post.post_id, text);
-    if (!localStorage.userSession) alert("You must be logged in to comment");
-    document.getElementById('postComment').disabled = 'true';
-    document.getElementById('postComment').style.color = '#D3D3D3';
-    document.getElementById('postComment').style.borderColor = '#D3D3D3';
-    const response = await comment(
-      props.post.user_id,
-      props.post.post_id,
-      text
-    );
-    document.getElementById('postComment').disabled = '';
-    document.getElementById('text').value = '';
-    document.getElementById('postComment').style.color = '#FBB44A';
-    document.getElementById('postComment').style.borderColor = '#FBB44A';
+    alert('Feature under maintenance');
+    // console.log(props.post.user_id, props.post.post_id, text);
+    // if (!localStorage.userSession) alert("You must be logged in to comment");
+    // document.getElementById('postComment').disabled = 'true';
+    // document.getElementById('postComment').style.color = '#D3D3D3';
+    // document.getElementById('postComment').style.borderColor = '#D3D3D3';
+    // const response = await comment(
+    //   props.post.user_id,
+    //   props.post.post_id,
+    //   text
+    // );
+    // document.getElementById('postComment').disabled = '';
+    // document.getElementById('text').value = '';
+    // document.getElementById('postComment').style.color = '#FBB44A';
+    // document.getElementById('postComment').style.borderColor = '#FBB44A';
   };
 
   const handleLike = async () => {
-    const response = await likeWebinar(props.post.user_id, props.post.post_id);
-    if (response == 'success' && isWebinarLiked == false) {
-      setWebinarDisliked(false);
-      setWebinarLiked(true);
-      props.post.likes++;
-      let amount = document.getElementById('likesAmount').textContent;
-      amount = Number(amount) + 1;
-      document.getElementById('likesAmount').textContent = amount;
-    } else if (response == 'success') {
-      setWebinarDisliked(false);
-      setWebinarLiked(false);
-      props.post.likes--;
-      let amount = document.getElementById('likesAmount').textContent;
-      amount = Number(amount) - 1;
-      document.getElementById('likesAmount').textContent = amount;
-    } else alert("Please login to like a webinar");
+    alert('Feature under maintenance');
+    // const response = await likeWebinar(props.post.user_id, props.post.post_id);
+    // if (response == 'success' && isWebinarLiked == false) {
+    //   setWebinarDisliked(false);
+    //   setWebinarLiked(true);
+    //   props.post.likes++;
+    //   let amount = document.getElementById('likesAmount').textContent;
+    //   amount = Number(amount) + 1;
+    //   document.getElementById('likesAmount').textContent = amount;
+    // } else if (response == 'success') {
+    //   setWebinarDisliked(false);
+    //   setWebinarLiked(false);
+    //   props.post.likes--;
+    //   let amount = document.getElementById('likesAmount').textContent;
+    //   amount = Number(amount) - 1;
+    //   document.getElementById('likesAmount').textContent = amount;
+    // } else alert("Please login to like a webinar");
   };
 
   const handleDislike = async () => {
-    const response = await dislikeWebinar(props.post.user_id, props.post.post_id);
-    if (response == 'success' && isWebinarDisliked == false) {
-      setWebinarLiked(false);
-      setWebinarDisliked(true);
-      props.post.dislike++;
-      let amount = document.getElementById('dislikesAmount').textContent;
-      amount = Number(amount) + 1;
-      document.getElementById('dislikesAmount').textContent = amount;
-    } else if (response == 'success') {
-      setWebinarLiked(false);
-      setWebinarDisliked(false);
-      props.post.dislike--;
-      let amount = document.getElementById('dislikesAmount').textContent;
-      amount = Number(amount) - 1;
-      document.getElementById('dislikesAmount').textContent = amount;
-    } else alert('Please login to dislike a webinar');
+    alert('Feature under maintenance');
+    // const response = await dislikeWebinar(props.post.user_id, props.post.post_id);
+    // if (response == 'success' && isWebinarDisliked == false) {
+    //   setWebinarLiked(false);
+    //   setWebinarDisliked(true);
+    //   props.post.dislike++;
+    //   let amount = document.getElementById('dislikesAmount').textContent;
+    //   amount = Number(amount) + 1;
+    //   document.getElementById('dislikesAmount').textContent = amount;
+    // } else if (response == 'success') {
+    //   setWebinarLiked(false);
+    //   setWebinarDisliked(false);
+    //   props.post.dislike--;
+    //   let amount = document.getElementById('dislikesAmount').textContent;
+    //   amount = Number(amount) - 1;
+    //   document.getElementById('dislikesAmount').textContent = amount;
+    // } else alert('Please login to dislike a webinar');
   };
 
   const setClickEvent = () => {
@@ -275,19 +279,19 @@ export default function Cinema(props) {
 
   const getThePost = async () => {
     const post = await getPost(props.post.user_id, props.post.post_id);
-    for (const item of post.comments) {
-      setComments((oldComments) => [...oldComments, item]);
-    }
-    const { likes, dislike } = post;
-    console.log(likes);
-    let liked = likes.filter(function (e) {
-      return e.user === localStorage.user;
-    });
-    let disLiked = dislike.filter(function (e) {
-      return e.user === localStorage.user;
-    });
-    if (liked.length) setWebinarLiked(true);
-    if (disLiked.length) setWebinarDisliked(true);
+    // for (const item of post.comments) {   ********************************************
+    //   setComments((oldComments) => [...oldComments, item]);
+    // }
+    // const { likes, dislike } = post;
+    // console.log(likes);
+    // let liked = likes.filter(function (e) {
+    //   return e.user === localStorage.user;
+    // });
+    // let disLiked = dislike.filter(function (e) {
+    //   return e.user === localStorage.user;
+    // });
+    // if (liked.length) setWebinarLiked(true);
+    // if (disLiked.length) setWebinarDisliked(true);
   }
 
   useEffect(() => {
@@ -316,13 +320,13 @@ export default function Cinema(props) {
             {props.post.likes !== undefined && (
               <p id="likes" onClick={handleLike} className={`${isWebinarLiked ? 'colourYellow' : 'colourBlack'}`}>
                 <i className="fa fa-thumbs-up" id="likePost"></i>
-                <span id="likesAmount">{props.post.likes}</span>
+                {/* <span id="likesAmount">{props.post.likes}</span> *******************************************************/}
               </p>
             )}
             {props.post.dislike !== undefined && (
               <p id="dislikes" onClick={handleDislike} className={`${isWebinarDisliked ? 'colourYellow' : 'colourBlack'}`}>
                 <i className="fa fa-thumbs-down" id="dislikePost"></i>
-                <span id="dislikesAmount">{props.post.dislike}</span>
+                {/* <span id="dislikesAmount">{props.post.dislike}</span> ***************************************************/}
               </p>
             )}
             {window.innerWidth >= 850 && (<p id="category">{props.post.category}</p>)}
@@ -330,7 +334,7 @@ export default function Cinema(props) {
               <p id="date">{props.post.date.substring(0, 10)}</p>
             )}
             <button id="pay" onClick={() => { buyWebinar(props.post) }}>
-              Buy webinar
+              {t('Buy_webinar')}
             </button>
             <Link to={`/user/${props.post.user_id}`} id="creatorProfile">
               {props.post.avatar ? (
@@ -354,7 +358,7 @@ export default function Cinema(props) {
         </div>
 
         <div id="comments">
-          <p2 style={{ borderTop: "solid 3px #fbb44a" }}>Comments:</p2>
+          <p2 style={{ borderTop: "solid 3px #fbb44a" }}>{t('Comments')}:</p2>
           <br />
           <br />
           <form className="commentField" id="commentForm">
@@ -363,7 +367,7 @@ export default function Cinema(props) {
               onChange={(e) => setText(e.target.value)}
               id="text"
               type="text"
-              placeholder="Write a comment.."
+              placeholder={t('Write_a_comment')}
             />
             <input
               style={{
@@ -377,7 +381,7 @@ export default function Cinema(props) {
               }}
               onClick={handleComment}
               type="button"
-              value="Comment"
+              value={t('Comment')}
               id="postComment"
             />
           </form>
@@ -389,7 +393,7 @@ export default function Cinema(props) {
               data-ad-layout-key="-6f+d5-2h+50+bf"
               data-ad-client="ca-pub-7095325310319034"
               data-ad-slot="1627309222"></ins> }
-            {comments.map((comment) => {
+            {/* {comments.map((comment) => {
               return (
                 <article key={comment._id}>
                   <Comment
@@ -407,7 +411,8 @@ export default function Cinema(props) {
                   />
                 </article>
               );
-            })}
+            })} */}
+            <i style={{ display: 'flex', width: '100vw', justifyContent: 'center' }}>Feature under maintenance</i>
           </div>
         </div>
       </div>

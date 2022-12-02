@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
+import { useTranslation } from "react-i18next";
 import Uploads from '../components/Uploads.js';
 import { myProfile, editProfile, addAvatar } from '../app/authentication.js';
 import avatar from '../assets/avatar.png';
 
 export default function Profile() {
+  const { t } = useTranslation();
   const [profile, setProfile] = useState({
     name: "loading..",
     username: "loading..",
@@ -54,7 +56,7 @@ export default function Profile() {
             : <>
               <span id='avatar-span'>
                 <img onClick={addAvatar} id="avatar" src={avatar}></img>
-                <figcaption onClick={addAvatar} id="avatar-text">Add Avatar</figcaption>
+                <figcaption onClick={addAvatar} id="avatar-text">{t('Add_Avatar')}</figcaption>
               </span>
             </>
           }
@@ -67,9 +69,9 @@ export default function Profile() {
             {profile.verified === true ? <img id="verified" src="https://www.piwebinars.co.uk/img/Verified_Icon.png"></img> : null}
           </span>
           <span id="profileStats">
-            <p>Followers: {profile.followers}</p>
-            <p>Following: {profile.following}</p>
-            <p>Credit: {profile.credit} <i>Pi</i></p>
+            <p>{t('Followers')}: {profile.followers}</p>
+            <p>{t('Following')}: {profile.following}</p>
+            <p>{t('Credit')}: {profile.credit} <i>Pi</i></p>
           </span>
         </div>
         <Uploads />

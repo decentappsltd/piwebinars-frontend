@@ -20,7 +20,9 @@ async function auth() {
     localStorage.uid = uid;
     localStorage.piName = userName;
     localStorage.piAccessToken = auth.accessToken;
-    piLogin();
+    if (!sessionStorage.userSession) {
+      piLogin();
+    }
   });
 }
 

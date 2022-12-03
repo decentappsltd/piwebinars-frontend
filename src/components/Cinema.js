@@ -4,9 +4,7 @@ import { useTranslation } from "react-i18next";
 import { buyWebinar } from "../app/payment.js";
 import { getPost, comment, likeWebinar, dislikeWebinar } from "../app/webinars.js";
 import { manipulateComment } from "../app/authentication.js";
-import Player from '@vimeo/player';
 import avatar from '../assets/avatar.png';
-import videojs from "video.js";
 import VideoJS from './Video.js';
 
 function CommentReply(props) {
@@ -81,6 +79,7 @@ export function Comment(props) {
     );
     console.log(response);
     setText('');
+    setDelete('Done!');
   };
 
   const editComment = async () => {
@@ -101,7 +100,6 @@ export function Comment(props) {
     );
     setText(text);
     setEdit('edit');
-    console.log(response);
   };
 
   return (
@@ -176,61 +174,58 @@ export default function Cinema(props) {
   const playerRef = React.useRef(null);
 
   const handleComment = async () => {
-    alert('Feature under maintenance');
-    // console.log(props.post.user_id, props.post.post_id, text);
-    // if (!localStorage.userSession) alert("You must be logged in to comment");
-    // document.getElementById('postComment').disabled = 'true';
-    // document.getElementById('postComment').style.color = '#D3D3D3';
-    // document.getElementById('postComment').style.borderColor = '#D3D3D3';
-    // const response = await comment(
-    //   props.post.user_id,
-    //   props.post.post_id,
-    //   text
-    // );
-    // document.getElementById('postComment').disabled = '';
-    // document.getElementById('text').value = '';
-    // document.getElementById('postComment').style.color = '#FBB44A';
-    // document.getElementById('postComment').style.borderColor = '#FBB44A';
+    console.log(props.post.user_id, props.post.post_id, text);
+    if (!localStorage.userSession) alert("You must be logged in to comment");
+    document.getElementById('postComment').disabled = 'true';
+    document.getElementById('postComment').style.color = '#D3D3D3';
+    document.getElementById('postComment').style.borderColor = '#D3D3D3';
+    const response = await comment(
+      props.post.user_id,
+      props.post.post_id,
+      text
+    );
+    document.getElementById('postComment').disabled = '';
+    document.getElementById('text').value = '';
+    document.getElementById('postComment').style.color = '#FBB44A';
+    document.getElementById('postComment').style.borderColor = '#FBB44A';
   };
 
   const handleLike = async () => {
-    alert('Feature under maintenance');
-    // const response = await likeWebinar(props.post.user_id, props.post.post_id);
-    // if (response == 'success' && isWebinarLiked == false) {
-    //   setWebinarDisliked(false);
-    //   setWebinarLiked(true);
-    //   props.post.likes++;
-    //   let amount = document.getElementById('likesAmount').textContent;
-    //   amount = Number(amount) + 1;
-    //   document.getElementById('likesAmount').textContent = amount;
-    // } else if (response == 'success') {
-    //   setWebinarDisliked(false);
-    //   setWebinarLiked(false);
-    //   props.post.likes--;
-    //   let amount = document.getElementById('likesAmount').textContent;
-    //   amount = Number(amount) - 1;
-    //   document.getElementById('likesAmount').textContent = amount;
-    // } else alert("Please login to like a webinar");
+    const response = await likeWebinar(props.post.user_id, props.post.post_id);
+    if (response == 'success' && isWebinarLiked == false) {
+      setWebinarDisliked(false);
+      setWebinarLiked(true);
+      props.post.likes++;
+      let amount = document.getElementById('likesAmount').textContent;
+      amount = Number(amount) + 1;
+      document.getElementById('likesAmount').textContent = amount;
+    } else if (response == 'success') {
+      setWebinarDisliked(false);
+      setWebinarLiked(false);
+      props.post.likes--;
+      let amount = document.getElementById('likesAmount').textContent;
+      amount = Number(amount) - 1;
+      document.getElementById('likesAmount').textContent = amount;
+    } else alert("Please login to like a webinar");
   };
 
   const handleDislike = async () => {
-    alert('Feature under maintenance');
-    // const response = await dislikeWebinar(props.post.user_id, props.post.post_id);
-    // if (response == 'success' && isWebinarDisliked == false) {
-    //   setWebinarLiked(false);
-    //   setWebinarDisliked(true);
-    //   props.post.dislike++;
-    //   let amount = document.getElementById('dislikesAmount').textContent;
-    //   amount = Number(amount) + 1;
-    //   document.getElementById('dislikesAmount').textContent = amount;
-    // } else if (response == 'success') {
-    //   setWebinarLiked(false);
-    //   setWebinarDisliked(false);
-    //   props.post.dislike--;
-    //   let amount = document.getElementById('dislikesAmount').textContent;
-    //   amount = Number(amount) - 1;
-    //   document.getElementById('dislikesAmount').textContent = amount;
-    // } else alert('Please login to dislike a webinar');
+    const response = await dislikeWebinar(props.post.user_id, props.post.post_id);
+    if (response == 'success' && isWebinarDisliked == false) {
+      setWebinarLiked(false);
+      setWebinarDisliked(true);
+      props.post.dislike++;
+      let amount = document.getElementById('dislikesAmount').textContent;
+      amount = Number(amount) + 1;
+      document.getElementById('dislikesAmount').textContent = amount;
+    } else if (response == 'success') {
+      setWebinarLiked(false);
+      setWebinarDisliked(false);
+      props.post.dislike--;
+      let amount = document.getElementById('dislikesAmount').textContent;
+      amount = Number(amount) - 1;
+      document.getElementById('dislikesAmount').textContent = amount;
+    } else alert('Please login to dislike a webinar');
   };
 
   const setClickEvent = () => {
@@ -279,19 +274,19 @@ export default function Cinema(props) {
 
   const getThePost = async () => {
     const post = await getPost(props.post.user_id, props.post.post_id);
-    // for (const item of post.comments) {   ********************************************
-    //   setComments((oldComments) => [...oldComments, item]);
-    // }
-    // const { likes, dislike } = post;
-    // console.log(likes);
-    // let liked = likes.filter(function (e) {
-    //   return e.user === localStorage.user;
-    // });
-    // let disLiked = dislike.filter(function (e) {
-    //   return e.user === localStorage.user;
-    // });
-    // if (liked.length) setWebinarLiked(true);
-    // if (disLiked.length) setWebinarDisliked(true);
+    for (const item of post.comments) {
+      setComments((oldComments) => [...oldComments, item]);
+    }
+    const { likes, dislikes } = JSON.parse(sessionStorage.profile);
+    console.log(likes);
+    let liked = likes.filter(function (e) {
+      return e === localStorage.user;
+    });
+    let disLiked = dislikes.filter(function (e) {
+      return e === localStorage.user;
+    });
+    if (liked.length) setWebinarLiked(true);
+    if (disLiked.length) setWebinarDisliked(true);
   }
 
   useEffect(() => {
@@ -320,13 +315,13 @@ export default function Cinema(props) {
             {props.post.likes !== undefined && (
               <p id="likes" onClick={handleLike} className={`${isWebinarLiked ? 'colourYellow' : 'colourBlack'}`}>
                 <i className="fa fa-thumbs-up" id="likePost"></i>
-                {/* <span id="likesAmount">{props.post.likes}</span> *******************************************************/}
+                <span id="likesAmount">{props.post.likes}</span>
               </p>
             )}
-            {props.post.dislike !== undefined && (
+            {props.post.dislikes !== undefined && (
               <p id="dislikes" onClick={handleDislike} className={`${isWebinarDisliked ? 'colourYellow' : 'colourBlack'}`}>
                 <i className="fa fa-thumbs-down" id="dislikePost"></i>
-                {/* <span id="dislikesAmount">{props.post.dislike}</span> ***************************************************/}
+                <span id="dislikesAmount">{props.post.dislikes}</span>
               </p>
             )}
             {window.innerWidth >= 850 && (<p id="category">{props.post.category}</p>)}
@@ -393,7 +388,7 @@ export default function Cinema(props) {
               data-ad-layout-key="-6f+d5-2h+50+bf"
               data-ad-client="ca-pub-7095325310319034"
               data-ad-slot="1627309222"></ins> }
-            {/* {comments.map((comment) => {
+            {comments.map((comment) => {
               return (
                 <article key={comment._id}>
                   <Comment
@@ -411,8 +406,7 @@ export default function Cinema(props) {
                   />
                 </article>
               );
-            })} */}
-            <i style={{ display: 'flex', width: '100vw', justifyContent: 'center' }}>Feature under maintenance</i>
+            })}
           </div>
         </div>
       </div>

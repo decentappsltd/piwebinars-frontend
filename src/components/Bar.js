@@ -93,7 +93,7 @@ function SearchResults(props) {
         {props.posts.map(post => {
           return (
             <article key={post.upload}>
-              <Post key={post.upload} post={post} post_id={post._id} file_id={post.upload} user_id={post.user} video_id={post.video_id} title={post.title} name={post.name} description={post.description} category={post.category} likes={post.likes} dislike={post.dislike} date={post.dateAdded} amount={post.amount} wishlisted={post.wishlisted} />
+              <Post key={post.upload} post={post} post_id={post._id} file_id={post.upload} user_id={post.user} video_id={post.video_id} title={post.title} name={post.name} description={post.description} category={post.category} likes={post.likes} dislikes={post.dislikes} date={post.dateAdded} amount={post.amount} wishlisted={post.wishlisted} />
             </article>
           );
         })

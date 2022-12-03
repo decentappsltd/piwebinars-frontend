@@ -128,7 +128,7 @@ function Uploads(props) {
         return (
           <>
             <article>
-              <Post key={post.upload} post={post} post_id={post._id} file_id={post.upload} user_id={post.user} video_id={post.video_id} title={post.title} name={post.name} description={post.description} category={post.category} likes={post.likes.length} date={post.dateAdded} amount={post.amount} wishlisted={post.wishlisted} />
+              <Post key={post.upload} post={post} post_id={post._id} file_id={post.upload} user_id={post.user} video_id={post.video_id} title={post.title} name={post.name} description={post.description} category={post.category} likes={post.likes} date={post.dateAdded} amount={post.amount} wishlisted={post.wishlisted} />
             </article>
             {ad === true && <>
               <ins className="adsbygoogle"

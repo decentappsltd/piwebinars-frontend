@@ -1,19 +1,17 @@
 import React, { useState, useEffect } from "react";
-import { createPath, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useTranslation } from "react-i18next";
 import { buyWebinar } from "../app/payment.js";
 import { getPost, comment, likeWebinar, dislikeWebinar } from "../app/webinars.js";
 import { manipulateComment } from "../app/authentication.js";
-import Player from '@vimeo/player';
 import avatar from '../assets/avatar.png';
 import { Comment } from '../components/Cinema.js';
 import Loader from "../components/Loader.js";
 import VideoJS from "../components/Video.js";
-import videojs from "video.js";
 
 function Webinar(props) {
     const { t } = useTranslation();
-    const [post, setPost] = useState({ title: '', description: '', price: '', video_url: '', user_id: '', post_id: '', likes: 0, dislike: 0, comments: [], commentReplies: [] });
+    const [post, setPost] = useState({ title: '', description: '', price: '', video_url: '', user_id: '', post_id: '', likes: 0, dislikes: 0, comments: [], commentReplies: [] });
     const [loading, setLoading] = useState(true);
     const [comments, setComments] = useState([]);
     const [commentsScroll, setCommentsScroll] = useState(0);
@@ -37,72 +35,68 @@ function Webinar(props) {
     });
 
     const handleComment = async () => {
-        alert('Feature under maintenance');
-        // console.log(post.user_id, post.post_id, text);
-        // if (!sessionStorage.userSession) {
-        //     window.location.href = "/login";
-        //     return;
-        // }
-        // document.getElementById('postComment').disabled = 'true';
-        // document.getElementById('postComment').style.color = '#D3D3D3';
-        // document.getElementById('postComment').style.borderColor = '#D3D3D3';
-        // const response = await comment(
-        //     post.user_id,
-        //     post.post_id,
-        //     text
-        // );
-        // document.getElementById('postComment').disabled = '';
-        // document.getElementById('text').value = '';
-        // document.getElementById('postComment').style.color = '#FBB44A';
-        // document.getElementById('postComment').style.borderColor = '#FBB44A';
+        if (!sessionStorage.userSession) {
+            window.location.href = "/login";
+            return;
+        }
+        document.getElementById('postComment').disabled = 'true';
+        document.getElementById('postComment').style.color = '#D3D3D3';
+        document.getElementById('postComment').style.borderColor = '#D3D3D3';
+        const response = await comment(
+            props.userId,
+            props.postId,
+            text
+        );
+        document.getElementById('postComment').disabled = '';
+        document.getElementById('text').value = '';
+        document.getElementById('postComment').style.color = '#FBB44A';
+        document.getElementById('postComment').style.borderColor = '#FBB44A';
     };
 
     const handleLike = async () => {
-        alert('Feature under maintenance');
-        // if (!sessionStorage.userSession) {
-        //     window.location.href = "/login";
-        //     return;
-        // }
-        // const response = await likeWebinar(props.userId, props.postId);
-        // if (response == 'success' && isWebinarLiked == false) {
-        //     setWebinarDisliked(false);
-        //     setWebinarLiked(true);
-        //     post.likes++;
-        //     let amount = document.getElementById('likesAmount').textContent;
-        //     amount = Number(amount) + 1;
-        //     document.getElementById('likesAmount').textContent = amount;
-        // } else if (response == 'success') {
-        //     setWebinarDisliked(false);
-        //     setWebinarLiked(false);
-        //     post.likes--;
-        //     let amount = document.getElementById('likesAmount').textContent;
-        //     amount = Number(amount) - 1;
-        //     document.getElementById('likesAmount').textContent = amount;
-        // } else alert("Please login to like a webinar");
+        if (!sessionStorage.userSession) {
+            window.location.href = "/login";
+            return;
+        }
+        const response = await likeWebinar(props.userId, props.postId);
+        if (response == 'success' && isWebinarLiked == false) {
+            setWebinarDisliked(false);
+            setWebinarLiked(true);
+            post.likes++;
+            let amount = document.getElementById('likesAmount').textContent;
+            amount = Number(amount) + 1;
+            document.getElementById('likesAmount').textContent = amount;
+        } else if (response == 'success') {
+            setWebinarDisliked(false);
+            setWebinarLiked(false);
+            post.likes--;
+            let amount = document.getElementById('likesAmount').textContent;
+            amount = Number(amount) - 1;
+            document.getElementById('likesAmount').textContent = amount;
+        } else alert("Please login to like a webinar");
     };
 
     const handleDislike = async () => {
-        alert('Feature under maintenance');
-        // if (!sessionStorage.userSession) {
-        //     window.location.href = "/login";
-        //     return;
-        // }
-        // const response = await dislikeWebinar(props.userId, props.postId);
-        // if (response == 'success' && isWebinarDisliked == false) {
-        //     setWebinarLiked(false);
-        //     setWebinarDisliked(true);
-        //     post.dislike++;
-        //     let amount = document.getElementById('dislikesAmount').textContent;
-        //     amount = Number(amount) + 1;
-        //     document.getElementById('dislikesAmount').textContent = amount;
-        // } else if (response == 'success') {
-        //     setWebinarLiked(false);
-        //     setWebinarDisliked(false);
-        //     post.dislike--;
-        //     let amount = document.getElementById('dislikesAmount').textContent;
-        //     amount = Number(amount) - 1;
-        //     document.getElementById('dislikesAmount').textContent = amount;
-        // } else alert('Please login to dislike a webinar');
+        if (!sessionStorage.userSession) {
+            window.location.href = "/login";
+            return;
+        }
+        const response = await dislikeWebinar(props.userId, props.postId);
+        if (response == 'success' && isWebinarDisliked == false) {
+            setWebinarLiked(false);
+            setWebinarDisliked(true);
+            post.dislikes++;
+            let amount = document.getElementById('dislikesAmount').textContent;
+            amount = Number(amount) + 1;
+            document.getElementById('dislikesAmount').textContent = amount;
+        } else if (response == 'success') {
+            setWebinarLiked(false);
+            setWebinarDisliked(false);
+            post.dislikes--;
+            let amount = document.getElementById('dislikesAmount').textContent;
+            amount = Number(amount) - 1;
+            document.getElementById('dislikesAmount').textContent = amount;
+        } else alert('Please login to dislike a webinar');
     };
 
     const getThePost = async () => {
@@ -125,25 +119,20 @@ function Webinar(props) {
             ...prev,
             ...foundPost
         }));
-        setPost(prev => ({
-            ...prev,
-            // likes: foundPost.likes.length, ******************************************
-            // dislike: foundPost.dislike.length,
-        }));
         setLoading(false);
         console.log(foundPost);
-        // for (const item of foundPost.comments) {  ******************************************
-        //     setComments((oldComments) => [...oldComments, item]);
-        // }
-        // const { likes, dislike } = foundPost;
-        // let liked = likes.filter(function (e) {
-        //     return e.user === localStorage.user;
-        // });
-        // let disLiked = dislike.filter(function (e) {
-        //     return e.user === localStorage.user;
-        // });
-        // if (liked.length) setWebinarLiked(true);
-        // if (disLiked.length) setWebinarDisliked(true);
+        for (const item of foundPost.comments) { 
+            setComments((oldComments) => [...oldComments, item]);
+        }
+        const { likes, dislikes } = JSON.parse(sessionStorage.profile);
+        let liked = likes.filter(function (e) {
+            return e === props.postId;
+        });
+        let disLiked = dislikes.filter(function (e) {
+            return e === props.postId;
+        });
+        if (liked.length) setWebinarLiked(true);
+        if (disLiked.length) setWebinarDisliked(true);
         setVideoJsOptions(prev => ({
             ...prev,
             sources: [{
@@ -236,13 +225,13 @@ function Webinar(props) {
                                 {post.likes !== undefined && (
                                     <p id="likes" onClick={handleLike} className={`${isWebinarLiked ? 'colourYellow' : 'colourBlack'}`}>
                                         <i className="fa fa-thumbs-up" id="likePost"></i>
-                                        {/* <span id="likesAmount">{post.likes}</span> ************************************************/}
+                                        <span id="likesAmount">{post.likes}</span>
                                     </p>
                                 )}
-                                {post.dislike !== undefined && (
+                                {post.dislikes !== undefined && (
                                     <p id="dislikes" onClick={handleDislike} className={`${isWebinarDisliked ? 'colourYellow' : 'colourBlack'}`}>
                                         <i className="fa fa-thumbs-down" id="dislikePost"></i>
-                                        {/* <span id="dislikesAmount">{post.dislike}</span> ***********************************************/}
+                                        <span id="dislikesAmount">{post.dislikes}</span>
                                     </p>
                                 )}
                                 {window.innerWidth >= 850 && (<p id="category">{post.category}</p>)}
@@ -311,7 +300,7 @@ function Webinar(props) {
                                         data-ad-client="ca-pub-7095325310319034"
                                         data-ad-slot="1627309222"></ins>
                                 }
-                                {/* {comments.map((comment) => {
+                                {comments.map((comment) => {
                                     return (
                                         <article key={comment._id}>
                                             <Comment
@@ -329,8 +318,7 @@ function Webinar(props) {
                                             />
                                         </article>
                                     );
-                                })} */}
-                                <i style={{ display: 'flex', width: '100vw', justifyContent: 'center' }}>Feature under maintenance</i>
+                                })}
                             </div>
                         </div>
                     </>}

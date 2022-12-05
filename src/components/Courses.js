@@ -46,7 +46,9 @@ function CreateCourse(props) {
         title: post.title,
         user: post.user,
         upload: post.upload,
-        video_id: post.video_id,
+        videoImg: post.videoImg,
+        videoId: post.videoId,
+        videoURL: post.videoURL,
         _id: post._id
       }
       setPosts([...posts, filteredPost]);
@@ -85,6 +87,14 @@ function CreateCourse(props) {
 
 export function Preview(props) {
   const { t } = useTranslation();
+  const [img, setImg] = useState('');
+
+  useEffect(() => {
+    if (props.posts[0]) {
+      if (props.posts[0].videoImg) setImg(props.posts[0].videoImg);
+      else setImg('https://assets.codepen.io/6636213/empty.png');
+    } else setImg('https://assets.codepen.io/6636213/empty.png');
+  }, []);
 
   const handleOpen = () => {
     Storage.prototype.setObj = function (key, obj) {
@@ -98,7 +108,7 @@ export function Preview(props) {
   return (
     <>
       <div onClick={handleOpen} className="course">
-        {props.posts[0] && <img src={`https://vumbnail.com/${props.posts[0].video_id}.jpg`} />}
+        <img src={img} />
         <h3>{props.title}</h3>
         <p className='courseDescription'>{props.description}</p>
         {props.length > 1 ? <p className='courseLength'>{t('Length_webinars', {length: props.length})}</p> : <p className='courseLength'>{t('Length_webinar', {length: props.length})}</p>}

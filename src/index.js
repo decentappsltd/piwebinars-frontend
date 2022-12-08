@@ -34,7 +34,7 @@ i18n
     supportedLngs: ['en', 'es', 'kr', 'hi', 'zh'],
     fallbackLng: "en",
     detection: {
-      order: ['localStorage', 'navigator', 'htmlTag'],
+      order: ['navigator', 'localStorage', 'htmlTag'],
       caches: ['localStorage']
     },
     backend: {

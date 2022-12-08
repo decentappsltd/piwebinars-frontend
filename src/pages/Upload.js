@@ -54,6 +54,7 @@ function UploadForm() {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
+  const [language, setLanguage] = useState("en");
   const [category, setCategory] = useState("None");
   const [certified, setCertify] = useState(false);
   const [button, setButton] = useState("Upload");
@@ -66,11 +67,15 @@ function UploadForm() {
     setCategory(event.target.value);
   }
 
+  const handleLanguageChange = (event) => {
+    setLanguage(event.target.value);
+  }
+
   const handleSubmit = async () => {
     console.log(fileType, title, description, price, category);
-    if (title.length > 30 ) alert('Title length must not exceed 30 characters');
+    if (title.length > 30) alert('Title length must not exceed 30 characters');
     else if (title.includes("/")) alert('Title must not contain "/"');
-    else { 
+    else {
       setButton("Uploading...");
       const response = await upload(fileType, title, description, price, category);
       console.log(response);
@@ -94,7 +99,7 @@ function UploadForm() {
   return (
     <>
       <form action="/upload" method="POST" id="form" onSubmit={(e) => e.preventDefault()}>
-      <h1>{t('Share_your_knowledge')}</h1><br />
+        <h1>{t('Share_your_knowledge')}</h1><br />
         <label>{t('Video')} :
           <input name="videoUpload" type="file" id="videoUpload" />
           <select style={{ display: 'none' }} id="fileType" value={fileType} onChange={handleFileTypeChange}>
@@ -130,8 +135,21 @@ function UploadForm() {
           : null
         }
 
+        <label>{t('Language_of_webinar')}:
+          <select style={{ marginLeft: '10px' }} value={language} onChange={handleLanguageChange}>
+            <option name="language" value="en">English</option><br />
+            <option name="language" value="es">Español</option><br />
+            <option name="language" value="kr">한국어</option><br />
+            <option name="language" value="hi">हिन्दी</option><br />
+            <option name="category" value="zh">中文</option><br />
+            <option name="category" value="vi">Tiếng Việt</option><br />
+            <option name="category" value="id">Indonesian</option><br />
+            <option name="category" value="other">{t('Other')}</option><br />
+          </select>
+        </label><br /><br />
+
         <label>{t('Select_a_category')}:
-          <select value={category} onChange={handleCategoryChange}>
+          <select style={{ marginLeft: '10px' }} value={category} onChange={handleCategoryChange}>
             <option name="category" value="none">{t('None')}</option><br />
             <option name="category" value="cryptocurrency">{t('Cryptocurrency')}</option><br />
             <option name="category" value="education">{t('Education')}</option><br />

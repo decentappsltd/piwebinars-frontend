@@ -45,7 +45,8 @@ async function getPost(userId, post_id) {
 // Get homepage webinars
 const renderWebinars = async () => {
   const auth_token = localStorage.getItem("userSession");
-  const webinarUploads = await axios.get(`${urlApi}/post/all`, {
+  const language = localStorage.getItem("i18nextLng");
+  const webinarUploads = await axios.get(`${urlApi}/post/all/${language}`, {
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${auth_token}`
@@ -57,7 +58,8 @@ const renderWebinars = async () => {
 // Get more webinars for infinite scrolling
 async function renderMore(category) {
   const auth_token = localStorage.getItem("userSession");
-  const webinarUploads = await axios.get(`${urlApi}/post/more/${category}`, {
+  const language = localStorage.getItem("i18nextLng");
+  const webinarUploads = await axios.get(`${urlApi}/post/more/${category}/${language}`, {
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${auth_token}`

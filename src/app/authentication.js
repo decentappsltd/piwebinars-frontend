@@ -195,7 +195,7 @@ async function editProfile(currentHandle) {
 }
 
 // Upload webinar
-async function upload(fileType, title, description, price, category) {
+async function upload(fileType, title, description, price, category, language) {
   const formSection = document.getElementById("form");
   const errorFlash = document.querySelector("#upload_log");
   const video = document.querySelector("#videoUpload");
@@ -207,6 +207,7 @@ async function upload(fileType, title, description, price, category) {
     const formData = new FormData(formSection);
     console.log(formData);
     formData.append("category", category);
+    formData.append("language", language);
 
     if ((title || description) === "" || video === null)
       return "Unable to process.";

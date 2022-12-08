@@ -77,7 +77,7 @@ function UploadForm() {
     else if (title.includes("/")) alert('Title must not contain "/"');
     else {
       setButton("Uploading...");
-      const response = await upload(fileType, title, description, price, category);
+      const response = await upload(fileType, title, description, price, category, language);
       console.log(response);
       setButton("Upload");
     }

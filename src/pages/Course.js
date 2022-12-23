@@ -39,7 +39,7 @@ function Uploads(props) {
 
                         return (
                             <div key={upload._id} className='courseOwnPost'>
-                                <img src={upload.thumbnail} />
+                                <img src={upload.videoImg} />
                                 <h4>{upload.title}</h4>
                                 {owner === false ? <button onClick={() => { document.getElementById('course').style.cursor = 'wait'; props.addPost(upload).then(() => { owner = true }); document.getElementById('course').style.cursor = 'initial'; }} className='fas fa-plus'></button> :
                                     <button onClick={() => { document.getElementById('course').style.cursor = 'wait'; props.removePost(upload).then(() => { owner = false }); document.getElementById('course').style.cursor = 'initial'; }} className='fas fa-minus'></button>}
@@ -54,7 +54,7 @@ function Uploads(props) {
 
 function Course(props) {
     const { t } = useTranslation();
-    const [course, setCourse] = useState({ title: 'Loading...', description: '', username: '', avatar: '', posts: [] });
+    const [course, setCourse] = useState({ title: 'Loading...', description: '', username: '', avatar: '', price: 0, posts: [] });
     const [owner, setOwner] = useState(false);
     const [addingPosts, setAddingPosts] = useState(false);
 
@@ -131,11 +131,16 @@ function Course(props) {
                 <div id="courseHeader">
                     <h4>{t('About_this_course')}:</h4>
                     <p>{course.description} {owner && <a onClick={editDescription} className='fas fa-edit'></a>}</p>
-                    {course.posts.length > 1 ? <p id='courseLength'>{t('Length_webinars', {length: course.posts.length})}</p> : <p id='courseLength'>{t('Length_webinar', {length: course.posts.length})}</p>} <br />
+                    {course.posts.length > 1 ? <p id='courseLength'>{t('Length_webinars', { length: course.posts.length })}</p> : <p id='courseLength'>{t('Length_webinar', { length: course.posts.length })}</p>} <br />
+                </div>
+                <div id="courseInteractions">
+                    {course.price > 0 && <a id="purchaseCourse"><i className='fas fa-cart-plus'></i> {course.price} Pi</a> }
+                    <a>
                     <Link to={`/user/${props.userId}`} id='courseCreator'>
                         {course.avatar ? <img src={course.avatar} /> : <img src={avatar} />}
-                        <p>{course.username}</p>
+                        <p>{course.username.substring(0, 12)}{course.username.length > 12 && <span>...</span>}</p>
                     </Link>
+                    </a>
                 </div>
 
                 {addingPosts ? <>

@@ -267,7 +267,6 @@ export default function Cinema(props) {
       if (player.currentTime() >= 15) {
         player.pause();
         player.currentTime(0);
-        // TODO: create payment
       }
     });
   };
@@ -328,8 +327,8 @@ export default function Cinema(props) {
             {(props.post.date !== undefined && window.innerWidth >= 850) && (
               <p id="date">{props.post.date.substring(0, 10)}</p>
             )}
-            <button id="pay" onClick={() => { buyWebinar(props.post) }}>
-              {t('Buy_webinar')}
+            <button id="pay" onClick={() => { window.location.href = `/post/${props.post.user_id}/${props.post.post_id}` }}>
+              {t('Open_webinar')} <i class="fa fa-external-link"></i>
             </button>
             <Link to={`/user/${props.post.user_id}`} id="creatorProfile">
               {props.post.avatar ? (

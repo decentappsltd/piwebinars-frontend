@@ -25,7 +25,14 @@ function Post(props) {
   };
 
   const purchase = async () => {
-    const response = await buyWebinar(props.post);
+    const post = {
+      user: props.post.user_id, 
+      _id: props.post.post_id, 
+      videoId: props.post.videoId, 
+      amount: props.post.amount, 
+      title: props.post.title,
+    }
+    await buyWebinar(post);
   }
 
   const remove = async () => {
@@ -53,7 +60,7 @@ function Post(props) {
         <h3 className="postTitle">{props.title}</h3>
         <div className="statDiv">
           <p2 className="statName">{props.name}</p2>
-          <p2 className="statCategory">{props.category}</p2>
+          <span>•</span>
           <p2 className="statLikes">Watch for <b>{props.amount} Pi</b></p2>
         </div>
         <div className="wishlistOptions">
@@ -112,7 +119,7 @@ function RenderedList() {
           return (
             <>
               <article key={post.upload}>
-                <Post key={post.upload} post_id={post.post_id} file_id={post.upload} user_id={post.user_id} video_id={post.video_id} title={post.title} name={post.name} description={post.description} category={post.category} date={post.dateAdded} amount={post.amount} post={post} />
+                <Post key={post.upload} post_id={post.post_id} file_id={post.upload} user_id={post.user_id} video_id={post.videoId} title={post.title} name={post.name} description={post.description} category={post.category} date={post.dateAdded} amount={post.amount} post={post} />
               </article>
               {ad === true && <>
                 <ins className="adsbygoogle"

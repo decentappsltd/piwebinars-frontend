@@ -56,8 +56,14 @@ export function Post(props) {
         <img onClick={open} className="postThumbnail" src={img} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}></img>
         <h3 className="postTitle">{props.title}</h3>
         <div className="statDiv">
-          <Link to={`/user/${props.user_id}`} className="statName">{props.name}</Link>
-          <p2 className="statCategory">{props.category}</p2>
+          <Link to={`/user/${props.user_id}`} className="statName">{props.name.toString().substring(0, 7)}{props.name.length > 7 && <span>...</span>}</Link>
+          <span>•</span>
+          <p2 className="statCategory">
+            {props.category.toLowerCase() === 'cryptocurrency' && 'Crypto'}
+            {props.category.toLowerCase() === 'technology' && 'Tech'}
+            {(props.category.toLowerCase() !== 'cryptocurrency' && props.category.toLowerCase() !== 'technology') && `${props.category}`}
+          </p2>
+          <span>•</span>
           <p2 className="statLikes">{props.amount} <i>Pi</i></p2>
         </div>
         {props.remove ? <i onClick={props.remove} className="fas fa-minus addWishlist"></i> : <>

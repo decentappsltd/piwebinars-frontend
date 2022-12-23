@@ -124,7 +124,18 @@ async function addWishlist(props) {
   }
   console.log(props);
   const config = {
-    post: props
+    post: {
+      user_id: props.post.user,
+      post_id: props.post._id,
+      category: props.post.category,
+      title: props.post.title,
+      description: props.post.description,
+      amount: props.post.amount,
+      videoId: props.post.videoId,
+      videoImg: props.post.videoImg,
+      videoURL: props.post.videoURL,
+      name: props.post.name,
+    }
   };
   const auth_token = localStorage.getItem("userSession");
   const response = await axios.post(`${urlApi}/post/addWishlist`, config, {

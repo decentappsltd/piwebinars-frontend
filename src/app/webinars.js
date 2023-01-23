@@ -34,6 +34,10 @@ const filter = (input) => {
       x[i].style.display = "none";
     } else x[i].style.display = "block";
   }
+
+  for (const x of document.querySelectorAll(".adsbygoogle")) {
+    x.style.display = "none";
+  }
 };
 
 // Get individual webinar by its IDs

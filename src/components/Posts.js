@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { renderWebinars, addWishlist } from '../app/webinars.js';
+import { renderMore, renderWebinars, addWishlist } from '../app/webinars.js';
 import {
   useRecoilState,
 } from 'recoil';
@@ -85,7 +85,7 @@ export function Post(props) {
 }
 
 function Posts(props) {
-  const [posts, setPosts] = useRecoilState(storedPosts);
+  const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(false);
   const [modalShown, toggleModal] = useState(false);
 
@@ -115,12 +115,34 @@ function Posts(props) {
     }
   }
 
+  const applyCategory = async () => {
+    setPosts([]);
+    setLoading(true);
+    const category = localStorage.category;
+    const response = await renderMore(category);
+    const morePosts = response.data.list;
+    let list = [];
+    for (const post of morePosts) {
+      list.push(post);
+    }
+    setPosts(list);
+    setLoading(false);
+  }
+
   useEffect(() => {
     if (props.postId) {
       window.history.pushState(null, null, `/post/${props.userId}/${props.postId}`);
       toggleModal(true);
     }
     getWebinars();
+
+    window.addEventListener('category', () => {
+      if (localStorage.category !== '') applyCategory();
+      else {
+        setPosts([]);
+        getWebinars();
+      }
+    });
   }, []);
 
   useEffect(() => {
@@ -136,7 +158,7 @@ function Posts(props) {
       {loading ? <Loader /> : null}
       {posts.map((post, index) => {
         let ad = false;
-        if (index % 4 == 0 ) ad = true;
+        if (index % 4 == 0) ad = true;
         function pushAds() {
           let adsbygoogle;
           (adsbygoogle = window.adsbygoogle || []).push({});
@@ -160,6 +182,7 @@ function Posts(props) {
         );
       })
       }
+      {posts.length == 0 && !loading && <h2>No posts found</h2> }
       {modalShown ?
         <Cinema close={() => {
           toggleModal(false);

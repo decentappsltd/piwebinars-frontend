@@ -118,8 +118,8 @@ function CategorySelection() {
 
   const handleClick = (input) => {
     localStorage.category = input;
+    window.dispatchEvent(new Event("category"));
     window.dispatchEvent(new Event("storage"));
-    filter(input);
   };
 
   return (

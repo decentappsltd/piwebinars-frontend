@@ -215,7 +215,7 @@ function Uploads(props) {
   }
 
   return (
-    <>
+    <div>
       {loading ? null :
         <>
           <ins className="adsbygoogle"
@@ -234,33 +234,40 @@ function Uploads(props) {
         </div>
       </>}
 
-      {display == 'courses' && <>{
-        courses.map(course => {
-          return (
-            <article>
-              <Preview course_id={course._id} course={course} title={course.title} description={course.description} length={course.posts.length} avatar={course.avatar} username={course.username} posts={course.posts} />
-            </article>
-          );
-        })
-      }</>
+      {display == 'courses' &&
+        <>
+          {
+            courses.map(course => {
+              return (
+                <article>
+                  <Preview course_id={course._id} course={course} title={course.title} description={course.description} length={course.posts.length} avatar={course.avatar} username={course.username} posts={course.posts} />
+                </article>
+              );
+            })
+          }
+          <br /><br /><br /><br /><br /><br />
+        </>
       }
 
       {display == 'posts' &&
-        <> {
-          webinars.map(post => {
-            return (
-              <article key={post._id}>
-                <Post title={post.title} remove={remove} url={`https://player.vimeo.com/video/${post.video_id}`} post={post} course={props.course} />
-              </article>
-            );
-          })
-        }</>
+        <>
+          {
+            webinars.map(post => {
+              return (
+                <article key={post._id}>
+                  <Post title={post.title} remove={remove} url={`https://player.vimeo.com/video/${post.video_id}`} post={post} course={props.course} />
+                </article>
+              );
+            })
+          }
+          <br /><br /><br /><br /><br /><br />
+        </>
       }
 
       {loading ? <Loader /> : null}
       {(webinars.length == 0 && !loading && display == 'posts') && <h2 style={{ position: 'fixed', top: 'calc(50vh - 10px)', width: '100%', textAlign: 'center' }}>{t('Your_uploads_will_appear_here')}</h2>}
       {(courses.length == 0 && !loading && display == 'courses') && <h2 style={{ position: 'fixed', top: 'calc(50vh - 10px)', width: '100%', textAlign: 'center' }}>{t('Your_courses_will_appear_here')}</h2>}
-    </>
+    </div>
   );
 }
 

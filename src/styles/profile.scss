@@ -82,7 +82,8 @@ $charcoal: #36454f;
 #displayToggle {
   position: fixed;
   bottom: 10px;
-  width: 100%;
+  right: 0;
+  width: calc(100% - 250px);
   display: flex;
   justify-content: center;
   flex-direction: row;
@@ -134,5 +135,9 @@ $charcoal: #36454f;
       display: flex;
       justify-content: space-evenly;
     }
+  }
+
+  #displayToggle {
+    width: 100%;
   }
 }

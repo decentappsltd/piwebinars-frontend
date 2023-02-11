@@ -192,7 +192,7 @@ function Webinar(props) {
         playerRef.current = player;
 
         player.on('timeupdate', async () => {
-            if (player.currentTime() >= 15 && purchased == false) {
+            if (player.currentTime() >= 15 && purchased == false && props.userId !== '61ed4c16d45bdef7bd5a9a95') {
                 player.currentTime(0);
                 player.pause();
                 const foundPost = await getPost(props.userId, props.postId);

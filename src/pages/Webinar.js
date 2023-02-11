@@ -121,18 +121,20 @@ function Webinar(props) {
         }));
         setLoading(false);
         console.log(foundPost);
-        for (const item of foundPost.comments) { 
+        for (const item of foundPost.comments) {
             setComments((oldComments) => [...oldComments, item]);
         }
-        const { likes, dislikes } = JSON.parse(sessionStorage.profile);
-        let liked = likes.filter(function (e) {
-            return e === props.postId;
-        });
-        let disLiked = dislikes.filter(function (e) {
-            return e === props.postId;
-        });
-        if (liked.length) setWebinarLiked(true);
-        if (disLiked.length) setWebinarDisliked(true);
+        if (sessionStorage.profile) {
+            const { likes, dislikes } = JSON.parse(sessionStorage.profile);
+            let liked = likes.filter(function (e) {
+                return e === props.postId;
+            });
+            let disLiked = dislikes.filter(function (e) {
+                return e === props.postId;
+            });
+            if (liked.length) setWebinarLiked(true);
+            if (disLiked.length) setWebinarDisliked(true);
+        }
         setVideoJsOptions(prev => ({
             ...prev,
             sources: [{

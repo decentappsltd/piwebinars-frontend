@@ -20,9 +20,9 @@ async function auth() {
     localStorage.uid = uid;
     localStorage.piName = userName;
     localStorage.piAccessToken = auth.accessToken;
-    if (!sessionStorage.userSession) {
+    // if (!sessionStorage.userSession) {
       piLogin();
-    }
+    // }
   });
 }
 
@@ -40,7 +40,7 @@ async function piLogin() {
   const response = await axios.post(
     `${serverURL}/login/pi`,
     config
-  );
+  ).catch(() => alert('Login failed, please try again later'));
   if (response.status === 200 || response.status === 201) {
     const token = response.data.token;
     sessionStorage.removeItem("userSession");
@@ -67,7 +67,7 @@ function buyWebinar(post) {
   console.log(userId, post_id, videoId, price, title);
   if (navigator.userAgent.toLowerCase().indexOf("pibrowser") < 0) {
     alert("Please go to the Pi Browser to make a crypto payment");
-    window.open("pi://www.piwebinars.co.uk");
+    window.open("pi://www.piwebinars.app");
   }
   if (!localStorage.userSession) {
     alert("Please login to purchase a webinar!");
@@ -156,4 +156,97 @@ function buyWebinar(post) {
   );
 }
 
-export { buyWebinar };
+function buyCourse(course) {
+  const { amount } = course;
+  const Tkn = localStorage.getItem("userSession");
+  if (navigator.userAgent.toLowerCase().indexOf("pibrowser") < 0) {
+    alert("Please go to the Pi Browser to make a crypto payment");
+    window.open("pi://www.piwebinars.app");
+  }
+  if (!localStorage.userSession) {
+    alert("Please login to purchase a webinar!");
+    return null;
+  }
+  const username = sessionStorage.username;
+
+  const payment = window.Pi.createPayment(
+    {
+      amount,
+      memo: "Purchase Course",
+      metadata: { 
+        paymentType: "course_purchase",
+        course,
+        amount
+      },
+    },
+    {
+      onReadyForServerApproval: function (paymentId) {
+        var data = {
+          paymentId: paymentId,
+          txid: "",
+        };
+        axios.post(
+          `${serverURL}/payment/approve`,
+          data, {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${Tkn}`
+          },
+          withCredentials: true,
+          credentials: "same-origin"
+        }
+        );
+      },
+      onReadyForServerCompletion: async function (paymentId, txid) {
+        var data = {
+          paymentId: paymentId,
+          txid: txid,
+          username: username,
+        };
+        const response = await axios.post(
+          `${serverURL}/payment/complete`,
+          data,
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${Tkn}`,
+            },
+            withCredentials: true,
+            credentials: "same-origin",
+          }
+        ).catch((err) => {
+          console.log(err);
+          alert('Payment failed, please contact customer service at support@piwebinars.app');
+        });
+        if (response.data.success == true) {
+          alert('Thank you for purchasing a course, you may now watch it here or in your purchases page. Enjoy!');
+          await piLogin();
+          window.location.reload();
+        } else alert('Payment failed, please contact customer service at support@piwebinars.app');
+        return response;
+      },
+      onCancel: function (paymentId, txid) {
+        var data = {
+          paymentId: paymentId,
+          txid: txid,
+        };
+        axios.post(
+          `${serverURL}/payment/incomplete`,
+          data
+        );
+      },
+      onError: function (paymentId, txid) {
+        var data = {
+          paymentId: paymentId,
+          txid: txid,
+        };
+        axios.post(
+          `${serverURL}/payment/incomplete`,
+          data
+        );
+      },
+    }
+  );
+}
+
+export { buyWebinar, buyCourse };

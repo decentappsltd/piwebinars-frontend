@@ -8,6 +8,7 @@ export function TranlateDropdown(props) {
     { code: 'es', name: 'Español', country_code: 'es' },
     { code: 'kr', name: '한국어', country_code: 'kr' },
     { code: 'hi', name: 'हिन्दी', country_code: 'in' },
+    { code: 'kn', name: 'ಕನ್ನಡ', country_code: 'in' },
     { code: 'zh', name: '中文', country_code: 'cn' }
   ];
 

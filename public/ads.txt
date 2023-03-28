@@ -1,1 +1,25 @@
-google.com, pub-7095325310319034, DIRECT, f08c47fec0942fa0
+taboola.com,1541750,DIRECT,c228e6794e811952
+spotx.tv,71451,RESELLER
+spotxchange.com,71451,RESELLER
+pubmatic.com,156307,RESELLER
+appnexus.com,3364,RESELLER
+indexexchange.com,183756,RESELLER
+contextweb.com,560382,RESELLER
+tremorhub.com,z87wm,RESELLER
+rubiconproject.com,16698,RESELLER
+openx.com,539154393,RESELLER
+freewheel.tv,799921,RESELLER
+smartadserver.com,3563,RESELLER
+beachfront.com,13749,RESELLER
+emxdgt.com,1643,RESELLER
+improvedigital.com,1577,RESELLER
+video.unrulymedia.com,1166984029,RESELLER
+inmobi.com,a985e39014a94721a8e97c929d32ef9d,RESELLER
+pubnative.net,1007180,RESELLER
+smaato.com,1100047487,RESELLER
+synacor.com,82376,RESELLER
+sonobi.com,9a1db44c9c,RESELLER
+yahoo.com,59189,RESELLER
+imds.tv,82376,RESELLER
+yahoo.com,59177,RESELLER
+vidoomy.com,2717565,RESELLER

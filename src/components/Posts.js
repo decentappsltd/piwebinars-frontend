@@ -147,8 +147,13 @@ function Posts(props) {
 
   useEffect(() => {
     function pushAds() {
-      let adsbygoogle;
-      (adsbygoogle = window.adsbygoogle || []).push({});
+      const _taboola = window._taboola || [];
+      _taboola.push({
+        mode: 'thumbnails-Stream-mobile',
+        container: 'taboola-homepage-recommendation-reel',
+        placement: 'Homepage Recommendation Reel',
+        target_type: 'mix'
+      });
     }
     setTimeout(pushAds, 2500);
   }, [props]);
@@ -160,8 +165,13 @@ function Posts(props) {
         let ad = false;
         if (index % 4 == 0) ad = true;
         function pushAds() {
-          let adsbygoogle;
-          (adsbygoogle = window.adsbygoogle || []).push({});
+          const _taboola = window._taboola || [];
+          _taboola.push({
+            mode: 'thumbnails-Stream-mobile',
+            container: 'taboola-homepage-recommendation-reel',
+            placement: 'Homepage Recommendation Reel',
+            target_type: 'mix'
+          });
         }
         if (ad === true) setTimeout(pushAds, 2500);
         return (
@@ -170,19 +180,14 @@ function Posts(props) {
               <Post key={post.upload} post={post} post_id={post._id} file_id={post.upload} user_id={post.user} video_id={post.video_id} title={post.title} name={post.name} description={post.description} category={post.category} likes={post.likes} dislike={post.dislike} date={post.dateAdded} amount={post.amount} wishlisted={post.wishlisted} />
             </article>
             {ad === true && <>
-              <ins className="adsbygoogle"
-                style={{ display: "block", minWidth: '251px', minHeight: '50px' }}
-                data-ad-format="fluid"
-                data-ad-layout-key="-6f+d5-2h+50+bf"
-                data-ad-client="ca-pub-7095325310319034"
-                data-ad-slot="1627309222"></ins>
+              <div id="taboola-homepage-recommendation-reel" className='adsbygoogle' style={{ display: "block", minWidth: '251px', minHeight: '50px' }} ></div>
             </>
             }
           </>
         );
       })
       }
-      {posts.length == 0 && !loading && <h2>No posts found</h2> }
+      {posts.length == 0 && !loading && <h2>No posts found</h2>}
       {modalShown ?
         <Cinema close={() => {
           toggleModal(false);

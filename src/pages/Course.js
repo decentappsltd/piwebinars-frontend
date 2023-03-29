@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from "react-i18next";
 import { addPostToCourse, getCourse, removePostFromCourse, editCourse, renderUploads } from '../app/webinars.js';
+import { buyCourse } from '../app/payment.js';
 import Loader from '../components/Loader.js';
 import { Post } from '../components/Posts.js';
 import avatar from '../assets/avatar.png';
@@ -124,6 +125,15 @@ function Course(props) {
         }
     }
 
+    const purchaseCourse = async () => {
+        // const response = await buyCourse(props.userId, props.courseId);
+        // if (response.success == true) {
+        //     alert('You have successfully purchased this course!');
+        //     window.location.reload();
+        // } else alert(response.message);
+        alert('Feature coming soon!');
+    }
+
     return (
         <>
             <div id="course">
@@ -134,12 +144,12 @@ function Course(props) {
                     {course.posts.length > 1 ? <p id='courseLength'>{t('Length_webinars', { length: course.posts.length })}</p> : <p id='courseLength'>{t('Length_webinar', { length: course.posts.length })}</p>} <br />
                 </div>
                 <div id="courseInteractions">
-                    {course.price > 0 && <a id="purchaseCourse"><i className='fas fa-cart-plus'></i> {course.price} Pi</a> }
+                    {course.price > 0 && <a id="purchaseCourse" onClick={purchaseCourse}><i className='fas fa-cart-plus'></i> {course.price} Pi</a>}
                     <a>
-                    <Link to={`/user/${props.userId}`} id='courseCreator'>
-                        {course.avatar ? <img src={course.avatar} /> : <img src={avatar} />}
-                        <p>{course.username.substring(0, 12)}{course.username.length > 12 && <span>...</span>}</p>
-                    </Link>
+                        <Link to={`/user/${props.userId}`} id='courseCreator'>
+                            {course.avatar ? <img src={course.avatar} /> : <img src={avatar} />}
+                            <p>{course.username.substring(0, 12)}{course.username.length > 12 && <span>...</span>}</p>
+                        </Link>
                     </a>
                 </div>
 

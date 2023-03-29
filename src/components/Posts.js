@@ -154,6 +154,7 @@ function Posts(props) {
         placement: 'Homepage Recommendation Reel',
         target_type: 'mix'
       });
+      _taboola.push({flush: true});
     }
     setTimeout(pushAds, 2500);
   }, [props]);
@@ -172,6 +173,7 @@ function Posts(props) {
             placement: 'Homepage Recommendation Reel',
             target_type: 'mix'
           });
+          _taboola.push({flush: true});
         }
         if (ad === true) setTimeout(pushAds, 2500);
         return (

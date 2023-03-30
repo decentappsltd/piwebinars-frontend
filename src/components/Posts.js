@@ -178,10 +178,7 @@ function Posts(props) {
 
           let ad = false;
           if (index % 4 == 0) ad = true;
-
-          componentDidMount = () => {
-            if (ad === true) pushAds();
-          }
+          if (ad === true) setTimeout(pushAds, 3000);
 
           return (
             <>

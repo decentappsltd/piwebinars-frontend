@@ -149,9 +149,9 @@ function Posts(props) {
     function pushAds() {
       window._taboola = window._taboola || [];
       window._taboola.push({
-        mode: 'thumbnails-Stream-mobile',
-        container: 'taboola-homepage-recommendation-reel',
-        placement: 'Homepage Recommendation Reel',
+        mode: 'thumbnails-home-mobile',
+        container: 'taboola-mobile-below-article-thumbnails',
+        placement: 'Mobile Below Article Thumbnails',
         target_type: 'mix'
       });
       window._taboola.push({ flush: true });
@@ -186,7 +186,7 @@ function Posts(props) {
                 <Post key={post.upload} post={post} post_id={post._id} file_id={post.upload} user_id={post.user} video_id={post.video_id} title={post.title} name={post.name} description={post.description} category={post.category} likes={post.likes} dislike={post.dislike} date={post.dateAdded} amount={post.amount} wishlisted={post.wishlisted} />
               </article>
               {ad === true && <>
-                <div id="taboola-mobile-below-article-thumbnails" className='adsbygoogle' style={{ display: "block", minWidth: '251px', minHeight: '50px' }}></div>
+                <div id="taboola-mobile-below-article-thumbnails" style={{ display: "block", width: '90vw', maxWidth: '500px', minHeight: '100px' }}></div>
               </>
               }
             </>

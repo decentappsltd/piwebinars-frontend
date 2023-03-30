@@ -102,14 +102,6 @@ function Uploads(props) {
     getUploads();
   }, []);
 
-  useEffect(() => {
-    function pushAds() {
-      let adsbygoogle;
-      (adsbygoogle = window.adsbygoogle || []).push({});
-    }
-    setTimeout(pushAds, 5000);
-  }, []);
-
   return (
     <>
       <div id='displayToggle'>
@@ -118,54 +110,22 @@ function Uploads(props) {
       </div>
 
       {display == 'posts' && <>{webinars.map((post, index) => {
-        let ad = false;
-        if (index % 4 == 0) ad = true;
-        function pushAds() {
-          let adsbygoogle;
-          (adsbygoogle = window.adsbygoogle || []).push({});
-        }
-        if (ad === true) setTimeout(pushAds, 2500);
         return (
           <>
             <article>
               <Post key={post.upload} post={post} post_id={post._id} file_id={post.upload} user_id={post.user} video_id={post.video_id} title={post.title} name={post.name} description={post.description} category={post.category} likes={post.likes} date={post.dateAdded} amount={post.amount} wishlisted={post.wishlisted} />
             </article>
-            {ad === true && <>
-              <ins className="adsbygoogle"
-                style={{ display: "block", minWidth: '251px', minHeight: '50px' }}
-                data-ad-format="fluid"
-                data-ad-layout-key="-6f+d5-2h+50+bf"
-                data-ad-client="ca-pub-7095325310319034"
-                data-ad-slot="1627309222"></ins>
-            </>
-            }
           </>
         );
       })
       }</>}
 
       {display == 'courses' && <>{courses.map((course, index) => {
-        let ad = false;
-        if (index % 3 == 0) ad = true;
-        function pushAds() {
-          let adsbygoogle;
-          (adsbygoogle = window.adsbygoogle || []).push({});
-        }
-        if (ad === true) setTimeout(pushAds, 2500);
         return (
           <>
             <article>
               <Preview course_id={course._id} course={course} title={course.title} description={course.description} length={course.posts.length} avatar={course.avatar} username={course.username} posts={course.posts} />
             </article>
-            {ad === true && <>
-              <ins className="adsbygoogle"
-                style={{ display: "block", minWidth: '251px', minHeight: '50px' }}
-                data-ad-format="fluid"
-                data-ad-layout-key="-6f+d5-2h+50+bf"
-                data-ad-client="ca-pub-7095325310319034"
-                data-ad-slot="1627309222"></ins>
-            </>
-            }
           </>
         );
       })
@@ -229,6 +189,20 @@ export default function User(props) {
     const response = await followUnfollow(props.userId);
     setFollow(response);
   }
+  
+  useEffect(() => {
+    function pushAds() {
+      window._taboola = window._taboola || [];
+      window._taboola.push({
+        mode: 'thumbnails-home-mobile',
+        container: 'taboola-mobile-below-article-thumbnails',
+        placement: 'Mobile Below Article Thumbnails',
+        target_type: 'mix'
+      });
+      window._taboola.push({flush: true});
+    }
+    setTimeout(pushAds, 5000);
+  }, []);
 
   return (
     <>
@@ -251,6 +225,7 @@ export default function User(props) {
           </span>
           <button id="followBtn" onClick={handleFollow}>{follow}</button>
         </div>
+        <div id="taboola-mobile-below-article-thumbnails" style={{ minHeight: '100px', display: 'block', minWidth: '90vw' }}></div>
         <Uploads userId={props.userId} />
       </span>
     </>

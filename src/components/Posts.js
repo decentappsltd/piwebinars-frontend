@@ -157,7 +157,7 @@ function Posts(props) {
       window._taboola.push({ flush: true });
     }
     setTimeout(pushAds, 2500);
-  }, [props]);
+  }, []);
 
   return (
     <>

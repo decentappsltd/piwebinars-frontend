@@ -156,7 +156,7 @@ function Posts(props) {
       });
       window._taboola.push({ flush: true });
     }
-    setTimeout(pushAds, 5000);
+    setTimeout(pushAds, 1000);
   }, [props]);
 
   return (
@@ -177,7 +177,7 @@ function Posts(props) {
           }
 
           let ad = false;
-          if (index == 0) ad = true;
+          // if (index % 4 == 0) ad = true;
           if (ad === true) setTimeout(pushAds, 3000);
 
           return (

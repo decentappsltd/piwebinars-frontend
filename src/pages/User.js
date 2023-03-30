@@ -225,7 +225,7 @@ export default function User(props) {
           </span>
           <button id="followBtn" onClick={handleFollow}>{follow}</button>
         </div>
-        <div id="taboola-mobile-below-article-thumbnails" style={{ minHeight: '100px', display: 'block', width: '90vw', maxWidth: '500px' }}></div>
+        <div id="taboola-mobile-below-article-thumbnails" style={{ minHeight: '100px', display: 'block', width: '85vw', maxWidth: '500px' }}></div>
         <Uploads userId={props.userId} />
       </span>
     </>

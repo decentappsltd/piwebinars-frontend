@@ -147,16 +147,16 @@ function Posts(props) {
 
   useEffect(() => {
     function pushAds() {
-      const _taboola = window._taboola || [];
-      _taboola.push({
+      window._taboola = window._taboola || [];
+      window._taboola.push({
         mode: 'thumbnails-Stream-mobile',
         container: 'taboola-homepage-recommendation-reel',
         placement: 'Homepage Recommendation Reel',
         target_type: 'mix'
       });
-      _taboola.push({ flush: true });
+      window._taboola.push({ flush: true });
     }
-    setTimeout(pushAds, 2500);
+    setTimeout(pushAds, 5000);
   }, [props]);
 
   return (

@@ -177,8 +177,8 @@ function Posts(props) {
           }
 
           let ad = false;
-          // if (index % 4 == 0) ad = true;
-          if (ad === true) setTimeout(pushAds, 3000);
+          if (index == 0) ad = true;
+          // if (ad === true) setTimeout(pushAds, 3000);
 
           return (
             <>

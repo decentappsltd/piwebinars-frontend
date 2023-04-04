@@ -145,20 +145,6 @@ function Posts(props) {
     });
   }, []);
 
-  useEffect(() => {
-    function pushAds() {
-      window._taboola = window._taboola || [];
-      window._taboola.push({
-        mode: 'thumbnails-home-mobile',
-        container: 'taboola-mobile-below-article-thumbnails',
-        placement: 'Mobile Below Article Thumbnails',
-        target_type: 'mix'
-      });
-      window._taboola.push({ flush: true });
-    }
-    // setTimeout(pushAds, 2500);
-  }, []);
-
   return (
     <>
       {loading ? <Loader /> : null}
@@ -166,12 +152,11 @@ function Posts(props) {
       {
         posts.map((post, index) => {
           function pushAds() {
-            console.log('push ', index)
             window._taboola = window._taboola || [];
             window._taboola.push({
-              mode: 'thumbnails-home-mobile',
+              mode: index == 0 ? 'thumbnails-Stream-mobile' : 'thumbnails-home-mobile',
               container: `taboola-mobile-below-article-thumbnails-${index}`,
-              placement: 'Mobile Below Article Thumbnails',
+              placement: index == 0 ? 'Homepage Recommendation Reel' : 'Mobile Below Article Thumbnails',
               target_type: 'mix'
             });
             window._taboola.push({ flush: true });
@@ -179,16 +164,18 @@ function Posts(props) {
 
           let ad = false;
           if (index % 4 == 0) ad = true;
-          if (ad === true && !document.getElementById('taboola-mobile-below-article-thumbnails-' + index)) setTimeout(pushAds, 3000);
+          if (ad === true && !document.getElementById('taboola-mobile-below-article-thumbnails-' + index) && window.innerWidth < 850) setTimeout(pushAds, 2500);
 
           return (
             <>
               <article style={{ display: 'flex' }} key={post.upload}>
                 <Post key={post.upload} post={post} post_id={post._id} file_id={post.upload} user_id={post.user} video_id={post.video_id} title={post.title} name={post.name} description={post.description} category={post.category} likes={post.likes} dislike={post.dislike} date={post.dateAdded} amount={post.amount} wishlisted={post.wishlisted} />
               </article>
-              {ad === true && <>
-                <div id={"taboola-mobile-below-article-thumbnails-" + index} style={{ display: "block", width: '85vw', maxWidth: '500px', minHeight: '100px' }}></div>
-              </>
+              {
+                (ad === true && window.innerWidth < 850) &&
+                <>
+                  <div id={"taboola-mobile-below-article-thumbnails-" + index} style={{ display: "block", width: '85vw', maxWidth: '500px', minHeight: '100px' }}></div>
+                </>
               }
             </>
           );

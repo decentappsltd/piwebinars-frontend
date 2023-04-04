@@ -26,10 +26,10 @@ function Post(props) {
 
   const purchase = async () => {
     const post = {
-      user: props.post.user_id, 
-      _id: props.post.post_id, 
-      videoId: props.post.videoId, 
-      amount: props.post.amount, 
+      user: props.post.user_id,
+      _id: props.post.post_id,
+      videoId: props.post.videoId,
+      amount: props.post.amount,
       title: props.post.title,
     }
     await buyWebinar(post);
@@ -109,26 +109,31 @@ function RenderedList() {
       <span id="page">
         {(loading && localStorage.userSession) ? <Loader /> : null}
         {webinars.map((post, index) => {
+          function pushAds() {
+            window._taboola = window._taboola || [];
+            window._taboola.push({
+              mode: 'thumbnails-home-mobile',
+              container: `taboola-mobile-below-article-thumbnails-${index}`,
+              placement: 'Mobile Below Article Thumbnails',
+              target_type: 'mix'
+            });
+            window._taboola.push({ flush: true });
+          }
+
           let ad = false;
           if (index % 4 == 0) ad = true;
-          function pushAds() {
-            let adsbygoogle;
-            (adsbygoogle = window.adsbygoogle || []).push({});
-          }
-          if (ad === true) setTimeout(pushAds, 2500);
+          if (ad === true && window.innerWidth < 850) setTimeout(pushAds, 3000);
+
           return (
             <>
               <article key={post.upload}>
                 <Post key={post.upload} post_id={post.post_id} file_id={post.upload} user_id={post.user_id} video_id={post.videoId} title={post.title} name={post.name} description={post.description} category={post.category} date={post.dateAdded} amount={post.amount} post={post} />
               </article>
-              {ad === true && <>
-                <ins className="adsbygoogle"
-                  style={{ display: "block", minWidth: '251px', minHeight: '50px' }}
-                  data-ad-format="fluid"
-                  data-ad-layout-key="-6f+d5-2h+50+bf"
-                  data-ad-client="ca-pub-7095325310319034"
-                  data-ad-slot="1627309222"></ins>
-              </>
+              {
+                (ad === true && window.innerWidth < 850) &&
+                <>
+                  <div id={"taboola-mobile-below-article-thumbnails-" + index} style={{ display: "block", width: '85vw', maxWidth: '500px', minHeight: '100px' }}></div>
+                </>
               }
             </>
           );

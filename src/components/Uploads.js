@@ -200,10 +200,16 @@ function Uploads(props) {
 
   useEffect(() => {
     function pushAds() {
-      let adsbygoogle;
-      (adsbygoogle = window.adsbygoogle || []).push({});
+      window._taboola = window._taboola || [];
+      window._taboola.push({
+        mode: 'thumbnails-Stream-mobile',
+        container: `taboola-mobile-below-article-thumbnails`,
+        placement: 'Homepage Recommendation Reel',
+        target_type: 'mix'
+      });
+      window._taboola.push({ flush: true });
     }
-    setTimeout(pushAds, 5000);
+    if (window.innerWidth < 850) setTimeout(pushAds, 2500);
   }, []);
 
   const remove = (title) => {
@@ -216,15 +222,8 @@ function Uploads(props) {
 
   return (
     <div>
-      {loading ? null :
-        <>
-          <ins className="adsbygoogle"
-            style={{ display: "block", minWidth: '251px', minHeight: '50px' }}
-            data-ad-format="fluid"
-            data-ad-layout-key="-6f+d5-2h+50+bf"
-            data-ad-client="ca-pub-7095325310319034"
-            data-ad-slot="1627309222"></ins>
-        </>
+      {(loading == false && window.innerWidth < 850) &&
+        <div id={"taboola-mobile-below-article-thumbnails"} style={{ display: "block", width: '85vw', maxWidth: '500px', minHeight: '100px' }}></div>
       }
 
       {!props.course && <>

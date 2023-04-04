@@ -191,6 +191,10 @@ export default function User(props) {
   }
   
   useEffect(() => {
+    if (window.innerWidth > 850) {
+      document.getElementById("taboola-mobile-below-article-thumbnails").style.display = "none";
+      return;
+    }
     function pushAds() {
       window._taboola = window._taboola || [];
       window._taboola.push({
@@ -201,7 +205,7 @@ export default function User(props) {
       });
       window._taboola.push({flush: true});
     }
-    setTimeout(pushAds, 5000);
+    setTimeout(pushAds, 2500);
   }, []);
 
   return (

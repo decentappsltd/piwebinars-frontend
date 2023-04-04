@@ -111,7 +111,7 @@ export function Preview(props) {
         <img src={img} />
         <h3>{props.title}</h3>
         <p className='courseDescription'>{props.description}</p>
-        {props.length > 1 ? <p className='courseLength'>{t('Length_webinars', {length: props.length})}</p> : <p className='courseLength'>{t('Length_webinar', {length: props.length})}</p>}
+        {props.length > 1 ? <p className='courseLength'>{t('Length_webinars', { length: props.length })}</p> : <p className='courseLength'>{t('Length_webinar', { length: props.length })}</p>}
         {props.posts[0] &&
           <Link to={`/user/${props.posts[0].user}`} className='courseCreator'>
             <span>
@@ -157,14 +157,6 @@ function Courses(props) {
     getCoursesFromDB();
   }, [newCourse]);
 
-  useEffect(() => {
-    function pushAds() {
-      let adsbygoogle;
-      (adsbygoogle = window.adsbygoogle || []).push({});
-    }
-    setTimeout(pushAds, 2500);
-  }, [props]);
-
   return (
     <>
       {loading === true ? <><div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column', height: '200px', padding: '10px ' }}><h2>{t('Explore_courses_to_learn_a_new_skill')}</h2><Loader /></div></> :
@@ -172,26 +164,31 @@ function Courses(props) {
           {courses.length == 0 && <h2>There are no courses yet, check again later...</h2>}
           {
             courses.map((course, index) => {
+              function pushAds() {
+                window._taboola = window._taboola || [];
+                window._taboola.push({
+                  mode: 'thumbnails-home-mobile',
+                  container: `taboola-mobile-below-article-thumbnails-${index}`,
+                  placement: 'Mobile Below Article Thumbnails',
+                  target_type: 'mix'
+                });
+                window._taboola.push({ flush: true });
+              }
+
               let ad = false;
               if (index % 3 == 0) ad = true;
-              function pushAds() {
-                let adsbygoogle;
-                (adsbygoogle = window.adsbygoogle || []).push({});
-              }
-              if (ad === true) setTimeout(pushAds, 2500);
+              if (ad === true && window.innerWidth < 850) setTimeout(pushAds, 2500);
+
               return (
                 <>
                   <article key={course._id}>
                     <Preview course_id={course._id} course={course} title={course.title} description={course.description} length={course.posts.length} avatar={course.avatar} username={course.username} posts={course.posts} />
                   </article>
-                  {ad === true && <>
-                    <ins className="adsbygoogle"
-                      style={{ display: "block", minWidth: '251px', minHeight: '50px' }}
-                      data-ad-format="fluid"
-                      data-ad-layout-key="-6f+d5-2h+50+bf"
-                      data-ad-client="ca-pub-7095325310319034"
-                      data-ad-slot="1627309222"></ins>
-                  </>
+                  {
+                    (ad === true && window.innerWidth < 850) &&
+                    <>
+                      <div id={"taboola-mobile-below-article-thumbnails-" + index} style={{ display: "block", width: '85vw', maxWidth: '500px', minHeight: '100px' }}></div>
+                    </>
                   }
                 </>
               );

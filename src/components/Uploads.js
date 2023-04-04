@@ -209,7 +209,7 @@ function Uploads(props) {
       });
       window._taboola.push({ flush: true });
     }
-    if (window.innerWidth < 850) setTimeout(pushAds, 2500);
+    if (window.innerWidth < 850 && webinars.length > 0 && display == 'posts') setTimeout(pushAds, 2500);
   }, []);
 
   const remove = (title) => {
@@ -222,7 +222,7 @@ function Uploads(props) {
 
   return (
     <div>
-      {(loading == false && window.innerWidth < 850 && webinars.length > 0) &&
+      {(loading == false && window.innerWidth < 850 && webinars.length > 0 && display == 'posts') &&
         <div id={"taboola-mobile-below-article-thumbnails"} style={{ display: "block", width: '85vw', maxWidth: '500px', minHeight: '100px' }}></div>
       }
 

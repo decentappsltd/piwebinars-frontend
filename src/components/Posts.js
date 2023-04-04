@@ -154,9 +154,9 @@ function Posts(props) {
           function pushAds() {
             window._taboola = window._taboola || [];
             window._taboola.push({
-              mode: index == 0 ? 'thumbnails-Stream-mobile' : 'thumbnails-home-mobile',
+              mode: index == 4 ? 'thumbnails-Stream-mobile' : 'thumbnails-home-mobile',
               container: `taboola-mobile-below-article-thumbnails-${index}`,
-              placement: index == 0 ? 'Homepage Recommendation Reel' : 'Mobile Below Article Thumbnails',
+              placement: index == 4 ? 'Homepage Recommendation Reel' : 'Mobile Below Article Thumbnails',
               target_type: 'mix'
             });
             window._taboola.push({ flush: true });

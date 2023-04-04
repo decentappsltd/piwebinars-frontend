@@ -222,7 +222,7 @@ function Uploads(props) {
 
   return (
     <div>
-      {(loading == false && window.innerWidth < 850) &&
+      {(loading == false && window.innerWidth < 850 && webinars.length > 0) &&
         <div id={"taboola-mobile-below-article-thumbnails"} style={{ display: "block", width: '85vw', maxWidth: '500px', minHeight: '100px' }}></div>
       }
 

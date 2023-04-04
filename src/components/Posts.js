@@ -166,6 +166,7 @@ function Posts(props) {
       {
         posts.map((post, index) => {
           function pushAds() {
+            console.log('push ', index)
             window._taboola = window._taboola || [];
             window._taboola.push({
               mode: 'thumbnails-home-mobile',
@@ -178,7 +179,7 @@ function Posts(props) {
 
           let ad = false;
           if (index % 4 == 0) ad = true;
-          if (ad === true) setTimeout(pushAds, 3000);
+          if (ad === true && !document.getElementById('taboola-mobile-below-article-thumbnails-' + index)) setTimeout(pushAds, 3000);
 
           return (
             <>

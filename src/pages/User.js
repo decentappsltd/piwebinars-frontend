@@ -122,13 +122,13 @@ function Uploads(props) {
         }
 
         let ad = false;
-        if (index % 4 == 0) ad = true;
+        // if (index % 4 == 0) ad = true;
         if (ad === true && window.innerWidth < 850) setTimeout(pushAds, 3000);
 
         return (
           <>
             <article>
-              <Post key={post.upload} post={post} post_id={post._id} file_id={post.upload} user_id={post.user} video_id={post.video_id} title={post.title} name={post.name} description={post.description} category={post.category} likes={post.likes} date={post.dateAdded} amount={post.amount} wishlisted={post.wishlisted} />
+              <Post key={post.upload} post={post} post_id={post._id} file_id={post.upload} user_id={post.user} video_id={post.video_id} videoImg={post.videoImg} title={post.title} name={post.name} description={post.description} category={post.category} likes={post.likes} date={post.dateAdded} amount={post.amount} wishlisted={post.wishlisted} />
             </article>
             {
               (ad === true && window.innerWidth < 850) &&
@@ -154,7 +154,7 @@ function Uploads(props) {
         }
 
         let ad = false;
-        if (index % 3 == 0) ad = true;
+        // if (index % 3 == 0) ad = true;
         if (ad === true && window.innerWidth < 850) setTimeout(pushAds, 3000);
 
         return (
@@ -233,7 +233,7 @@ export default function User(props) {
   }
 
   useEffect(() => {
-    if (window.innerWidth > 850) {
+    if (window.innerWidth > 850 && document.getElementById("taboola-mobile-below-article-thumbnails")) {
       document.getElementById("taboola-mobile-below-article-thumbnails").style.display = "none";
       return;
     }

@@ -21,6 +21,39 @@ $charcoal: #36454f;
     top: 0px;
     left: 0px;
   }
+  #payWebinarThumb {
+    position: relative;
+    max-height: 280px;
+    max-width: 500px;
+    top: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #000000;
+  }
+  #webinarThumb {
+    position: relative;
+    max-height: 280px;
+    max-width: 500px;
+    top: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #000000;
+  }
+  .fa-play-circle {
+    font-size: 100px;
+    color: black;
+    z-index: 3;
+    position: absolute;
+    cursor: pointer;
+  }
+  #playBtnThumbBacking {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background: white;
+  }
   #comments {
     position: absolute;
     padding: 5px;
@@ -220,6 +253,45 @@ $charcoal: #36454f;
     justify-content: center;
     align-items: center;
     background: #000000;
+  }
+
+  #payWebinarThumb {
+    background-size: cover;
+    position: relative;
+    max-height: calc(100vh - 200px);
+    max-width: calc(100vw - 250px);
+    top: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #000000;
+  }
+
+  #webinarThumb {
+    background-size: cover;
+    position: relative;
+    max-height: calc(100vh - 200px);
+    max-width: calc(100vw - 250px);
+    top: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #000000;
+  }
+
+  .fa-play-circle {
+    font-size: 100px;
+    color: black;
+    z-index: 3;
+    position: absolute;
+    cursor: pointer;
+  }
+
+  #playBtnThumbBacking {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background: white;
   }
 
   #dyntube_Player {
@@ -558,7 +630,7 @@ $charcoal: #36454f;
     }
 
     #comments {
-      top: 1000px;
+      top: 700px;
       width: calc(100vw - 250px);
       left: 0px;
       height: auto;
@@ -575,6 +647,13 @@ $charcoal: #36454f;
     right: 0px;
     overflow-y: scroll;
     overflow-x: hidden;
+
+    #webinarThumb {
+      max-height: unset;
+      max-width: unset;
+      width: 100vw;
+      height: calc(100vw * 0.5625);
+    }
     
     #info {
       top: 250px;
@@ -616,7 +695,7 @@ $charcoal: #36454f;
     #comments {
       position: absolute;
       padding: 5px;
-      top: 580px;
+      top: 530px;
       width: 100vw;
       height: auto; 
     }
@@ -639,11 +718,18 @@ $charcoal: #36454f;
       width: 100vw;
       height: calc(100vw * 0.5625);
     }
+
+    #webinarThumb {
+      max-height: unset;
+      max-width: unset;
+      width: 100vw;
+      height: calc(100vw * 0.5625);
+    }
   
     #comments {
       position: absolute;
       padding: 5px;
-      top: calc(100vw * 0.5625 + 375px);
+      top: calc(100vw * 0.5625 + 280px);
       width: 100vw;
       height: auto; 
     }

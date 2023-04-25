@@ -121,7 +121,7 @@ function RenderedList() {
           }
 
           let ad = false;
-          if (index % 4 == 0) ad = true;
+          // if (index % 4 == 0) ad = true;
           if (ad === true && window.innerWidth < 850) setTimeout(pushAds, 3000);
 
           return (

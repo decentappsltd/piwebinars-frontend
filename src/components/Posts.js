@@ -163,7 +163,7 @@ function Posts(props) {
           }
 
           let ad = false;
-          if (index % 4 == 0) ad = true;
+          // if (index % 4 == 0) ad = true;
           if (ad === true && !document.getElementById('taboola-mobile-below-article-thumbnails-' + index) && window.innerWidth < 850) setTimeout(pushAds, 2500);
 
           return (

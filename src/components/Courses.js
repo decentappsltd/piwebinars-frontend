@@ -176,7 +176,7 @@ function Courses(props) {
               }
 
               let ad = false;
-              if (index % 3 == 0) ad = true;
+              // if (index % 3 == 0) ad = true;
               if (ad === true && window.innerWidth < 850) setTimeout(pushAds, 2500);
 
               return (

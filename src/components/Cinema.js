@@ -304,7 +304,12 @@ export default function Cinema(props) {
     <>
       <div id="cinema">
         <div id="Video">
-          <VideoJS options={videoJsOptions} onReady={handlePlayerReady} />
+          {/* <VideoJS options={videoJsOptions} onReady={handlePlayerReady} /> : */}
+          <div onClick={() => { window.location.href = `/post/${props.post.user_id}/${props.post.post_id}` }} id="payWebinarThumb">
+            <img src={props.post.videoImg} id="webinarThumb" />
+            <i class="fas fa-play-circle"></i>
+            <span id="playBtnThumbBacking"></span>
+          </div>
         </div>
 
         <div id="info">
@@ -342,12 +347,12 @@ export default function Cinema(props) {
               <p id="name">{props.post.name}</p>
             </Link>
 
-            { window.innerWidth <= 850 && <ins id='cinemaAdvert' className="adsbygoogle commentGoogleAd"
+            {window.innerWidth <= 850 && <ins id='cinemaAdvert' className="adsbygoogle commentGoogleAd"
               style={{ display: "block", minWidth: '251px', minHeight: '50px' }}
               data-ad-format="fluid"
               data-ad-layout-key="-6f+d5-2h+50+bf"
               data-ad-client="ca-pub-7095325310319034"
-              data-ad-slot="1627309222"></ins> }
+              data-ad-slot="1627309222"></ins>}
           </span>
         </div>
 
@@ -381,12 +386,12 @@ export default function Cinema(props) {
           </form>
           <br />
           <div id="commentsContainer">
-            { window.innerWidth > 850 && <ins className="adsbygoogle commentGoogleAd"
+            {window.innerWidth > 850 && <ins className="adsbygoogle commentGoogleAd"
               style={{ display: "block", minWidth: '251px', minHeight: '50px' }}
               data-ad-format="fluid"
               data-ad-layout-key="-6f+d5-2h+50+bf"
               data-ad-client="ca-pub-7095325310319034"
-              data-ad-slot="1627309222"></ins> }
+              data-ad-slot="1627309222"></ins>}
             {comments.map((comment) => {
               return (
                 <article key={comment._id}>

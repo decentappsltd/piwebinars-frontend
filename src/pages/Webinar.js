@@ -11,13 +11,14 @@ import VideoJS from "../components/Video.js";
 
 function Webinar(props) {
     const { t } = useTranslation();
-    const [post, setPost] = useState({ title: '', description: '', price: '', video_url: '', user_id: '', post_id: '', likes: 0, dislikes: 0, comments: [], commentReplies: [] });
+    const [post, setPost] = useState({ title: '', description: '', price: '', video_url: '', videoImg: 'https://assets.codepen.io/6636213/empty.png', user_id: '', post_id: '', likes: 0, dislikes: 0, comments: [], commentReplies: [] });
     const [loading, setLoading] = useState(true);
     const [comments, setComments] = useState([]);
     const [commentsScroll, setCommentsScroll] = useState(0);
     const [text, setText] = useState("");
     const [isWebinarLiked, setWebinarLiked] = useState(false);
     const [isWebinarDisliked, setWebinarDisliked] = useState(false);
+    const [isPurchased, setPurchased] = useState(false);
 
     const playerRef = React.useRef(null);
     let width = window.innerWidth - 260;
@@ -192,6 +193,7 @@ function Webinar(props) {
             }
         }
         playerRef.current = player;
+        if (!purchased) setPurchased(false);
 
         player.on('timeupdate', async () => {
             if (player.currentTime() >= 15 && purchased == false && props.userId !== '61ed4c16d45bdef7bd5a9a95') {
@@ -215,7 +217,15 @@ function Webinar(props) {
             <div id="webinarPage">
 
                 <div id="Video">
-                    <VideoJS options={videoJsOptions} onReady={handlePlayerReady} />
+                    {
+                        isPurchased ?
+                            <VideoJS options={videoJsOptions} onReady={handlePlayerReady} /> :
+                            <div onClick={() => { handlePurchase(post) }} id="payWebinarThumb">
+                                <img src={post.videoImg} id="webinarThumb" />
+                                <i class="fas fa-play-circle"></i>
+                                <span id="playBtnThumbBacking"></span>
+                            </div>
+                    }
                 </div>
 
                 {loading ? <Loader /> :
@@ -257,14 +267,6 @@ function Webinar(props) {
                                 {window.innerWidth < 850 && <a className="fas fa-arrow-left" id='postBackBtn' onClick={() => { window.history.back() }}></a>}
                             </span>
                         </div>
-                        {window.innerWidth <= 850 &&
-                            <ins className="adsbygoogle commentGoogleAd"
-                                style={{ display: "block", minWidth: '251px', minHeight: '50px' }}
-                                data-ad-format="fluid"
-                                data-ad-layout-key="-6f+d5-2h+50+bf"
-                                data-ad-client="ca-pub-7095325310319034"
-                                data-ad-slot="1627309222"></ins>
-                        }
 
                         <div id="comments" onScroll={handleCommentsScroll}>
                             <p style={{ borderTop: "solid 3px #36454f", color: '#36454f' }}>{t('Comments')}:</p>

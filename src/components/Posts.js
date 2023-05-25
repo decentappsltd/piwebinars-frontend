@@ -160,9 +160,9 @@ function Posts(props) {
                 <Post key={post.upload} post={post} post_id={post._id} file_id={post.upload} user_id={post.user} video_id={post.video_id} title={post.title} name={post.name} description={post.description} category={post.category} likes={post.likes} dislike={post.dislike} date={post.dateAdded} amount={post.amount} wishlisted={post.wishlisted} />
               </article>
               {
-                (ad === true && window.innerWidth < 850) &&
+                ad === true &&
                 <>
-                  <iframe data-aa='1980365' src='//ad.a-ads.com/1980365?size=300x250' style={{width:'300px', height:'250px', border:'0px', padding:'0', overflow:'hidden', backgroundColor: 'transparent'}}></iframe>
+                  <iframe data-aa='1980365' src='//ad.a-ads.com/1980365?size=300x250' style={{width: '300px', height: '250px', margin: '50px', border: '0px', padding: '0', overflow: 'hidden', backgroundColor: 'transparent'}}></iframe>
                 </>
               }
             </>

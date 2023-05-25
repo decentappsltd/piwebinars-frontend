@@ -151,20 +151,8 @@ function Posts(props) {
 
       {
         posts.map((post, index) => {
-          function pushAds() {
-            window._taboola = window._taboola || [];
-            window._taboola.push({
-              mode: index == 4 ? 'thumbnails-Stream-mobile' : 'thumbnails-home-mobile',
-              container: `taboola-mobile-below-article-thumbnails-${index}`,
-              placement: index == 4 ? 'Homepage Recommendation Reel' : 'Mobile Below Article Thumbnails',
-              target_type: 'mix'
-            });
-            window._taboola.push({ flush: true });
-          }
-
           let ad = false;
-          // if (index % 4 == 0) ad = true;
-          if (ad === true && !document.getElementById('taboola-mobile-below-article-thumbnails-' + index) && window.innerWidth < 850) setTimeout(pushAds, 2500);
+          if (index % 4 == 0) ad = true;
 
           return (
             <>
@@ -174,7 +162,7 @@ function Posts(props) {
               {
                 (ad === true && window.innerWidth < 850) &&
                 <>
-                  <div id={"taboola-mobile-below-article-thumbnails-" + index} style={{ display: "block", width: '85vw', maxWidth: '500px', minHeight: '100px' }}></div>
+                  <iframe data-aa='1980365' src='//ad.a-ads.com/1980365?size=300x250' style={{width:'300px', height:'250px', border:'0px', padding:'0', overflow:'hidden', backgroundColor: 'transparent'}}></iframe>
                 </>
               }
             </>

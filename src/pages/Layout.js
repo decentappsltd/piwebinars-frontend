@@ -39,7 +39,7 @@ const Layout = () => {
       <Nav />
       <Outlet />
       { consent === false && <Consent accept={accept} />}
-      { notice === false && <HackathonNotice close={() => {setNotice(true); localStorage.notice = 'true'}} />}
+      {/* { notice === false && <HackathonNotice close={() => {setNotice(true); localStorage.notice = 'true'}} />} */}
     </>
   )
 };

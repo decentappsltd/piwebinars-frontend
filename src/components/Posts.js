@@ -165,7 +165,7 @@ function Posts(props) {
                   {
                     index !== 0 ?
                       <iframe data-aa='1980365' src='//ad.a-ads.com/1980365?size=300x250' style={{ width: '300px', height: '250px', margin: '50px', border: '0px', padding: '0', overflow: 'hidden', backgroundColor: 'transparent' }}></iframe> :
-                      <a onClick={() => window.open('https://www.epimall.io')}>
+                      <a id="epimall" onClick={() => window.open('https://www.epimall.io')}>
                         <img  src='https://piwebinars.co.uk/epimall.png' style={{ width: '300px', height: '250px', margin: '50px', border: '0px', padding: '0', overflow: 'hidden', backgroundColor: 'transparent', cursor: 'pointer' }}></img>
                       </a>
                   }

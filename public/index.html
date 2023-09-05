@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
-  
+
 <!--  
 Created by Decent Apps Ltd
   => Oliver Crockett, oliver@decentapps.co.uk
   => Naphtali Duniya, duniya.naphtali@decentapps.co.uk
 -->
 
-<head>  
+<head>
   <!-- Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-DHEX8LQ19E"></script>
   <script>
@@ -18,25 +18,16 @@ Created by Decent Apps Ltd
     gtag('js', new Date());
     gtag('config', 'G-DHEX8LQ19E');
   </script>
-
-  <!-- Adsense -->
-  <script type="text/javascript">
-    window._taboola = window._taboola || [];
-    _taboola.push({article:'auto'});
-    !function (e, f, u, i) {
-      if (!document.getElementById(i)){
-        e.async = 1;
-        e.src = u;
-        e.id = i;
-        f.parentNode.insertBefore(e, f);
-      }
-    }(document.createElement('script'),
-    document.getElementsByTagName('script')[0],
-    '//cdn.taboola.com/libtrc/piads-network/loader.js',
-    'tb_loader_script');
-    if(window.performance && typeof window.performance.mark == 'function')
-      {window.performance.mark('tbl_ic');}
-  </script>
+  
+  <!-- Google Tag Manager -->
+  <script>(function (w, d, s, l, i) {
+      w[l] = w[l] || []; w[l].push({
+        'gtm.start':
+          new Date().getTime(), event: 'gtm.js'
+      }); var f = d.getElementsByTagName(s)[0],
+        j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+          'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+    })(window, document, 'script', 'dataLayer', 'GTM-K3BC6XMS');</script>
 
   <!--Scripts-->
   <script src="https://sdk.minepi.com/pi-sdk.js"></script>
@@ -48,12 +39,14 @@ Created by Decent Apps Ltd
     })
   </script>
   <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-  
+
   <!--CSS-->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" id="dark">
   <link rel="icon" type="image/png" href="./logo.png">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+    integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
   <meta charset="UTF-8" />
 
   <!--Google Fonts-->
@@ -61,19 +54,23 @@ Created by Decent Apps Ltd
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
-  
+
 </head>
 
 <body>
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-K3BC6XMS" height="0" width="0"
+      style="display:none;visibility:hidden"></iframe></noscript>
+
   <title>Pi Webinars</title>
-  
+
   <div id="root"></div>
-  
+
   <script type="text/javascript">
     window._taboola = window._taboola || [];
-    _taboola.push({flush: true});
+    _taboola.push({ flush: true });
   </script>
-  
+
 </body>
 
 </html>

@@ -85,30 +85,32 @@ export function Post(props) {
 }
 
 function Banner() {
-  const banner = useRef();
+  // const banner = useRef();
 
-  const atOptions = {
-    key: '31321ce92233d755671e4488afe05bf4',
-    format: 'iframe',
-    height: 50,
-    width: 320,
-    params: {},
-  }
+  // const atOptions = {
+  //   key: '31321ce92233d755671e4488afe05bf4',
+  //   format: 'iframe',
+  //   height: 50,
+  //   width: 320,
+  //   params: {},
+  // }
 
-  useEffect(() => {
-    if (banner.current && !banner.current.firstChild) {
-      const conf = document.createElement('script')
-      const script = document.createElement('script')
-      script.type = 'text/javascript'
-      script.src = `//www.topcreativeformat.com/${atOptions.key}/invoke.js`
-      conf.innerHTML = `atOptions = ${JSON.stringify(atOptions)}`
+  // useEffect(() => {
+  //   if (banner.current && !banner.current.firstChild) {
+  //     const conf = document.createElement('script')
+  //     const script = document.createElement('script')
+  //     script.type = 'text/javascript'
+  //     script.src = `//www.topcreativeformat.com/${atOptions.key}/invoke.js`
+  //     conf.innerHTML = `atOptions = ${JSON.stringify(atOptions)}`
 
-      banner.current.append(conf)
-      banner.current.append(script)
-    }
-  }, [banner])
+  //     banner.current.append(conf)
+  //     banner.current.append(script)
+  //   }
+  // }, [banner])
 
-  return <div style={{ width: '300px', height: '250px', margin: '50px', border: '0px', padding: '0', overflow: 'hidden', backgroundColor: 'transparent' }} ref={banner}></div>
+  // return <div style={{ width: '300px', height: '250px', margin: '50px', border: '0px', padding: '0', overflow: 'hidden', backgroundColor: 'transparent' }} ref={banner}></div>
+
+  return <iframe src="//www.topcreativeformat.com/watchnew?key=31321ce92233d755671e4488afe05bf4" width="300" height="250" frameborder="0" scrolling="no"></iframe>
 }
 
 function Posts(props) {

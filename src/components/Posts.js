@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { renderMore, renderWebinars, addWishlist } from '../app/webinars.js';
 import {
@@ -84,6 +84,33 @@ export function Post(props) {
   );
 }
 
+function Banner() {
+  const banner = useRef();
+
+  const atOptions = {
+    key: '31321ce92233d755671e4488afe05bf4',
+    format: 'iframe',
+    height: 50,
+    width: 320,
+    params: {},
+  }
+
+  useEffect(() => {
+    if (banner.current && !banner.current.firstChild) {
+      const conf = document.createElement('script')
+      const script = document.createElement('script')
+      script.type = 'text/javascript'
+      script.src = `//www.topcreativeformat.com/${atOptions.key}/invoke.js`
+      conf.innerHTML = `atOptions = ${JSON.stringify(atOptions)}`
+
+      banner.current.append(conf)
+      banner.current.append(script)
+    }
+  }, [banner])
+
+  return <div style={{ width: '300px', height: '250px', margin: '50px', border: '0px', padding: '0', overflow: 'hidden', backgroundColor: 'transparent' }} ref={banner}></div>
+}
+
 function Posts(props) {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -164,9 +191,9 @@ function Posts(props) {
                 <>
                   {
                     index !== 0 ?
-                      <iframe src="//www.topcreativeformat.com/31321ce92233d755671e4488afe05bf4/invoke.js" style={{ width: '300px', height: '250px', margin: '50px', border: '0px', padding: '0', overflow: 'hidden', backgroundColor: 'transparent' }}></iframe> :
+                      <Banner /> :
                       <a id="epimall" href='https://www.epimall.io'>
-                        <img  src='https://piwebinars.co.uk/epimall.png' style={{ width: '300px', height: '250px', margin: '50px', border: '0px', padding: '0', overflow: 'hidden', backgroundColor: 'transparent', cursor: 'pointer' }}></img>
+                        <img src='https://piwebinars.co.uk/epimall.png' style={{ width: '300px', height: '250px', margin: '50px', border: '0px', padding: '0', overflow: 'hidden', backgroundColor: 'transparent', cursor: 'pointer' }}></img>
                       </a>
                   }
                 </>

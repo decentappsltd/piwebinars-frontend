@@ -8,8 +8,7 @@ import {
 import { storedWishlist } from '../atoms/posts.js';
 import Cinema from '../components/Cinema.js';
 import Loader from '../components/Loader.js';
-
-const urlApi = 'https://piwebinars-server.onrender.com';
+import Ad from '../components/Ad.js';
 
 function Post(props) {
   const [modalShown, toggleModal] = useState(false);
@@ -96,44 +95,20 @@ function RenderedList() {
     getWishlist();
   }, []);
 
-  useEffect(() => {
-    function pushAds() {
-      let adsbygoogle;
-      (adsbygoogle = window.adsbygoogle || []).push({});
-    }
-    setTimeout(pushAds, 5000);
-  }, []);
-
   return (
     <>
       <span id="page">
         {(loading && localStorage.userSession) ? <Loader /> : null}
         {webinars.map((post, index) => {
-          function pushAds() {
-            window._taboola = window._taboola || [];
-            window._taboola.push({
-              mode: 'thumbnails-home-mobile',
-              container: `taboola-mobile-below-article-thumbnails-${index}`,
-              placement: 'Mobile Below Article Thumbnails',
-              target_type: 'mix'
-            });
-            window._taboola.push({ flush: true });
-          }
-
           let ad = false;
-          // if (index % 4 == 0) ad = true;
-          if (ad === true && window.innerWidth < 850) setTimeout(pushAds, 3000);
-
+          if (index % 4 == 0) ad = true;
           return (
             <>
               <article key={post.upload}>
                 <Post key={post.upload} post_id={post.post_id} file_id={post.upload} user_id={post.user_id} video_id={post.videoId} title={post.title} name={post.name} description={post.description} category={post.category} date={post.dateAdded} amount={post.amount} post={post} />
               </article>
               {
-                (ad === true && window.innerWidth < 850) &&
-                <>
-                  <div id={"taboola-mobile-below-article-thumbnails-" + index} style={{ display: "block", width: '85vw', maxWidth: '500px', minHeight: '100px' }}></div>
-                </>
+                (ad === true && window.innerWidth < 850) && <Ad />
               }
             </>
           );

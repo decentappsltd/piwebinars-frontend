@@ -8,6 +8,7 @@ import avatar from '../assets/avatar.png';
 import { Comment } from '../components/Cinema.js';
 import Loader from "../components/Loader.js";
 import VideoJS from "../components/Video.js";
+import Ad from "../components/Ad.js";
 
 function Webinar(props) {
     const { t } = useTranslation();
@@ -172,14 +173,6 @@ function Webinar(props) {
         getThePost();
     }, []);
 
-    useEffect(() => {
-        function pushAds() {
-            let adsbygoogle;
-            (adsbygoogle = window.adsbygoogle || []).push({});
-        }
-        setTimeout(pushAds, 2000);
-    }, []);
-
     const handlePlayerReady = async (player) => {
         let user;
         let purchased = false;
@@ -297,12 +290,7 @@ function Webinar(props) {
                             <br />
                             <div id="commentsContainer">
                                 {window.innerWidth > 850 &&
-                                    <ins className="adsbygoogle commentGoogleAd"
-                                        style={{ display: "block", minWidth: '251px', minHeight: '50px' }}
-                                        data-ad-format="fluid"
-                                        data-ad-layout-key="-6f+d5-2h+50+bf"
-                                        data-ad-client="ca-pub-7095325310319034"
-                                        data-ad-slot="1627309222"></ins>
+                                    <Ad />
                                 }
                                 {comments.map((comment) => {
                                     return (

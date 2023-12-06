@@ -6,6 +6,7 @@ import Cinema from '../components/Cinema.js';
 import Loader from '../components/Loader.js';
 import avatar from '../assets/avatar.png';
 import { Preview } from '../components/Courses.js';
+import Ad from '../components/Ad.js';
 
 function Post(props) {
   const { t } = useTranslation();
@@ -110,20 +111,8 @@ function Uploads(props) {
       </div>
 
       {display == 'posts' && <>{webinars.map((post, index) => {
-        function pushAds() {
-          window._taboola = window._taboola || [];
-          window._taboola.push({
-            mode: 'thumbnails-home-mobile',
-            container: `taboola-mobile-below-article-thumbnails-${index}`,
-            placement: 'Mobile Below Article Thumbnails',
-            target_type: 'mix'
-          });
-          window._taboola.push({ flush: true });
-        }
-
         let ad = false;
-        // if (index % 4 == 0) ad = true;
-        if (ad === true && window.innerWidth < 850) setTimeout(pushAds, 3000);
+        if (index % 4 == 0) ad = true;
 
         return (
           <>
@@ -131,10 +120,7 @@ function Uploads(props) {
               <Post key={post.upload} post={post} post_id={post._id} file_id={post.upload} user_id={post.user} video_id={post.video_id} videoImg={post.videoImg} title={post.title} name={post.name} description={post.description} category={post.category} likes={post.likes} date={post.dateAdded} amount={post.amount} wishlisted={post.wishlisted} />
             </article>
             {
-              (ad === true && window.innerWidth < 850) &&
-              <>
-                <div id={"taboola-mobile-below-article-thumbnails-" + index} style={{ display: "block", width: '85vw', maxWidth: '500px', minHeight: '100px' }}></div>
-              </>
+              (ad === true && window.innerWidth < 850) && <Ad />
             }
           </>
         );
@@ -142,20 +128,8 @@ function Uploads(props) {
       }</>}
 
       {display == 'courses' && <>{courses.map((course, index) => {
-        function pushAds() {
-          window._taboola = window._taboola || [];
-          window._taboola.push({
-            mode: 'thumbnails-home-mobile',
-            container: `taboola-mobile-below-article-thumbnails-${index}`,
-            placement: 'Mobile Below Article Thumbnails',
-            target_type: 'mix'
-          });
-          window._taboola.push({ flush: true });
-        }
-
         let ad = false;
-        // if (index % 3 == 0) ad = true;
-        if (ad === true && window.innerWidth < 850) setTimeout(pushAds, 3000);
+        if (index % 3 == 0) ad = true;
 
         return (
           <>
@@ -163,10 +137,7 @@ function Uploads(props) {
               <Preview course_id={course._id} course={course} title={course.title} description={course.description} length={course.posts.length} avatar={course.avatar} username={course.username} posts={course.posts} />
             </article>
             {
-              (ad === true && window.innerWidth < 850) &&
-              <>
-                <div id={"taboola-mobile-below-article-thumbnails-" + index} style={{ display: "block", width: '85vw', maxWidth: '500px', minHeight: '100px' }}></div>
-              </>
+              (ad === true && window.innerWidth < 850) && <Ad />
             }
           </>
         );
@@ -232,24 +203,6 @@ export default function User(props) {
     setFollow(response);
   }
 
-  useEffect(() => {
-    if (window.innerWidth > 850 && document.getElementById("taboola-mobile-below-article-thumbnails")) {
-      document.getElementById("taboola-mobile-below-article-thumbnails").style.display = "none";
-      return;
-    }
-    function pushAds() {
-      window._taboola = window._taboola || [];
-      window._taboola.push({
-        mode: 'thumbnails-home-mobile',
-        container: 'taboola-mobile-below-article-thumbnails',
-        placement: 'Mobile Below Article Thumbnails',
-        target_type: 'mix'
-      });
-      window._taboola.push({ flush: true });
-    }
-    // setTimeout(pushAds, 2500);
-  }, []);
-
   return (
     <>
       <span id="page" style={{ paddingBottom: '50px', height: 'calc(100vh - 50px)' }}>
@@ -271,7 +224,6 @@ export default function User(props) {
           </span>
           <button id="followBtn" onClick={handleFollow}>{follow}</button>
         </div>
-        {/* <div id="taboola-mobile-below-article-thumbnails" style={{ minHeight: '100px', display: 'block', width: '85vw', maxWidth: '500px' }}></div> */}
         <Uploads userId={props.userId} />
       </span>
     </>

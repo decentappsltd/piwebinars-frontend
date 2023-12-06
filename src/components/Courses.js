@@ -5,6 +5,7 @@ import { getCourses, createCourse } from '../app/webinars.js';
 import Loader from './Loader.js';
 import Uploads from './Uploads.js';
 import avatar from '../assets/avatar.png';
+import Ad from './Ad.js';
 
 function CreateCourse(props) {
   const { t } = useTranslation();
@@ -164,20 +165,8 @@ function Courses(props) {
           {courses.length == 0 && <h2>There are no courses yet, check again later...</h2>}
           {
             courses.map((course, index) => {
-              function pushAds() {
-                window._taboola = window._taboola || [];
-                window._taboola.push({
-                  mode: 'thumbnails-home-mobile',
-                  container: `taboola-mobile-below-article-thumbnails-${index}`,
-                  placement: 'Mobile Below Article Thumbnails',
-                  target_type: 'mix'
-                });
-                window._taboola.push({ flush: true });
-              }
-
               let ad = false;
-              // if (index % 3 == 0) ad = true;
-              if (ad === true && window.innerWidth < 850) setTimeout(pushAds, 2500);
+              if (index % 3 == 0) ad = true;
 
               return (
                 <>
@@ -185,10 +174,7 @@ function Courses(props) {
                     <Preview course_id={course._id} course={course} title={course.title} description={course.description} length={course.posts.length} avatar={course.avatar} username={course.username} posts={course.posts} />
                   </article>
                   {
-                    (ad === true && window.innerWidth < 850) &&
-                    <>
-                      <div id={"taboola-mobile-below-article-thumbnails-" + index} style={{ display: "block", width: '85vw', maxWidth: '500px', minHeight: '100px' }}></div>
-                    </>
+                    (ad === true && window.innerWidth < 850) && <Ad />
                   }
                 </>
               );

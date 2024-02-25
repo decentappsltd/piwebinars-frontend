@@ -1,7 +1,7 @@
 export default function Ad() {
   return (
     <>
-      <iframe src="//www.topcreativeformat.com/watchnew?key=31321ce92233d755671e4488afe05bf4" width="300" height="250" frameborder="0" scrolling="no"></iframe>
+      <iframe data-aa='1980365' src='//ad.a-ads.com/1980365?size=300x250' style={{ width: '300px', height: '250px', margin: '50px', border: '0px', padding: '0', overflow: 'hidden', backgroundColor: 'transparent' }}></iframe>
     </>
   );
 }
